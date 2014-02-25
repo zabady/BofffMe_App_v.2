@@ -1,0 +1,53 @@
+<Alloy>
+	
+	<Require id="settingsWin" src="settingsWin" type="view" platform="ios" />
+	
+	<TabGroup id="tabGroup">
+		
+		<!-- Android Menu -->
+		<Menu platform="android">
+            <!-- Cannot specify node text.  Use attributes only. -->
+            <MenuItem icon="/images/icon_settings.png" onClick="settingsClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
+        </Menu>
+		
+		
+		<!-- Tab 1 -->
+		<Tab title="QR Code">
+    		<Require id="qrCodeWin" src="qrCodeWin" type="view" />
+        </Tab>
+		
+		
+		<!-- Tab 2 -->
+		<Tab title="Tab 2">
+			<Window title="Tab 2">
+				
+				<RightNavButton>
+					<Button class="settingsBtn" onClick="settingsClicked" />
+				</RightNavButton>
+				<LeftNavButton>
+					<Button class="logo"/>
+				</LeftNavButton>
+				
+				<Label>I am Window 1</Label>
+			</Window>
+		</Tab>
+		
+		
+		<!-- Tab 3 -->
+		<Tab title="Tab 3">
+			<Window title="Tab 3">
+				
+				<RightNavButton>
+					<Button class="settingsBtn" onClick="settingsClicked" />
+				</RightNavButton>
+				<LeftNavButton>
+					<Button class="logo"/>
+				</LeftNavButton>
+				
+				<Label>I am Window 2</Label>
+			</Window>
+		</Tab>
+		
+	</TabGroup>
+	
+</Alloy>

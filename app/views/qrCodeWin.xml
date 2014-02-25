@@ -1,0 +1,22 @@
+<Alloy>
+	<Window title="QR Code" autoAdjustScrollViewInsets="true">
+		
+		<RightNavButton>
+			<Button id="btn_settings" class="settingsBtn"/>
+		</RightNavButton>
+		<LeftNavButton>
+			<Button class="logo"/>
+		</LeftNavButton>
+		
+		<Label id="lbl">Your Bofff Me Code!</Label>
+		<ImageView id="img" />
+		<Button title="Scan a Bofff QR Code" onClick="scanBtnClicked" />
+		
+	</Window>
+	
+	<!-- Overlay view that appears on the capture window  -->
+	<View id="view_overlay">
+		<Button class="overlayBtns" onClick="openCloseLedBarcode" title="Flash" left="0"></Button>
+		<Button class="overlayBtns" onClick="cancelBarcode" title="Cancel" right="0"></Button>
+	</View>
+</Alloy>

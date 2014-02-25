@@ -1,0 +1,24 @@
+//////////////////////////////////////////////////////////////////////////////// OBJECT COMMEN STYLES
+"Window": {
+	backgroundColor: "white",
+},
+"Label": {
+	font: {fontSize: "20dp"},
+	color: "#2279bc", // Dark blue
+}
+
+
+//////////////////////////////////////////////////////////////////////////////// CLASSES STYLES
+".settingsBtn[platform=ios]": {
+	backgroundImage: "/images/icon_settings.png",
+	backgroundColor: "transparent",
+	width: 30,
+	height: 30,
+},
+".logo[platform=ios]": {
+	backgroundImage: "/images/app_icon_60x60.png", // TODO: Test the logo's quality
+	backgroundColor: "transparent",
+	width: 40,
+	height: 40,
+	//enabled: false, // TODO: it's very bad, try another way
+}

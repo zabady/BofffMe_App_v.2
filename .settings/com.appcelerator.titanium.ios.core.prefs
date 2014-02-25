@@ -1,0 +1,14 @@
+eclipse.preferences.version=1
+iosLaunchConfigurationAttributes/ATTR_MINIFY=true
+iosLaunchConfigurationAttributes/ATTR_PROJECT_NAME=BofffMe_App_v.2
+iosLaunchConfigurationAttributes/appid=com.BofffMeAppv1
+iosLaunchConfigurationAttributes/certificate=Victor Zaki (PDCZB2N26J)
+iosLaunchConfigurationAttributes/keychain=
+iosLaunchConfigurationAttributes/sdk_version=7.0.3
+iosLaunchConfigurationAttributes/uuid=C3A23484-8538-4580-B42D-6C4F6E9693CD
+provisioning_profiles/development/73BF45A1-A9EB-4E38-A72C-20EC730296F0/appid=*
+provisioning_profiles/development/73BF45A1-A9EB-4E38-A72C-20EC730296F0/name=2mdotnet
+provisioning_profiles/development/73BF45A1-A9EB-4E38-A72C-20EC730296F0/uuid=73BF45A1-A9EB-4E38-A72C-20EC730296F0
+provisioning_profiles/development/C3A23484-8538-4580-B42D-6C4F6E9693CD/appid=*
+provisioning_profiles/development/C3A23484-8538-4580-B42D-6C4F6E9693CD/name=iOS Team Provisioning Profile\: *
+provisioning_profiles/development/C3A23484-8538-4580-B42D-6C4F6E9693CD/uuid=C3A23484-8538-4580-B42D-6C4F6E9693CD

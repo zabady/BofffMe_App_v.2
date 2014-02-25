@@ -1,0 +1,27 @@
+//////////////////////////////////////////////////////////////////////////////// OBJECT COMMEN STYLES
+"Label": {
+	top: 0,
+	height: "10%",
+},
+"ImageView": {
+	top: "10%",
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+},
+"Button": {
+	bottom: 0,
+	height: "15%",
+	width: Ti.UI.FILL,
+	color: "white",
+	backgroundColor: "#2279bc",
+	font: { fontSize: "20", fontWeight: "bold", },
+}
+
+
+//////////////////////////////////////////////////////////////////////////////// CLASSES STYLES
+".overlayBtns": {
+	height: 50,
+	width: 100,
+	opacity: 0.5,
+	borderRadius: 5,
+}

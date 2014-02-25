@@ -1,0 +1,17 @@
+<Alloy>	
+	<Window id="win" title="Settings" layout="vertical" onAndroid:back="closeWindow">
+		
+		<Menu platform="android">
+        </Menu>
+		
+		<Label top="20">Settings</Label>
+		
+		<TableView>
+			<TableViewRow title="My Profile" />
+			<TableViewRow title="About" />
+			<TableViewRow title="FAQ" />
+			<TableViewRow title="Video Tutorial" />
+		</TableView>
+		
+	</Window>
+</Alloy>
