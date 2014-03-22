@@ -1,0 +1,5 @@
+<Alloy>
+	<Window id="win">
+		<Label id="lbl">Edit Profile</Label>
+	</Window>
+</Alloy>

@@ -1,6 +1,6 @@
 var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
-var firstTime = true;
+var firstTime = false;
 
 if (firstTime) {
     var userProfile = new Object({

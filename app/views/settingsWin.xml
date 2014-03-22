@@ -1,16 +1,26 @@
-<Alloy>	
-	<Window id="win" title="Settings" layout="vertical" onAndroid:back="closeWindow">
+<Alloy>
+	<Window id="win" title="Settings" layout="vertical">
 		
-		<Menu platform="android">
-        </Menu>
+		<Label top="40" class="appTitleLabel">Settings</Label>
 		
-		<Label top="20">Settings</Label>
-		
-		<TableView>
-			<TableViewRow title="My Profile" />
-			<TableViewRow title="About" />
-			<TableViewRow title="FAQ" />
-			<TableViewRow title="Video Tutorial" />
+		<TableView onClick="openClickedSettings">
+			
+			<TableViewRow window="editProfileWin">
+				<Label window="editProfileWin">My Profile</Label>
+			</TableViewRow>
+			
+			<TableViewRow window="http://www.bofffme.com">
+				<Label window="http://www.bofffme.com">About</Label>
+			</TableViewRow>
+			
+			<TableViewRow window="http://www.google.com">
+				<Label window="http://www.google.com">FAQ</Label>
+			</TableViewRow>
+			
+			<TableViewRow window="tutorialWin">
+				<Label window="tutorialWin">Video Tutorial</Label>
+			</TableViewRow>
+			
 		</TableView>
 		
 	</Window>

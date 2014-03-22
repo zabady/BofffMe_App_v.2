@@ -12,20 +12,20 @@
 		
 		
 		<!-- Tab 1 -->
-		<Tab title="QR Code">
+		<Tab title="QR Code" icon="/images/QR-code-7aram.png">
     		<Require id="qrCodeWin" src="qrCodeWin" type="view" />
         </Tab>
 		
 		
 		<!-- Tab 2 -->
-		<Tab title="Tab 2">
+		<Tab title="Tab 2" icon="/images/man-7aram.png">
 			<Window title="Tab 2">
 				
 				<RightNavButton>
 					<Button class="settingsBtn" onClick="settingsClicked" />
 				</RightNavButton>
 				<LeftNavButton>
-					<Button class="logo"/>
+					<ImageView class="logo"/>
 				</LeftNavButton>
 				
 				<Label>I am Window 1</Label>
@@ -34,14 +34,14 @@
 		
 		
 		<!-- Tab 3 -->
-		<Tab title="Tab 3">
+		<Tab title="Tab 3" icon="/images/love-7aram.png">
 			<Window title="Tab 3">
 				
 				<RightNavButton>
 					<Button class="settingsBtn" onClick="settingsClicked" />
 				</RightNavButton>
 				<LeftNavButton>
-					<Button class="logo"/>
+					<ImageView class="logo"/>
 				</LeftNavButton>
 				
 				<Label>I am Window 2</Label>

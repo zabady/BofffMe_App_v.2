@@ -5,10 +5,10 @@
 			<Button id="btn_settings" class="settingsBtn"/>
 		</RightNavButton>
 		<LeftNavButton>
-			<Button class="logo"/>
+			<ImageView class="logo"/>
 		</LeftNavButton>
 		
-		<Label id="lbl">Your Bofff Me Code!</Label>
+		<Label class="appTitleLabel">Your Bofff Me Code!</Label>
 		<ImageView id="img" />
 		<Button title="Scan a Bofff QR Code" onClick="scanBtnClicked" />
 		

@@ -1,14 +1,16 @@
 function Controller() {
-    function __alloyId28() {
-        $.__views.win.removeEventListener("open", __alloyId28);
-        if ($.__views.win.activity) $.__views.win.activity.onCreateOptionsMenu = function() {}; else {
-            Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
-            Ti.API.warn("or other UI component which does not have an Android activity.");
-            Ti.API.warn("Android Menus can only be opened on TabGroups and heavyweight Windows.");
-        }
-    }
-    function closeWindow() {
-        $.win.close();
+    function openClickedSettings(e) {
+        var selectedSettingWin;
+        selectedSettingWin = -1 != e.source.window.search("http") ? Alloy.createController("webViewWin", {
+            url: e.source.window
+        }).getView() : Alloy.createController("/Settings/" + e.source.window).getView();
+        selectedSettingWin.addEventListener("open", function() {
+            selectedSettingWin.activity.actionBar.onHomeIconItemSelected = function() {
+                selectedSettingWin.close();
+            };
+            selectedSettingWin.activity.actionBar.displayHomeAsUp = true;
+        });
+        selectedSettingWin.open();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "settingsWin";
@@ -25,51 +27,93 @@ function Controller() {
         layout: "vertical"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
-    closeWindow ? $.__views.win.addEventListener("android:back", closeWindow) : __defers["$.__views.win!android:back!closeWindow"] = true;
-    $.__views.win.addEventListener("open", __alloyId28);
-    $.__views.__alloyId29 = Ti.UI.createLabel({
+    $.__views.__alloyId28 = Ti.UI.createLabel({
         font: {
             fontSize: "20dp"
         },
         color: "#2279bc",
+        height: "60",
         text: "Settings",
-        top: "20",
+        top: "40",
+        id: "__alloyId28"
+    });
+    $.__views.win.add($.__views.__alloyId28);
+    var __alloyId30 = [];
+    $.__views.__alloyId31 = Ti.UI.createTableViewRow({
+        window: "editProfileWin",
+        id: "__alloyId31"
+    });
+    __alloyId30.push($.__views.__alloyId31);
+    $.__views.__alloyId32 = Ti.UI.createLabel({
+        font: {
+            fontSize: "20"
+        },
+        color: "black",
+        height: "60",
+        text: "My Profile",
+        window: "editProfileWin",
+        id: "__alloyId32"
+    });
+    $.__views.__alloyId31.add($.__views.__alloyId32);
+    $.__views.__alloyId33 = Ti.UI.createTableViewRow({
+        window: "http://www.bofffme.com",
+        id: "__alloyId33"
+    });
+    __alloyId30.push($.__views.__alloyId33);
+    $.__views.__alloyId34 = Ti.UI.createLabel({
+        font: {
+            fontSize: "20"
+        },
+        color: "black",
+        height: "60",
+        text: "About",
+        window: "http://www.bofffme.com",
+        id: "__alloyId34"
+    });
+    $.__views.__alloyId33.add($.__views.__alloyId34);
+    $.__views.__alloyId35 = Ti.UI.createTableViewRow({
+        window: "http://www.google.com",
+        id: "__alloyId35"
+    });
+    __alloyId30.push($.__views.__alloyId35);
+    $.__views.__alloyId36 = Ti.UI.createLabel({
+        font: {
+            fontSize: "20"
+        },
+        color: "black",
+        height: "60",
+        text: "FAQ",
+        window: "http://www.google.com",
+        id: "__alloyId36"
+    });
+    $.__views.__alloyId35.add($.__views.__alloyId36);
+    $.__views.__alloyId37 = Ti.UI.createTableViewRow({
+        window: "tutorialWin",
+        id: "__alloyId37"
+    });
+    __alloyId30.push($.__views.__alloyId37);
+    $.__views.__alloyId38 = Ti.UI.createLabel({
+        font: {
+            fontSize: "20"
+        },
+        color: "black",
+        height: "60",
+        text: "Video Tutorial",
+        window: "tutorialWin",
+        id: "__alloyId38"
+    });
+    $.__views.__alloyId37.add($.__views.__alloyId38);
+    $.__views.__alloyId29 = Ti.UI.createTableView({
+        top: 20,
+        rowHeight: 60,
+        data: __alloyId30,
         id: "__alloyId29"
     });
     $.__views.win.add($.__views.__alloyId29);
-    var __alloyId31 = [];
-    $.__views.__alloyId32 = Ti.UI.createTableViewRow({
-        title: "My Profile",
-        id: "__alloyId32"
-    });
-    __alloyId31.push($.__views.__alloyId32);
-    $.__views.__alloyId33 = Ti.UI.createTableViewRow({
-        title: "About",
-        id: "__alloyId33"
-    });
-    __alloyId31.push($.__views.__alloyId33);
-    $.__views.__alloyId34 = Ti.UI.createTableViewRow({
-        title: "FAQ",
-        id: "__alloyId34"
-    });
-    __alloyId31.push($.__views.__alloyId34);
-    $.__views.__alloyId35 = Ti.UI.createTableViewRow({
-        title: "Video Tutorial",
-        id: "__alloyId35"
-    });
-    __alloyId31.push($.__views.__alloyId35);
-    $.__views.__alloyId30 = Ti.UI.createTableView({
-        data: __alloyId31,
-        id: "__alloyId30"
-    });
-    $.__views.win.add($.__views.__alloyId30);
+    openClickedSettings ? $.__views.__alloyId29.addEventListener("click", openClickedSettings) : __defers["$.__views.__alloyId29!click!openClickedSettings"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    $.win.addEventListener("open", function() {
-        $.win.activity.actionBar.onHomeIconItemSelected = closeWindow;
-        $.win.activity.actionBar.displayHomeAsUp = true;
-    });
-    __defers["$.__views.win!android:back!closeWindow"] && $.__views.win.addEventListener("android:back", closeWindow);
+    __defers["$.__views.__alloyId29!click!openClickedSettings"] && $.__views.__alloyId29.addEventListener("click", openClickedSettings);
     _.extend($, exports);
 }
 

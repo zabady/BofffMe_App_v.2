@@ -1,3 +1,10 @@
 //////////////////////////////////////////////////////////////////////////////// OBJECT COMMEN STYLES
 "TableView": {
+	top: 20,
+	rowHeight: 60,
+},
+"Label": {
+	font: { fontSize: "20" },
+	color: "black",
+	height: "60",
 }

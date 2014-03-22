@@ -10,7 +10,7 @@
 //
 // Alloy.Globals.someGlobalFunction = function(){};
 
-var firstTime = true;
+var firstTime = false;
 if(firstTime) {
 	var userProfile = new Object({
 		pin: '5000',

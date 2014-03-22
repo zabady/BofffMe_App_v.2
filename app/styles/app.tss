@@ -1,14 +1,24 @@
+// TODO: Have a look at window and tabGroup commented properties for iOS
 //////////////////////////////////////////////////////////////////////////////// OBJECT COMMEN STYLES
 "Window": {
 	backgroundColor: "white",
+	//statusBarStyle: Titanium.UI.iPhone.StatusBar.DEFAULT,
+	//titleAttributes : titleAttributesParams,
+	//titleControl: Search Bar Ya ZeeZoooo,
 },
-"Label": {
-	font: {fontSize: "20dp"},
-	color: "#2279bc", // Dark blue
+"TabGroup[platform=ios]": {
+	//tintColor: "red",
+	//tabsTintColor: "green",
+	//barColor: 'blue',
+	//tabsBackgroundColor: "transparent",
 }
 
 
 //////////////////////////////////////////////////////////////////////////////// CLASSES STYLES
+".appTitleLabel": {
+	font: {fontSize: "20dp"},
+	color: "#2279bc", // Dark blue
+},
 ".settingsBtn[platform=ios]": {
 	backgroundImage: "/images/icon_settings.png",
 	backgroundColor: "transparent",
@@ -16,9 +26,7 @@
 	height: 30,
 },
 ".logo[platform=ios]": {
-	backgroundImage: "/images/app_icon_60x60.png", // TODO: Test the logo's quality
-	backgroundColor: "transparent",
+	image: "/images/app_icon_60x60.png",
 	width: 40,
 	height: 40,
-	//enabled: false, // TODO: it's very bad, try another way
 }
