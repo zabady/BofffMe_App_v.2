@@ -1,5 +1,7 @@
 var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
+Alloy.Globals.apiUrl = "http://www.bofffme.com/api/index.php/home/";
+
 var firstTime = false;
 
 if (firstTime) {

@@ -10,6 +10,8 @@
 //
 // Alloy.Globals.someGlobalFunction = function(){};
 
+Alloy.Globals.apiUrl = 'http://www.bofffme.com/api/index.php/home/';
+
 var firstTime = false;
 if(firstTime) {
 	var userProfile = new Object({

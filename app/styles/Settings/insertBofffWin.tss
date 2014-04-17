@@ -1,0 +1,11 @@
+//////////////////////////////////////////////////////////////////////////////// OBJECT COMMEN STYLES
+"Label": {
+	font: { fontSize: "20" },
+	color: "black",
+	height: "60",
+}
+
+".allStyles": {
+	top: 40,
+	color: "white",
+}

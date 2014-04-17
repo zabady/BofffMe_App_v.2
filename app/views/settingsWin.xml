@@ -21,6 +21,10 @@
 				<Label window="tutorialWin">Video Tutorial</Label>
 			</TableViewRow>
 			
+			<TableViewRow window="insertBofffWin">
+				<Label window="insertBofffWin">Add Bofff Contact</Label>
+			</TableViewRow>
+			
 		</TableView>
 		
 	</Window>

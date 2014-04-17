@@ -103,6 +103,22 @@ function Controller() {
         id: "__alloyId38"
     });
     $.__views.__alloyId37.add($.__views.__alloyId38);
+    $.__views.__alloyId39 = Ti.UI.createTableViewRow({
+        window: "insertBofffWin",
+        id: "__alloyId39"
+    });
+    __alloyId30.push($.__views.__alloyId39);
+    $.__views.__alloyId40 = Ti.UI.createLabel({
+        font: {
+            fontSize: "20"
+        },
+        color: "black",
+        height: "60",
+        text: "Add Bofff Contact",
+        window: "insertBofffWin",
+        id: "__alloyId40"
+    });
+    $.__views.__alloyId39.add($.__views.__alloyId40);
     $.__views.__alloyId29 = Ti.UI.createTableView({
         top: 20,
         rowHeight: 60,
