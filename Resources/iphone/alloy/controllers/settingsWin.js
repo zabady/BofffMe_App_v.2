@@ -7,15 +7,7 @@ function Controller() {
             var windowUrl = "Settings/" + e.source.window;
             selectedSettingWin = Alloy.createController(windowUrl).getView();
         }
-        var tempRootWin = Ti.UI.createWindow({});
-        var tempNavWin = Ti.UI.iOS.createNavigationWindow({
-            window: tempRootWin
-        });
-        tempNavWin.open();
-        tempNavWin.openWindow(selectedSettingWin);
-        selectedSettingWin.addEventListener("close", function() {
-            tempNavWin.close();
-        });
+        Alloy.Globals.openNavigationWindow(selectedSettingWin, true);
         $.win.fireEvent("close");
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));

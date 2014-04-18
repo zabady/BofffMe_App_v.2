@@ -10,8 +10,38 @@
 //
 // Alloy.Globals.someGlobalFunction = function(){};
 
+// Adding APIs url to Alloy.Globals
 Alloy.Globals.apiUrl = 'http://www.bofffme.com/api/index.php/home/';
 
+
+// Creating the open function that creates a navigation window works with the tabgroup,
+// and add a back button to android's action bar
+if(OS_IOS) {
+	var tempRootWin = Ti.UI.createWindow({
+		// navBarHidden: true,	// TODO: Must be tested for user experience
+	});
+	var tempNavWin = Ti.UI.iOS.createNavigationWindow({
+		window: tempRootWin,
+	});
+}
+Alloy.Globals.openNavigationWindow = function(window, isWindowAfterRoot) {
+	if(OS_IOS) {
+		tempNavWin.open();
+		tempNavWin.openWindow(window);
+		if(isWindowAfterRoot) window.addEventListener('close', function(){ tempNavWin.close(); });
+	}
+	else if(OS_ANDROID) {
+		// Adding a back button to android's action bar
+		window.addEventListener('open', function() {
+			window.activity.actionBar.onHomeIconItemSelected = function() { window.close(); };
+			window.activity.actionBar.displayHomeAsUp = true;
+		});
+		window.open();
+	}
+};
+
+
+// Generating the QR Code for the first time the app runs
 var firstTime = true;
 if(firstTime) {
 	var userProfile = new Object({

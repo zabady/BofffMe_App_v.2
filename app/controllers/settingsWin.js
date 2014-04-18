@@ -12,24 +12,6 @@ function openClickedSettings(e) {
 	}
 	
 	// Opening the selected setting window
-	if(OS_ANDROID) {
-		// Adding a back button to android's action bar
-		selectedSettingWin.addEventListener('open', function() {
-			selectedSettingWin.activity.actionBar.onHomeIconItemSelected = function() { selectedSettingWin.close(); };
-			selectedSettingWin.activity.actionBar.displayHomeAsUp = true;
-		});
-		selectedSettingWin.open();
-	} else {
-		// Creating a work around to open the settings window in navigation window that is compatible with nappDrawer module
-		var tempRootWin = Ti.UI.createWindow({
-			// navBarHidden: true,	// TODO: Must be tested for user experience
-		});
-		var tempNavWin = Ti.UI.iOS.createNavigationWindow({
-			window: tempRootWin,
-		});
-		tempNavWin.open();
-		tempNavWin.openWindow(selectedSettingWin);
-		selectedSettingWin.addEventListener('close', function(){ tempNavWin.close(); });
-		$.win.fireEvent('close');
-	}
+	Alloy.Globals.openNavigationWindow(selectedSettingWin, true);
+	if(OS_IOS) $.win.fireEvent('close'); // for better user experience, toggle the settings back to the right
 }

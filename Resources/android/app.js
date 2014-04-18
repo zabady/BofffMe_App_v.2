@@ -2,7 +2,21 @@ var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
 Alloy.Globals.apiUrl = "http://www.bofffme.com/api/index.php/home/";
 
-var firstTime = false;
+var tempRootWin;
+
+var tempNavWin;
+
+Alloy.Globals.openNavigationWindow = function(window, isWindowAfterRoot) {
+    window.addEventListener("open", function() {
+        window.activity.actionBar.onHomeIconItemSelected = function() {
+            window.close();
+        };
+        window.activity.actionBar.displayHomeAsUp = true;
+    });
+    window.open();
+};
+
+var firstTime = true;
 
 if (firstTime) {
     var userProfile = new Object({

@@ -17,18 +17,6 @@
 	left:5,
 }
 
-"#lb_contactsType":{
-	width: Ti.UI.SIZE,
-	height: '30dp',
-	color: "blue",
-	font: {
-		fontSize: "20dp",
-		fontFamily: 'Helvetica Neue'
-	},
-	textAlign: 'center',
-	left:'5dp',
-}
-
 ".list_bofffContacts":{
 	width:Ti.Platform.displayCaps.platformWidth,
 }

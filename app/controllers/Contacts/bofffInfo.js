@@ -2,16 +2,17 @@ var args = arguments[0] || {};
 var bofff=args.bofff;
 var image= args.image;
 //this is the back button on the title bar
-var prevButton = Titanium.UI.createButton({
-    title:'Back' 
-});
-//this is to navigate back 
-prevButton.addEventListener('click',function(e)
-{
-    $.win_bofffInfo.close();
-});
-//assigning the back button to the current window
-$.win_bofffInfo.leftNavButton= prevButton;
+// var prevButton = Titanium.UI.createButton({
+    // title:'Back' 
+// });
+// //this is to navigate back 
+// prevButton.addEventListener('click',function(e)
+// {
+    // $.win_bofffInfo.close();
+// });
+// //assigning the back button to the current window
+// $.win_bofffInfo.leftNavButton= prevButton;
+
 //assigning the contact name to the window title 
 $.win_bofffInfo.title=bofff.fullName;
 
@@ -40,5 +41,6 @@ function enlargeImage(e)
 			image: bofff.profile_picture,
 			iconImage: bofff.icon_image,
 		};
-		Ti.App.bofffsListTab.open(Alloy.createController('Contacts/bofffImage', params).getView());
+		//Ti.App.bofffsListTab.open(Alloy.createController('Contacts/bofffImage', params).getView());
+		Alloy.Globals.openNavigationWindow(Alloy.createController('Contacts/bofffImage', params).getView(), false);
 }

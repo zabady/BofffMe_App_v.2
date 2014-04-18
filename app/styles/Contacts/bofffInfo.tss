@@ -15,7 +15,3 @@
 	left:10,
 	top:'30',
 }
-
-".view_dynamicLabels":{
-	layout: "vertical",
-}

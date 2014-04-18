@@ -1,6 +1,6 @@
 function Controller() {
     function initializeSearch() {
-        if (firstFocus && false) {
+        if (firstFocus && true) {
             firstFocus = false;
             $.search.blur();
         } else {
@@ -32,6 +32,9 @@ function Controller() {
                 $.view_search.width = 0;
                 $.view_search.height = 0;
             }
+            $.search.value = "";
+            $.search.hide();
+            $.search.show();
         }
     }
     function openSearchPicker() {
@@ -212,25 +215,11 @@ function Controller() {
         height: Ti.UI.SIZE
     });
     $.__views.view_search.add($.__views.lbl_findBy);
-    $.__views.lbl_searchField = Ti.UI.createLabel({
-        color: "black",
-        font: {
-            fontSize: "20dp",
-            fontFamily: "Helvetica Neue"
-        },
-        left: "10",
-        text: "Name",
-        id: "lbl_searchField",
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE
-    });
-    $.__views.view_search.add($.__views.lbl_searchField);
-    openSearchPicker ? $.__views.lbl_searchField.addEventListener("click", openSearchPicker) : __defers["$.__views.lbl_searchField!click!openSearchPicker"] = true;
     $.__views.picker_searchBy = Alloy.createController("Contacts/searchByFieldPicker", {
         id: "picker_searchBy",
-        __parentSymbol: $.__views.view_bofffsContacts
+        __parentSymbol: $.__views.view_search
     });
-    $.__views.picker_searchBy.setParent($.__views.view_bofffsContacts);
+    $.__views.picker_searchBy.setParent($.__views.view_search);
     $.__views.search = Ti.UI.createSearchBar({
         backgroundColor: "transparent",
         id: "search",
@@ -245,9 +234,9 @@ function Controller() {
     updateSearch ? $.__views.search.addEventListener("change", updateSearch) : __defers["$.__views.search!change!updateSearch"] = true;
     stopSearch ? $.__views.search.addEventListener("blur", stopSearch) : __defers["$.__views.search!blur!stopSearch"] = true;
     searchBofff ? $.__views.search.addEventListener("return", searchBofff) : __defers["$.__views.search!return!searchBofff"] = true;
-    var __alloyId32 = {};
-    var __alloyId34 = [];
-    var __alloyId35 = {
+    var __alloyId35 = {};
+    var __alloyId37 = [];
+    var __alloyId38 = {
         type: "Ti.UI.ImageView",
         bindId: "pic",
         properties: {
@@ -260,8 +249,8 @@ function Controller() {
             click: imageClicked
         }
     };
-    __alloyId34.push(__alloyId35);
-    var __alloyId36 = {
+    __alloyId37.push(__alloyId38);
+    var __alloyId39 = {
         type: "Ti.UI.ImageView",
         bindId: "bofff_pic",
         properties: {
@@ -274,8 +263,8 @@ function Controller() {
             click: starClicked
         }
     };
-    __alloyId34.push(__alloyId36);
-    var __alloyId37 = {
+    __alloyId37.push(__alloyId39);
+    var __alloyId40 = {
         type: "Ti.UI.Label",
         bindId: "textLabel",
         properties: {
@@ -289,18 +278,18 @@ function Controller() {
             bindId: "textLabel"
         }
     };
-    __alloyId34.push(__alloyId37);
-    var __alloyId33 = {
+    __alloyId37.push(__alloyId40);
+    var __alloyId36 = {
         properties: {
-            height: "56dp",
+            height: Ti.UI.SIZE,
             name: "template1"
         },
-        childTemplates: __alloyId34
+        childTemplates: __alloyId37
     };
-    __alloyId32["template1"] = __alloyId33;
+    __alloyId35["template1"] = __alloyId36;
     $.__views.list_bofffContacts = Ti.UI.createListView({
         width: "100%",
-        templates: __alloyId32,
+        templates: __alloyId35,
         id: "list_bofffContacts",
         left: "0",
         defaultItemTemplate: "template1"
@@ -334,7 +323,7 @@ function Controller() {
     $.picker_searchBy.picker.addEventListener("change", function(e) {
         searchableText = e.row.dbName;
         searchableTextPrivacy = e.row.dbPrivacy;
-        $.lbl_searchField.text = e.selectedValue[0];
+        changeSearchableText(searchableText, searchableTextPrivacy);
         if ("Custom" == e.selectedValue[0]) {
             $.view_customField.view_customField.width = "90%";
             $.view_customField.view_customField.height = "40%";

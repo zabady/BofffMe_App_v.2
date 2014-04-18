@@ -334,7 +334,9 @@ function showContact(e)
 			bofff: bofff,
 			image: image,
 		};
-		Ti.App.bofffsListTab.open(Alloy.createController('Contacts/bofffInfo', params).getView());
+		//Ti.App.bofffsListTab.open(Alloy.createController('Contacts/bofffInfo', params).getView());
+		// TODO: My BA3BASA !
+		Alloy.Globals.openNavigationWindow(Alloy.createController('Contacts/bofffInfo', params).getView(), true);
 	}
 }
 var ifImageClicked=false;
