@@ -103,8 +103,9 @@ function openSearchPicker(e)
 		$.search.blur();
 	}
 }
-var searchableText;
-var searchableTextPrivacy;
+//e7naaa fhsaaaaaar
+var searchableText ="fullName";
+var searchableTextPrivacy="public";
 //on selection of picker change update the search process
 $.picker_searchBy.picker.addEventListener("change", function(e)
 {
@@ -345,6 +346,15 @@ function imageClicked(e)
 	ifImageClicked=true;
 }
 
+// function createVisibleData(privacyOfBofff,friendData)
+// {
+	// for(var dataField in friendData)
+	// if(privacyNumber[privacyOfBofff]>=privacyNumber[privacyOfField])
+		// {
+// 			
+		// }
+// }
+//e7na fshaaaaaaaaaaaaaaaaar
 function getUserData(pin,bofffsSpecificData)
 {
 	var url =  'http://www.bofffme.com/api/index.php/home/';
