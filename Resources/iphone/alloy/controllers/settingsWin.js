@@ -1,9 +1,12 @@
 function Controller() {
     function openClickedSettings(e) {
         var selectedSettingWin;
-        selectedSettingWin = -1 != e.source.window.search("http") ? Alloy.createController("webViewWin", {
+        if (-1 != e.source.window.search("http")) selectedSettingWin = Alloy.createController("webViewWin", {
             url: e.source.window
-        }).getView() : Alloy.createController("/Settings/" + e.source.window).getView();
+        }).getView(); else {
+            var windowUrl = "Settings/" + e.source.window;
+            selectedSettingWin = Alloy.createController(windowUrl).getView();
+        }
         var tempRootWin = Ti.UI.createWindow({});
         var tempNavWin = Ti.UI.iOS.createNavigationWindow({
             window: tempRootWin
@@ -30,7 +33,7 @@ function Controller() {
         layout: "vertical"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
-    $.__views.__alloyId25 = Ti.UI.createLabel({
+    $.__views.__alloyId19 = Ti.UI.createLabel({
         font: {
             fontSize: "20dp"
         },
@@ -38,16 +41,16 @@ function Controller() {
         height: "60",
         text: "Settings",
         top: "40",
-        id: "__alloyId25"
+        id: "__alloyId19"
     });
-    $.__views.win.add($.__views.__alloyId25);
-    var __alloyId27 = [];
-    $.__views.__alloyId28 = Ti.UI.createTableViewRow({
+    $.__views.win.add($.__views.__alloyId19);
+    var __alloyId21 = [];
+    $.__views.__alloyId22 = Ti.UI.createTableViewRow({
         window: "editProfileWin",
-        id: "__alloyId28"
+        id: "__alloyId22"
     });
-    __alloyId27.push($.__views.__alloyId28);
-    $.__views.__alloyId29 = Ti.UI.createLabel({
+    __alloyId21.push($.__views.__alloyId22);
+    $.__views.__alloyId23 = Ti.UI.createLabel({
         font: {
             fontSize: "20"
         },
@@ -55,15 +58,15 @@ function Controller() {
         height: "60",
         text: "My Profile",
         window: "editProfileWin",
-        id: "__alloyId29"
+        id: "__alloyId23"
     });
-    $.__views.__alloyId28.add($.__views.__alloyId29);
-    $.__views.__alloyId30 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId22.add($.__views.__alloyId23);
+    $.__views.__alloyId24 = Ti.UI.createTableViewRow({
         window: "http://www.bofffme.com",
-        id: "__alloyId30"
+        id: "__alloyId24"
     });
-    __alloyId27.push($.__views.__alloyId30);
-    $.__views.__alloyId31 = Ti.UI.createLabel({
+    __alloyId21.push($.__views.__alloyId24);
+    $.__views.__alloyId25 = Ti.UI.createLabel({
         font: {
             fontSize: "20"
         },
@@ -71,15 +74,15 @@ function Controller() {
         height: "60",
         text: "About",
         window: "http://www.bofffme.com",
-        id: "__alloyId31"
+        id: "__alloyId25"
     });
-    $.__views.__alloyId30.add($.__views.__alloyId31);
-    $.__views.__alloyId32 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId24.add($.__views.__alloyId25);
+    $.__views.__alloyId26 = Ti.UI.createTableViewRow({
         window: "http://www.google.com",
-        id: "__alloyId32"
+        id: "__alloyId26"
     });
-    __alloyId27.push($.__views.__alloyId32);
-    $.__views.__alloyId33 = Ti.UI.createLabel({
+    __alloyId21.push($.__views.__alloyId26);
+    $.__views.__alloyId27 = Ti.UI.createLabel({
         font: {
             fontSize: "20"
         },
@@ -87,15 +90,15 @@ function Controller() {
         height: "60",
         text: "FAQ",
         window: "http://www.google.com",
-        id: "__alloyId33"
+        id: "__alloyId27"
     });
-    $.__views.__alloyId32.add($.__views.__alloyId33);
-    $.__views.__alloyId34 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId26.add($.__views.__alloyId27);
+    $.__views.__alloyId28 = Ti.UI.createTableViewRow({
         window: "tutorialWin",
-        id: "__alloyId34"
+        id: "__alloyId28"
     });
-    __alloyId27.push($.__views.__alloyId34);
-    $.__views.__alloyId35 = Ti.UI.createLabel({
+    __alloyId21.push($.__views.__alloyId28);
+    $.__views.__alloyId29 = Ti.UI.createLabel({
         font: {
             fontSize: "20"
         },
@@ -103,15 +106,15 @@ function Controller() {
         height: "60",
         text: "Video Tutorial",
         window: "tutorialWin",
-        id: "__alloyId35"
+        id: "__alloyId29"
     });
-    $.__views.__alloyId34.add($.__views.__alloyId35);
-    $.__views.__alloyId36 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId28.add($.__views.__alloyId29);
+    $.__views.__alloyId30 = Ti.UI.createTableViewRow({
         window: "insertBofffWin",
-        id: "__alloyId36"
+        id: "__alloyId30"
     });
-    __alloyId27.push($.__views.__alloyId36);
-    $.__views.__alloyId37 = Ti.UI.createLabel({
+    __alloyId21.push($.__views.__alloyId30);
+    $.__views.__alloyId31 = Ti.UI.createLabel({
         font: {
             fontSize: "20"
         },
@@ -119,20 +122,20 @@ function Controller() {
         height: "60",
         text: "Add Bofff Contact",
         window: "insertBofffWin",
-        id: "__alloyId37"
+        id: "__alloyId31"
     });
-    $.__views.__alloyId36.add($.__views.__alloyId37);
-    $.__views.__alloyId26 = Ti.UI.createTableView({
+    $.__views.__alloyId30.add($.__views.__alloyId31);
+    $.__views.__alloyId20 = Ti.UI.createTableView({
         top: 20,
         rowHeight: 60,
-        data: __alloyId27,
-        id: "__alloyId26"
+        data: __alloyId21,
+        id: "__alloyId20"
     });
-    $.__views.win.add($.__views.__alloyId26);
-    openClickedSettings ? $.__views.__alloyId26.addEventListener("click", openClickedSettings) : __defers["$.__views.__alloyId26!click!openClickedSettings"] = true;
+    $.__views.win.add($.__views.__alloyId20);
+    openClickedSettings ? $.__views.__alloyId20.addEventListener("click", openClickedSettings) : __defers["$.__views.__alloyId20!click!openClickedSettings"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    __defers["$.__views.__alloyId26!click!openClickedSettings"] && $.__views.__alloyId26.addEventListener("click", openClickedSettings);
+    __defers["$.__views.__alloyId20!click!openClickedSettings"] && $.__views.__alloyId20.addEventListener("click", openClickedSettings);
     _.extend($, exports);
 }
 

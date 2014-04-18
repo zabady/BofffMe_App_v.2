@@ -1,6 +1,8 @@
 var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
-var firstTime = false;
+Alloy.Globals.apiUrl = "http://www.bofffme.com/api/index.php/home/";
+
+var firstTime = true;
 
 if (firstTime) {
     var userProfile = new Object({

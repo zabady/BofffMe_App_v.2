@@ -12,7 +12,7 @@
 
 Alloy.Globals.apiUrl = 'http://www.bofffme.com/api/index.php/home/';
 
-var firstTime = false;
+var firstTime = true;
 if(firstTime) {
 	var userProfile = new Object({
 		pin: '5000',

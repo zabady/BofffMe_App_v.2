@@ -9,9 +9,9 @@
 			<TextField class="allStyles" switchValue="3" onChange="textFieldChanges" hintText="Email">ahmed</TextField>
 			<TextField class="allStyles" switchValue="4" onChange="textFieldChanges" hintText="Gender">male</TextField>
 			
-			<Button class="allStyles" onClick="openLibrary">Choose Picture</Button>
+			<Button class="allStyles" onClick="openLibrary" title="Choose Picture"></Button>
 			
-			<Button class="allStyles" onClick="continuePressed">Continue</Button>
+			<Button class="allStyles" onClick="continuePressed" title="Continue"></Button>
 					
 		</ScrollView>
 		

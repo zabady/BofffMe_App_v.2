@@ -1,0 +1,16 @@
+<Alloy>
+	<Window id="win_boffsList" title="Contacts">
+		
+		<RightNavButton>
+			<Button id="btn_settings" class="settingsBtn"/>
+		</RightNavButton>
+		<LeftNavButton>
+			<ImageView class="logo"/>
+		</LeftNavButton>
+		
+		<View layout="vertical">
+	 		<ScrollableView showPagingControl="true" id="scrollableview_mainContactsView" onScrollend="changeRightNavButton" />
+		</View>
+		
+	</Window>
+</Alloy>

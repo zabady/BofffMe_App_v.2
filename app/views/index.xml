@@ -11,26 +11,16 @@
         </Menu>
 		
 		
-		<!-- Tab 1 -->
+		<!-- Tab 1 : QrCode Window -->
 		<Tab title="QR Code" icon="/images/QR-code-7aram.png">
     		<Require id="qrCodeWin" src="qrCodeWin" type="view" />
         </Tab>
-		
-		
-		<!-- Tab 2 -->
-		<Tab title="Tab 2" icon="/images/man-7aram.png">
-			<Window title="Tab 2">
-				
-				<RightNavButton>
-					<Button class="settingsBtn" onClick="settingsClicked" />
-				</RightNavButton>
-				<LeftNavButton>
-					<ImageView class="logo"/>
-				</LeftNavButton>
-				
-				<Label>I am Window 1</Label>
-			</Window>
-		</Tab>
+        
+        
+        <!-- Tab 2 : Contacts Window -->
+        <Tab title="Contacts" icon="/images/man-7aram.png">
+    		<Require id="contactsWin" src="Contacts/coreContactsWin" type="view" />
+        </Tab>
 		
 		
 		<!-- Tab 3 -->

@@ -7,7 +7,8 @@ function openClickedSettings(e) {
 	if(e.source.window.search("http") != -1) {
 		selectedSettingWin = Alloy.createController("webViewWin", { url: e.source.window }).getView();
 	} else {
-		selectedSettingWin = Alloy.createController("/Settings/" + e.source.window).getView();
+		var windowUrl = OS_IOS ? "Settings/" + e.source.window : "/Settings/" + e.source.window; 
+		selectedSettingWin = Alloy.createController(windowUrl).getView();
 	}
 	
 	// Opening the selected setting window
