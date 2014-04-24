@@ -31,6 +31,8 @@ var xhr = Ti.Network.createHTTPClient(
 xhr.open("POST", Alloy.Globals.apiUrl + "search_user_by/bofff/user_accounts/pin/" + Alloy.Globals.userPin);
 xhr.send();
 
+//Split value to split update strings
+Alloy.Globals.splitValue="$";
 
 // Creating the open function that creates a navigation window works with the tabgroup,
 // and add a back button to android's action bar

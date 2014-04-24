@@ -317,8 +317,8 @@ function showContact(e)
 		var bofffId = bofffs[e.itemId].contact_id;
 		//deleteSocialLink(bofffId,"http://tttt");
 		//updateEmail(bofffId,'work',bofffs[e.itemId].bofff.mails);
-		//getUserData('95190228ae42e7652b098b5bce990aa8',bofffsList);
-		applyUpdatesOfFriend('95190228ae42e7652b098b5bce990aa8',bofffsList,bofffs);
+		getUserData('fbea0803a7d79e402d0557dcb7063a03',bofffsList);
+		//applyUpdatesOfFriend('95190228ae42e7652b098b5bce990aa8',bofffsList,bofffs);
 	}
 	else
 	{
@@ -624,22 +624,22 @@ function updateBofff(pin,userData,bofffsSpecificData)
 	xhr.open("POST", url+"update_with_pin/bofff/user_accounts/"+pin);
 	var params=
 	{
-		fullName:"Ahmed Atif",
-		gender:"male",
-		phone_numbers:"no1,no2,no3,no4",
-		phone_numbers_privacy:"friends,onlyMe,favorite,public",
-		mails:"ahmed.atif15@gmail.com,mail2,mail3,mail4",
-		mails_privacy:"friends,onlyMe,favorites,public",
-		social_links:"https://www.facebook.com/zabady,link2,link3,link4",
+		/*fullName:"Ahmed Atif",
+		gender:"male",*/
+		phone_numbers:"no13$no5$no8$no4",
+		phone_numbers_privacy:"friends$onlyMe$favorite$public",
+		mails:"ahmad.amin.ma@gmail.com$mail2$mail10$mail4",
+		mails_privacy:"friends$onlyMe$favorites$public",
+		/*social_links:"https://www.facebook.com/zabady,link2,link3,link4",
 		social_links_privacy:"friends,onlyMe,favorites,public",
-		residence:"bab el loo2,res2,res3,res4,res5",
-		residence_privacy:"friends,onlyMe,favorites,public,onlyMe",
-		job_title:"softwerg",
+		residence:"Cairo,Egypt",
+		residence_privacy:"friends",
+		job_title:"softwergy",
 		job_title_privacy:"public",
-		birthday_date:"1010101",
+		/*birthday_date:"1010101",
 		birthday_date_privacy:"friends",
 		company:"cectwtec",
-		company_privacy:"favorites",
+		company_privacy:"favorites",*/
 	};
 	xhr.send(params);  // request is actually sent with this statement
 }
