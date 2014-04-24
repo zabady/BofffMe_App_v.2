@@ -588,7 +588,7 @@ function createVisibleData(privacyOfBofff,friendData)
 }
 
 
-function getUserData(pin,bofffsSpecificData)
+function getUserData(pin, bofffsSpecificData)
 {
 	var url =  'http://www.bofffme.com/api/index.php/home/';
 	var xhr = Ti.Network.createHTTPClient(

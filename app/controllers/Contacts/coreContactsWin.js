@@ -299,5 +299,3 @@ $.scrollableview_mainContactsView.addView(bofffsContacts.getView());
 
 // var allContacts=Alloy.createController("allContacts",allContactsPayload);
 // $.scrollableview_mainContactsView.addView(allContacts.getView());
-
-

@@ -2,6 +2,22 @@ var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
 Alloy.Globals.apiUrl = "http://www.bofffme.com/api/index.php/home/";
 
+Alloy.Globals.userPin = "95190228ae42e7652b098b5bce990aa8";
+
+var xhr = Ti.Network.createHTTPClient({
+    onload: function() {
+        var userData = JSON.parse(this.responseText).rows[0];
+        Titanium.App.Properties.setObject("userData", userData);
+    },
+    onerror: function() {
+        alert(this.responseText);
+    }
+});
+
+xhr.open("POST", Alloy.Globals.apiUrl + "search_user_by/bofff/user_accounts/pin/" + Alloy.Globals.userPin);
+
+xhr.send();
+
 var tempRootWin = Ti.UI.createWindow({});
 
 var tempNavWin = Ti.UI.iOS.createNavigationWindow({
