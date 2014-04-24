@@ -2,6 +2,8 @@ var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
 Alloy.Globals.apiUrl = "http://www.bofffme.com/api/index.php/home/";
 
+Alloy.Globals.splitValue = "$";
+
 var tempRootWin = Ti.UI.createWindow({});
 
 var tempNavWin = Ti.UI.iOS.createNavigationWindow({

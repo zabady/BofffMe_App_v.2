@@ -13,6 +13,8 @@
 // Adding APIs url to Alloy.Globals
 Alloy.Globals.apiUrl = 'http://www.bofffme.com/api/index.php/home/';
 
+//Split value to split update strings
+Alloy.Globals.splitValue="$";
 
 // Creating the open function that creates a navigation window works with the tabgroup,
 // and add a back button to android's action bar
