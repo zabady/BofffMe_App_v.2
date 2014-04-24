@@ -69,12 +69,12 @@ function Controller() {
         title: "Add Bofff"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
-    $.__views.__alloyId76 = Ti.UI.createScrollView({
+    $.__views.__alloyId79 = Ti.UI.createScrollView({
         layout: "vertical",
-        id: "__alloyId76"
+        id: "__alloyId79"
     });
-    $.__views.win.add($.__views.__alloyId76);
-    $.__views.__alloyId77 = Ti.UI.createLabel({
+    $.__views.win.add($.__views.__alloyId79);
+    $.__views.__alloyId80 = Ti.UI.createLabel({
         font: {
             fontSize: "20dp"
         },
@@ -82,66 +82,66 @@ function Controller() {
         height: "60",
         text: "Add a new Bofff !",
         top: "40",
-        id: "__alloyId77"
+        id: "__alloyId80"
     });
-    $.__views.__alloyId76.add($.__views.__alloyId77);
-    $.__views.__alloyId78 = Ti.UI.createTextField({
+    $.__views.__alloyId79.add($.__views.__alloyId80);
+    $.__views.__alloyId81 = Ti.UI.createTextField({
         top: 40,
         color: "white",
         switchValue: "1",
         hintText: "Name",
-        id: "__alloyId78"
+        id: "__alloyId81"
     });
-    $.__views.__alloyId76.add($.__views.__alloyId78);
-    textFieldChanges ? $.__views.__alloyId78.addEventListener("change", textFieldChanges) : __defers["$.__views.__alloyId78!change!textFieldChanges"] = true;
-    $.__views.__alloyId79 = Ti.UI.createTextField({
+    $.__views.__alloyId79.add($.__views.__alloyId81);
+    textFieldChanges ? $.__views.__alloyId81.addEventListener("change", textFieldChanges) : __defers["$.__views.__alloyId81!change!textFieldChanges"] = true;
+    $.__views.__alloyId82 = Ti.UI.createTextField({
         top: 40,
         color: "white",
         switchValue: "2",
         hintText: "Phone Number",
-        id: "__alloyId79"
+        id: "__alloyId82"
     });
-    $.__views.__alloyId76.add($.__views.__alloyId79);
-    textFieldChanges ? $.__views.__alloyId79.addEventListener("change", textFieldChanges) : __defers["$.__views.__alloyId79!change!textFieldChanges"] = true;
-    $.__views.__alloyId80 = Ti.UI.createTextField({
+    $.__views.__alloyId79.add($.__views.__alloyId82);
+    textFieldChanges ? $.__views.__alloyId82.addEventListener("change", textFieldChanges) : __defers["$.__views.__alloyId82!change!textFieldChanges"] = true;
+    $.__views.__alloyId83 = Ti.UI.createTextField({
         top: 40,
         color: "white",
         switchValue: "3",
         hintText: "Email",
-        id: "__alloyId80"
+        id: "__alloyId83"
     });
-    $.__views.__alloyId76.add($.__views.__alloyId80);
-    textFieldChanges ? $.__views.__alloyId80.addEventListener("change", textFieldChanges) : __defers["$.__views.__alloyId80!change!textFieldChanges"] = true;
-    $.__views.__alloyId81 = Ti.UI.createTextField({
+    $.__views.__alloyId79.add($.__views.__alloyId83);
+    textFieldChanges ? $.__views.__alloyId83.addEventListener("change", textFieldChanges) : __defers["$.__views.__alloyId83!change!textFieldChanges"] = true;
+    $.__views.__alloyId84 = Ti.UI.createTextField({
         top: 40,
         color: "white",
         switchValue: "4",
         hintText: "Gender",
-        id: "__alloyId81"
+        id: "__alloyId84"
     });
-    $.__views.__alloyId76.add($.__views.__alloyId81);
-    textFieldChanges ? $.__views.__alloyId81.addEventListener("change", textFieldChanges) : __defers["$.__views.__alloyId81!change!textFieldChanges"] = true;
-    $.__views.__alloyId82 = Ti.UI.createButton({
+    $.__views.__alloyId79.add($.__views.__alloyId84);
+    textFieldChanges ? $.__views.__alloyId84.addEventListener("change", textFieldChanges) : __defers["$.__views.__alloyId84!change!textFieldChanges"] = true;
+    $.__views.__alloyId85 = Ti.UI.createButton({
         top: 40,
         color: "white",
         title: "Choose Picture",
-        id: "__alloyId82"
+        id: "__alloyId85"
     });
-    $.__views.__alloyId76.add($.__views.__alloyId82);
-    openLibrary ? $.__views.__alloyId82.addEventListener("click", openLibrary) : __defers["$.__views.__alloyId82!click!openLibrary"] = true;
-    $.__views.__alloyId83 = Ti.UI.createButton({
+    $.__views.__alloyId79.add($.__views.__alloyId85);
+    openLibrary ? $.__views.__alloyId85.addEventListener("click", openLibrary) : __defers["$.__views.__alloyId85!click!openLibrary"] = true;
+    $.__views.__alloyId86 = Ti.UI.createButton({
         top: 40,
         color: "white",
         title: "Continue",
-        id: "__alloyId83"
+        id: "__alloyId86"
     });
-    $.__views.__alloyId76.add($.__views.__alloyId83);
-    continuePressed ? $.__views.__alloyId83.addEventListener("click", continuePressed) : __defers["$.__views.__alloyId83!click!continuePressed"] = true;
-    var __alloyId85 = [];
-    __alloyId85.push("Edit");
-    __alloyId85.push("Confirm");
+    $.__views.__alloyId79.add($.__views.__alloyId86);
+    continuePressed ? $.__views.__alloyId86.addEventListener("click", continuePressed) : __defers["$.__views.__alloyId86!click!continuePressed"] = true;
+    var __alloyId88 = [];
+    __alloyId88.push("Edit");
+    __alloyId88.push("Confirm");
     $.__views.dialog_confirm = Ti.UI.createAlertDialog({
-        buttonNames: __alloyId85,
+        buttonNames: __alloyId88,
         id: "dialog_confirm",
         title: "Confirm data"
     });
@@ -149,12 +149,12 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var bofffContactData = new Object();
-    __defers["$.__views.__alloyId78!change!textFieldChanges"] && $.__views.__alloyId78.addEventListener("change", textFieldChanges);
-    __defers["$.__views.__alloyId79!change!textFieldChanges"] && $.__views.__alloyId79.addEventListener("change", textFieldChanges);
-    __defers["$.__views.__alloyId80!change!textFieldChanges"] && $.__views.__alloyId80.addEventListener("change", textFieldChanges);
     __defers["$.__views.__alloyId81!change!textFieldChanges"] && $.__views.__alloyId81.addEventListener("change", textFieldChanges);
-    __defers["$.__views.__alloyId82!click!openLibrary"] && $.__views.__alloyId82.addEventListener("click", openLibrary);
-    __defers["$.__views.__alloyId83!click!continuePressed"] && $.__views.__alloyId83.addEventListener("click", continuePressed);
+    __defers["$.__views.__alloyId82!change!textFieldChanges"] && $.__views.__alloyId82.addEventListener("change", textFieldChanges);
+    __defers["$.__views.__alloyId83!change!textFieldChanges"] && $.__views.__alloyId83.addEventListener("change", textFieldChanges);
+    __defers["$.__views.__alloyId84!change!textFieldChanges"] && $.__views.__alloyId84.addEventListener("change", textFieldChanges);
+    __defers["$.__views.__alloyId85!click!openLibrary"] && $.__views.__alloyId85.addEventListener("click", openLibrary);
+    __defers["$.__views.__alloyId86!click!continuePressed"] && $.__views.__alloyId86.addEventListener("click", continuePressed);
     __defers["$.__views.dialog_confirm!click!dialogConfirmPressed"] && $.__views.dialog_confirm.addEventListener("click", dialogConfirmPressed);
     _.extend($, exports);
 }

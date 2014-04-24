@@ -1,0 +1,7 @@
+<Alloy>
+	<Window title="Contact Image" backgroundColor="black">
+		<ScrollView>
+			<ImageView id="img" />
+		</ScrollView>
+	</Window>
+</Alloy>

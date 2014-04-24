@@ -7,6 +7,7 @@ function openClickedSettings(e) {
 	if(e.source.window.search("http") != -1) {
 		selectedSettingWin = Alloy.createController("webViewWin", { url: e.source.window }).getView();
 	} else {
+		// TODO: Remove the backslash from the next line of code
 		var windowUrl = OS_IOS ? "Settings/" + e.source.window : "/Settings/" + e.source.window; 
 		selectedSettingWin = Alloy.createController(windowUrl).getView();
 	}

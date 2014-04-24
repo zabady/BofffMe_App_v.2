@@ -160,18 +160,204 @@ function Controller() {
             applyUpdatesOfFriend("95190228ae42e7652b098b5bce990aa8", bofffsList, bofffs);
         } else {
             $.search.blur();
-            var bofff;
-            bofff = bofffs[e.itemId]["bofff"];
-            var image = e.section.getItemAt(e.itemIndex).pic.image;
-            var params = {
-                bofff: bofff,
-                image: image
-            };
-            Alloy.Globals.openNavigationWindow(Alloy.createController("Contacts/bofffInfo", params).getView(), true);
+            var bofff = bofffs[e.itemId]["bofff"];
+            var privacyOfBofff = bofffsList[e.itemId].privacy_of_friend;
+            e.section.getItemAt(e.itemIndex).pic.image;
+            createVisibleData(privacyOfBofff, bofff);
         }
     }
     function imageClicked() {
         ifImageClicked = true;
+    }
+    function createVisibleData(privacyOfBofff, friendData) {
+        var visibleData = new Object();
+        visibleData.iconImage = null;
+        visibleData.profilePicture = null;
+        visibleData.data = [];
+        var counter = 1;
+        for (var field in friendData) switch (field) {
+          case "fullName":
+            visibleData.Name = friendData[field];
+            break;
+
+          case "gender":
+            var dataObject = new Object();
+            dataObject.FieldName = "Gender";
+            dataObject.FieldValue = friendData[field];
+            visibleData.data.push(dataObject);
+            break;
+
+          case "primary_mobile":
+            var dataObject = new Object();
+            dataObject.FieldName = "Primary Phone";
+            dataObject.FieldValue = friendData[field];
+            visibleData.data.push(dataObject);
+            break;
+
+          case "phone_numbers":
+            try {
+                counter = 1;
+                var values = friendData[field].split(",");
+                var privacies = friendData.phone_numbers_privacy.split(",");
+                for (var record in values) {
+                    var privacyOfField = privacies[record];
+                    if (privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField]) {
+                        var dataObject = new Object();
+                        dataObject.FieldName = "Phone Number " + counter++;
+                        dataObject.FieldValue = values[record];
+                        visibleData.data.push(dataObject);
+                    }
+                }
+            } catch (e) {}
+            break;
+
+          case "primary_email":
+            var dataObject = new Object();
+            dataObject.FieldName = "Primary E-Mail";
+            dataObject.FieldValue = friendData[field];
+            visibleData.data.push(dataObject);
+            break;
+
+          case "mails":
+            try {
+                counter = 1;
+                var values = friendData[field].split(",");
+                var privacies = friendData.mails_privacy.split(",");
+                for (var record in values) {
+                    var privacyOfField = privacies[record];
+                    if (privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField]) {
+                        var dataObject = new Object();
+                        dataObject.FieldName = "mail " + counter++;
+                        dataObject.FieldValue = values[record];
+                        visibleData.data.push(dataObject);
+                    }
+                }
+            } catch (e) {}
+            break;
+
+          case "social_links":
+            try {
+                counter = 1;
+                var values = friendData[field].split(",");
+                var privacies = friendData.social_links_privacy.split(",");
+                for (var record in values) {
+                    var privacyOfField = privacies[record];
+                    if (privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField]) {
+                        var dataObject = new Object();
+                        dataObject.FieldName = "Social Link " + counter++;
+                        dataObject.FieldValue = values[record];
+                        visibleData.data.push(dataObject);
+                    }
+                }
+            } catch (e) {}
+            break;
+
+          case "residence":
+            if (null != friendData[field]) {
+                var privacyOfField = friendData.residence_privacy;
+                if (privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField]) {
+                    var dataObject = new Object();
+                    dataObject.FieldName = "Residence";
+                    dataObject.FieldValue = friendData[field];
+                    visibleData.data.push(dataObject);
+                }
+            }
+            break;
+
+          case "job_title":
+            if (null != friendData[field]) {
+                var privacyOfField = friendData.job_title_privacy;
+                if (privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField]) {
+                    var dataObject = new Object();
+                    dataObject.FieldName = "Job Title";
+                    dataObject.FieldValue = friendData[field];
+                    visibleData.data.push(dataObject);
+                }
+            }
+            break;
+
+          case "education":
+            if (null != friendData[field]) {
+                var privacyOfField = friendData.education_privacy;
+                if (privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField]) {
+                    var dataObject = new Object();
+                    dataObject.FieldName = "Education";
+                    dataObject.FieldValue = friendData[field];
+                    visibleData.data.push(dataObject);
+                }
+            }
+            break;
+
+          case "marital_status":
+            if (null != friendData[field]) {
+                var privacyOfField = friendData.marital_status_privacy;
+                if (privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField]) {
+                    var dataObject = new Object();
+                    dataObject.FieldName = "Marital Status";
+                    dataObject.FieldValue = friendData[field];
+                    visibleData.data.push(dataObject);
+                }
+            }
+            break;
+
+          case "birthday_date":
+            if (null != friendData[field]) {
+                var privacyOfField = friendData.birthday_date_privacy;
+                if (privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField]) {
+                    var dataObject = new Object();
+                    dataObject.FieldName = "Birthday";
+                    dataObject.FieldValue = friendData[field];
+                    visibleData.data.push(dataObject);
+                }
+            }
+            break;
+
+          case "interests":
+            if (null != friendData[field]) {
+                var privacyOfField = friendData.interests_privacy;
+                if (privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField]) {
+                    var dataObject = new Object();
+                    dataObject.FieldName = "Interests";
+                    dataObject.FieldValue = friendData[field];
+                    visibleData.data.push(dataObject);
+                }
+            }
+            break;
+
+          case "company":
+            if (null != friendData[field]) {
+                var privacyOfField = friendData.company_privacy;
+                if (privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField]) {
+                    var dataObject = new Object();
+                    dataObject.FieldName = "Company";
+                    dataObject.FieldValue = friendData[field];
+                    visibleData.data.push(dataObject);
+                }
+            }
+            break;
+
+          case "favorite_places":
+            if (null != friendData[field]) {
+                var privacyOfField = friendData.favorite_places_privacy;
+                if (privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField]) {
+                    var dataObject = new Object();
+                    dataObject.FieldName = "Favorite Places";
+                    dataObject.FieldValue = friendData[field];
+                    visibleData.data.push(dataObject);
+                }
+            }
+            break;
+
+          case "icon_image":
+            visibleData.iconImage = friendData[field];
+            break;
+
+          case "profile_picture":
+            var privacyOfField = friendData.profile_picture_privacy;
+            privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField] && (visibleData.profilePicture = friendData[field]);
+        }
+        alert(visibleData);
+        Alloy.Globals.openNavigationWindow(Alloy.createController("Contacts/bofffProfileWin", visibleData).getView(), true);
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Contacts/bofffsContacts";
@@ -245,9 +431,9 @@ function Controller() {
     updateSearch ? $.__views.search.addEventListener("change", updateSearch) : __defers["$.__views.search!change!updateSearch"] = true;
     stopSearch ? $.__views.search.addEventListener("blur", stopSearch) : __defers["$.__views.search!blur!stopSearch"] = true;
     searchBofff ? $.__views.search.addEventListener("return", searchBofff) : __defers["$.__views.search!return!searchBofff"] = true;
-    var __alloyId32 = {};
-    var __alloyId34 = [];
-    var __alloyId35 = {
+    var __alloyId35 = {};
+    var __alloyId37 = [];
+    var __alloyId38 = {
         type: "Ti.UI.ImageView",
         bindId: "pic",
         properties: {
@@ -260,8 +446,8 @@ function Controller() {
             click: imageClicked
         }
     };
-    __alloyId34.push(__alloyId35);
-    var __alloyId36 = {
+    __alloyId37.push(__alloyId38);
+    var __alloyId39 = {
         type: "Ti.UI.ImageView",
         bindId: "bofff_pic",
         properties: {
@@ -274,8 +460,8 @@ function Controller() {
             click: starClicked
         }
     };
-    __alloyId34.push(__alloyId36);
-    var __alloyId37 = {
+    __alloyId37.push(__alloyId39);
+    var __alloyId40 = {
         type: "Ti.UI.Label",
         bindId: "textLabel",
         properties: {
@@ -289,18 +475,18 @@ function Controller() {
             bindId: "textLabel"
         }
     };
-    __alloyId34.push(__alloyId37);
-    var __alloyId33 = {
+    __alloyId37.push(__alloyId40);
+    var __alloyId36 = {
         properties: {
             height: "56dp",
             name: "template1"
         },
-        childTemplates: __alloyId34
+        childTemplates: __alloyId37
     };
-    __alloyId32["template1"] = __alloyId33;
+    __alloyId35["template1"] = __alloyId36;
     $.__views.list_bofffContacts = Ti.UI.createListView({
         width: "100%",
-        templates: __alloyId32,
+        templates: __alloyId35,
         id: "list_bofffContacts",
         left: "0",
         defaultItemTemplate: "template1"
@@ -329,8 +515,8 @@ function Controller() {
     $.list_bofffContacts.keepSectionsInSearch = true;
     var pickerVisible = false;
     var animation = require("alloy/animation");
-    var searchableText;
-    var searchableTextPrivacy;
+    var searchableText = "fullName";
+    var searchableTextPrivacy = "public";
     $.picker_searchBy.picker.addEventListener("change", function(e) {
         searchableText = e.row.dbName;
         searchableTextPrivacy = e.row.dbPrivacy;

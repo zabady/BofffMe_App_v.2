@@ -1,0 +1,25 @@
+//////////////////////////////////////////////////////////////////////////////// OBJECT COMMEN STYLES
+"TableViewRow": {
+	height: 100,
+},
+"ImageView": {
+	width: 100,
+	height: 100,
+	left: 10,
+},
+"Label": {
+	color: "black",
+	font: { fontSize: "18" },
+}
+
+
+//////////////////////////////////////////////////////////////////////////////// CLASSES STYLES
+".imageTableViewRow": {
+	height: 120,
+	backgroundColor: "#D0D0D0",
+},
+".nameLabel": {
+	left: 120,
+	font: { fontSize: "20", fontWeight: "bold" },
+	color: "white",
+}

@@ -1,0 +1,14 @@
+<Alloy>
+	<Window title="Contact Info">
+		
+		<TableView id="tableView">
+			
+			<TableViewRow class="imageTableViewRow">
+				<ImageView id="img" onClick="enlargeImage" />
+				<Label id="lbl_name" class="nameLabel" />
+			</TableViewRow>
+			
+		</TableView>
+		
+	</Window>
+</Alloy>
