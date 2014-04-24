@@ -177,9 +177,10 @@ function Controller() {
         visibleData.iconImage = null;
         visibleData.profilePicture = null;
         visibleData.data = [];
+        var counter = 1;
         for (var field in friendData) switch (field) {
           case "fullName":
-            visibleData.name = friendData[field];
+            visibleData.Name = friendData[field];
             break;
 
           case "gender":
@@ -198,13 +199,14 @@ function Controller() {
 
           case "phone_numbers":
             try {
+                counter = 1;
                 var values = friendData[field].split(",");
                 var privacies = friendData.phone_numbers_privacy.split(",");
                 for (var record in values) {
                     var privacyOfField = privacies[record];
                     if (privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField]) {
                         var dataObject = new Object();
-                        dataObject.FieldName = "Phone Number " + record;
+                        dataObject.FieldName = "Phone Number " + counter++;
                         dataObject.FieldValue = values[record];
                         visibleData.data.push(dataObject);
                     }
@@ -221,13 +223,14 @@ function Controller() {
 
           case "mails":
             try {
+                counter = 1;
                 var values = friendData[field].split(",");
                 var privacies = friendData.mails_privacy.split(",");
                 for (var record in values) {
                     var privacyOfField = privacies[record];
                     if (privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField]) {
                         var dataObject = new Object();
-                        dataObject.FieldName = "mail " + record;
+                        dataObject.FieldName = "mail " + counter++;
                         dataObject.FieldValue = values[record];
                         visibleData.data.push(dataObject);
                     }
@@ -237,13 +240,14 @@ function Controller() {
 
           case "social_links":
             try {
+                counter = 1;
                 var values = friendData[field].split(",");
                 var privacies = friendData.social_links_privacy.split(",");
                 for (var record in values) {
                     var privacyOfField = privacies[record];
                     if (privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField]) {
                         var dataObject = new Object();
-                        dataObject.FieldName = "Social Link " + record;
+                        dataObject.FieldName = "Social Link " + counter++;
                         dataObject.FieldValue = values[record];
                         visibleData.data.push(dataObject);
                     }

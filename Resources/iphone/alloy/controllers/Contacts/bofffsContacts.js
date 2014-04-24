@@ -356,7 +356,6 @@ function Controller() {
             var privacyOfField = friendData.profile_picture_privacy;
             privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField] && (visibleData.profilePicture = friendData[field]);
         }
-        alert(visibleData);
         Alloy.Globals.openNavigationWindow(Alloy.createController("Contacts/bofffProfileWin", visibleData).getView(), true);
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
