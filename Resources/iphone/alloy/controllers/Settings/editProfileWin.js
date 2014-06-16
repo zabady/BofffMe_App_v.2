@@ -1,10 +1,9 @@
 function Controller() {
     function textFieldsEditing(e) {
-        newUserData[e.id] = e.value;
-        alert(newUserData[e.id]);
+        newUserData[e.source.id] = e.value;
     }
     function doneEditing() {
-        alert("Go Call ZeeZo's Function w eb3atlo zeby w 5leeha 3la allah :)");
+        updateBofff(Alloy.Globals.userPin, userData, newUserData, bofffsSpecificData);
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Settings/editProfileWin";
@@ -16,7 +15,8 @@ function Controller() {
     var __defers = {};
     $.__views.win = Ti.UI.createWindow({
         backgroundColor: "white",
-        id: "win"
+        id: "win",
+        title: "Edit My Profile"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     $.__views.__alloyId77 = Ti.UI.createButton({
@@ -59,15 +59,33 @@ function Controller() {
     });
     $.__views.__alloyId81.add($.__views.phone_numbers);
     textFieldsEditing ? $.__views.phone_numbers.addEventListener("change", textFieldsEditing) : __defers["$.__views.phone_numbers!change!textFieldsEditing"] = true;
+    $.__views.__alloyId82 = Ti.UI.createView({
+        layout: "horizontal",
+        backgroundColor: "blue",
+        top: "50",
+        height: "100",
+        width: "100%",
+        id: "__alloyId82"
+    });
+    $.__views.__alloyId79.add($.__views.__alloyId82);
+    $.__views.phone_numbers_privacy = Ti.UI.createTextArea({
+        id: "phone_numbers_privacy"
+    });
+    $.__views.__alloyId82.add($.__views.phone_numbers_privacy);
+    textFieldsEditing ? $.__views.phone_numbers_privacy.addEventListener("change", textFieldsEditing) : __defers["$.__views.phone_numbers_privacy!change!textFieldsEditing"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
+    Ti.include("/contactsUpdate.js");
     var userData = Titanium.App.Properties.getObject("userData");
-    var newUserData = userData;
+    var newUserData = Titanium.App.Properties.getObject("userData");
+    var bofffsSpecificData = Titanium.App.Properties.getObject("bofffsSpecificData");
     $.fullName.value = userData.fullName;
     $.phone_numbers.value = userData.phone_numbers;
+    $.phone_numbers_privacy.value = userData.phone_numbers_privacy;
     __defers["$.__views.__alloyId77!click!doneEditing"] && $.__views.__alloyId77.addEventListener("click", doneEditing);
     __defers["$.__views.fullName!change!textFieldsEditing"] && $.__views.fullName.addEventListener("change", textFieldsEditing);
     __defers["$.__views.phone_numbers!change!textFieldsEditing"] && $.__views.phone_numbers.addEventListener("change", textFieldsEditing);
+    __defers["$.__views.phone_numbers_privacy!change!textFieldsEditing"] && $.__views.phone_numbers_privacy.addEventListener("change", textFieldsEditing);
     _.extend($, exports);
 }
 

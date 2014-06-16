@@ -26,7 +26,8 @@ function Controller() {
     $.__views.win && $.addTopLevelView($.__views.win);
     $.__views.__alloyId22 = Ti.UI.createLabel({
         font: {
-            fontSize: "20dp"
+            fontSize: "30",
+            fontWeight: "bold"
         },
         color: "#2279bc",
         height: "60",
@@ -43,7 +44,7 @@ function Controller() {
     __alloyId24.push($.__views.__alloyId25);
     $.__views.__alloyId26 = Ti.UI.createLabel({
         font: {
-            fontSize: "20"
+            fontSize: "24"
         },
         color: "black",
         height: "60",
@@ -53,69 +54,93 @@ function Controller() {
     });
     $.__views.__alloyId25.add($.__views.__alloyId26);
     $.__views.__alloyId27 = Ti.UI.createTableViewRow({
-        window: "http://www.bofffme.com",
+        height: "1",
+        backgroundColor: "black",
         id: "__alloyId27"
     });
     __alloyId24.push($.__views.__alloyId27);
-    $.__views.__alloyId28 = Ti.UI.createLabel({
+    $.__views.__alloyId28 = Ti.UI.createTableViewRow({
+        window: "http://www.bofffme.com",
+        id: "__alloyId28"
+    });
+    __alloyId24.push($.__views.__alloyId28);
+    $.__views.__alloyId29 = Ti.UI.createLabel({
         font: {
-            fontSize: "20"
+            fontSize: "24"
         },
         color: "black",
         height: "60",
         text: "About",
         window: "http://www.bofffme.com",
-        id: "__alloyId28"
-    });
-    $.__views.__alloyId27.add($.__views.__alloyId28);
-    $.__views.__alloyId29 = Ti.UI.createTableViewRow({
-        window: "http://www.google.com",
         id: "__alloyId29"
     });
-    __alloyId24.push($.__views.__alloyId29);
-    $.__views.__alloyId30 = Ti.UI.createLabel({
-        font: {
-            fontSize: "20"
-        },
-        color: "black",
-        height: "60",
-        text: "FAQ",
-        window: "http://www.google.com",
+    $.__views.__alloyId28.add($.__views.__alloyId29);
+    $.__views.__alloyId30 = Ti.UI.createTableViewRow({
+        height: "1",
+        backgroundColor: "black",
         id: "__alloyId30"
     });
-    $.__views.__alloyId29.add($.__views.__alloyId30);
+    __alloyId24.push($.__views.__alloyId30);
     $.__views.__alloyId31 = Ti.UI.createTableViewRow({
-        window: "tutorialWin",
+        window: "http://www.google.com",
         id: "__alloyId31"
     });
     __alloyId24.push($.__views.__alloyId31);
     $.__views.__alloyId32 = Ti.UI.createLabel({
         font: {
-            fontSize: "20"
+            fontSize: "24"
+        },
+        color: "black",
+        height: "60",
+        text: "FAQ",
+        window: "http://www.google.com",
+        id: "__alloyId32"
+    });
+    $.__views.__alloyId31.add($.__views.__alloyId32);
+    $.__views.__alloyId33 = Ti.UI.createTableViewRow({
+        height: "1",
+        backgroundColor: "black",
+        id: "__alloyId33"
+    });
+    __alloyId24.push($.__views.__alloyId33);
+    $.__views.__alloyId34 = Ti.UI.createTableViewRow({
+        window: "tutorialWin",
+        id: "__alloyId34"
+    });
+    __alloyId24.push($.__views.__alloyId34);
+    $.__views.__alloyId35 = Ti.UI.createLabel({
+        font: {
+            fontSize: "24"
         },
         color: "black",
         height: "60",
         text: "Video Tutorial",
         window: "tutorialWin",
-        id: "__alloyId32"
+        id: "__alloyId35"
     });
-    $.__views.__alloyId31.add($.__views.__alloyId32);
-    $.__views.__alloyId33 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId34.add($.__views.__alloyId35);
+    $.__views.__alloyId36 = Ti.UI.createTableViewRow({
+        height: "1",
+        backgroundColor: "black",
+        id: "__alloyId36"
+    });
+    __alloyId24.push($.__views.__alloyId36);
+    $.__views.__alloyId37 = Ti.UI.createTableViewRow({
         window: "insertBofffWin",
-        id: "__alloyId33"
+        id: "__alloyId37"
     });
-    __alloyId24.push($.__views.__alloyId33);
-    $.__views.__alloyId34 = Ti.UI.createLabel({
+    __alloyId24.push($.__views.__alloyId37);
+    $.__views.__alloyId38 = Ti.UI.createLabel({
         font: {
-            fontSize: "20"
+            fontSize: "24"
         },
         color: "black",
         height: "60",
         text: "Add Bofff Contact",
         window: "insertBofffWin",
-        id: "__alloyId34"
+        id: "__alloyId38"
     });
-    $.__views.__alloyId33.add($.__views.__alloyId34);
+    $.__views.__alloyId37.add($.__views.__alloyId38);
     $.__views.__alloyId23 = Ti.UI.createTableView({
         top: 20,
         rowHeight: 60,

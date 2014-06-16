@@ -22,6 +22,10 @@
 				<TextArea id="phone_numbers" onChange="textFieldsEditing" />
 			</View>
 			
+			<View layout="horizontal" backgroundColor="blue" top="50" height="100" width="100%">
+				<TextArea id="phone_numbers_privacy" onChange="textFieldsEditing" />
+			</View>
+			
 		</ScrollView>
 		
 	</Window>

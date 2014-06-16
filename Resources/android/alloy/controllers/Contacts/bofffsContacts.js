@@ -160,7 +160,7 @@ function Controller() {
         if (privacyClicked) updatePrivacy(e); else if (ifImageClicked) {
             ifImageClicked = false;
             bofffs[e.itemId].contact_id;
-            applyUpdatesOfFriend("95190228ae42e7652b098b5bce990aa8", bofffsList, bofffs);
+            getUserData(Alloy.Globals.userPin, bofffsList);
         } else {
             $.search.blur();
             var bofff = bofffs[e.itemId]["bofff"];
@@ -192,7 +192,7 @@ function Controller() {
 
           case "primary_mobile":
             var dataObject = new Object();
-            dataObject.FieldName = "Primary Phone";
+            dataObject.FieldName = "Phone";
             dataObject.FieldValue = friendData[field];
             visibleData.data.push(dataObject);
             break;
@@ -200,8 +200,8 @@ function Controller() {
           case "phone_numbers":
             try {
                 counter = 1;
-                var values = friendData[field].split(",");
-                var privacies = friendData.phone_numbers_privacy.split(",");
+                var values = friendData[field].split(Alloy.Globals.splitValue);
+                var privacies = friendData.phone_numbers_privacy.split(Alloy.Globals.splitValue);
                 for (var record in values) {
                     var privacyOfField = privacies[record];
                     if (privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField]) {
@@ -216,7 +216,7 @@ function Controller() {
 
           case "primary_email":
             var dataObject = new Object();
-            dataObject.FieldName = "Primary E-Mail";
+            dataObject.FieldName = "Email";
             dataObject.FieldValue = friendData[field];
             visibleData.data.push(dataObject);
             break;
@@ -224,13 +224,13 @@ function Controller() {
           case "mails":
             try {
                 counter = 1;
-                var values = friendData[field].split(",");
-                var privacies = friendData.mails_privacy.split(",");
+                var values = friendData[field].split(Alloy.Globals.splitValue);
+                var privacies = friendData.mails_privacy.split(Alloy.Globals.splitValue);
                 for (var record in values) {
                     var privacyOfField = privacies[record];
                     if (privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField]) {
                         var dataObject = new Object();
-                        dataObject.FieldName = "mail " + counter++;
+                        dataObject.FieldName = "Email " + counter++;
                         dataObject.FieldValue = values[record];
                         visibleData.data.push(dataObject);
                     }
@@ -361,6 +361,20 @@ function Controller() {
         }
         Alloy.Globals.openNavigationWindow(Alloy.createController("Contacts/bofffProfileWin", visibleData).getView(), true);
     }
+    function getUserData(pin, bofffsSpecificData) {
+        var url = "http://www.bofffme.com/api/index.php/home/";
+        var xhr = Ti.Network.createHTTPClient({
+            onload: function() {
+                var userData = JSON.parse(this.responseText).rows[0];
+                updateBofff(pin, userData, bofffsSpecificData);
+            },
+            onerror: function() {
+                alert(this.responseText);
+            }
+        });
+        xhr.open("POST", url + "search_user_by/bofff/user_accounts/pin/" + pin);
+        xhr.send();
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Contacts/bofffsContacts";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -419,9 +433,9 @@ function Controller() {
     updateSearch ? $.__views.search.addEventListener("change", updateSearch) : __defers["$.__views.search!change!updateSearch"] = true;
     stopSearch ? $.__views.search.addEventListener("blur", stopSearch) : __defers["$.__views.search!blur!stopSearch"] = true;
     searchBofff ? $.__views.search.addEventListener("return", searchBofff) : __defers["$.__views.search!return!searchBofff"] = true;
-    var __alloyId38 = {};
-    var __alloyId40 = [];
-    var __alloyId41 = {
+    var __alloyId42 = {};
+    var __alloyId44 = [];
+    var __alloyId45 = {
         type: "Ti.UI.ImageView",
         bindId: "pic",
         properties: {
@@ -434,8 +448,8 @@ function Controller() {
             click: imageClicked
         }
     };
-    __alloyId40.push(__alloyId41);
-    var __alloyId42 = {
+    __alloyId44.push(__alloyId45);
+    var __alloyId46 = {
         type: "Ti.UI.ImageView",
         bindId: "bofff_pic",
         properties: {
@@ -448,8 +462,8 @@ function Controller() {
             click: starClicked
         }
     };
-    __alloyId40.push(__alloyId42);
-    var __alloyId43 = {
+    __alloyId44.push(__alloyId46);
+    var __alloyId47 = {
         type: "Ti.UI.Label",
         bindId: "textLabel",
         properties: {
@@ -463,18 +477,18 @@ function Controller() {
             bindId: "textLabel"
         }
     };
-    __alloyId40.push(__alloyId43);
-    var __alloyId39 = {
+    __alloyId44.push(__alloyId47);
+    var __alloyId43 = {
         properties: {
             height: Ti.UI.SIZE,
             name: "template1"
         },
-        childTemplates: __alloyId40
+        childTemplates: __alloyId44
     };
-    __alloyId38["template1"] = __alloyId39;
+    __alloyId42["template1"] = __alloyId43;
     $.__views.list_bofffContacts = Ti.UI.createListView({
         width: "100%",
-        templates: __alloyId38,
+        templates: __alloyId42,
         id: "list_bofffContacts",
         left: "0",
         defaultItemTemplate: "template1"

@@ -545,3 +545,18 @@ function determineUpdateType(fieldType, stringObjects) {
         alert("no known");
     }
 }
+
+function updateBofff(pin, userData, newData, bofffsSpecificData) {
+    var url = "http://www.bofffme.com/api/index.php/home/";
+    var xhr = Ti.Network.createHTTPClient({
+        onload: function() {
+            alert(this.responseText);
+            createUpdateString(userData, newData, pin, bofffsSpecificData);
+        },
+        onerror: function() {
+            alert("error");
+        }
+    });
+    xhr.open("POST", url + "update_with_pin/bofff/user_accounts/" + pin);
+    xhr.send(newData);
+}

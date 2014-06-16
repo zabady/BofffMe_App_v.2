@@ -27,7 +27,7 @@ function Controller() {
     $.__views.win && $.addTopLevelView($.__views.win);
     $.__views.__alloyId19 = Ti.UI.createLabel({
         font: {
-            fontSize: "20dp"
+            fontSize: "24"
         },
         color: "#2279bc",
         height: "60",

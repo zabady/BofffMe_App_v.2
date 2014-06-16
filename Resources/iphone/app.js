@@ -2,8 +2,9 @@ var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
 Alloy.Globals.apiUrl = "http://www.bofffme.com/api/index.php/home/";
 
-<<<<<<< HEAD
 Alloy.Globals.userPin = "95190228ae42e7652b098b5bce990aa8";
+
+Alloy.Globals.splitValue = "$";
 
 var xhr = Ti.Network.createHTTPClient({
     onload: function() {
@@ -18,9 +19,6 @@ var xhr = Ti.Network.createHTTPClient({
 xhr.open("POST", Alloy.Globals.apiUrl + "search_user_by/bofff/user_accounts/pin/" + Alloy.Globals.userPin);
 
 xhr.send();
-=======
-Alloy.Globals.splitValue = "$";
->>>>>>> FETCH_HEAD
 
 var tempRootWin = Ti.UI.createWindow({});
 

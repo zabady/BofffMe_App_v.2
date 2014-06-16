@@ -1,7 +1,7 @@
 <Alloy>
 	<Window id="win" title="Settings" layout="vertical">
 		
-		<Label top="40" class="appTitleLabel">Settings</Label>
+		<Label top="40" class="settingsLabel">Settings</Label>
 		
 		<TableView onClick="openClickedSettings">
 			
@@ -9,17 +9,25 @@
 				<Label window="editProfileWin">My Profile</Label>
 			</TableViewRow>
 			
+			<TableViewRow platform="android" height="1" backgroundColor="black" />
+			
 			<TableViewRow window="http://www.bofffme.com">
 				<Label window="http://www.bofffme.com">About</Label>
 			</TableViewRow>
+			
+			<TableViewRow platform="android" height="1" backgroundColor="black" />
 			
 			<TableViewRow window="http://www.google.com">
 				<Label window="http://www.google.com">FAQ</Label>
 			</TableViewRow>
 			
+			<TableViewRow platform="android" height="1" backgroundColor="black" />
+			
 			<TableViewRow window="tutorialWin">
 				<Label window="tutorialWin">Video Tutorial</Label>
 			</TableViewRow>
+			
+			<TableViewRow platform="android" height="1" backgroundColor="black" />
 			
 			<TableViewRow window="insertBofffWin">
 				<Label window="insertBofffWin">Add Bofff Contact</Label>

@@ -10,13 +10,8 @@ function Controller() {
         var contacts = Ti.Contacts.getAllPeople();
         sortedContacts = [];
         for (var x in contacts) sortedContacts.push(contacts[x]);
-        sortedContacts.sort(sortContacts);
+        sortedContacts.sort();
         getContactsReady();
-    }
-    function sortContacts(a, b) {
-        if (a.fullName.toUpperCase() > b.fullName.toUpperCase()) return 1;
-        if (a.fullName.toUpperCase() < b.fullName.toUpperCase()) return -1;
-        return 0;
     }
     function sortBofffs(a, b) {
         if (a.contactName.toUpperCase() > b.contactName.toUpperCase()) return 1;
@@ -61,7 +56,7 @@ function Controller() {
                         fullName: bofffFriends[record]["bofff"].fullName,
                         icon_image: bofffFriends[record]["bofff"].icon_image,
                         friend_pin_code: bofffFriends[record]["bofff"].pin,
-                        user_pin_code: "fbea0803a7d79e402d0557dcb7063a03",
+                        user_pin_code: Alloy.Globals.userPin,
                         contactName: fullName
                     };
                     bofffsData.push(data);
@@ -75,7 +70,7 @@ function Controller() {
         });
         var params = {
             numbers: JSON.stringify(contactNumbers),
-            pin: "fbea0803a7d79e402d0557dcb7063a03"
+            pin: Alloy.Globals.userPin
         };
         xhr.open("POST", url + "all_data_by_mobile/bofff");
         xhr.send(params);
@@ -89,6 +84,7 @@ function Controller() {
                 bofffsList = response.rows;
                 if (bofffsList.length > 0) {
                     bofffsList.sort(sortBofffs);
+                    Titanium.App.Properties.setObject("bofffsSpecificData", bofffsList);
                     initializeBofffsList(bofffFriends, bofffsList);
                 }
             },

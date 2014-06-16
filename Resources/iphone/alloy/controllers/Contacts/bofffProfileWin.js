@@ -38,12 +38,12 @@ function Controller() {
     $.__views.__alloyId34.add($.__views.img);
     enlargeImage ? $.__views.img.addEventListener("click", enlargeImage) : __defers["$.__views.img!click!enlargeImage"] = true;
     $.__views.lbl_name = Ti.UI.createLabel({
-        color: "white",
+        left: 120,
         font: {
             fontSize: "20",
             fontWeight: "bold"
         },
-        left: 120,
+        color: "white",
         id: "lbl_name"
     });
     $.__views.__alloyId34.add($.__views.lbl_name);
@@ -56,7 +56,7 @@ function Controller() {
     _.extend($, $.__views);
     var passedData = arguments[0] || {};
     var bofffData = passedData.data;
-    $.lbl_name.text = passedData.name;
+    $.lbl_name.text = passedData.Name;
     $.img.image = passedData.iconImage;
     for (var bofffContact in bofffData) {
         var fieldLabel = Ti.UI.createLabel({
@@ -71,6 +71,9 @@ function Controller() {
         row.add(fieldLabel);
         row.add(valueLabel);
         $.tableView.appendRow(row);
+        $.addClass(fieldLabel, "labelStyle fieldNameStyle");
+        $.addClass(valueLabel, "labelStyle valueNameStyle");
+        $.addClass(row, "dataTableViewRow");
     }
     __defers["$.__views.img!click!enlargeImage"] && $.__views.img.addEventListener("click", enlargeImage);
     _.extend($, exports);

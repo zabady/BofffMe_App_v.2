@@ -14,6 +14,8 @@
 Alloy.Globals.apiUrl = 'http://www.bofffme.com/api/index.php/home/';
 Alloy.Globals.userPin = "95190228ae42e7652b098b5bce990aa8";
 
+//Split value to split update strings
+Alloy.Globals.splitValue = "$";
 
 // Getting user's data
 var xhr = Ti.Network.createHTTPClient(
@@ -31,8 +33,8 @@ var xhr = Ti.Network.createHTTPClient(
 xhr.open("POST", Alloy.Globals.apiUrl + "search_user_by/bofff/user_accounts/pin/" + Alloy.Globals.userPin);
 xhr.send();
 
-//Split value to split update strings
-Alloy.Globals.splitValue="$";
+// Getting user's friends
+
 
 // Creating the open function that creates a navigation window works with the tabgroup,
 // and add a back button to android's action bar

@@ -65,7 +65,9 @@ function performAddressBookFunction()
     {
         sortedContacts.push(contacts[x]);
     }
- 	sortedContacts.sort(sortContacts);
+    
+ 	// TODO: BUG FOUND --> sortedContacts.sort(sortContacts);
+ 	sortedContacts.sort();
  	getContactsReady();
  	
 };
@@ -197,7 +199,7 @@ function findBofffs(contactNumbers)
 	    			fullName:bofffFriends[record]['bofff'].fullName,
 	    			icon_image:bofffFriends[record]['bofff'].icon_image,
 	    			friend_pin_code:bofffFriends[record]['bofff'].pin,	
-	    			user_pin_code:'fbea0803a7d79e402d0557dcb7063a03',
+	    			user_pin_code:Alloy.Globals.userPin,
 	    			contactName:fullName,
 	    		};
 	    		bofffsData.push(data);
@@ -216,7 +218,7 @@ function findBofffs(contactNumbers)
 	var params=
 	{
 		numbers:JSON.stringify(contactNumbers),
-		pin:'fbea0803a7d79e402d0557dcb7063a03',
+		pin:Alloy.Globals.userPin,
 	};
 	
 	xhr.open("POST", url+"all_data_by_mobile/bofff");
@@ -240,6 +242,8 @@ function addFriend(data, bofffFriends)
 	    	{
 		    	//This is to sort the bofffs alphabetically
 		    	bofffsList.sort(sortBofffs);
+		    	// TODO: Adding the bofffLists (friends from my prespective)
+		    	Titanium.App.Properties.setObject("bofffsSpecificData", bofffsList);
 		    	initializeBofffsList(bofffFriends,bofffsList);
 	    	}
 	    	
@@ -275,7 +279,9 @@ function initializeBofffsList(bofffFriends,bofffsList)
 	var bofffContactsPayload=
 	{
 		mainView:$.scrollableview_mainContactsView,
+		// TODO: bofffList are my friends with their data from the server
 		bofffFriends:bofffFriends,
+		// TODO: bofffFiends are my friends from my prespective, it need's to be global
 		bofffsList:bofffsList,
 	};
 	bofffsContacts=Alloy.createController("Contacts/bofffsContacts",bofffContactsPayload);

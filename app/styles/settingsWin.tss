@@ -7,4 +7,17 @@
 	font: { fontSize: "20" },
 	color: "black",
 	height: "60",
+},
+"Label[platform=android]": {
+	font: { fontSize: "24" },
+}
+
+
+//////////////////////////////////////////////////////////////////////////////// CLASS STYLES
+".settingsLabel": {
+	font: {fontSize: "26"},
+	color: "#2279bc", // Dark blue
+},
+".settingsLabel[android]": {
+	font: {fontSize: "30", fontWeight: "bold" },
 }

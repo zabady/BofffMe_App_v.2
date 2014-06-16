@@ -157,7 +157,7 @@ function Controller() {
         if (privacyClicked) updatePrivacy(e); else if (ifImageClicked) {
             ifImageClicked = false;
             bofffs[e.itemId].contact_id;
-            getUserData("fbea0803a7d79e402d0557dcb7063a03", bofffsList);
+            getUserData(Alloy.Globals.userPin, bofffsList);
         } else {
             $.search.blur();
             var bofff = bofffs[e.itemId]["bofff"];
@@ -189,7 +189,7 @@ function Controller() {
 
           case "primary_mobile":
             var dataObject = new Object();
-            dataObject.FieldName = "Primary Phone";
+            dataObject.FieldName = "Phone";
             dataObject.FieldValue = friendData[field];
             visibleData.data.push(dataObject);
             break;
@@ -197,8 +197,8 @@ function Controller() {
           case "phone_numbers":
             try {
                 counter = 1;
-                var values = friendData[field].split(",");
-                var privacies = friendData.phone_numbers_privacy.split(",");
+                var values = friendData[field].split(Alloy.Globals.splitValue);
+                var privacies = friendData.phone_numbers_privacy.split(Alloy.Globals.splitValue);
                 for (var record in values) {
                     var privacyOfField = privacies[record];
                     if (privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField]) {
@@ -213,7 +213,7 @@ function Controller() {
 
           case "primary_email":
             var dataObject = new Object();
-            dataObject.FieldName = "Primary E-Mail";
+            dataObject.FieldName = "Email";
             dataObject.FieldValue = friendData[field];
             visibleData.data.push(dataObject);
             break;
@@ -221,13 +221,13 @@ function Controller() {
           case "mails":
             try {
                 counter = 1;
-                var values = friendData[field].split(",");
-                var privacies = friendData.mails_privacy.split(",");
+                var values = friendData[field].split(Alloy.Globals.splitValue);
+                var privacies = friendData.mails_privacy.split(Alloy.Globals.splitValue);
                 for (var record in values) {
                     var privacyOfField = privacies[record];
                     if (privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField]) {
                         var dataObject = new Object();
-                        dataObject.FieldName = "mail " + counter++;
+                        dataObject.FieldName = "Email " + counter++;
                         dataObject.FieldValue = values[record];
                         visibleData.data.push(dataObject);
                     }
@@ -371,25 +371,6 @@ function Controller() {
         });
         xhr.open("POST", url + "search_user_by/bofff/user_accounts/pin/" + pin);
         xhr.send();
-    }
-    function updateBofff(pin, userData, bofffsSpecificData) {
-        var url = "http://www.bofffme.com/api/index.php/home/";
-        var xhr = Ti.Network.createHTTPClient({
-            onload: function() {
-                manageUserUpdates(userData, pin, bofffsSpecificData);
-            },
-            onerror: function() {
-                alert("error");
-            }
-        });
-        xhr.open("POST", url + "update_with_pin/bofff/user_accounts/" + pin);
-        var params = {
-            phone_numbers: "no13$no5$no8$no4",
-            phone_numbers_privacy: "friends$onlyMe$favorite$public",
-            mails: "ahmad.amin.ma@gmail.com$mail2$mail10$mail4",
-            mails_privacy: "friends$onlyMe$favorites$public"
-        };
-        xhr.send(params);
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Contacts/bofffsContacts";

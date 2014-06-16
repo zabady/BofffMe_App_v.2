@@ -1,15 +1,8 @@
 //////////////////////////////////////////////////////////////////////////////// OBJECT COMMEN STYLES
-"TableViewRow": {
-	height: 100,
-},
 "ImageView": {
 	width: 100,
 	height: 100,
 	left: 10,
-},
-"Label": {
-	color: "black",
-	font: { fontSize: "18" },
 }
 
 
@@ -18,8 +11,35 @@
 	height: 120,
 	backgroundColor: "#D0D0D0",
 },
+".imageTableViewRow[platform=android]": {
+	backgroundColor: "#B7B7B7",
+},
+
 ".nameLabel": {
 	left: 120,
 	font: { fontSize: "20", fontWeight: "bold" },
 	color: "white",
+}
+
+
+// Dynamic Classes
+".dataTableViewRow": {
+	height: 60,
+},
+".labelStyle": {
+	left: 10,
+	top: 20,
+	color: "black",
+},
+".fieldNameStyle[platform=ios]": {
+	font: { fontSize: "14" },
+},
+".valueNameStyle[platform=ios]": {
+	font: { fontSize: "16", fontWeight: "bold" },
+},
+".fieldNameStyle[platform=android]": {
+	font: { fontSize: "15" },
+},
+".valueNameStyle[platform=android]": {
+	font: { fontSize: "18", fontWeight: "bold" },
 }

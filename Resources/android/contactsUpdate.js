@@ -157,8 +157,8 @@ function checkGender(userData, newUserData, genderObject) {
 function checkPhoneNumbersUpdate(userData, newUserData, phoneNumbersObject) {
     var phoneNumbers = newUserData.phone_numbers;
     if (userData.phone_numbers != phoneNumbers) {
-        var currentNumbers = userData.phone_numbers.split(",");
-        var updatedNumbers = phoneNumbers.split(",");
+        var currentNumbers = userData.phone_numbers.split(Alloy.Globals.splitValue);
+        var updatedNumbers = phoneNumbers.split(Alloy.Globals.splitValue);
         var hashCurrentNumbers = [];
         var newNumbers = [];
         for (var number in currentNumbers) hashCurrentNumbers[currentNumbers[number]] = currentNumbers[number];
@@ -181,8 +181,8 @@ function checkPhoneNumbersUpdate(userData, newUserData, phoneNumbersObject) {
 function checkMailsUpdate(userData, newUserData, mailsObject) {
     var mails = newUserData.mails;
     if (userData.mails != mails) {
-        var currentMails = userData.mails.split(",");
-        var updatedMails = mails.split(",");
+        var currentMails = userData.mails.split(Alloy.Globals.splitValue);
+        var updatedMails = mails.split(Alloy.Globals.splitValue);
         var hashCurrentMails = [];
         var newMails = [];
         for (var mail in currentMails) hashCurrentMails[currentMails[mail]] = currentMails[mail];
@@ -205,8 +205,8 @@ function checkMailsUpdate(userData, newUserData, mailsObject) {
 function checkSocialLinksUpdate(userData, newUserData, socialLinksObject) {
     var socialLinks = newUserData.social_links;
     if (userData.social_links != socialLinks) {
-        var currentSocialLinks = userData.social_links.split(",");
-        var updatedSocialLinks = socialLinks.split(",");
+        var currentSocialLinks = userData.social_links.split(Alloy.Globals.splitValue);
+        var updatedSocialLinks = socialLinks.split(Alloy.Globals.splitValue);
         var hashCurrentSocialLinks = [];
         var newLinks = [];
         for (var socialLink in currentSocialLinks) hashCurrentSocialLinks[currentSocialLinks[socialLink]] = currentSocialLinks[socialLink];
@@ -229,21 +229,6 @@ function checkSocialLinksUpdate(userData, newUserData, socialLinksObject) {
 function checkResidenceUpdate(userData, newUserData, residenceObject) {
     var residences = newUserData.residence;
     if (userData.residence != residences) {
-        var currentResidences = userData.residence.split(",");
-        var updatedResidences = residences.split(",");
-        var hashCurrentResidences = [];
-        var newResidences = [];
-        for (var residence in currentResidences) hashCurrentResidences[currentResidences[residence]] = currentResidences[residence];
-        for (var residence in updatedResidences) null == hashCurrentResidences[updatedResidences[residence]] && newResidences.push(updatedResidences[residence]);
-        var deletedResidences = [];
-        for (var residence in hashCurrentResidences) {
-            deletedResidences.push(hashCurrentResidences[residence]);
-            for (var counter in updatedResidences) hashCurrentResidences[residence] == updatedResidences[counter] && deletedResidences.pop();
-        }
-        var residences = {
-            newResidences: newResidences.toString(),
-            deletedResidences: deletedResidences.toString()
-        };
         residenceObject.residences = residences;
         return residenceObject.residences;
     }
@@ -355,6 +340,7 @@ function createUpdateString(userData, newData, userPin, bofffsSpecificData) {
             friendsToSendAdded[3] = [];
             for (var mail in addedMails) {
                 friendsToSendAdded[3][mail] = [];
+                alert(addedMails[mail]);
                 checkPrivacySettings("mails", "mails_privacy", addedMails[mail], newData, bofffsSpecificData, friendsToSendAdded[3][mail]) && added[3].push("mails$" + addedMails[mail] + "\n");
             }
         }
@@ -364,6 +350,7 @@ function createUpdateString(userData, newData, userPin, bofffsSpecificData) {
             friendsToSendDeleted[3] = [];
             for (var mail in deletedMails) {
                 friendsToSendDeleted[3][mail] = [];
+                alert(deletedMails[mail]);
                 checkPrivacySettings("mails", "mails_privacy", deletedMails[mail], userData, bofffsSpecificData, friendsToSendDeleted[3][mail]) && deleted[3].push("mails$" + deletedMails[mail] + "\n");
             }
         }
@@ -397,24 +384,11 @@ function createUpdateString(userData, newData, userPin, bofffsSpecificData) {
     };
     if (0 != checkResidenceUpdate(userData, newData, newResidences)) {
         upadteHappened = true;
-        if ("" != newResidences.residences.newResidences) {
-            var addedResidences = newResidences.residences.newResidences.split(",");
-            added[5] = [];
-            friendsToSendAdded[5] = [];
-            for (var residence in addedResidences) {
-                friendsToSendAdded[5][residence] = [];
-                checkPrivacySettings("residence", "residence_privacy", addedResidences[residence], newData, bofffsSpecificData, friendsToSendAdded[5][residence]) && added[5].push("residence$" + addedResidences[residence] + "\n");
-            }
-        }
-        if ("" != newResidences.residences.deletedResidences) {
-            var deletedResidences = newResidences.residences.deletedResidences.split(",");
-            deleted[5] = [];
-            friendsToSendDeleted[5] = [];
-            for (var residence in deletedResidences) {
-                friendsToSendDeleted[5][residence] = [];
-                checkPrivacySettings("residence", "residence_privacy", deletedResidences[residence], userData, bofffsSpecificData, friendsToSendDeleted[5][residence]) && deleted[5].push("residence$" + deletedResidences[residence] + "\n");
-            }
-        }
+        added[5] = [];
+        added[5].push("residence$" + newResidences.residences + "\n");
+        friendsToSendAdded[5] = [];
+        friendsToSendAdded[5][0] = [];
+        checkPrivacySettings("residence", "residence_privacy", newResidences.residences, newData, bofffsSpecificData, friendsToSendAdded[5][0]);
     }
     var newJobTitle = {
         title: ""
@@ -464,8 +438,8 @@ function checkPrivacySettings(fieldToUpdate, fieldPrivacy, valueOfField, newUser
         favorites: 2,
         onlyMe: 3
     };
-    var indexOfTheUpdateValue = newUserData[fieldToUpdate].split(",").indexOf(valueOfField);
-    var valuePrivacy = newUserData[fieldPrivacy].split(",")[indexOfTheUpdateValue];
+    var indexOfTheUpdateValue = newUserData[fieldToUpdate].split(Alloy.Globals.splitValue).indexOf(valueOfField);
+    var valuePrivacy = newUserData[fieldPrivacy].split(Alloy.Globals.splitValue)[indexOfTheUpdateValue];
     for (var friend in bofffsSpecificData) {
         var isFriendFavorite = bofffsSpecificData[friend].status;
         privacyNumber[isFriendFavorite] >= privacyNumber[valuePrivacy] && friendsToSendTo.push(bofffsSpecificData[friend].friend_pin_code);
@@ -531,7 +505,7 @@ function parsingUpdateString(updateString, addOrDelete, userFriendAppId, bofffsS
     var stringLines = updateString.split("\n");
     var stringObjects = {};
     for (var line in stringLines) if ("" != stringLines[line]) {
-        var stringColon = stringLines[line].split("$");
+        var stringColon = stringLines[line].split(Alloy.Globals.splitValue);
         stringObjects[stringColon[0]] = stringColon[1];
         determineUpdateType(stringColon[0], stringObjects, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData);
     }
@@ -570,4 +544,19 @@ function determineUpdateType(fieldType, stringObjects) {
       default:
         alert("no known");
     }
+}
+
+function updateBofff(pin, userData, newData, bofffsSpecificData) {
+    var url = "http://www.bofffme.com/api/index.php/home/";
+    var xhr = Ti.Network.createHTTPClient({
+        onload: function() {
+            alert(this.responseText);
+            createUpdateString(userData, newData, pin, bofffsSpecificData);
+        },
+        onerror: function() {
+            alert("error");
+        }
+    });
+    xhr.open("POST", url + "update_with_pin/bofff/user_accounts/" + pin);
+    xhr.send(newData);
 }

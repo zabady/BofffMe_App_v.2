@@ -1,11 +1,11 @@
 var args = arguments[0] || {};
-var mainView=args.mainView;
+var mainView = args.mainView;
 // contains functions to update friends data on user contacts
 Ti.include("/contactsUpdate.js");
 try
 {
-	var bofffs= args.bofffFriends;
-	var bofffsList=args.bofffsList;
+	var bofffs = args.bofffFriends;
+	var bofffsList = args.bofffsList;
 	createBofffListView(bofffsList,"fullName");
 }catch(error){}
 
@@ -127,7 +127,7 @@ $.picker_searchBy.picker.addEventListener("change", function(e)
 		$.view_customField.txt_customField.focus();
 	}
 });
-var privacyNumber={public:0,"not favorite":1,friends:1,favorite:2, favorites:2,onlyMe:3};
+var privacyNumber = { public:0, "not favorite":1, friends:1, favorite:2, favorites:2, onlyMe:3 };
 
 function changeSearchableText(searchableText,searchableTextPrivacy)
 {
@@ -137,16 +137,16 @@ function changeSearchableText(searchableText,searchableTextPrivacy)
 		var items=[];
 		for(var itemCounter in section.items )
 		{
-			var item= section.items[itemCounter];
-			var itemId=item.properties.itemId;
-			if(searchableText=="fullName")
+			var item = section.items[itemCounter];
+			var itemId = item.properties.itemId;
+			if(searchableText == "fullName")
 			{
-				item.properties.searchableText=bofffsList[itemId].contactName;
+				item.properties.searchableText = bofffsList[itemId].contactName;
 			}
 			else
 			{
 				item.properties.searchableText='';
-				var privacyOfBofff=bofffsList[itemId].privacy_of_friend;
+				var privacyOfBofff = bofffsList[itemId].privacy_of_friend;
 				var searchableTextValues=bofffs[itemId].bofff[searchableText].split(",");
 				var searchableTextPrivacyValues=bofffs[itemId].bofff[searchableTextPrivacy].split(",");
 				for(var record in searchableTextValues)
@@ -310,6 +310,7 @@ function showContact(e)
 	{
 		updatePrivacy(e);
 	}
+	// TODO: Remove If image click, it's used for testing
 	else
 	if (ifImageClicked)
 	{
@@ -317,8 +318,21 @@ function showContact(e)
 		var bofffId = bofffs[e.itemId].contact_id;
 		//deleteSocialLink(bofffId,"http://tttt");
 		//updateEmail(bofffId,'work',bofffs[e.itemId].bofff.mails);
-		getUserData('fbea0803a7d79e402d0557dcb7063a03',bofffsList);
+		// TODO: THIS IS VERY IMPORTAT
+		// TODO: THIS IS VERY IMPORTAT
+		// TODO: THIS IS VERY IMPORTAT
+		// TODO: THIS IS VERY IMPORTAT
+		// TODO: THIS IS VERY IMPORTAT
+		// comment the next line and uncomment the one after it or viseversa to send updates or recieve updates
+		getUserData(Alloy.Globals.userPin,bofffsList);
 		//applyUpdatesOfFriend('95190228ae42e7652b098b5bce990aa8',bofffsList,bofffs);
+		
+		// TODO: --> The next
+		//if(getUserData(Alloy.Globals.userPin,bofffsList)) {
+			// TODO: Call next function in if statement
+			// TODO: Each function must return true so the next one is fired after the current function completes
+			// execution, this is a workaround for async execution
+		//}
 	}
 	else
 	{
@@ -346,11 +360,12 @@ function imageClicked(e)
 
 function createVisibleData(privacyOfBofff,friendData)
 {
-	var visibleData=new Object;
-	visibleData.iconImage= null;
-	visibleData.profilePicture=null;
-	visibleData.data=[];
-	var counter=1;
+	var visibleData = new Object;
+	visibleData.iconImage = null;
+	visibleData.profilePicture = null;
+	visibleData.data = [];
+	var counter = 1;
+	
 	for(var field in friendData)
 	{
 		switch(field)
@@ -362,17 +377,17 @@ function createVisibleData(privacyOfBofff,friendData)
 			}
 			case 'gender':
 			{
-				var dataObject= new Object();
-				dataObject.FieldName="Gender";
-				dataObject.FieldValue=friendData[field];
+				var dataObject = new Object();
+				dataObject.FieldName = "Gender";
+				dataObject.FieldValue = friendData[field];
 				visibleData.data.push(dataObject);
 				break;
 			}
 			case 'primary_mobile':
 			{
-				var dataObject= new Object();
-				dataObject.FieldName="Primary Phone";
-				dataObject.FieldValue=friendData[field];
+				var dataObject = new Object();
+				dataObject.FieldName = "Phone";
+				dataObject.FieldValue = friendData[field];
 				visibleData.data.push(dataObject);
 				break;
 			}
@@ -380,16 +395,16 @@ function createVisibleData(privacyOfBofff,friendData)
 			{
 				try
 				{
-					counter=1;
-					var values= friendData[field].split(",");
-					var privacies= friendData.phone_numbers_privacy.split(",");
+					counter = 1;
+					var values = friendData[field].split(Alloy.Globals.splitValue);
+					var privacies = friendData.phone_numbers_privacy.split(Alloy.Globals.splitValue);
 					for(var record in values)
 					{
-						var privacyOfField= privacies[record];
-						if(privacyNumber[privacyOfBofff]>=privacyNumber[privacyOfField])
+						var privacyOfField = privacies[record];
+						if(privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField])
 						{
 							var dataObject= new Object();
-							dataObject.FieldName="Phone Number "+counter++;
+							dataObject.FieldName="Phone Number " + counter++;
 							dataObject.FieldValue=values[record];
 							visibleData.data.push(dataObject);
 						}
@@ -400,7 +415,7 @@ function createVisibleData(privacyOfBofff,friendData)
 			case 'primary_email':
 			{
 				var dataObject= new Object();
-				dataObject.FieldName="Primary E-Mail";
+				dataObject.FieldName="Email";
 				dataObject.FieldValue=friendData[field];
 				visibleData.data.push(dataObject);
 				break;
@@ -410,15 +425,15 @@ function createVisibleData(privacyOfBofff,friendData)
 				try
 				{
 					counter=1;
-					var values= friendData[field].split(",");
-					var privacies= friendData.mails_privacy.split(",");
+					var values= friendData[field].split(Alloy.Globals.splitValue);
+					var privacies= friendData.mails_privacy.split(Alloy.Globals.splitValue);
 					for(var record in values)
 					{
 						var privacyOfField= privacies[record];
 						if(privacyNumber[privacyOfBofff]>=privacyNumber[privacyOfField])
 						{
 							var dataObject= new Object();
-							dataObject.FieldName="mail "+counter++;
+							dataObject.FieldName="Email " + counter++;
 							dataObject.FieldValue=values[record];
 							visibleData.data.push(dataObject);
 						}
@@ -570,15 +585,15 @@ function createVisibleData(privacyOfBofff,friendData)
 			}
 			case 'icon_image':
 			{
-				visibleData.iconImage=friendData[field];
+				visibleData.iconImage = friendData[field];
 				break;
 			}
 			case 'profile_picture':
 			{
 				var privacyOfField = friendData.profile_picture_privacy;
-				if(privacyNumber[privacyOfBofff]>=privacyNumber[privacyOfField])
+				if(privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField])
 				{
-					visibleData.profilePicture=friendData[field];
+					visibleData.profilePicture = friendData[field];
 				}
 			}
 		}
@@ -606,40 +621,4 @@ function getUserData(pin, bofffsSpecificData)
 	
 	xhr.open("POST", url+"search_user_by/bofff/user_accounts/pin/"+pin);
 	xhr.send();  
-}
-function updateBofff(pin,userData,bofffsSpecificData)
-{
-	var url =  'http://www.bofffme.com/api/index.php/home/';
-	var xhr = Ti.Network.createHTTPClient(
-	{
-	    onload: function(e) 
-	    {
-	    	manageUserUpdates(userData,pin,bofffsSpecificData);
-	    },
-	    onerror: function(e) 
-	    {
-	    	alert("error");
-	    },
-	});
-	xhr.open("POST", url+"update_with_pin/bofff/user_accounts/"+pin);
-	var params=
-	{
-		/*fullName:"Ahmed Atif",
-		gender:"male",*/
-		phone_numbers:"no13$no5$no8$no4",
-		phone_numbers_privacy:"friends$onlyMe$favorite$public",
-		mails:"ahmad.amin.ma@gmail.com$mail2$mail10$mail4",
-		mails_privacy:"friends$onlyMe$favorites$public",
-		/*social_links:"https://www.facebook.com/zabady,link2,link3,link4",
-		social_links_privacy:"friends,onlyMe,favorites,public",
-		residence:"Cairo,Egypt",
-		residence_privacy:"friends",
-		job_title:"softwergy",
-		job_title_privacy:"public",
-		/*birthday_date:"1010101",
-		birthday_date_privacy:"friends",
-		company:"cectwtec",
-		company_privacy:"favorites",*/
-	};
-	xhr.send(params);  // request is actually sent with this statement
 }

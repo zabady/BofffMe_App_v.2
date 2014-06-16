@@ -22,33 +22,33 @@ function Controller() {
         id: "bofffProfileWin"
     });
     $.__views.bofffProfileWin && $.addTopLevelView($.__views.bofffProfileWin);
-    var __alloyId36 = [];
-    $.__views.__alloyId37 = Ti.UI.createTableViewRow({
+    var __alloyId40 = [];
+    $.__views.__alloyId41 = Ti.UI.createTableViewRow({
         height: 120,
-        backgroundColor: "#D0D0D0",
-        id: "__alloyId37"
+        backgroundColor: "#B7B7B7",
+        id: "__alloyId41"
     });
-    __alloyId36.push($.__views.__alloyId37);
+    __alloyId40.push($.__views.__alloyId41);
     $.__views.img = Ti.UI.createImageView({
         width: 100,
         height: 100,
         left: 10,
         id: "img"
     });
-    $.__views.__alloyId37.add($.__views.img);
+    $.__views.__alloyId41.add($.__views.img);
     enlargeImage ? $.__views.img.addEventListener("click", enlargeImage) : __defers["$.__views.img!click!enlargeImage"] = true;
     $.__views.lbl_name = Ti.UI.createLabel({
-        color: "white",
+        left: 120,
         font: {
             fontSize: "20",
             fontWeight: "bold"
         },
-        left: 120,
+        color: "white",
         id: "lbl_name"
     });
-    $.__views.__alloyId37.add($.__views.lbl_name);
+    $.__views.__alloyId41.add($.__views.lbl_name);
     $.__views.tableView = Ti.UI.createTableView({
-        data: __alloyId36,
+        data: __alloyId40,
         id: "tableView"
     });
     $.__views.bofffProfileWin.add($.__views.tableView);
@@ -56,7 +56,7 @@ function Controller() {
     _.extend($, $.__views);
     var passedData = arguments[0] || {};
     var bofffData = passedData.data;
-    $.lbl_name.text = passedData.name;
+    $.lbl_name.text = passedData.Name;
     $.img.image = passedData.iconImage;
     for (var bofffContact in bofffData) {
         var fieldLabel = Ti.UI.createLabel({
@@ -71,6 +71,9 @@ function Controller() {
         row.add(fieldLabel);
         row.add(valueLabel);
         $.tableView.appendRow(row);
+        $.addClass(fieldLabel, "labelStyle fieldNameStyle");
+        $.addClass(valueLabel, "labelStyle valueNameStyle");
+        $.addClass(row, "dataTableViewRow");
     }
     __defers["$.__views.img!click!enlargeImage"] && $.__views.img.addEventListener("click", enlargeImage);
     _.extend($, exports);

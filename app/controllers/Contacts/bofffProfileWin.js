@@ -1,8 +1,10 @@
 
-var passedData = arguments[0] || {};
-var bofffData = passedData.data;
-$.lbl_name.text = passedData.name;
-$.img.image = passedData.iconImage;
+var passedBofffData = arguments[0] || {};
+
+var bofffData = passedBofffData.data;
+$.lbl_name.text = passedBofffData.Name;
+$.img.image = passedBofffData.iconImage;
+
 
 for(var bofffContact in bofffData) {
 	var fieldLabel = Ti.UI.createLabel({ text: bofffData[bofffContact].FieldName });
@@ -13,16 +15,20 @@ for(var bofffContact in bofffData) {
 	row.add(valueLabel);
 	
 	$.tableView.appendRow(row);
+	
+	$.addClass(fieldLabel, "labelStyle fieldNameStyle");
+	$.addClass(valueLabel, "labelStyle valueNameStyle");
+	$.addClass(row, "dataTableViewRow");
 }
 
 
 // Open the profile picture in a new window
 function enlargeImage()
 {
-	if(passedData.profilePicture) {
+	if(passedBofffData.profilePicture) {
 		var params = {
-			iconImage: passedData.iconImage,
-			profilePicture: passedData.profilePicture,  
+			iconImage: passedBofffData.iconImage,
+			profilePicture: passedBofffData.profilePicture,  
 		};
 		Alloy.Globals.openNavigationWindow(Alloy.createController('Contacts/bofffImageWin', params).getView(), false);
 	}
