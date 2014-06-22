@@ -64,7 +64,7 @@ Alloy.Globals.openNavigationWindow = function(window, isWindowAfterRoot) {
 
 
 // Generating the QR Code for the first time the app runs
-var firstTime = true;
+var firstTime = false;
 if(firstTime) {
 	var userProfile = new Object({
 		pin: '5000',

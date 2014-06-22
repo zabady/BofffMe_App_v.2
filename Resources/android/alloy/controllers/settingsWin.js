@@ -38,7 +38,7 @@ function Controller() {
     $.__views.win.add($.__views.__alloyId22);
     var __alloyId24 = [];
     $.__views.__alloyId25 = Ti.UI.createTableViewRow({
-        window: "editProfileWin",
+        window: "EditProfile/basicInfoWin",
         id: "__alloyId25"
     });
     __alloyId24.push($.__views.__alloyId25);
@@ -49,7 +49,7 @@ function Controller() {
         color: "black",
         height: "60",
         text: "My Profile",
-        window: "editProfileWin",
+        window: "EditProfile/basicInfoWin",
         id: "__alloyId26"
     });
     $.__views.__alloyId25.add($.__views.__alloyId26);

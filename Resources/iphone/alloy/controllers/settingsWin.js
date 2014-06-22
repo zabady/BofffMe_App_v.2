@@ -27,7 +27,8 @@ function Controller() {
     $.__views.win && $.addTopLevelView($.__views.win);
     $.__views.__alloyId19 = Ti.UI.createLabel({
         font: {
-            fontSize: "24"
+            fontSize: "30",
+            fontWeight: "bold"
         },
         color: "#2279bc",
         height: "60",
@@ -38,7 +39,7 @@ function Controller() {
     $.__views.win.add($.__views.__alloyId19);
     var __alloyId21 = [];
     $.__views.__alloyId22 = Ti.UI.createTableViewRow({
-        window: "editProfileWin",
+        window: "EditProfile/contactInfoWin",
         id: "__alloyId22"
     });
     __alloyId21.push($.__views.__alloyId22);
@@ -49,7 +50,7 @@ function Controller() {
         color: "black",
         height: "60",
         text: "My Profile",
-        window: "editProfileWin",
+        window: "EditProfile/contactInfoWin",
         id: "__alloyId23"
     });
     $.__views.__alloyId22.add($.__views.__alloyId23);

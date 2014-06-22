@@ -1,0 +1,11 @@
+<Alloy>
+	<Window platform="ios">
+		
+		<TableView>
+			<TableViewRow>
+				<TextField hintText="Zeby">
+			</TableViewRow>
+		</TableView>
+		
+	</Window>
+</Alloy>

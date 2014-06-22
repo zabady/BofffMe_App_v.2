@@ -1,0 +1,54 @@
+//////////////////////////////////////////////////////////////////////////////// OBJECT COMMEN STYLES
+"TableViewRow": {
+	height: 50
+},
+"TableViewRow": {
+	editable: false
+}
+
+
+//////////////////////////////////////////////////////////////////////////////// CLASS STYLES
+// HEADERS
+".headTitleRow": {
+	top: 20,
+	height: Ti.UI.SIZE,
+},
+".headTitleLabel": {
+	left: 10,
+	font: {fontSize: "17"},
+	color: "#2279bc", // Dark blue
+},
+".addRowButton": {
+	right: 10,
+	style: Ti.UI.iPhone.SystemButton.CONTACT_ADD,
+},
+
+// FIELDS
+".fieldRow": {
+	height: 50,
+},
+".fieldTitleLabel": {
+	left: "5%",
+	width: "22%",
+	font: { fontSize: "15" },
+	color: "#2279bc", // Dark blue
+	bubbleParent: false,
+	//borderRadius: 1,
+	//borderWidth: 1,
+},
+".fieldText": {
+	left: "29%",
+	width: "42%",
+	font: { fontSize: "15" },
+	bubbleParent: false,
+	//borderRadius: 1,
+	//borderWidth: 1,
+},
+".privacyLabel": {
+	left: "73%",
+	width: "22%",
+	font: { fontSize: "15" },
+	bubbleParent: false,
+	//borderRadius: 1,
+	//borderWidth: 1,
+}

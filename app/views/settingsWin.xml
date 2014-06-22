@@ -5,9 +5,15 @@
 		
 		<TableView onClick="openClickedSettings">
 			
+			<TableViewRow window="EditProfile/contactInfoWin">
+				<Label window="EditProfile/contactInfoWin">My Profile</Label>
+			</TableViewRow>
+			
+			<!--
 			<TableViewRow window="editProfileWin">
 				<Label window="editProfileWin">My Profile</Label>
 			</TableViewRow>
+			-->
 			
 			<TableViewRow platform="android" height="1" backgroundColor="black" />
 			

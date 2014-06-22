@@ -1,0 +1,54 @@
+<Alloy>
+	<Window id="win" platform="ios">
+		
+		<RightNavButton>
+			<View layout="horizontal">
+				<Button title="Edit" onClick="EditPressed" />
+				<Button title=" Done" onClick="DonePressed" />
+			</View>
+		</RightNavButton>
+		<LeftNavButton>
+			<Button title="Cancel" onClick="CancelPressed" />
+		</LeftNavButton>
+		
+		<TableView id="tableView" onClick="TableViewRowClicked" onDelete="DeletePressed">
+			
+			<!-- ------ Phone Numbers ------ -->
+			<TableViewRow class="headTitleRow" isPhone=1 >
+				<Label class="headTitleLabel" >Phone Numbers</Label>
+				<Button class="addRowButton" onClick="AddRowButtonClicked" />
+			</TableViewRow>
+			
+			<!-- ------ Primary Phone Number ------ -->
+			<TableViewRow class="fieldRow" >
+				<Label class="fieldTitleLabel" >Priamry</Label>
+				<TextField id="primary_mobile" class="fieldText" hintText="Primary Phone" onChange="NonAddableTextChanged" />
+				<Label id="primary_mobile_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
+			</TableViewRow>
+			
+			
+			<TableViewRow backgroundColor="#D0D0D0" />
+			
+			
+			<!-- ------ Email Addresses ------ -->
+			<TableViewRow class="headTitleRow" isPhone=0 >
+				<Label class="headTitleLabel" >Email Addresses</Label>
+				<Button class="addRowButton" onClick="AddRowButtonClicked" />
+			</TableViewRow>
+			
+			<!-- ------ Primary email address ------ -->
+			<TableViewRow class="fieldRow" >
+				<Label class="fieldTitleLabel" >Priamry</Label>
+				<TextField id="primary_email" class="fieldText" hintText="Email address" onChange="NonAddableTextChanged" />
+				<Label id="primary_email_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
+			</TableViewRow>
+			
+			
+			<TableViewRow backgroundColor="#D0D0D0" />
+			
+		</TableView>
+		
+		<Require id="pickerContainer" src="/Settings/EditProfile/privacyPicker" type="view"></Require>
+		
+	</Window>
+</Alloy>

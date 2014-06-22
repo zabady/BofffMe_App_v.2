@@ -1,0 +1,23 @@
+<Alloy>
+	<View id="pickerView" height="Ti.UI.SIZE" width="Ti.UI.SIZE" bottom="0" layout="vertical" visible="false" >
+		
+		<Toolbar>
+			
+			<Items>
+				<Button systemButton="Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE" />
+				<Button id="btn_toolBarDone" style="Titanium.UI.iPhone.SystemButtonStyle.DONE" title="Done" />
+			</Items>
+			
+		</Toolbar>
+		
+		<!-- TODO: add animation -->
+		<Picker id="picker">
+			
+			<PickerRow title="public" />
+			<PickerRow title="friends" />
+			<PickerRow title="favorites" />
+			<PickerRow title="onlyMe" />
+			
+		</Picker>
+	</View>
+</Alloy>

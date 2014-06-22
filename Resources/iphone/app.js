@@ -34,7 +34,7 @@ Alloy.Globals.openNavigationWindow = function(window, isWindowAfterRoot) {
     });
 };
 
-var firstTime = true;
+var firstTime = false;
 
 if (firstTime) {
     var userProfile = new Object({

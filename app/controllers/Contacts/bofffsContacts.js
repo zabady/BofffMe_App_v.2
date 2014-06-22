@@ -247,7 +247,7 @@ var privacyClicked=false;
 // if a star is clicked by the user
 function starClicked(e)
 {
-	privacyClicked=true;
+	privacyClicked = true;
 }
 
 function changeStar(listItem)
@@ -281,6 +281,7 @@ function updatePrivacy(listItem)
 		newStatus="favorite";
 	}
 	var url =  'http://www.bofffme.com/api/index.php/home/';
+	
 	var xhr = Ti.Network.createHTTPClient(
 	{
 	    onload: function(e) 
@@ -293,7 +294,7 @@ function updatePrivacy(listItem)
 	    	alert("error");
 	    },
 	});
-	xhr.open("POST", url+"update_friend_status/bofff/user_friends/"+bofffsList[listItem.itemId].id);
+	xhr.open("POST", url+"update_friend_status/bofff/user_friends/" + bofffsList[listItem.itemId].id);
 	var params=
 	{
 		status: newStatus,
@@ -372,7 +373,7 @@ function createVisibleData(privacyOfBofff,friendData)
 		{
 			case 'fullName':
 			{
-				visibleData.Name= friendData[field];
+				visibleData.Name = friendData[field];
 				break;
 			}
 			case 'gender':
