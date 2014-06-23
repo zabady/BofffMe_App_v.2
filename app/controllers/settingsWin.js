@@ -12,7 +12,13 @@ function openClickedSettings(e) {
 		selectedSettingWin = Alloy.createController(windowUrl).getView();
 	}
 	
-	// Opening the selected setting window
+	// Hide the navigation bar to replace it with required buttons in Editing the user profile
+	if(e.source.window.search("EditProfile") != -1 && OS_IOS) {
+		tempNavWin.navBarHidden = true;
+		tempRootWin.navBarHidden = true;
+	}
+	
+	// Finally, open the selected setting window
 	Alloy.Globals.openNavigationWindow(selectedSettingWin, true);
 	if(OS_IOS) $.win.fireEvent('close'); // for better user experience, toggle the settings back to the right
 }

@@ -33,8 +33,6 @@ var xhr = Ti.Network.createHTTPClient(
 xhr.open("POST", Alloy.Globals.apiUrl + "search_user_by/bofff/user_accounts/pin/" + Alloy.Globals.userPin);
 xhr.send();
 
-// Getting user's friends
-
 
 // Creating the open function that creates a navigation window works with the tabgroup,
 // and add a back button to android's action bar
@@ -96,3 +94,9 @@ if(firstTime) {
 	client.open("GET", url);
 	client.send();
 } else var userProfile = Titanium.App.Properties.getObject('userProfile');
+
+
+//////////////////////////////////////////////////////////////////////////////////////// SERVING CONTACTS
+// Getting the user's data to be used in editing the user's profile
+var userData = Titanium.App.Properties.getObject("userData");
+var userDataInArrays;

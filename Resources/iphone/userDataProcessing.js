@@ -100,3 +100,42 @@ function changePrivacyOfAddableField(userDataInArrays, fieldType, oldPrivacy, ne
         alert(exp);
     }
 }
+
+function postUserDataUpdatesOnServer(oldUserDataInStrings, newUserDataInArrays) {
+    var validationMsg = validateAddableFields(newUserDataInArrays);
+    if (validationMsg.search("Wrong") >= 0) return validationMsg;
+    try {
+        var bofffsSpecificData = Titanium.App.Properties.getObject("bofffsSpecificData");
+        var userUpdatesInStrings = convertAddableFieldsToStrings(newUserDataInArrays);
+        updateBofff(Alloy.Globals.userPin, oldUserDataInStrings, userUpdatesInStrings, bofffsSpecificData);
+    } catch (exp) {
+        alert(exp);
+    } finally {
+        return "";
+    }
+}
+
+function validateAddableFields(userDataInArrays) {
+    for (var i = 0; userDataInArrays.phone_numbers.length > i; i++) if (null == userDataInArrays.phone_numbers[i] || "" == userDataInArrays.phone_numbers[i]) {
+        Ti.API.info("I will delete an empty phone");
+        deleteAddableField(userDataInArrays, "phone_numbers", "");
+        i--;
+    } else if (!validatePhoneNumber(userDataInArrays.phone_numbers[i])) return "Wrong phone number.";
+    for (var i = 0; userDataInArrays.mails.length > i; i++) if (null == userDataInArrays.mails[i] || "" == userDataInArrays.mails[i]) {
+        Ti.API.info("I will delete an empty email");
+        deleteAddableField(userDataInArrays, "mails", "");
+        i--;
+    } else if (!validateEmail(userDataInArrays.mails[i])) return "Wrong email address.";
+    if (!validateEmail(userDataInArrays.primary_email)) return "Wrong primary email address.";
+    return "No problems.";
+}
+
+function validatePhoneNumber(phoneNumber) {
+    var phoneNumberRegex = /^[0-9]{9,15}$/;
+    return phoneNumber.match(phoneNumberRegex) ? true : false;
+}
+
+function validateEmail(email) {
+    var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return email.match(emailRegex) ? true : false;
+}

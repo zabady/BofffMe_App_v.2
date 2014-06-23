@@ -1,28 +1,44 @@
+<!--
+--	Rows that are marked as sections are considered to be sections, no sections are used as sections does not
+--	support adding buttons (+ Button that add a new row).
+--	isPhone: used to distinguish between the two sections in this file which are phone_numbers and mails	
+--	rowsAfter: the number of the section's childers, used in adding a new row after the last row (Deprecated)
+--
+--	Rows that are marked as child are considered to be children to the section the are after it till a new section
+--	or independent row is found.
+--
+--	Rows that are marked as independent are not children to classes, they are alone, having an independent column 
+--	in database.
+--
+--	Rows that do only have a background color are used as a separator between sections.
+-->
+
 <Alloy>
-	<Window id="win" platform="ios">
+	
 		
-		<RightNavButton>
-			<View layout="horizontal">
-				<Button title="Edit" onClick="EditPressed" />
-				<Button title=" Done" onClick="DonePressed" />
-			</View>
-		</RightNavButton>
-		<LeftNavButton>
-			<Button title="Cancel" onClick="CancelPressed" />
-		</LeftNavButton>
-		
-		<TableView id="tableView" onClick="TableViewRowClicked" onDelete="DeletePressed">
+		<TableView id="tableView" onClick="TableViewRowClicked" onDelete="DeletePressed" >
 			
-			<!-- ------ Phone Numbers ------ -->
+			<!-- ------ Phone Numbers (Section) ------ -->
 			<TableViewRow class="headTitleRow" isPhone=1 >
 				<Label class="headTitleLabel" >Phone Numbers</Label>
 				<Button class="addRowButton" onClick="AddRowButtonClicked" />
 			</TableViewRow>
 			
-			<!-- ------ Primary Phone Number ------ -->
+			<!-- ------ Primary Phone Number (Child) ------ -->
 			<TableViewRow class="fieldRow" >
 				<Label class="fieldTitleLabel" >Priamry</Label>
-				<TextField id="primary_mobile" class="fieldText" hintText="Primary Phone" onChange="NonAddableTextChanged" />
+				<!--<Label id="primary_mobile" class="fieldText" onClick="PrimaryPhoneClicked" />-->
+				<TextField id="primary_mobile" class="fieldText" onLongclick="PrimaryPhoneTextLongclick" editable="false" >
+					<KeyboardToolbar>
+						<!-- A toolbar for decimals keyboard that have done button to dismiss the keybaord on ios -->
+						<Toolbar id="keyboardToolbar" platform="ios">
+					        <Items >
+					            <FlexSpace />
+					            <Button style="Titanium.UI.iPhone.SystemButtonStyle.DONE" title="Done" onClick="DismissKeyboardClicked" />
+					        </Items>
+					    </Toolbar>
+					</KeyboardToolbar>
+				</TextField>
 				<Label id="primary_mobile_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
 			</TableViewRow>
 			
@@ -30,25 +46,45 @@
 			<TableViewRow backgroundColor="#D0D0D0" />
 			
 			
-			<!-- ------ Email Addresses ------ -->
+			<!-- ------ Email Addresses (Section) ------ -->
 			<TableViewRow class="headTitleRow" isPhone=0 >
 				<Label class="headTitleLabel" >Email Addresses</Label>
 				<Button class="addRowButton" onClick="AddRowButtonClicked" />
 			</TableViewRow>
 			
-			<!-- ------ Primary email address ------ -->
+			<!-- ------ Primary email address (Child) ------ -->
 			<TableViewRow class="fieldRow" >
 				<Label class="fieldTitleLabel" >Priamry</Label>
-				<TextField id="primary_email" class="fieldText" hintText="Email address" onChange="NonAddableTextChanged" />
+				<TextField id="primary_email" class="fieldText" hintText="Email address" 
+					onChange="NonAddableTextChanged" onFocus="TextFieldFocused" 
+					keyboardType="Ti.UI.KEYBOARD_EMAIL" />
 				<Label id="primary_email_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
 			</TableViewRow>
 			
 			
 			<TableViewRow backgroundColor="#D0D0D0" />
 			
+			
+			<!-- ------ Skype Name (Independent) ------ -->
+			<TableViewRow class="fieldRow" >
+				<Label class="fieldTitleLabel" >Skype Name</Label>
+				<TextField id="skype" class="fieldText" hintText="Skype name" />
+				<Label id="skype_privacy" class="privacyLabel" >Default</Label>
+			</TableViewRow>
+			
+			
+			<TableViewRow backgroundColor="#D0D0D0" />
+			
+			
+			<!-- ------ BBM Pin Number (Independent) ------ -->
+			<TableViewRow class="fieldRow" >
+				<Label class="fieldTitleLabel" >BBM Pin</Label>
+				<TextField id="bbm" class="fieldText" hintText="BBM Pin Number" />
+				<Label id="bbm_privacy" class="privacyLabel" >Default</Label>
+			</TableViewRow>
+			
 		</TableView>
 		
 		<Require id="pickerContainer" src="/Settings/EditProfile/privacyPicker" type="view"></Require>
-		
-	</Window>
+	
 </Alloy>

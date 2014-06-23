@@ -1,0 +1,59 @@
+<Alloy>
+	
+	<TabGroup id="tabGroup">
+		
+		<!-- Android Menu ->
+		<Menu platform="android">
+            <!-- Cannot specify node text.  Use attributes only. ->
+            <MenuItem icon="/images/icon_settings.png" onClick="settingsClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
+    	</Menu>
+		-->
+		
+		
+		<!-- Tab 1 : Contact Information Window -->
+        <Tab title="Contact Info" icon="/images/man-7aram.png" >
+        	
+        	<Window id="win" platform="ios" >
+		
+				<RightNavButton>
+					<View layout="horizontal">
+						<Button title="Edit" onClick="EditClicked" requiredViewId="contactInfoWin" />
+						<Button title=" Done" onClick="SubmitDataToServer" />
+					</View>
+				</RightNavButton>
+				
+				<LeftNavButton>
+					<Button title="Cancel" onClick="CancelClicked" />
+				</LeftNavButton>
+        	
+        		<!-- Requiring the contact information view as we create its window here -->
+	    		<Require id="contactInfoWin" src="/Settings/EditProfile/contactInfoWin" type="view" />
+	    		
+	    	</Window>
+        </Tab>
+        
+		
+		<!-- Tab 2 : Basic Information Window -->
+		<Tab title="Basic Info" icon="/images/QR-code-7aram.png">
+    		<Require id="basicInfoWin" src="/Settings/EditProfile/basicInfoWin" type="view" />
+        </Tab>
+        
+        
+        <!-- Tab 3 -->
+        <Tab title="Info" icon="/images/love-7aram.png">
+        	<Window>
+        		<RightNavButton>
+					<View layout="horizontal">
+						<Button title="Edit" />
+						<Button title=" Done" onClick="SubmitDataToServer" />
+					</View>
+				</RightNavButton>
+				
+				<LeftNavButton>
+					<Button title="Cancel" onClick="CancelClicked" />
+				</LeftNavButton>
+        	</Window>
+        </Tab>
+		
+	</TabGroup>
+</Alloy>

@@ -1,19 +1,15 @@
 Ti.include("/userDataProcessing.js");
 
-var args = arguments[0] || {};
+var args = arguments[0] || {};	// TODO: Not used
 
 //////////////////////////////////////////////////////////////////////////////////////// LOGIC
-// Getting user's data from App.Properties
-var userData = Titanium.App.Properties.getObject("userData");
-var bofffsSpecificData = Titanium.App.Properties.getObject("bofffsSpecificData");
-var userDataInArrays = convertAddableFieldsToArrays(userData); // Convert the addable fields into arrays
-
+// Initialize userDataInArrays here as this is the first required view
+userDataInArrays = convertAddableFieldsToArrays(userData); // Convert the addable fields into arrays	// userDataProcessing.js
 
 // TODO: Remaining Shit
 // TODO: Add new row to the end of the fields' rows
-// TODO: Handle empty fields
-// TODO: Add validations while typing
-// TODO: Add validations before sending the data to the server
+// TODO: Handle changing the primary phone number
+// TODO: Handle skype name and BBM pin number
 
 //////////////////////////////////////////////////////////////////////////////////////// END OF LOGIC
 
@@ -57,10 +53,13 @@ function createBindingRowData(fieldValue, privacy, isPhone) {
 		TextOfFieldTitle: isPhone ? "Phone" : "Email",
 		HintTextOfField: isPhone ? "Phone number" : "Email address",
 		FieldType: isPhone ? "phone_numbers" : "mails",
+		KeyboardType: isPhone ? Ti.UI.KEYBOARD_DECIMAL_PAD : Ti.UI.KEYBOARD_EMAIL,
+		KeyboardToolbar: isPhone ? $.keyboardToolbar : null,
 		
 		TextOfField: fieldValue,
-		TextOfPrivacy: privacy
+		TextOfPrivacy: privacy,
 	};
+	
 	return data;
 }
 //////////////////////////////////////////////////////////////////////////////////////// END OF DISPLAY USER DATA
@@ -71,7 +70,8 @@ function createBindingRowData(fieldValue, privacy, isPhone) {
 var addNewRow = false;	// Used to flag that the add button was clicked
 var addableTextOldValue = "";	// Used to know the old field's value when focused before editing, to get its index in array
 var clickedPrivacyLabel;	// Used to save the label that was clicked to edit it when the picker's value changes
-var privacyIndex = { public:0, friends:1, favorites:2, onlyMe:3 };
+var privacyIndex = { public:0, friends:1, favorites:2, onlyMe:3 };	// Used to update the picker selected row with current privacy
+var clickedTextField;	// Used to save the clicked text field, to be able to blur its keybaord
 
 // Event listener for clicking the add row button that turns the flag to true
 function AddRowButtonClicked() {
@@ -94,55 +94,44 @@ function TableViewRowClicked(e) {
 // Event listener for deleting any row of the table view
 function DeletePressed(e) {
 	// TODO: Add an alert dialog to confirm deleting
-	deleteAddableField(userDataInArrays, e.source.fieldType, e.source.fieldValue);
+	deleteAddableField(userDataInArrays, e.source.fieldType, e.source.fieldValue);	// userDataProcessing.js
+}
+
+// Event listener for clicking the primary phone number
+function PrimaryPhoneTextLongclick(e) {
+	alert("How will we allow the user to change primary phone ?\nMaybe with FTR.");
 }
 
 // Event listener for text change in non addable fields
 function NonAddableTextChanged(e) {
-	changeValueOfNonAddableField(userDataInArrays, e.source.id, e.source.value);
+	changeValueOfNonAddableField(userDataInArrays, e.source.id, e.source.value);	// userDataProcessing.js
 }
 
 // Event listener for text change in non addable fields
 function AddableTextChanged(e) {
-	changeValueOfAddableField(userDataInArrays, e.source.fieldType, addableTextOldValue, e.source.value);
+	changeValueOfAddableField(userDataInArrays, e.source.fieldType, addableTextOldValue, e.source.value);	// userDataProcessing.js
 	addableTextOldValue = e.source.value;
 }
 
 // Event listener for addable fields' text fields to get their current value before edidting
-function AddableTextFocused(e) {
-	addableTextOldValue = e.source.value;
+function TextFieldFocused(e) {
+	if(clickedPrivacyLabel) $.pickerContainer.btn_toolBarDone.fireEvent("click");
+	
+	if(e.source.fieldType) addableTextOldValue = e.source.value;
+	clickedTextField = e.source;
 }
 
 // Event listener for clicking on the privacy label, it shows the privacy picker
 function PrivacyLabelClicked(e) {
+	DismissKeyboardClicked();
 	$.pickerContainer.pickerView.visible = true;
 	$.pickerContainer.picker.setSelectedRow(0, privacyIndex[e.source.text], { animated: true });
 	clickedPrivacyLabel = e.source;
 }
 
-
-function CancelPressed() {
-	$.win.close();
-}
-function EditPressed() {
-	$.tableView.editing = !$.tableView.editing;
-}
-function DonePressed() {
-	// Coule be useful
-	// var thisPageData = {
-		// primary_mobile: userDataInArrays.primary_mobile,
-		// primary_mobile_privacy: userDataInArrays.primary_mobile_privacy,
-		// phone_numbers: userDataInArrays.phone_numbers,
-		// phone_numbers_privacy: userDataInArrays.phone_numbers_privacy,
-		// primary_email: userDataInArrays.primary_email,
-		// primary_email_privacy: userDataInArrays.primary_email_privacy,
-		// mails: userDataInArrays.mails,
-		// mails_privacy: userDataInArrays.mails_privacy
-	// };
-	
-	// TODO: Uncomment the next lines to send the data to the server
-	var stringArray = convertAddableFieldsToStrings(userDataInArrays);
-	updateBofff(Alloy.Globals.userPin, userData, stringArray, bofffsSpecificData);
+// An event listener that listens to Done button in decimal pad toolbar to dismiss it on ios
+function DismissKeyboardClicked() {
+	if(clickedTextField) clickedTextField.blur();
 }
 //////////////////////////////////////////////////////////////////////////////////////// END OF EVENT LISTENRES
 
@@ -155,15 +144,17 @@ function addNewRowAfter(data, rowNum) {
 		text: data.TextOfFieldTitle
 	});
 	$.addClass(fieldTitleLabel, "fieldTitleLabel");
-	
+
 	// Create the field's value text field
 	var fieldTextField = Ti.UI.createTextField({
 		value: data.TextOfField,
 		hintText: data.HintTextOfField,
 		fieldType: data.FieldType,	// Used in editing the addable fields, to know the array that should be processed
+		keyboardType: data.KeyboardType,
+		keyboardToolbar: data.KeyboardToolbar,
 	});
 	fieldTextField.addEventListener("change", AddableTextChanged);
-	fieldTextField.addEventListener("focus", AddableTextFocused);
+	fieldTextField.addEventListener("focus", TextFieldFocused);
 	$.addClass(fieldTextField, "fieldText");
 	
 	// Create the field's privacy label
@@ -197,8 +188,8 @@ $.pickerContainer.picker.addEventListener("change", function(e) {
 	var newPrivacy = $.pickerContainer.picker.getSelectedRow(0).title;
 	
 	if(clickedPrivacyLabel.id) // Non addable field
-		changePrivacyOfNonAddableField(userDataInArrays, clickedPrivacyLabel.id, newPrivacy);
-	else changePrivacyOfAddableField(userDataInArrays, clickedPrivacyLabel.fieldType, clickedPrivacyLabel.text, newPrivacy);
+		changePrivacyOfNonAddableField(userDataInArrays, clickedPrivacyLabel.id, newPrivacy);	// userDataProcessing.js
+	else changePrivacyOfAddableField(userDataInArrays, clickedPrivacyLabel.fieldType, clickedPrivacyLabel.text, newPrivacy);	// userDataProcessing.js
 		
 	clickedPrivacyLabel.text = newPrivacy;
 });

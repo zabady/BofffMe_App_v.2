@@ -60,4 +60,8 @@ if (firstTime) {
     client.send();
 } else var userProfile = Titanium.App.Properties.getObject("userProfile");
 
+var userData = Titanium.App.Properties.getObject("userData");
+
+var userDataInArrays;
+
 Alloy.createController("index");

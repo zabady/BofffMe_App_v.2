@@ -5,9 +5,15 @@
 		
 		<TableView onClick="openClickedSettings">
 			
+			<TableViewRow window="EditProfile/editProfileIndex" >
+				<Label window="EditProfile/editProfileIndex" >My Profile</Label>
+			</TableViewRow>
+			
+			<!--
 			<TableViewRow window="EditProfile/contactInfoWin">
 				<Label window="EditProfile/contactInfoWin">My Profile</Label>
 			</TableViewRow>
+			-->
 			
 			<!--
 			<TableViewRow window="editProfileWin">

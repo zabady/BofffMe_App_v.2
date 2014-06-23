@@ -1,5 +1,11 @@
 /*
- * This lib file will contain functions that process the user's data and simplify using it during the app
+ * This lib file will contain functions that process the user's data and simplify using it during the app.
+ * 
+ * Note that any method called by an array takes the array as a reference, so, no need to save returning 
+ * array as it's already processing the one called the function.
+ * 
+ * Validators should not be used outside this file, we only validate some fields before posting them to the server.
+ * Only for better UX, these validators can be used in the UI layer.
  */
 
 // A function that copies an object creating a new copy for refrences inside 
@@ -96,6 +102,9 @@ function changePrivacyOfNonAddableField(userDataInArrays, fieldPrivacyName, newV
 function deleteAddableField(userDataInArrays, fieldType, value) {
 	try {
 		var index = userDataInArrays[fieldType].indexOf(value);
+		/* Splice deletes an element from the array then resets the indexes of 
+		 * the array's to match the new elements minus the deleted one.
+		 * Note that no need to save the returning array as we call the function by the reference of current array */
 		userDataInArrays[fieldType].splice(index, 1);
 		userDataInArrays[fieldType + "_privacy"].splice(index, 1);
 	}
@@ -128,4 +137,73 @@ function changePrivacyOfAddableField(userDataInArrays, fieldType, oldPrivacy, ne
 		userDataInArrays[fieldType + "_privacy"][index] = newPrivacy;
 	}
 	catch(exp) { /*TODO: remove this line*/ alert(exp); }
+}
+
+// A fucntion that post updates to the server
+function postUserDataUpdatesOnServer(oldUserDataInStrings, newUserDataInArrays) {
+	
+	// TODO: Make sure that there is at least one change (Ask zeez first if he is handling such case)
+	
+	// If any field is not valid, return with the validation msg that will contain the error
+	var validationMsg = validateAddableFields(newUserDataInArrays);
+	if(validationMsg.search("Wrong") >= 0) return validationMsg;
+	
+	try {
+		var bofffsSpecificData = Titanium.App.Properties.getObject("bofffsSpecificData");
+		var userUpdatesInStrings = convertAddableFieldsToStrings(newUserDataInArrays);
+		// TODO: comment or uncomment the next line to not send or send the data to the server
+		updateBofff(Alloy.Globals.userPin, oldUserDataInStrings, userUpdatesInStrings, bofffsSpecificData);
+	}
+	catch(exp) { /*TODO: remove this line*/ alert(exp); }
+	finally{ return ""; }
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////// VALIDATORS
+// A function that validates the addable fields, checks wether if they empty or unvalid
+function validateAddableFields(userDataInArrays) {
+	// Validate all phone numbers
+	for(var i = 0; i < userDataInArrays.phone_numbers.length; i++) {
+		// If empty, delete it and minus one from the counter as the array will lose one element
+		if(userDataInArrays.phone_numbers[i] == null || userDataInArrays.phone_numbers[i] == "") {
+			Ti.API.info("I will delete an empty phone");
+			deleteAddableField(userDataInArrays, "phone_numbers", "");
+			i--;
+		}
+			
+		else if(!validatePhoneNumber(userDataInArrays.phone_numbers[i])) return "Wrong phone number.";
+	}
+	
+	// Validate all emails	
+	for(var i = 0; i < userDataInArrays.mails.length; i++) {
+		// If empty, delete it and minus one from the counter as the array will lose one element
+		if(userDataInArrays.mails[i] == null || userDataInArrays.mails[i] == "") {
+			Ti.API.info("I will delete an empty email");
+			deleteAddableField(userDataInArrays, "mails", "");
+			i--;
+		}
+			
+		else if(!validateEmail(userDataInArrays.mails[i])) return "Wrong email address.";
+	}
+	
+	// Validate primary email
+	if(!validateEmail(userDataInArrays.primary_email)) return "Wrong primary email address.";
+	
+	return "No problems.";
+}
+
+// A function that validates a phone number
+function validatePhoneNumber(phoneNumber) {
+	var phoneNumberRegex = /^[0-9]{9,15}$/;
+	
+	if (phoneNumber.match(phoneNumberRegex)) return true;
+	else return false;
+}
+
+// A function that validates an email address
+function validateEmail(email) {
+	var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	
+	if (email.match(emailRegex)) return true;
+	else return false;
 }

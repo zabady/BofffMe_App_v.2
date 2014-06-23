@@ -7,6 +7,10 @@ function Controller() {
             var windowUrl = "Settings/" + e.source.window;
             selectedSettingWin = Alloy.createController(windowUrl).getView();
         }
+        if (-1 != e.source.window.search("EditProfile") && true) {
+            tempNavWin.navBarHidden = true;
+            tempRootWin.navBarHidden = true;
+        }
         Alloy.Globals.openNavigationWindow(selectedSettingWin, true);
         $.win.fireEvent("close");
     }
@@ -39,7 +43,7 @@ function Controller() {
     $.__views.win.add($.__views.__alloyId19);
     var __alloyId21 = [];
     $.__views.__alloyId22 = Ti.UI.createTableViewRow({
-        window: "EditProfile/contactInfoWin",
+        window: "EditProfile/editProfileIndex",
         id: "__alloyId22"
     });
     __alloyId21.push($.__views.__alloyId22);
@@ -50,7 +54,7 @@ function Controller() {
         color: "black",
         height: "60",
         text: "My Profile",
-        window: "EditProfile/contactInfoWin",
+        window: "EditProfile/editProfileIndex",
         id: "__alloyId23"
     });
     $.__views.__alloyId22.add($.__views.__alloyId23);
