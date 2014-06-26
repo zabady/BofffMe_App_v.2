@@ -730,6 +730,12 @@ function parsingUpdateString(updateString,addOrDelete,userFriendAppId,bofffsSpec
 // This is where the contacts data are changed on the user's phonebook
 function determineUpdateType(fieldType,stringObjects,addOrDelete,userFriendAppId,bofffsSpecificData,bofffsData)
 {
+	alert("fieldType: "+fieldType
+	+"\n+addOrDelete: "+addOrDelete+
+	"\n+userFriendAppId: "+userFriendAppId+
+	"\n+bofffsSpecificData: "+bofffsSpecificData+
+	"\n+bofffsData: "+bofffsData);
+	
 	switch(fieldType)
 		{
 			case 'phone_number':
