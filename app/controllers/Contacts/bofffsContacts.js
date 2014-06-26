@@ -317,16 +317,7 @@ function showContact(e)
 	{
 		ifImageClicked=false;
 		var bofffId = bofffs[e.itemId].contact_id;
-		//deleteSocialLink(bofffId,"http://tttt");
-		//updateEmail(bofffId,'work',bofffs[e.itemId].bofff.mails);
-		// TODO: THIS IS VERY IMPORTAT
-		// TODO: THIS IS VERY IMPORTAT
-		// TODO: THIS IS VERY IMPORTAT
-		// TODO: THIS IS VERY IMPORTAT
-		// TODO: THIS IS VERY IMPORTAT
-		// comment the next line and uncomment the one after it or viseversa to send updates or recieve updates
-		getUserData(Alloy.Globals.userPin,bofffsList);
-		//applyUpdatesOfFriend('95190228ae42e7652b098b5bce990aa8',bofffsList,bofffs);
+		applyUpdatesOfFriend('95190228ae42e7652b098b5bce990aa8',bofffsList,bofffs);
 		
 		// TODO: --> The next
 		//if(getUserData(Alloy.Globals.userPin,bofffsList)) {
@@ -604,22 +595,4 @@ function createVisibleData(privacyOfBofff,friendData)
 }
 
 
-function getUserData(pin, bofffsSpecificData)
-{
-	var url =  'http://www.bofffme.com/api/index.php/home/';
-	var xhr = Ti.Network.createHTTPClient(
-	{
-		onload: function(e) 
-	    {
-	    	var userData = JSON.parse(this.responseText).rows[0];
-	    	updateBofff(pin,userData,bofffsSpecificData);
-	    },
-	    onerror: function(e) 
-	    {
-	    	alert(this.responseText);
-	    },
-	});
-	
-	xhr.open("POST", url+"search_user_by/bofff/user_accounts/pin/"+pin);
-	xhr.send();  
-}
+

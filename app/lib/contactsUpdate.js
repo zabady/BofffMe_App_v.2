@@ -727,6 +727,7 @@ function parsingUpdateString(updateString,addOrDelete,userFriendAppId,bofffsSpec
 	
 }
 //TODO:remove alerts and put the action to do instead
+// This is where the contacts data are changed on the user's phonebook
 function determineUpdateType(fieldType,stringObjects,addOrDelete,userFriendAppId,bofffsSpecificData,bofffsData)
 {
 	switch(fieldType)
@@ -791,26 +792,6 @@ function updateBofff(pin, userData, newData, bofffsSpecificData)
 	    },
 	});
 	xhr.open("POST", url+"update_with_pin/bofff/user_accounts/"+pin);
-	/*
-	var params=
-	{
-		fullName:"Ahmed Atif",
-		gender:"male",
-		phone_numbers:"no13$no5$no8$no4",
-		phone_numbers_privacy:"friends$onlyMe$favorite$public",
-		mails:"ahmad.amin.ma@gmail.com$mail2$mail10$mail4",
-		mails_privacy:"friends$onlyMe$favorites$public",
-		/*social_links:"https://www.facebook.com/zabady,link2,link3,link4",
-		social_links_privacy:"friends,onlyMe,favorites,public",
-		residence:"Cairo,Egypt",
-		residence_privacy:"friends",
-		job_title:"softwergy",
-		job_title_privacy:"public",
-		birthday_date:"1010101",
-		birthday_date_privacy:"friends",
-		company:"cectwtec",
-		company_privacy:"favorites",
-	};
-	*/
+	
 	xhr.send(newData);  // request is actually sent with this statement
 }
