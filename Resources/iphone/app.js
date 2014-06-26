@@ -2,7 +2,14 @@ var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
 Alloy.Globals.apiUrl = "http://www.bofffme.com/api/index.php/home/";
 
-Alloy.Globals.userPin = "95190228ae42e7652b098b5bce990aa8";
+Alloy.Globals.userPin = Titanium.App.Properties.getObject("pin");
+
+if (null == Alloy.Globals.userPin) {
+    Alloy.Globals.userPin = "95190228ae42e7652b098b5bce990aa8";
+    Titanium.App.Properties.setObject("pin", Alloy.Globals.userPin);
+}
+
+alert(Alloy.Globals.userPin);
 
 Alloy.Globals.splitValue = "$";
 
@@ -34,7 +41,7 @@ Alloy.Globals.openNavigationWindow = function(window, isWindowAfterRoot) {
     });
 };
 
-var firstTime = false;
+var firstTime = true;
 
 if (firstTime) {
     var userProfile = new Object({

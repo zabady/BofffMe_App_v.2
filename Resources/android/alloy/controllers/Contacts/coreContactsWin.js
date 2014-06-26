@@ -72,7 +72,7 @@ function Controller() {
             numbers: JSON.stringify(contactNumbers),
             pin: Alloy.Globals.userPin
         };
-        xhr.open("POST", url + "all_data_by_mobile/bofff");
+        xhr.open("POST", url + "detect_user_friends_by_mobile/bofff");
         xhr.send(params);
     }
     function addFriend(data, bofffFriends) {
@@ -130,22 +130,22 @@ function Controller() {
         id: "btn_settings"
     });
     $.__views.win_boffsList.rightNavButton = $.__views.btn_settings;
-    $.__views.__alloyId50 = Ti.UI.createImageView({
-        id: "__alloyId50"
+    $.__views.__alloyId56 = Ti.UI.createImageView({
+        id: "__alloyId56"
     });
-    $.__views.win_boffsList.leftNavButton = $.__views.__alloyId50;
-    $.__views.__alloyId51 = Ti.UI.createView({
+    $.__views.win_boffsList.leftNavButton = $.__views.__alloyId56;
+    $.__views.__alloyId57 = Ti.UI.createView({
         layout: "vertical",
-        id: "__alloyId51"
+        id: "__alloyId57"
     });
-    $.__views.win_boffsList.add($.__views.__alloyId51);
-    var __alloyId52 = [];
+    $.__views.win_boffsList.add($.__views.__alloyId57);
+    var __alloyId58 = [];
     $.__views.scrollableview_mainContactsView = Ti.UI.createScrollableView({
-        views: __alloyId52,
+        views: __alloyId58,
         showPagingControl: "true",
         id: "scrollableview_mainContactsView"
     });
-    $.__views.__alloyId51.add($.__views.scrollableview_mainContactsView);
+    $.__views.__alloyId57.add($.__views.scrollableview_mainContactsView);
     changeRightNavButton ? $.__views.scrollableview_mainContactsView.addEventListener("scrollend", changeRightNavButton) : __defers["$.__views.scrollableview_mainContactsView!scrollend!changeRightNavButton"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);

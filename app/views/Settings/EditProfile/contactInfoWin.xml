@@ -15,13 +15,13 @@
 
 <Alloy>
 	
-		
 		<TableView id="tableView" onClick="TableViewRowClicked" onDelete="DeletePressed" >
 			
 			<!-- ------ Phone Numbers (Section) ------ -->
 			<TableViewRow class="headTitleRow" isPhone=1 >
 				<Label class="headTitleLabel" >Phone Numbers</Label>
-				<Button class="addRowButton" onClick="AddRowButtonClicked" />
+				<Button platform="ios" class="addRowButton" onClick="AddRowButtonClicked" />
+				<ImageView platform="android" class="addRowImage" onClick="AddRowButtonClicked" />
 			</TableViewRow>
 			
 			<!-- ------ Primary Phone Number (Child) ------ -->
@@ -29,9 +29,9 @@
 				<Label class="fieldTitleLabel" >Priamry</Label>
 				<!--<Label id="primary_mobile" class="fieldText" onClick="PrimaryPhoneClicked" />-->
 				<TextField id="primary_mobile" class="fieldText" onLongclick="PrimaryPhoneTextLongclick" editable="false" >
-					<KeyboardToolbar>
+					<KeyboardToolbar platform="ios">
 						<!-- A toolbar for decimals keyboard that have done button to dismiss the keybaord on ios -->
-						<Toolbar id="keyboardToolbar" platform="ios">
+						<Toolbar id="keyboardToolbar">
 					        <Items >
 					            <FlexSpace />
 					            <Button style="Titanium.UI.iPhone.SystemButtonStyle.DONE" title="Done" onClick="DismissKeyboardClicked" />
@@ -40,6 +40,7 @@
 					</KeyboardToolbar>
 				</TextField>
 				<Label id="primary_mobile_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
+				
 			</TableViewRow>
 			
 			
@@ -49,7 +50,8 @@
 			<!-- ------ Email Addresses (Section) ------ -->
 			<TableViewRow class="headTitleRow" isPhone=0 >
 				<Label class="headTitleLabel" >Email Addresses</Label>
-				<Button class="addRowButton" onClick="AddRowButtonClicked" />
+				<Button platform="ios" class="addRowButton" onClick="AddRowButtonClicked" />
+				<ImageView platform="android" class="addRowImage" onClick="AddRowButtonClicked" />
 			</TableViewRow>
 			
 			<!-- ------ Primary email address (Child) ------ -->
@@ -85,6 +87,21 @@
 			
 		</TableView>
 		
-		<Require id="pickerContainer" src="/Settings/EditProfile/privacyPicker" type="view"></Require>
+		
+		<View id="androidEditView" platform="android" visible="false" height="100%" layout="vertical">
+			<View opacity="0.4" onClick="AndroidEditViewBlur" height="25%" backgroundColor="black" />
+			
+			<View layout="vertical" backgroundColor="#58c8f3" height="Ti.UI.SIZE"
+				softKeyboardOnFocus="Titanium.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS">
+				
+				<Label class="andoridEditViewField" id="fieldTitle" />
+				<TextField class="andoridEditViewField" id="fieldValue" onReturn="AndroidEditViewBlur"
+					softKeyboardOnFocus="Titanium.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS" onChange="AndroidEditViewTextChanged" />
+			</View>
+			
+			<View opacity="0.4" onClick="AndroidEditViewBlur" height="60%" backgroundColor="black" />
+		</View>
+		
+		<Require platform="ios" id="pickerContainer" src="Settings/EditProfile/privacyPicker" type="view"></Require>
 	
 </Alloy>

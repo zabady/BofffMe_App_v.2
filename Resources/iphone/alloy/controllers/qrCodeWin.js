@@ -1,6 +1,6 @@
 function Controller() {
     function scanBtnClicked() {
-        Barcode.allowRotation = true;
+        Barcode.allowRotation = false;
         Barcode.allowInstructions = false;
         Barcode.allowMenu = false;
         Barcode.addEventListener("success", function(e) {
@@ -11,7 +11,7 @@ function Controller() {
         });
         Barcode.capture({
             overlay: $.view_overlay,
-            showCancel: false,
+            showCancel: true,
             animate: true,
             showRectangle: true,
             keepOpen: false,

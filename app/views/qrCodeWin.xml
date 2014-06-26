@@ -14,7 +14,7 @@
 		
 	</Window>
 	
-	<!-- Overlay view that appears on the capture window  -->
+	<!-- Overlay view that appears over the capture window  -->
 	<View id="view_overlay">
 		<Button class="overlayBtns" onClick="openCloseLedBarcode" title="Flash" left="0"></Button>
 		<Button class="overlayBtns" onClick="cancelBarcode" title="Cancel" right="0"></Button>

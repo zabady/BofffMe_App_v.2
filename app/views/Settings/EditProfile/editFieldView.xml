@@ -1,0 +1,14 @@
+<Alloy>
+	<View id="editView" platform="android" visible="false" height="100%" layout="vertical">
+		<View opacity="0.4" onClick="Zeby" height="25%" backgroundColor="black" />
+		
+		<View layout="vertical" backgroundColor="#58c8f3" height="Ti.UI.SIZE"
+			softKeyboardOnFocus="Titanium.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS">
+			
+			<Label class="andoridEditViewField" id="fieldTitle" />
+			<TextField class="andoridEditViewField" id="fieldValue" />
+		</View>
+		
+		<View opacity="0.4" onClick="Zeby" height="60%" backgroundColor="black" />
+	</View>
+</Alloy>

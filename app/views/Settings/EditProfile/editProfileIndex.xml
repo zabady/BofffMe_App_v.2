@@ -2,18 +2,17 @@
 	
 	<TabGroup id="tabGroup">
 		
-		<!-- Android Menu ->
+		<!-- Android Menu -->
 		<Menu platform="android">
-            <!-- Cannot specify node text.  Use attributes only. ->
-            <MenuItem icon="/images/icon_settings.png" onClick="settingsClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
+            <!-- Cannot specify node text.  Use attributes only. -->
+            <MenuItem title="Done" onClick="SubmitDataToServer" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
     	</Menu>
-		-->
 		
 		
 		<!-- Tab 1 : Contact Information Window -->
         <Tab title="Contact Info" icon="/images/man-7aram.png" >
         	
-        	<Window id="win" platform="ios" >
+        	<Window id="win" windowSoftInputMode="Titanium.UI.Android.SOFT_INPUT_ADJUST_PAN">
 		
 				<RightNavButton>
 					<View layout="horizontal">
@@ -27,7 +26,7 @@
 				</LeftNavButton>
         	
         		<!-- Requiring the contact information view as we create its window here -->
-	    		<Require id="contactInfoWin" src="/Settings/EditProfile/contactInfoWin" type="view" />
+	    		<Require id="contactInfoWin" src="Settings/EditProfile/contactInfoWin" type="view" />
 	    		
 	    	</Window>
         </Tab>
@@ -35,7 +34,7 @@
 		
 		<!-- Tab 2 : Basic Information Window -->
 		<Tab title="Basic Info" icon="/images/QR-code-7aram.png">
-    		<Require id="basicInfoWin" src="/Settings/EditProfile/basicInfoWin" type="view" />
+    		<Require id="basicInfoWin" src="Settings/EditProfile/basicInfoWin" type="view" />
         </Tab>
         
         

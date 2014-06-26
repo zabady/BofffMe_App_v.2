@@ -629,7 +629,7 @@ function checkPrivacySettings(fieldToUpdate,fieldPrivacy,valueOfField,newUserDat
 	var valuePrivacy=newUserData[fieldPrivacy].split(Alloy.Globals.splitValue)[indexOfTheUpdateValue];
 	for(var friend in bofffsSpecificData)
 	{
-		var isFriendFavorite=bofffsSpecificData[friend].status;
+		var isFriendFavorite=bofffsSpecificData[friend].userPrivacy_towards_friend;
 		if(privacyNumber[isFriendFavorite]>=privacyNumber[valuePrivacy])
 		{
 			friendsToSendTo.push(bofffsSpecificData[friend].friend_pin_code);
@@ -656,6 +656,8 @@ function addUpdatesToFriends(dataAdded,dataDeleted,friendsToSendAdded,friendsToS
 	xhr.open("POST", url+"update_friend_updates/bofff/user_friends/"+userPin);
 	var params=
 	{
+		// TODO: Send array to server via json.stringify
+		// TODO: Send params to the server without using the url
 		friend_added_data: JSON.stringify(dataAdded),
 		friend_deleted_data	: JSON.stringify(dataDeleted),
 		friendsToSendAdded:JSON.stringify(friendsToSendAdded),
@@ -772,7 +774,7 @@ function determineUpdateType(fieldType,stringObjects,addOrDelete,userFriendAppId
 		}
 }
  // TODO: De msh bel tarteeb 3shan zeez myz3alsh
-function updateBofff(pin,userData,newData,bofffsSpecificData)
+function updateBofff(pin, userData, newData, bofffsSpecificData)
 {
 	var url =  'http://www.bofffme.com/api/index.php/home/';
 	var xhr = Ti.Network.createHTTPClient(

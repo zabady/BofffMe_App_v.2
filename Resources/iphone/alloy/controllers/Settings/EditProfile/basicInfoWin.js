@@ -11,21 +11,21 @@ function Controller() {
         id: "basicInfoWin"
     });
     $.__views.basicInfoWin && $.addTopLevelView($.__views.basicInfoWin);
-    var __alloyId96 = [];
-    $.__views.__alloyId97 = Ti.UI.createTableViewRow({
-        id: "__alloyId97"
+    var __alloyId93 = [];
+    $.__views.__alloyId94 = Ti.UI.createTableViewRow({
+        id: "__alloyId94"
     });
-    __alloyId96.push($.__views.__alloyId97);
-    $.__views.__alloyId98 = Ti.UI.createTextField({
+    __alloyId93.push($.__views.__alloyId94);
+    $.__views.__alloyId95 = Ti.UI.createTextField({
         hintText: "Zeby",
-        id: "__alloyId98"
-    });
-    $.__views.__alloyId97.add($.__views.__alloyId98);
-    $.__views.__alloyId95 = Ti.UI.createTableView({
-        data: __alloyId96,
         id: "__alloyId95"
     });
-    $.__views.basicInfoWin.add($.__views.__alloyId95);
+    $.__views.__alloyId94.add($.__views.__alloyId95);
+    $.__views.__alloyId92 = Ti.UI.createTableView({
+        data: __alloyId93,
+        id: "__alloyId92"
+    });
+    $.__views.basicInfoWin.add($.__views.__alloyId92);
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};

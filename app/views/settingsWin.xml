@@ -5,44 +5,57 @@
 		
 		<TableView onClick="openClickedSettings">
 			
+			<!-- Edit Profile tab group windows -->
 			<TableViewRow window="EditProfile/editProfileIndex" >
 				<Label window="EditProfile/editProfileIndex" >My Profile</Label>
 			</TableViewRow>
 			
-			<!--
-			<TableViewRow window="EditProfile/contactInfoWin">
-				<Label window="EditProfile/contactInfoWin">My Profile</Label>
-			</TableViewRow>
-			-->
-			
-			<!--
-			<TableViewRow window="editProfileWin">
-				<Label window="editProfileWin">My Profile</Label>
-			</TableViewRow>
-			-->
-			
+			<!------------------------------------ Horizontal Line for Android -->
 			<TableViewRow platform="android" height="1" backgroundColor="black" />
 			
+			<!-- About Window, opens bofffme.com/about -->
 			<TableViewRow window="http://www.bofffme.com">
 				<Label window="http://www.bofffme.com">About</Label>
 			</TableViewRow>
 			
+			<!------------------------------------ Horizontal Line for Android -->
 			<TableViewRow platform="android" height="1" backgroundColor="black" />
 			
+			<!-- Frequently Asked Questions Window, opens bofffme.com/FAQ -->
 			<TableViewRow window="http://www.google.com">
 				<Label window="http://www.google.com">FAQ</Label>
 			</TableViewRow>
 			
+			<!------------------------------------ Horizontal Line for Android -->
 			<TableViewRow platform="android" height="1" backgroundColor="black" />
 			
+			<!-- Video Tutorial Window -->
 			<TableViewRow window="tutorialWin">
 				<Label window="tutorialWin">Video Tutorial</Label>
 			</TableViewRow>
 			
+			<!------------------------------------ Horizontal Line for Android -->
 			<TableViewRow platform="android" height="1" backgroundColor="black" />
 			
+			<!-- Add New Bofff Contact Window (DEBUG MODE) -->
 			<TableViewRow window="insertBofffWin">
-				<Label window="insertBofffWin">Add Bofff Contact</Label>
+				<Label window="insertBofffWin">Add Bofff Contact (DEBUG)</Label>
+			</TableViewRow>
+			
+			<!------------------------------------ Horizontal Line for Android -->
+			<TableViewRow platform="android" height="1" backgroundColor="black" />
+			
+			<!-- Change User Pin Window (DEBUG MODE) -->
+			<TableViewRow window="changeUserPinWin">
+				<Label window="changeUserPinWin">Change User Pin (DEBUG)</Label>
+			</TableViewRow>
+			
+			<!------------------------------------ Horizontal Line for Android -->
+			<TableViewRow platform="android" height="1" backgroundColor="black" />
+			
+			<!-- Change User Pin Window (DEBUG MODE) -->
+			<TableViewRow window="SubscribeToPushNotification">
+				<Label window="SubscribeToPushNotification">Subscribe to Push Notifications (DEBUG)</Label>
 			</TableViewRow>
 			
 		</TableView>

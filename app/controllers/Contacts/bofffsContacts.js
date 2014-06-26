@@ -146,7 +146,7 @@ function changeSearchableText(searchableText,searchableTextPrivacy)
 			else
 			{
 				item.properties.searchableText='';
-				var privacyOfBofff = bofffsList[itemId].privacy_of_friend;
+				var privacyOfBofff = bofffsList[itemId].friendPrivacy_towards_user;
 				var searchableTextValues=bofffs[itemId].bofff[searchableText].split(",");
 				var searchableTextPrivacyValues=bofffs[itemId].bofff[searchableTextPrivacy].split(",");
 				for(var record in searchableTextValues)
@@ -200,7 +200,7 @@ function createBofffListView(_data, textToSearchFor)
         	items=[];
         }
    		//add items to an array
-   		if(_data[i].status=="favorite")
+   		if(_data[i].userPrivacy_towards_friend=="favorite")
    		{
    			imageFavorite="/images/favoritecontact.png";
    		}
@@ -220,7 +220,7 @@ function createBofffListView(_data, textToSearchFor)
             bofff_pic:{
             	image:imageFavorite,
             	},
-            status:_data[i].status,
+            userPrivacy_towards_friend:_data[i].userPrivacy_towards_friend,
             properties : {
             itemId:i ,			//assign the unique contact id to the listItem's itemId for retrieving
             searchableText: _data[i].contactName ,
@@ -255,20 +255,20 @@ function changeStar(listItem)
 	privacyClicked=false;
 	var item = listItem.section.getItemAt(listItem.itemIndex);
 	// it means that the user clicked an empty star so we have to change it to a full star
-	if (item.status=="not favorite")
+	if (item.userPrivacy_towards_friend=="not favorite")
 	{
-		item.status="favorite";
+		item.userPrivacy_towards_friend="favorite";
 		item.bofff_pic.image = "/images/favoritecontact.png";
 		listItem.section.updateItemAt(listItem.itemIndex, item); 
-		bofffsList[listItem.itemId].status="favorite"; 
+		bofffsList[listItem.itemId].userPrivacy_towards_friend="favorite"; 
 	}
 	// it means that the user clicked a full star so we have to change it to an empty star
 	else
 	{
-		item.status="not favorite";
+		item.userPrivacy_towards_friend="not favorite";
 		item.bofff_pic.image = "/images/notfavoritecontact.png";
 		listItem.section.updateItemAt(listItem.itemIndex, item);
-		bofffsList[listItem.itemId].status="not favorite";
+		bofffsList[listItem.itemId].userPrivacy_towards_friend="not favorite";
 	}
 }
 
@@ -276,7 +276,7 @@ function updatePrivacy(listItem)
 {
 	var item = listItem.section.getItemAt(listItem.itemIndex);
 	var newStatus="not favorite";
-	if(item.status=="not favorite")
+	if(item.userPrivacy_towards_friend=="not favorite")
 	{
 		newStatus="favorite";
 	}
@@ -297,7 +297,7 @@ function updatePrivacy(listItem)
 	xhr.open("POST", url+"update_friend_status/bofff/user_friends/" + bofffsList[listItem.itemId].id);
 	var params=
 	{
-		status: newStatus,
+		userPrivacy_towards_friend: newStatus,
 	};
 	xhr.send(params);  // request is actually sent with this statement
 }
@@ -341,7 +341,7 @@ function showContact(e)
 		//Here is to know what contact the user want by searching for this contact with the itemId I saved in the listItem in which
 		//is saved the actual contact id of this user
 		var bofff=bofffs[e.itemId]['bofff'];
-		var privacyOfBofff= bofffsList[e.itemId].privacy_of_friend;
+		var privacyOfBofff= bofffsList[e.itemId].friendPrivacy_towards_user;
 		var image = e.section.getItemAt(e.itemIndex).pic.image;
 		//Here is to initialize a view that will contain the data of the user
 		var params=

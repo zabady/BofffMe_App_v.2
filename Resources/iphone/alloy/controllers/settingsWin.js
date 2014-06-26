@@ -117,11 +117,43 @@ function Controller() {
         },
         color: "black",
         height: "60",
-        text: "Add Bofff Contact",
+        text: "Add Bofff Contact (DEBUG)",
         window: "insertBofffWin",
         id: "__alloyId31"
     });
     $.__views.__alloyId30.add($.__views.__alloyId31);
+    $.__views.__alloyId32 = Ti.UI.createTableViewRow({
+        window: "changeUserPinWin",
+        id: "__alloyId32"
+    });
+    __alloyId21.push($.__views.__alloyId32);
+    $.__views.__alloyId33 = Ti.UI.createLabel({
+        font: {
+            fontSize: "20"
+        },
+        color: "black",
+        height: "60",
+        text: "Change User Pin (DEBUG)",
+        window: "changeUserPinWin",
+        id: "__alloyId33"
+    });
+    $.__views.__alloyId32.add($.__views.__alloyId33);
+    $.__views.__alloyId34 = Ti.UI.createTableViewRow({
+        window: "SubscribeToPushNotification",
+        id: "__alloyId34"
+    });
+    __alloyId21.push($.__views.__alloyId34);
+    $.__views.__alloyId35 = Ti.UI.createLabel({
+        font: {
+            fontSize: "20"
+        },
+        color: "black",
+        height: "60",
+        text: "Subscribe to Push Notifications (DEBUG)",
+        window: "SubscribeToPushNotification",
+        id: "__alloyId35"
+    });
+    $.__views.__alloyId34.add($.__views.__alloyId35);
     $.__views.__alloyId20 = Ti.UI.createTableView({
         top: 20,
         rowHeight: 60,

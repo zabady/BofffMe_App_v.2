@@ -29,4 +29,15 @@
 	image: "/images/app_icon_60x60.png",
 	width: 40,
 	height: 40,
+},
+
+// A class used in Edit Profile folder by the contact, basic information and work&education windows
+".andoridEditViewField[platform=android]": {
+	font: { fontSize: 20, fontWeight: "bold" },
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
+	color: "white",
+	bubbleParent: false,
+	height: 60,
+	width: "100%",
+	returnKeyType: Titanium.UI.RETURNKEY_DONE,
 }

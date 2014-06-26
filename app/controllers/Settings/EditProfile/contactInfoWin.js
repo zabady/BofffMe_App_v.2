@@ -10,6 +10,7 @@ userDataInArrays = convertAddableFieldsToArrays(userData); // Convert the addabl
 // TODO: Add new row to the end of the fields' rows
 // TODO: Handle changing the primary phone number
 // TODO: Handle skype name and BBM pin number
+// TODO: Replace TextFields with Labels for Android
 
 //////////////////////////////////////////////////////////////////////////////////////// END OF LOGIC
 
@@ -72,6 +73,7 @@ var addableTextOldValue = "";	// Used to know the old field's value when focused
 var clickedPrivacyLabel;	// Used to save the label that was clicked to edit it when the picker's value changes
 var privacyIndex = { public:0, friends:1, favorites:2, onlyMe:3 };	// Used to update the picker selected row with current privacy
 var clickedTextField;	// Used to save the clicked text field, to be able to blur its keybaord
+if(OS_ANDROID) var androidDeleteRowFlag = false;	// Used to flag that remove icon was pressed for android
 
 // Event listener for clicking the add row button that turns the flag to true
 function AddRowButtonClicked() {
@@ -89,6 +91,15 @@ function TableViewRowClicked(e) {
 		addNewRowAfter(data, e.index + 1);
 		addNewRow = false;
 	}
+	// If delete flag is true, delete the selected row for android
+	else if(OS_ANDROID && androidDeleteRowFlag) {
+		DeletePressed({ source: {
+			fieldType: e.row.fieldType,
+			fieldValue: e.row.fieldValue,
+		}});	// Call DeletePressed event listener and send it the required arguments get from selected row
+		$.tableView.deleteRow(e.index);	// Delete the row from the table view
+		androidDeleteRowFlag = false;
+	}
 }
 
 // Event listener for deleting any row of the table view
@@ -102,6 +113,34 @@ function PrimaryPhoneTextLongclick(e) {
 	alert("How will we allow the user to change primary phone ?\nMaybe with FTR.");
 }
 
+// Event listener for addable fields' text fields to get their current value before edidting
+function TextFieldFocused(e) {
+//////////////////////////////////////////////////////////////////////////////// ANDROID WORK AROUND
+	if(OS_ANDROID) {
+		e.source.blur();
+		$.androidEditView.visible = true;
+		$.fieldTitle.text = "Type " + e.source.hintText;
+		$.fieldValue.hintText = e.source.hintText;
+		$.fieldValue.value = e.source.value;
+		$.fieldValue.keyboardType = e.source.keyboardType;
+	}
+	else if(OS_IOS && clickedPrivacyLabel) $.pickerContainer.btn_toolBarDone.fireEvent("click");
+	
+	if(e.source.fieldType) addableTextOldValue = e.source.value;
+	clickedTextField = e.source;
+}
+
+//////////////////////////////////////////////////////////////////////////////// ANDROID WORK AROUND
+// Event listener for android work around that 
+function AndroidEditViewTextChanged(e) {
+	clickedTextField.value = $.fieldValue.value;
+}
+
+// Event listener that hide android edit view, fired when the low opacity views are clicked
+function AndroidEditViewBlur() {
+	$.androidEditView.visible = false;
+}
+
 // Event listener for text change in non addable fields
 function NonAddableTextChanged(e) {
 	changeValueOfNonAddableField(userDataInArrays, e.source.id, e.source.value);	// userDataProcessing.js
@@ -113,19 +152,12 @@ function AddableTextChanged(e) {
 	addableTextOldValue = e.source.value;
 }
 
-// Event listener for addable fields' text fields to get their current value before edidting
-function TextFieldFocused(e) {
-	if(clickedPrivacyLabel) $.pickerContainer.btn_toolBarDone.fireEvent("click");
-	
-	if(e.source.fieldType) addableTextOldValue = e.source.value;
-	clickedTextField = e.source;
-}
-
 // Event listener for clicking on the privacy label, it shows the privacy picker
 function PrivacyLabelClicked(e) {
 	DismissKeyboardClicked();
-	$.pickerContainer.pickerView.visible = true;
-	$.pickerContainer.picker.setSelectedRow(0, privacyIndex[e.source.text], { animated: true });
+	// TODO: Handle ios picker and undo commenting next 2 lines
+	//$.pickerContainer.pickerView.visible = true;
+	//$.pickerContainer.picker.setSelectedRow(0, privacyIndex[e.source.text], { animated: true });
 	clickedPrivacyLabel = e.source;
 }
 
@@ -176,6 +208,14 @@ function addNewRowAfter(data, rowNum) {
 	newRow.add(fieldTextField);
 	newRow.add(privacyLabel);
 	
+	// Add a remove row image view for android
+	if(OS_ANDROID) {
+		var removeIcon = Ti.UI.createImageView();
+		removeIcon.addEventListener("click", function() { androidDeleteRowFlag = true; });
+		$.addClass(removeIcon, "removeRowImage");
+		newRow.add(removeIcon);
+	}
+	
 	$.tableView.insertRowAfter(rowNum, newRow, { animated: true });
 }
 
@@ -183,18 +223,20 @@ function addNewRowAfter(data, rowNum) {
 
 
 //////////////////////////////////////////////////////////////////////////////////////// PICKER EVENT LISTENERS
-$.pickerContainer.picker.addEventListener("change", function(e) {
-	// Change the user's data privacy on change of the picker's rows
-	var newPrivacy = $.pickerContainer.picker.getSelectedRow(0).title;
-	
-	if(clickedPrivacyLabel.id) // Non addable field
-		changePrivacyOfNonAddableField(userDataInArrays, clickedPrivacyLabel.id, newPrivacy);	// userDataProcessing.js
-	else changePrivacyOfAddableField(userDataInArrays, clickedPrivacyLabel.fieldType, clickedPrivacyLabel.text, newPrivacy);	// userDataProcessing.js
+if(OS_IOS) {
+	$.pickerContainer.picker.addEventListener("change", function(e) {
+		// Change the user's data privacy on change of the picker's rows
+		var newPrivacy = $.pickerContainer.picker.getSelectedRow(0).title;
 		
-	clickedPrivacyLabel.text = newPrivacy;
-});
-$.pickerContainer.btn_toolBarDone.addEventListener("click", function() {
-	// Just dismiss the picker
-	$.pickerContainer.pickerView.visible = false;
-});
+		if(clickedPrivacyLabel.id) // Non addable field
+			changePrivacyOfNonAddableField(userDataInArrays, clickedPrivacyLabel.id, newPrivacy);	// userDataProcessing.js
+		else changePrivacyOfAddableField(userDataInArrays, clickedPrivacyLabel.fieldType, clickedPrivacyLabel.text, newPrivacy);	// userDataProcessing.js
+			
+		clickedPrivacyLabel.text = newPrivacy;
+	});
+	$.pickerContainer.btn_toolBarDone.addEventListener("click", function() {
+		// Just dismiss the picker
+		$.pickerContainer.pickerView.visible = false;
+	});
+}
 //////////////////////////////////////////////////////////////////////////////////////// END OF PICKER EVENT LISTENERS

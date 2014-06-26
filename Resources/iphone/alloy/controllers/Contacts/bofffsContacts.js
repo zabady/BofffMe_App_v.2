@@ -444,9 +444,9 @@ function Controller() {
     updateSearch ? $.__views.search.addEventListener("change", updateSearch) : __defers["$.__views.search!change!updateSearch"] = true;
     stopSearch ? $.__views.search.addEventListener("blur", stopSearch) : __defers["$.__views.search!blur!stopSearch"] = true;
     searchBofff ? $.__views.search.addEventListener("return", searchBofff) : __defers["$.__views.search!return!searchBofff"] = true;
-    var __alloyId35 = {};
-    var __alloyId37 = [];
-    var __alloyId38 = {
+    var __alloyId39 = {};
+    var __alloyId41 = [];
+    var __alloyId42 = {
         type: "Ti.UI.ImageView",
         bindId: "pic",
         properties: {
@@ -459,8 +459,8 @@ function Controller() {
             click: imageClicked
         }
     };
-    __alloyId37.push(__alloyId38);
-    var __alloyId39 = {
+    __alloyId41.push(__alloyId42);
+    var __alloyId43 = {
         type: "Ti.UI.ImageView",
         bindId: "bofff_pic",
         properties: {
@@ -473,8 +473,8 @@ function Controller() {
             click: starClicked
         }
     };
-    __alloyId37.push(__alloyId39);
-    var __alloyId40 = {
+    __alloyId41.push(__alloyId43);
+    var __alloyId44 = {
         type: "Ti.UI.Label",
         bindId: "textLabel",
         properties: {
@@ -488,18 +488,18 @@ function Controller() {
             bindId: "textLabel"
         }
     };
-    __alloyId37.push(__alloyId40);
-    var __alloyId36 = {
+    __alloyId41.push(__alloyId44);
+    var __alloyId40 = {
         properties: {
             height: "56dp",
             name: "template1"
         },
-        childTemplates: __alloyId37
+        childTemplates: __alloyId41
     };
-    __alloyId35["template1"] = __alloyId36;
+    __alloyId39["template1"] = __alloyId40;
     $.__views.list_bofffContacts = Ti.UI.createListView({
         width: "100%",
-        templates: __alloyId35,
+        templates: __alloyId39,
         id: "list_bofffContacts",
         left: "0",
         defaultItemTemplate: "template1"

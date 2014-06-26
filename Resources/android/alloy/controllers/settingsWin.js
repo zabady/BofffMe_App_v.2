@@ -7,6 +7,10 @@ function Controller() {
             var windowUrl = "/Settings/" + e.source.window;
             selectedSettingWin = Alloy.createController(windowUrl).getView();
         }
+        if (-1 != e.source.window.search("EditProfile") && false) {
+            tempNavWin.navBarHidden = true;
+            tempRootWin.navBarHidden = true;
+        }
         Alloy.Globals.openNavigationWindow(selectedSettingWin, true);
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
@@ -38,7 +42,7 @@ function Controller() {
     $.__views.win.add($.__views.__alloyId22);
     var __alloyId24 = [];
     $.__views.__alloyId25 = Ti.UI.createTableViewRow({
-        window: "EditProfile/basicInfoWin",
+        window: "EditProfile/editProfileIndex",
         id: "__alloyId25"
     });
     __alloyId24.push($.__views.__alloyId25);
@@ -49,7 +53,7 @@ function Controller() {
         color: "black",
         height: "60",
         text: "My Profile",
-        window: "EditProfile/basicInfoWin",
+        window: "EditProfile/editProfileIndex",
         id: "__alloyId26"
     });
     $.__views.__alloyId25.add($.__views.__alloyId26);
@@ -136,14 +140,59 @@ function Controller() {
         },
         color: "black",
         height: "60",
-        text: "Add Bofff Contact",
+        text: "Add Bofff Contact (DEBUG)",
         window: "insertBofffWin",
         id: "__alloyId38"
     });
     $.__views.__alloyId37.add($.__views.__alloyId38);
+    $.__views.__alloyId39 = Ti.UI.createTableViewRow({
+        height: "1",
+        backgroundColor: "black",
+        id: "__alloyId39"
+    });
+    __alloyId24.push($.__views.__alloyId39);
+    $.__views.__alloyId40 = Ti.UI.createTableViewRow({
+        window: "changeUserPinWin",
+        id: "__alloyId40"
+    });
+    __alloyId24.push($.__views.__alloyId40);
+    $.__views.__alloyId41 = Ti.UI.createLabel({
+        font: {
+            fontSize: "24"
+        },
+        color: "black",
+        height: "60",
+        text: "Change User Pin (DEBUG)",
+        window: "changeUserPinWin",
+        id: "__alloyId41"
+    });
+    $.__views.__alloyId40.add($.__views.__alloyId41);
+    $.__views.__alloyId42 = Ti.UI.createTableViewRow({
+        height: "1",
+        backgroundColor: "black",
+        id: "__alloyId42"
+    });
+    __alloyId24.push($.__views.__alloyId42);
+    $.__views.__alloyId43 = Ti.UI.createTableViewRow({
+        window: "SubscribeToPushNotification",
+        id: "__alloyId43"
+    });
+    __alloyId24.push($.__views.__alloyId43);
+    $.__views.__alloyId44 = Ti.UI.createLabel({
+        font: {
+            fontSize: "24"
+        },
+        color: "black",
+        height: "60",
+        text: "Subscribe to Push Notifications (DEBUG)",
+        window: "SubscribeToPushNotification",
+        id: "__alloyId44"
+    });
+    $.__views.__alloyId43.add($.__views.__alloyId44);
     $.__views.__alloyId23 = Ti.UI.createTableView({
         top: 20,
         rowHeight: 60,
+        height: Ti.UI.SIZE,
         data: __alloyId24,
         id: "__alloyId23"
     });

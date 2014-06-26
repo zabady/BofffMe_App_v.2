@@ -22,20 +22,20 @@ function Controller() {
         id: "bofffProfileWin"
     });
     $.__views.bofffProfileWin && $.addTopLevelView($.__views.bofffProfileWin);
-    var __alloyId33 = [];
-    $.__views.__alloyId34 = Ti.UI.createTableViewRow({
+    var __alloyId37 = [];
+    $.__views.__alloyId38 = Ti.UI.createTableViewRow({
         height: 120,
         backgroundColor: "#D0D0D0",
-        id: "__alloyId34"
+        id: "__alloyId38"
     });
-    __alloyId33.push($.__views.__alloyId34);
+    __alloyId37.push($.__views.__alloyId38);
     $.__views.img = Ti.UI.createImageView({
         width: 100,
         height: 100,
         left: 10,
         id: "img"
     });
-    $.__views.__alloyId34.add($.__views.img);
+    $.__views.__alloyId38.add($.__views.img);
     enlargeImage ? $.__views.img.addEventListener("click", enlargeImage) : __defers["$.__views.img!click!enlargeImage"] = true;
     $.__views.lbl_name = Ti.UI.createLabel({
         left: 120,
@@ -46,9 +46,9 @@ function Controller() {
         color: "white",
         id: "lbl_name"
     });
-    $.__views.__alloyId34.add($.__views.lbl_name);
+    $.__views.__alloyId38.add($.__views.lbl_name);
     $.__views.tableView = Ti.UI.createTableView({
-        data: __alloyId33,
+        data: __alloyId37,
         id: "tableView"
     });
     $.__views.bofffProfileWin.add($.__views.tableView);

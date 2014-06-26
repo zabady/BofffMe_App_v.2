@@ -20,99 +20,99 @@ function Controller() {
         selectionIndicator: "true"
     });
     $.__views.view_picker.add($.__views.picker);
-    var __alloyId46 = [];
-    $.__views.__alloyId47 = Ti.UI.createPickerRow({
+    var __alloyId50 = [];
+    $.__views.__alloyId51 = Ti.UI.createPickerRow({
         dbName: "fullName",
         dbPrivacy: "",
         title: "Name",
-        id: "__alloyId47"
+        id: "__alloyId51"
     });
-    __alloyId46.push($.__views.__alloyId47);
-    $.__views.__alloyId48 = Ti.UI.createPickerRow({
+    __alloyId50.push($.__views.__alloyId51);
+    $.__views.__alloyId52 = Ti.UI.createPickerRow({
         dbName: "phone_numbers",
         dbPrivacy: "phone_numbers_privacy",
         title: "Phone Number",
-        id: "__alloyId48"
+        id: "__alloyId52"
     });
-    __alloyId46.push($.__views.__alloyId48);
-    $.__views.__alloyId49 = Ti.UI.createPickerRow({
+    __alloyId50.push($.__views.__alloyId52);
+    $.__views.__alloyId53 = Ti.UI.createPickerRow({
         dbName: "mails",
         dbPrivacy: "mails_privacy",
         title: "E-mail",
-        id: "__alloyId49"
+        id: "__alloyId53"
     });
-    __alloyId46.push($.__views.__alloyId49);
-    $.__views.__alloyId50 = Ti.UI.createPickerRow({
+    __alloyId50.push($.__views.__alloyId53);
+    $.__views.__alloyId54 = Ti.UI.createPickerRow({
         dbName: "social_links",
         dbPrivacy: "social_links_privacy",
         title: "Social Network",
-        id: "__alloyId50"
+        id: "__alloyId54"
     });
-    __alloyId46.push($.__views.__alloyId50);
-    $.__views.__alloyId51 = Ti.UI.createPickerRow({
+    __alloyId50.push($.__views.__alloyId54);
+    $.__views.__alloyId55 = Ti.UI.createPickerRow({
         dbName: "job_title",
         dbPrivacy: "job_title_privacy",
         title: "Job Title",
-        id: "__alloyId51"
+        id: "__alloyId55"
     });
-    __alloyId46.push($.__views.__alloyId51);
-    $.__views.__alloyId52 = Ti.UI.createPickerRow({
+    __alloyId50.push($.__views.__alloyId55);
+    $.__views.__alloyId56 = Ti.UI.createPickerRow({
         dbName: "company",
         dbPrivacy: "company_privacy",
         title: "Company",
-        id: "__alloyId52"
+        id: "__alloyId56"
     });
-    __alloyId46.push($.__views.__alloyId52);
-    $.__views.__alloyId53 = Ti.UI.createPickerRow({
+    __alloyId50.push($.__views.__alloyId56);
+    $.__views.__alloyId57 = Ti.UI.createPickerRow({
         dbName: "interests",
         dbPrivacy: "interests_privacy",
         title: "Interests",
-        id: "__alloyId53"
+        id: "__alloyId57"
     });
-    __alloyId46.push($.__views.__alloyId53);
-    $.__views.__alloyId54 = Ti.UI.createPickerRow({
+    __alloyId50.push($.__views.__alloyId57);
+    $.__views.__alloyId58 = Ti.UI.createPickerRow({
         dbName: "education",
         dbPrivacy: "education_privacy",
         title: "Education",
-        id: "__alloyId54"
+        id: "__alloyId58"
     });
-    __alloyId46.push($.__views.__alloyId54);
-    $.__views.__alloyId55 = Ti.UI.createPickerRow({
+    __alloyId50.push($.__views.__alloyId58);
+    $.__views.__alloyId59 = Ti.UI.createPickerRow({
         dbName: "favorite_places",
         dbPrivacy: "favorite_places_privacy",
         title: "Favorite Places",
-        id: "__alloyId55"
+        id: "__alloyId59"
     });
-    __alloyId46.push($.__views.__alloyId55);
-    $.__views.__alloyId56 = Ti.UI.createPickerRow({
+    __alloyId50.push($.__views.__alloyId59);
+    $.__views.__alloyId60 = Ti.UI.createPickerRow({
         dbName: "marital_status",
         dbPrivacy: "marital_status_privacy",
         title: "Marital Status",
-        id: "__alloyId56"
+        id: "__alloyId60"
     });
-    __alloyId46.push($.__views.__alloyId56);
-    $.__views.__alloyId57 = Ti.UI.createPickerRow({
+    __alloyId50.push($.__views.__alloyId60);
+    $.__views.__alloyId61 = Ti.UI.createPickerRow({
         dbName: "residence",
         dbPrivacy: "residence_privacy",
         title: "Residence",
-        id: "__alloyId57"
+        id: "__alloyId61"
     });
-    __alloyId46.push($.__views.__alloyId57);
-    $.__views.__alloyId58 = Ti.UI.createPickerRow({
+    __alloyId50.push($.__views.__alloyId61);
+    $.__views.__alloyId62 = Ti.UI.createPickerRow({
         dbName: "gender",
         dbPrivacy: "gender_privacy",
         title: "Gender",
-        id: "__alloyId58"
+        id: "__alloyId62"
     });
-    __alloyId46.push($.__views.__alloyId58);
-    $.__views.__alloyId59 = Ti.UI.createPickerRow({
+    __alloyId50.push($.__views.__alloyId62);
+    $.__views.__alloyId63 = Ti.UI.createPickerRow({
         dbName: "fullName",
         dbPrivacy: "",
         title: "Custom",
-        id: "__alloyId59"
+        id: "__alloyId63"
     });
-    __alloyId46.push($.__views.__alloyId59);
-    $.__views.picker.add(__alloyId46);
+    __alloyId50.push($.__views.__alloyId63);
+    $.__views.picker.add(__alloyId50);
     exports.destroy = function() {};
     _.extend($, $.__views);
     _.extend($, exports);

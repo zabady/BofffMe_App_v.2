@@ -1,9 +1,11 @@
 //////////////////////////////////////////////////////////////////////////////// OBJECT COMMEN STYLES
-"TableViewRow": {
-	height: 50
+"TableView": {
+	//height: 400,	// Work around for textfields insinde tableview
+	bottom: 0
 },
 "TableViewRow": {
-	editable: false
+	editable: false,
+	height: 50
 }
 
 
@@ -22,11 +24,25 @@
 	right: 10,
 	style: Ti.UI.iPhone.SystemButton.CONTACT_ADD,
 },
+".addRowImage[platform=android]": {
+	right: 10,
+	width: 22,
+	height: 22,
+	image: "/images/addIcon-44x44.png",
+},
+".removeRowImage[platform=android]": {
+	right: 10,
+	width: 22,
+	height: 22,
+	image: "/images/removeIcon-44x44.png",
+}
 
 // FIELDS
 ".fieldRow": {
 	height: 50,
 },
+
+// A class for the field's TITLE label for both android and iOS used dynamically
 ".fieldTitleLabel": {
 	left: "5%",
 	width: "22%",
@@ -36,6 +52,11 @@
 	//borderRadius: 1,
 	//borderWidth: 1,
 },
+".fieldTitleLabel[platform=android]": {
+	width: "20%",
+}
+
+// A class for the field's VALUE text field for both android and iOS used dynamically
 ".fieldText": {
 	left: "29%",
 	width: "42%",
@@ -44,6 +65,13 @@
 	//borderRadius: 1,
 	//borderWidth: 1,
 },
+".fieldText[platform=android]": {
+	left: "27%",
+	color: "white",
+	bubbleParent: false,
+}
+
+// A class for the field's PRIVACY label for both android and iOS used dynamically
 ".privacyLabel": {
 	left: "73%",
 	width: "22%",
@@ -51,4 +79,9 @@
 	bubbleParent: false,
 	//borderRadius: 1,
 	//borderWidth: 1,
+},
+".privacyLabel[platform=android]": {
+	left: "71%",
+	width: "20%",
+	color: "black",
 }

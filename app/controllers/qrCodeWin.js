@@ -4,6 +4,7 @@
 // TODO: Discussion point: Should we put the qr scope image to the left of the button ?
 // TODO: Add the user's info to the scanned bofff contact list and to his friends
 // TODO: Add the icon image url to the qr code
+// TODO: BUGS FOUND WHILE TESTING ON IPHONE, LAYOUT-ROTATION-CANCEL
 //////////////////////////////////////////////////////////////////////////////// HANDLING UI
 // Reading the qr code image from the file stored in application data directory
 $.img.image = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory + "qrcode.jpg").read();
@@ -18,7 +19,7 @@ var Barcode = require("ti.barcode");
 //////////////////////////////////////////////////////////////////////////////// UI FUNCTIONS
 // Defining a function to open the qr code scanner
 function scanBtnClicked() {
-	Barcode.allowRotation = true; // TODO: Test it on iphone
+	Barcode.allowRotation = false; // TODO: Test it on iphone
 	Barcode.allowInstructions = false;
 	Barcode.allowMenu = false;
 	if(OS_ANDROID) Barcode.displayedMessage = "You may need to rotate the device.";
@@ -34,7 +35,7 @@ function scanBtnClicked() {
 	
 	Barcode.capture({
 		overlay: $.view_overlay,
-		showCancel: false,
+		showCancel: true,
 		animate: true, 		// Default value but good for clarity
 		showRectangle: true,// Default value
 		keepOpen: false,	// Default value

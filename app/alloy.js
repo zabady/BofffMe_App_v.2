@@ -12,7 +12,12 @@
 
 // Adding APIs url to Alloy.Globals
 Alloy.Globals.apiUrl = 'http://www.bofffme.com/api/index.php/home/';
-Alloy.Globals.userPin = "95190228ae42e7652b098b5bce990aa8";
+Alloy.Globals.userPin = Titanium.App.Properties.getObject('pin');
+if(Alloy.Globals.userPin == null) {
+	Alloy.Globals.userPin = "95190228ae42e7652b098b5bce990aa8";	// Ahmed Atif's Pin
+	Titanium.App.Properties.setObject('pin', Alloy.Globals.userPin);
+}
+alert(Alloy.Globals.userPin);
 
 //Split value to split update strings
 Alloy.Globals.splitValue = "$";
@@ -62,7 +67,7 @@ Alloy.Globals.openNavigationWindow = function(window, isWindowAfterRoot) {
 
 
 // Generating the QR Code for the first time the app runs
-var firstTime = false;
+var firstTime = true;
 if(firstTime) {
 	var userProfile = new Object({
 		pin: '5000',
