@@ -160,7 +160,7 @@ function Controller() {
         if (privacyClicked) updatePrivacy(e); else if (ifImageClicked) {
             ifImageClicked = false;
             bofffs[e.itemId].contact_id;
-            getUserData(Alloy.Globals.userPin, bofffsList);
+            applyUpdatesOfFriend("95190228ae42e7652b098b5bce990aa8", bofffsList, bofffs);
         } else {
             $.search.blur();
             var bofff = bofffs[e.itemId]["bofff"];
@@ -360,20 +360,6 @@ function Controller() {
             privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField] && (visibleData.profilePicture = friendData[field]);
         }
         Alloy.Globals.openNavigationWindow(Alloy.createController("Contacts/bofffProfileWin", visibleData).getView(), true);
-    }
-    function getUserData(pin, bofffsSpecificData) {
-        var url = "http://www.bofffme.com/api/index.php/home/";
-        var xhr = Ti.Network.createHTTPClient({
-            onload: function() {
-                var userData = JSON.parse(this.responseText).rows[0];
-                updateBofff(pin, userData, bofffsSpecificData);
-            },
-            onerror: function() {
-                alert(this.responseText);
-            }
-        });
-        xhr.open("POST", url + "search_user_by/bofff/user_accounts/pin/" + pin);
-        xhr.send();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Contacts/bofffsContacts";

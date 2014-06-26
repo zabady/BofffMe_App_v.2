@@ -1,7 +1,7 @@
 <Alloy>
-	<Window id="win" title="Settings" layout="vertical">
+	<Window id="win" title="Settings">
 		
-		<Label top="40" class="settingsLabel">Settings</Label>
+		<Label class="settingsLabel">Settings</Label>
 		
 		<TableView onClick="openClickedSettings">
 			

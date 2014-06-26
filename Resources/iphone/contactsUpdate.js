@@ -441,7 +441,7 @@ function checkPrivacySettings(fieldToUpdate, fieldPrivacy, valueOfField, newUser
     var indexOfTheUpdateValue = newUserData[fieldToUpdate].split(Alloy.Globals.splitValue).indexOf(valueOfField);
     var valuePrivacy = newUserData[fieldPrivacy].split(Alloy.Globals.splitValue)[indexOfTheUpdateValue];
     for (var friend in bofffsSpecificData) {
-        var isFriendFavorite = bofffsSpecificData[friend].status;
+        var isFriendFavorite = bofffsSpecificData[friend].userPrivacy_towards_friend;
         privacyNumber[isFriendFavorite] >= privacyNumber[valuePrivacy] && friendsToSendTo.push(bofffsSpecificData[friend].friend_pin_code);
     }
     return true;

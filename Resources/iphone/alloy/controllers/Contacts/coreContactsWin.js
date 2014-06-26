@@ -72,7 +72,7 @@ function Controller() {
             numbers: JSON.stringify(contactNumbers),
             pin: Alloy.Globals.userPin
         };
-        xhr.open("POST", url + "all_data_by_mobile/bofff");
+        xhr.open("POST", url + "detect_user_friends_by_mobile/bofff");
         xhr.send(params);
     }
     function addFriend(data, bofffFriends) {

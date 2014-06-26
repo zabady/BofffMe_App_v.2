@@ -25,8 +25,7 @@ function Controller() {
     $.__views.win = Ti.UI.createWindow({
         backgroundColor: "white",
         id: "win",
-        title: "Settings",
-        layout: "vertical"
+        title: "Settings"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
     $.__views.__alloyId19 = Ti.UI.createLabel({
@@ -35,9 +34,9 @@ function Controller() {
             fontWeight: "bold"
         },
         color: "#2279bc",
-        height: "60",
+        height: "10%",
+        top: "5%",
         text: "Settings",
-        top: "40",
         id: "__alloyId19"
     });
     $.__views.win.add($.__views.__alloyId19);
@@ -155,8 +154,9 @@ function Controller() {
     });
     $.__views.__alloyId34.add($.__views.__alloyId35);
     $.__views.__alloyId20 = Ti.UI.createTableView({
-        top: 20,
+        top: "20%",
         rowHeight: 60,
+        height: Ti.UI.SIZE,
         data: __alloyId21,
         id: "__alloyId20"
     });

@@ -60,7 +60,7 @@ function Controller() {
                 var itemId = item.properties.itemId;
                 if ("fullName" == searchableText) item.properties.searchableText = bofffsList[itemId].contactName; else {
                     item.properties.searchableText = "";
-                    var privacyOfBofff = bofffsList[itemId].privacy_of_friend;
+                    var privacyOfBofff = bofffsList[itemId].friendPrivacy_towards_user;
                     var searchableTextValues = bofffs[itemId].bofff[searchableText].split(",");
                     var searchableTextPrivacyValues = bofffs[itemId].bofff[searchableTextPrivacy].split(",");
                     for (var record in searchableTextValues) {
@@ -91,7 +91,7 @@ function Controller() {
                 });
                 items = [];
             }
-            imageFavorite = "favorite" == _data[i].status ? "/images/favoritecontact.png" : "/images/notfavoritecontact.png";
+            imageFavorite = "favorite" == _data[i].userPrivacy_towards_friend ? "/images/favoritecontact.png" : "/images/notfavoritecontact.png";
             items.push({
                 template: "template1",
                 textLabel: {
@@ -103,7 +103,7 @@ function Controller() {
                 bofff_pic: {
                     image: imageFavorite
                 },
-                status: _data[i].status,
+                userPrivacy_towards_friend: _data[i].userPrivacy_towards_friend,
                 properties: {
                     itemId: i,
                     searchableText: _data[i].contactName,
@@ -121,22 +121,22 @@ function Controller() {
     function changeStar(listItem) {
         privacyClicked = false;
         var item = listItem.section.getItemAt(listItem.itemIndex);
-        if ("not favorite" == item.status) {
-            item.status = "favorite";
+        if ("not favorite" == item.userPrivacy_towards_friend) {
+            item.userPrivacy_towards_friend = "favorite";
             item.bofff_pic.image = "/images/favoritecontact.png";
             listItem.section.updateItemAt(listItem.itemIndex, item);
-            bofffsList[listItem.itemId].status = "favorite";
+            bofffsList[listItem.itemId].userPrivacy_towards_friend = "favorite";
         } else {
-            item.status = "not favorite";
+            item.userPrivacy_towards_friend = "not favorite";
             item.bofff_pic.image = "/images/notfavoritecontact.png";
             listItem.section.updateItemAt(listItem.itemIndex, item);
-            bofffsList[listItem.itemId].status = "not favorite";
+            bofffsList[listItem.itemId].userPrivacy_towards_friend = "not favorite";
         }
     }
     function updatePrivacy(listItem) {
         var item = listItem.section.getItemAt(listItem.itemIndex);
         var newStatus = "not favorite";
-        "not favorite" == item.status && (newStatus = "favorite");
+        "not favorite" == item.userPrivacy_towards_friend && (newStatus = "favorite");
         var url = "http://www.bofffme.com/api/index.php/home/";
         var xhr = Ti.Network.createHTTPClient({
             onload: function() {
@@ -149,7 +149,7 @@ function Controller() {
         });
         xhr.open("POST", url + "update_friend_status/bofff/user_friends/" + bofffsList[listItem.itemId].id);
         var params = {
-            status: newStatus
+            userPrivacy_towards_friend: newStatus
         };
         xhr.send(params);
     }
@@ -157,11 +157,11 @@ function Controller() {
         if (privacyClicked) updatePrivacy(e); else if (ifImageClicked) {
             ifImageClicked = false;
             bofffs[e.itemId].contact_id;
-            getUserData(Alloy.Globals.userPin, bofffsList);
+            applyUpdatesOfFriend("95190228ae42e7652b098b5bce990aa8", bofffsList, bofffs);
         } else {
             $.search.blur();
             var bofff = bofffs[e.itemId]["bofff"];
-            var privacyOfBofff = bofffsList[e.itemId].privacy_of_friend;
+            var privacyOfBofff = bofffsList[e.itemId].friendPrivacy_towards_user;
             e.section.getItemAt(e.itemIndex).pic.image;
             createVisibleData(privacyOfBofff, bofff);
         }
@@ -357,20 +357,6 @@ function Controller() {
             privacyNumber[privacyOfBofff] >= privacyNumber[privacyOfField] && (visibleData.profilePicture = friendData[field]);
         }
         Alloy.Globals.openNavigationWindow(Alloy.createController("Contacts/bofffProfileWin", visibleData).getView(), true);
-    }
-    function getUserData(pin, bofffsSpecificData) {
-        var url = "http://www.bofffme.com/api/index.php/home/";
-        var xhr = Ti.Network.createHTTPClient({
-            onload: function() {
-                var userData = JSON.parse(this.responseText).rows[0];
-                updateBofff(pin, userData, bofffsSpecificData);
-            },
-            onerror: function() {
-                alert(this.responseText);
-            }
-        });
-        xhr.open("POST", url + "search_user_by/bofff/user_accounts/pin/" + pin);
-        xhr.send();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Contacts/bofffsContacts";

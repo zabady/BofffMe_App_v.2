@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////// OBJECT COMMEN STYLES
 "TableView": {
-	top: 20,
+	top: "23%",
 	rowHeight: 60,
 	height: Ti.UI.SIZE,
 },
@@ -16,6 +16,8 @@
 
 //////////////////////////////////////////////////////////////////////////////// CLASS STYLES
 ".settingsLabel": {
+	top: "8%",
+	height: "10%",
 	font: {fontSize: "26"},
 	color: "#2279bc", // Dark blue
 },
