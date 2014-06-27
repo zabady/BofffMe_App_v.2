@@ -1,4 +1,5 @@
 <Alloy>
+	<!-- iOS picker view including a toolbar and a picker -->
 	<View platform="ios" id="pickerView" height="Ti.UI.SIZE" width="Ti.UI.SIZE" bottom="0" layout="vertical" visible="false" >
 		
 		<Toolbar>
@@ -10,7 +11,7 @@
 			
 		</Toolbar>
 		
-		<!-- TODO: add animation -->
+		<!-- TODO: add animation for iOS -->
 		<Picker id="picker">
 			
 			<PickerRow title="public" />
@@ -19,5 +20,28 @@
 			<PickerRow title="onlyMe" />
 			
 		</Picker>
+		
 	</View>
+	
+	
+	
+	<!-- Android non-native picker that that looks and behaves like the iOS picker by applying userSpinner=true -->
+	<View platform="android" id="pickerView" height="Ti.UI.SIZE" width="Ti.UI.SIZE" layout="vertical" visible="false" >
+		
+		<View id="transparentView1" opacity="0.4" height="25%" backgroundColor="black" />
+		
+		<Picker id="picker" useSpinner="true">
+			
+			<PickerRow title="public" />
+			<PickerRow title="friends" />
+			<PickerRow title="favorites" />
+			<PickerRow title="onlyMe" />
+			<PickerRow title="                                             " />
+		
+		</Picker>
+		
+		<View id="transparentView2" opacity="0.4" height="60%" backgroundColor="black" />	
+		
+	</View>
+	
 </Alloy>

@@ -1,19 +1,24 @@
-Ti.include("/userDataProcessing.js");
+Ti.include("/userDataProcessing.js");	// Including userDataProcessing APIs
 
-var args = arguments[0] || {};	// TODO: Not used
-
-//////////////////////////////////////////////////////////////////////////////////////// LOGIC
+//////////////////////////////////////////////////////////////////////////////////////// INITIALIZING VARIABLES
 // Initialize userDataInArrays here as this is the first required view
 userDataInArrays = convertAddableFieldsToArrays(userData); // Convert the addable fields into arrays	// userDataProcessing.js
 
-// TODO: Remaining Shit
-// TODO: Add new row to the end of the fields' rows
+var addNewRow = false;	// Used to flag that the add button was clicked
+var addableTextOldValue = "";	// Used to know the old field's value when focused before editing, to get its index in array
+var clickedPrivacyLabel;	// Used to save the label that was clicked to edit it when the picker's value changes
+var privacyIndex = { public:0, friends:1, favorites:2, onlyMe:3 };	// Used to update the picker selected row with current privacy
+var clickedTextField;	// Used to save the clicked text field, to be able to blur its keybaord
+if(OS_ANDROID) var androidDeleteRowFlag = false;	// Used to flag that remove icon was pressed for android
+
 // TODO: Handle changing the primary phone number
 // TODO: Handle skype name and BBM pin number
 // TODO: Replace TextFields with Labels for Android
+// TODO: Add an alert dialog to confirm deleting
+// TODO: Put Android Edit View in an xml alone and require it
+// TODO: Replace non-native android picker with the native one
 
-//////////////////////////////////////////////////////////////////////////////////////// END OF LOGIC
-
+//////////////////////////////////////////////////////////////////////////////////////// END OF INITIALIZING VARIABLES
 
 //////////////////////////////////////////////////////////////////////////////////////// DISPLAY USER DATA
 // Loop over the table view children to bind data
@@ -29,10 +34,13 @@ for(var i = 0; i < rows.length; i ++) { 	// Loop over the table view rows
 			
 			case 'primary_mobile_privacy':
 			case 'primary_email_privacy':
+				// If iOS, change the label's text; android, change picker's selected row 
 				children[j].text = userData[children[j].id];
+				//else children[j].setSelectedRow(0, privacyIndex[userData[children[j].id]]);
 		}
 	}
 }
+
 
 // Loop over the user emails
 for(var i = userDataInArrays.mails.length - 1; i >= 0; i--) {
@@ -68,13 +76,6 @@ function createBindingRowData(fieldValue, privacy, isPhone) {
 
 //////////////////////////////////////////////////////////////////////////////////////// EVENT LISTENRES
 
-var addNewRow = false;	// Used to flag that the add button was clicked
-var addableTextOldValue = "";	// Used to know the old field's value when focused before editing, to get its index in array
-var clickedPrivacyLabel;	// Used to save the label that was clicked to edit it when the picker's value changes
-var privacyIndex = { public:0, friends:1, favorites:2, onlyMe:3 };	// Used to update the picker selected row with current privacy
-var clickedTextField;	// Used to save the clicked text field, to be able to blur its keybaord
-if(OS_ANDROID) var androidDeleteRowFlag = false;	// Used to flag that remove icon was pressed for android
-
 // Event listener for clicking the add row button that turns the flag to true
 function AddRowButtonClicked() {
 	addNewRow = true;
@@ -104,7 +105,6 @@ function TableViewRowClicked(e) {
 
 // Event listener for deleting any row of the table view
 function DeletePressed(e) {
-	// TODO: Add an alert dialog to confirm deleting
 	deleteAddableField(userDataInArrays, e.source.fieldType, e.source.fieldValue);	// userDataProcessing.js
 }
 
@@ -124,7 +124,7 @@ function TextFieldFocused(e) {
 		$.fieldValue.value = e.source.value;
 		$.fieldValue.keyboardType = e.source.keyboardType;
 	}
-	else if(OS_IOS && clickedPrivacyLabel) $.pickerContainer.btn_toolBarDone.fireEvent("click");
+	else if(OS_IOS && clickedPrivacyLabel) DismissPicker();
 	
 	if(e.source.fieldType) addableTextOldValue = e.source.value;
 	clickedTextField = e.source;
@@ -134,11 +134,6 @@ function TextFieldFocused(e) {
 // Event listener for android work around that 
 function AndroidEditViewTextChanged(e) {
 	clickedTextField.value = $.fieldValue.value;
-}
-
-// Event listener that hide android edit view, fired when the low opacity views are clicked
-function AndroidEditViewBlur() {
-	$.androidEditView.visible = false;
 }
 
 // Event listener for text change in non addable fields
@@ -155,15 +150,41 @@ function AddableTextChanged(e) {
 // Event listener for clicking on the privacy label, it shows the privacy picker
 function PrivacyLabelClicked(e) {
 	DismissKeyboardClicked();
-	// TODO: Handle ios picker and undo commenting next 2 lines
-	//$.pickerContainer.pickerView.visible = true;
-	//$.pickerContainer.picker.setSelectedRow(0, privacyIndex[e.source.text], { animated: true });
+	$.pickerContainer.pickerView.visible = true;
+	$.pickerContainer.picker.setSelectedRow(0, privacyIndex[e.source.text], { animated: true });
 	clickedPrivacyLabel = e.source;
+}
+
+// Event listener that handles changing the selected privacy from the picker
+function SelectedPrivacyChanged(e) {
+	// Change the user's data privacy on change of the picker's rows
+	var newPrivacy = $.pickerContainer.picker.getSelectedRow(0).title;
+	if(OS_ANDROID && newPrivacy == "                                             ") {
+		$.pickerContainer.picker.setSelectedRow(0, 3);
+		var newPrivacy = $.pickerContainer.picker.getSelectedRow(0).title;
+	}
+	
+	if(clickedPrivacyLabel.id) // Non addable field
+		changePrivacyOfNonAddableField(userDataInArrays, clickedPrivacyLabel.id, newPrivacy);	// userDataProcessing.js
+	else changePrivacyOfAddableField(userDataInArrays, clickedPrivacyLabel.fieldType, clickedPrivacyLabel.text, newPrivacy);	// userDataProcessing.js
+		
+	clickedPrivacyLabel.text = newPrivacy; 	// Apply this change to the privacy label's text
+}
+
+// Event listener that hide android edit view, fired when the low opacity views are clicked
+function AndroidEditViewBlur() {
+	$.androidEditView.visible = false;
 }
 
 // An event listener that listens to Done button in decimal pad toolbar to dismiss it on ios
 function DismissKeyboardClicked() {
 	if(clickedTextField) clickedTextField.blur();
+}
+
+// An event listener that dismisses the picker wether on iOS or android
+function DismissPicker() {
+	// Just dismiss the picker
+	$.pickerContainer.pickerView.visible = false;
 }
 //////////////////////////////////////////////////////////////////////////////////////// END OF EVENT LISTENRES
 
@@ -223,20 +244,13 @@ function addNewRowAfter(data, rowNum) {
 
 
 //////////////////////////////////////////////////////////////////////////////////////// PICKER EVENT LISTENERS
-if(OS_IOS) {
-	$.pickerContainer.picker.addEventListener("change", function(e) {
-		// Change the user's data privacy on change of the picker's rows
-		var newPrivacy = $.pickerContainer.picker.getSelectedRow(0).title;
-		
-		if(clickedPrivacyLabel.id) // Non addable field
-			changePrivacyOfNonAddableField(userDataInArrays, clickedPrivacyLabel.id, newPrivacy);	// userDataProcessing.js
-		else changePrivacyOfAddableField(userDataInArrays, clickedPrivacyLabel.fieldType, clickedPrivacyLabel.text, newPrivacy);	// userDataProcessing.js
-			
-		clickedPrivacyLabel.text = newPrivacy;
-	});
-	$.pickerContainer.btn_toolBarDone.addEventListener("click", function() {
-		// Just dismiss the picker
-		$.pickerContainer.pickerView.visible = false;
-	});
+// Adding chnage event listener to picker which handles the change of the selected privacy for both platforms
+$.pickerContainer.picker.addEventListener("change", SelectedPrivacyChanged);
+
+// Adding event listeners to dismiss the picker; on toolbar's done button for iOS, and of the transparent views for android
+if(OS_IOS) $.pickerContainer.btn_toolBarDone.addEventListener("click", DismissPicker);
+else if(OS_ANDROID) {
+	$.pickerContainer.transparentView1.addEventListener("click", DismissPicker);
+	$.pickerContainer.transparentView2.addEventListener("click", DismissPicker);
 }
 //////////////////////////////////////////////////////////////////////////////////////// END OF PICKER EVENT LISTENERS

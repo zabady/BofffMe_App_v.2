@@ -39,6 +39,7 @@
 					    </Toolbar>
 					</KeyboardToolbar>
 				</TextField>
+				
 				<Label id="primary_mobile_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
 				
 			</TableViewRow>
@@ -60,7 +61,9 @@
 				<TextField id="primary_email" class="fieldText" hintText="Email address" 
 					onChange="NonAddableTextChanged" onFocus="TextFieldFocused" 
 					keyboardType="Ti.UI.KEYBOARD_EMAIL" />
+					
 				<Label id="primary_email_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
+				
 			</TableViewRow>
 			
 			
@@ -88,7 +91,8 @@
 		</TableView>
 		
 		
-		<View id="androidEditView" platform="android" visible="false" height="100%" layout="vertical">
+		<!-- Android editing fields view -->
+		<View platform="android" id="androidEditView" visible="false" height="100%" layout="vertical">
 			<View opacity="0.4" onClick="AndroidEditViewBlur" height="25%" backgroundColor="black" />
 			
 			<View layout="vertical" backgroundColor="#58c8f3" height="Ti.UI.SIZE"
@@ -102,6 +106,7 @@
 			<View opacity="0.4" onClick="AndroidEditViewBlur" height="60%" backgroundColor="black" />
 		</View>
 		
-		<Require platform="ios" id="pickerContainer" src="Settings/EditProfile/privacyPicker" type="view"></Require>
+		<!-- Requiring picker view for both platforms -->
+		<Require id="pickerContainer" src="Settings/EditProfile/privacyPicker" type="view" />
 	
 </Alloy>
