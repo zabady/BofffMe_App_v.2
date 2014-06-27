@@ -26,18 +26,28 @@ function saveUpdate(contact)
 }
 function addNumber(id,key,value)
 {
-	var contact=Titanium.Contacts.getPersonByID(id);
-	var phone= contact.phone;
-	try
+	// var contacts=Titanium.Contacts.getPeopleWithName("Zabady");
+	// for(var contact in contacts) {
+		// alert(contacts[contact].fullName);
+	// }
+	if(OS_IOS)
 	{
-	    phone[key].push(value);
+		var contact=Titanium.Contacts.getPersonByID(id);
+		var phone= contact.phone;
+		try
+		{
+		    phone[key].push(value);
+		}
+		catch(error)
+		{
+			phone[key]=[value];
+		}
+		contact.phone=phone;
+		saveUpdate(contact);
 	}
-	catch(error)
-	{
-		phone[key]=[value];
-	}
-	contact.phone=phone;
-	saveUpdate(contact);
+	else
+	alert("ana android mesh hayemfa3");
+	//TODO: Find a workaround for android _|_
 }
 function deleteNumber(id,value)
 {
@@ -728,7 +738,7 @@ function parsingUpdateString(updateString,addOrDelete,userFriendAppId,bofffsSpec
 }
 //TODO:remove alerts and put the action to do instead
 // This is where the contacts data are changed on the user's phonebook
-function determineUpdateType(fieldType,stringObjects,addOrDelete,userFriendAppId,bofffsSpecificData,bofffsData)
+function determineUpdateType_alerts(fieldType,stringObjects,addOrDelete,userFriendAppId,bofffsSpecificData,bofffsData)
 {
 	alert("fieldType: "+fieldType
 	+"\n+addOrDelete: "+addOrDelete+
@@ -771,6 +781,94 @@ function determineUpdateType(fieldType,stringObjects,addOrDelete,userFriendAppId
 			case 'company':
 			{
 				alert('company: '+stringObjects[fieldType]);
+				break;
+			}
+			default:
+			{
+				alert("no known");
+				break;
+			}
+		}
+}
+
+function determineUpdateType(fieldType,stringObjects,addOrDelete,userFriendAppId,bofffsSpecificData,bofffsData)
+{
+	
+	switch(fieldType)
+		{
+			case 'phone_number':
+			{
+				if(addOrDelete=="add")
+				{
+					addNumber(bofffsData[userFriendAppId].contact_id,"mobile",stringObjects[fieldType]);
+				}
+				else
+					deleteNumber(bofffsData[userFriendAppId].contact_id,stringObjects[fieldType]);
+				//alert('phone: '+ stringObjects[fieldType]);
+				break;
+			}
+			case 'mails':
+			{
+				if(addOrDelete=="add")
+				{
+					addEmail(bofffsData[userFriendAppId].contact_id,"work",stringObjects[fieldType]);
+				}
+				else
+					deleteEmail(bofffsData[userFriendAppId].contact_id,stringObjects[fieldType]);
+				
+				//alert('mails: '+stringObjects[fieldType]);
+				break;
+			}
+			case 'social_links':
+			{
+				if(addOrDelete=="add")
+				{
+					addSocialLink(bofffsData[userFriendAppId].contact_id,"home",stringObjects[fieldType]);
+				}
+				else
+					deleteSocialLink(bofffsData[userFriendAppId].contact_id,stringObjects[fieldType]);
+				//alert('sociallinks: '+stringObjects[fieldType]);
+				break;
+			}
+			case 'residence':
+			{
+				if(addOrDelete=="add")
+				{
+					//TODO: residence
+					//addAddress()
+					alert("residence is incomplete");
+				}
+			
+				alert('residence: '+stringObjects[fieldType]);
+				break;
+			}
+			case 'job_title':
+			{
+				if(addOrDelete=="add")
+				{
+					addJobTitle(bofffsData[userFriendAppId].contact_id,stringObjects[fieldType]);
+				}
+				
+				//alert('jobtitle: '+stringObjects[fieldType]);
+				break;
+			}
+			case 'birthday_date':
+			{
+				if(addOrDelete=="add")
+				{
+					addBirthday(bofffsData[userFriendAppId].contact_id,stringObjects[fieldType]);
+				}
+				
+				//alert('birthdate: '+stringObjects[fieldType]);
+				break;
+			}
+			case 'company':
+			{
+				if(addOrDelete=="add")
+				{
+					addCompany(bofffsData[userFriendAppId].contact_id,stringObjects[fieldType]);
+				}
+				//alert('company: '+stringObjects[fieldType]);
 				break;
 			}
 			default:

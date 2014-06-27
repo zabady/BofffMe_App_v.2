@@ -35,7 +35,7 @@ function Controller() {
         },
         color: "#2279bc",
         height: "10%",
-        top: "5%",
+        top: "8%",
         text: "Settings",
         id: "__alloyId19"
     });
@@ -154,7 +154,7 @@ function Controller() {
     });
     $.__views.__alloyId34.add($.__views.__alloyId35);
     $.__views.__alloyId20 = Ti.UI.createTableView({
-        top: "20%",
+        top: "23%",
         rowHeight: 60,
         height: Ti.UI.SIZE,
         data: __alloyId21,

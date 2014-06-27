@@ -4,15 +4,7 @@ function saveUpdate(contact) {
 }
 
 function addNumber(id, key, value) {
-    var contact = Titanium.Contacts.getPersonByID(id);
-    var phone = contact.phone;
-    try {
-        phone[key].push(value);
-    } catch (error) {
-        phone[key] = [ value ];
-    }
-    contact.phone = phone;
-    saveUpdate(contact);
+    alert("ana android mesh hayemfa3");
 }
 
 function deleteNumber(id, value) {
@@ -511,7 +503,8 @@ function parsingUpdateString(updateString, addOrDelete, userFriendAppId, bofffsS
     }
 }
 
-function determineUpdateType(fieldType, stringObjects) {
+function determineUpdateType_alerts(fieldType, stringObjects, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData) {
+    alert("fieldType: " + fieldType + "\n+addOrDelete: " + addOrDelete + "\n+userFriendAppId: " + userFriendAppId + "\n+bofffsSpecificData: " + bofffsSpecificData + "\n+bofffsData: " + bofffsData);
     switch (fieldType) {
       case "phone_number":
         alert("phone: " + stringObjects[fieldType]);
@@ -539,6 +532,42 @@ function determineUpdateType(fieldType, stringObjects) {
 
       case "company":
         alert("company: " + stringObjects[fieldType]);
+        break;
+
+      default:
+        alert("no known");
+    }
+}
+
+function determineUpdateType(fieldType, stringObjects, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData) {
+    switch (fieldType) {
+      case "phone_number":
+        "add" == addOrDelete ? addNumber(bofffsData[userFriendAppId].contact_id, "mobile", stringObjects[fieldType]) : deleteNumber(bofffsData[userFriendAppId].contact_id, stringObjects[fieldType]);
+        break;
+
+      case "mails":
+        "add" == addOrDelete ? addEmail(bofffsData[userFriendAppId].contact_id, "work", stringObjects[fieldType]) : deleteEmail(bofffsData[userFriendAppId].contact_id, stringObjects[fieldType]);
+        break;
+
+      case "social_links":
+        "add" == addOrDelete ? addSocialLink(bofffsData[userFriendAppId].contact_id, "home", stringObjects[fieldType]) : deleteSocialLink(bofffsData[userFriendAppId].contact_id, stringObjects[fieldType]);
+        break;
+
+      case "residence":
+        "add" == addOrDelete && alert("residence is incomplete");
+        alert("residence: " + stringObjects[fieldType]);
+        break;
+
+      case "job_title":
+        "add" == addOrDelete && addJobTitle(bofffsData[userFriendAppId].contact_id, stringObjects[fieldType]);
+        break;
+
+      case "birthday_date":
+        "add" == addOrDelete && addBirthday(bofffsData[userFriendAppId].contact_id, stringObjects[fieldType]);
+        break;
+
+      case "company":
+        "add" == addOrDelete && addCompany(bofffsData[userFriendAppId].contact_id, stringObjects[fieldType]);
         break;
 
       default:
