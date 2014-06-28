@@ -473,8 +473,11 @@ function addUpdatesToFriends(dataAdded, dataDeleted, friendsToSendAdded, friends
 
 function applyUpdatesOfFriend(friend_pin, bofffsList, bofffsData) {
 <<<<<<< HEAD
+<<<<<<< HEAD
     Ti.API.info("applyUpdatesOfFriend: " + friend_pin);
     Ti.include("/applyUpdatesToPhonebook.js");
+=======
+>>>>>>> parent of dfc29e3... contacsUpdate: Overriding Zeezo's code
 =======
 >>>>>>> parent of dfc29e3... contacsUpdate: Overriding Zeezo's code
     for (var record in bofffsList) if (bofffsList[record].friend_pin_code == friend_pin) {
@@ -512,8 +515,11 @@ function deleteUpdatesOffriend(friendId) {
 
 function parsingUpdateString(updateString, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData) {
 <<<<<<< HEAD
+<<<<<<< HEAD
     Ti.API.info("parsingUpdateString");
     InitializeContact(bofffsData[userFriendAppId].contact_id);
+=======
+>>>>>>> parent of dfc29e3... contacsUpdate: Overriding Zeezo's code
 =======
 >>>>>>> parent of dfc29e3... contacsUpdate: Overriding Zeezo's code
     var stringLines = updateString.split("\n");
