@@ -457,6 +457,7 @@ function Controller() {
     $.__views.pickerContainer && $.addTopLevelView($.__views.pickerContainer);
     exports.destroy = function() {};
     _.extend($, $.__views);
+    Ti.include("/userDataProcessing.js");
     userDataInArrays = convertAddableFieldsToArrays(userData);
     var addNewRow = false;
     var addableTextOldValue = "";
