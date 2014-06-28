@@ -593,3 +593,6 @@ function createVisibleData(privacyOfBofff,friendData)
 	//alert(visibleData);
 	Alloy.Globals.openNavigationWindow(Alloy.createController('Contacts/bofffProfileWin', visibleData).getView(), true);
 }
+
+
+

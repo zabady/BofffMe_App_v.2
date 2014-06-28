@@ -1,8 +1,3 @@
-/*
- * This file contained 900+ lines of code
- * After optimization it's --> 688 + 171 (applyUpdatesToPhonebook.js) = 859
- */
-
 /*This file contains functions to update the user friends' data in his contact list
  Functions include:
  - saveUpdate(contact)
@@ -16,12 +11,6 @@
  - updateNote(id,note)
  - updateAddress(id,key,street,city,country)
  */
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-=======
->>>>>>> parent of dfc29e3... contacsUpdate: Overriding Zeezo's code
 function saveUpdate(contact)
 {
 	if(OS_ANDROID)
@@ -60,10 +49,6 @@ function addNumber(id,key,value)
 	alert("ana android mesh hayemfa3");
 	//TODO: Find a workaround for android _|_
 }
-<<<<<<< HEAD
->>>>>>> parent of dfc29e3... contacsUpdate: Overriding Zeezo's code
-=======
->>>>>>> parent of dfc29e3... contacsUpdate: Overriding Zeezo's code
 function deleteNumber(id,value)
 {
 	var contact=Titanium.Contacts.getPersonByID(id);
@@ -107,8 +92,6 @@ function deleteNumber(id,value)
 	saveUpdate(contact);
 }
 
-<<<<<<< HEAD
-=======
 function addNickname(id,bofffFullName)
 {
 	var contact=Titanium.Contacts.getPersonByID(id);
@@ -140,10 +123,6 @@ function addEmail(id,key,value)
 	 contact.email=email;
 	 saveUpdate(contact);
 }
-<<<<<<< HEAD
->>>>>>> parent of dfc29e3... contacsUpdate: Overriding Zeezo's code
-=======
->>>>>>> parent of dfc29e3... contacsUpdate: Overriding Zeezo's code
 function deleteEmail(id,value)
 {
 	var contact=Titanium.Contacts.getPersonByID(id);
@@ -169,11 +148,6 @@ function deleteEmail(id,value)
 	contact.email=emailAfterDeletion;
 	saveUpdate(contact);
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of dfc29e3... contacsUpdate: Overriding Zeezo's code
 function addSocialLink(id,key,value)
 {
 	var contact=Titanium.Contacts.getPersonByID(id);
@@ -189,7 +163,6 @@ function addSocialLink(id,key,value)
 	contact.url=url;
 	saveUpdate(contact);
 }
->>>>>>> parent of dfc29e3... contacsUpdate: Overriding Zeezo's code
 
 function deleteSocialLink(id,value)
 {
@@ -218,11 +191,6 @@ function deleteSocialLink(id,value)
 	contact.url=urlAfterDeletion;
 	saveUpdate(contact);
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of dfc29e3... contacsUpdate: Overriding Zeezo's code
 //IOS_ONLY
 function addJobTitle(id,jobTitle)
 {
@@ -251,10 +219,6 @@ function addNote(id,note)
 	contact.note=note;
 	saveUpdate(contact);
 }
-<<<<<<< HEAD
->>>>>>> parent of dfc29e3... contacsUpdate: Overriding Zeezo's code
-=======
->>>>>>> parent of dfc29e3... contacsUpdate: Overriding Zeezo's code
 
 function addAddress(id,key,street,city,country)
 {
@@ -712,31 +676,8 @@ function addUpdatesToFriends(dataAdded,dataDeleted,friendsToSendAdded,friendsToS
 	xhr.send(params);  
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-//////////////////////////////////////////////////////////////////////////////////////////// START OF APPLYING UPDATES TO PHONEBOOK
-function applyUpdatesOfFriend(friend_pin, bofffsList, bofffsData)
-{
-	Ti.API.info("applyUpdatesOfFriend: " + friend_pin);
-	
-	Ti.include("/applyUpdatesToPhonebook.js");
-	
-	// Get the required friend
-	// Get the Added Updates string
-	// Parse added update string
-	// Get Deleted Updates string
-	// Parse deleted updates string
-	// Delete both added and deleted updates from server
-	
-	// Loop over all bofffs List (friends) untill the required pin is found
-=======
 function applyUpdatesOfFriend(friend_pin,bofffsList,bofffsData)
 {
->>>>>>> parent of dfc29e3... contacsUpdate: Overriding Zeezo's code
-=======
-function applyUpdatesOfFriend(friend_pin,bofffsList,bofffsData)
-{
->>>>>>> parent of dfc29e3... contacsUpdate: Overriding Zeezo's code
 	for(var record in bofffsList)
 	{
 		if(bofffsList[record].friend_pin_code==friend_pin)
@@ -782,59 +723,18 @@ function deleteUpdatesOffriend(friendId)
 }
 function parsingUpdateString(updateString,addOrDelete,userFriendAppId,bofffsSpecificData,bofffsData)
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-	Ti.API.info("parsingUpdateString");
-	
-	// Initialize Contact
-	// Get the updates
-	// Determine each update's type and apply it
-	// Save contact to phonebook
-	
-	InitializeContact(bofffsData[userFriendAppId].contact_id);
-	
-	// Get the updates
-	var stringLines = updateString.split("\n");
-	var stringObjects = {};
-=======
 	var stringLines=updateString.split("\n");
 	var stringObjects= {};
->>>>>>> parent of dfc29e3... contacsUpdate: Overriding Zeezo's code
-=======
-	var stringLines=updateString.split("\n");
-	var stringObjects= {};
->>>>>>> parent of dfc29e3... contacsUpdate: Overriding Zeezo's code
 	for(var line in stringLines)
 	{
 		if(stringLines[line]!="")
 		{
-<<<<<<< HEAD
-<<<<<<< HEAD
-			var stringColon = stringLines[line].split(Alloy.Globals.splitValue);
-			stringObjects[stringColon[0]] = stringColon[1];
-			// Determine each update's type and apply it
-			if(addOrDelete == "add")
-				determineAndApplyUpdate(stringColon[0], stringObjects, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData);
-			else alert("It's a delete !");
-		}
-	}
-	
-	SaveUpdatedContactToPhonebook();
-=======
 			var stringColon=stringLines[line].split(Alloy.Globals.splitValue);
 			stringObjects[stringColon[0]]=stringColon[1];
 			determineUpdateType(stringColon[0],stringObjects,addOrDelete,userFriendAppId,bofffsSpecificData,bofffsData);
 		}
 	}
 	
-=======
-			var stringColon=stringLines[line].split(Alloy.Globals.splitValue);
-			stringObjects[stringColon[0]]=stringColon[1];
-			determineUpdateType(stringColon[0],stringObjects,addOrDelete,userFriendAppId,bofffsSpecificData,bofffsData);
-		}
-	}
-	
->>>>>>> parent of dfc29e3... contacsUpdate: Overriding Zeezo's code
 }
 //TODO:remove alerts and put the action to do instead
 // This is where the contacts data are changed on the user's phonebook
@@ -977,7 +877,6 @@ function determineUpdateType(fieldType,stringObjects,addOrDelete,userFriendAppId
 				break;
 			}
 		}
->>>>>>> parent of dfc29e3... contacsUpdate: Overriding Zeezo's code
 }
  // TODO: De msh bel tarteeb 3shan zeez myz3alsh
 function updateBofff(pin, userData, newData, bofffsSpecificData)
