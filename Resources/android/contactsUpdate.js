@@ -1,13 +1,5 @@
-function saveUpdate(contact) {
-    Titanium.Contacts.save([ contact ]);
-    alert("contact updated");
-}
-
-function addNumber(id, key, value) {
-    alert("ana android mesh hayemfa3");
-}
-
 function deleteNumber(id, value) {
+    Ti.API.info("deleteNumber");
     var contact = Titanium.Contacts.getPersonByID(id);
     var phone = contact.phone;
     var phoneAfterDeletion = {};
@@ -26,27 +18,8 @@ function deleteNumber(id, value) {
     saveUpdate(contact);
 }
 
-function addNickname(id, bofffFullName) {
-    var contact = Titanium.Contacts.getPersonByID(id);
-    var nickname = contact.nickname;
-    0 == nickname.length ? nickname = "Bofff Name: " + bofffFullName : nickname += "\nBofff Name: " + bofffFullName;
-    contact.setNickname(nickname);
-    saveUpdate(contact);
-}
-
-function addEmail(id, key, value) {
-    var contact = Titanium.Contacts.getPersonByID(id);
-    var email = contact.email;
-    try {
-        email[key].push(value);
-    } catch (error) {
-        email[key] = [ value ];
-    }
-    contact.email = email;
-    saveUpdate(contact);
-}
-
 function deleteEmail(id, value) {
+    Ti.API.info("deleteEmail");
     var contact = Titanium.Contacts.getPersonByID(id);
     var email = contact.email;
     var emailAfterDeletion = {};
@@ -59,19 +32,8 @@ function deleteEmail(id, value) {
     saveUpdate(contact);
 }
 
-function addSocialLink(id, key, value) {
-    var contact = Titanium.Contacts.getPersonByID(id);
-    var url = contact.url;
-    try {
-        url[key].push(value);
-    } catch (error) {
-        url[key] = [ value ];
-    }
-    contact.url = url;
-    saveUpdate(contact);
-}
-
 function deleteSocialLink(id, value) {
+    Ti.API.info("deleteSocialLink");
     value = value.replace("http://", "");
     var contact = Titanium.Contacts.getPersonByID(id);
     var url = contact.url;
@@ -88,31 +50,8 @@ function deleteSocialLink(id, value) {
     saveUpdate(contact);
 }
 
-function addJobTitle(id, jobTitle) {
-    var contact = Titanium.Contacts.getPersonByID(id);
-    contact.jobTitle = jobTitle;
-    saveUpdate(contact);
-}
-
-function addCompany(id, company) {
-    var contact = Titanium.Contacts.getPersonByID(id);
-    contact.organization = company;
-    saveUpdate(contact);
-}
-
-function addBirthday(id, birthday) {
-    var contact = Titanium.Contacts.getPersonByID(id);
-    contact.birthday = birthday;
-    saveUpdate(contact);
-}
-
-function addNote(id, note) {
-    var contact = Titanium.Contacts.getPersonByID(id);
-    contact.note = note;
-    saveUpdate(contact);
-}
-
 function addAddress(id, key, street, city, country) {
+    Ti.API.info("addAddress");
     var contact = Titanium.Contacts.getPersonByID(id);
     var address = contact.address;
     var value = new Array();
@@ -129,6 +68,7 @@ function addAddress(id, key, street, city, country) {
 }
 
 function checkFullNameUpdate(userData, newUserData, fullNameObject) {
+    Ti.API.info("checkFullNameUpdate");
     var fullName = newUserData.fullName;
     if (userData.fullName != fullName) {
         fullNameObject.name = fullName;
@@ -138,6 +78,7 @@ function checkFullNameUpdate(userData, newUserData, fullNameObject) {
 }
 
 function checkGender(userData, newUserData, genderObject) {
+    Ti.API.info("checkGender");
     var gender = newUserData.gender;
     if (userData.gender != gender) {
         genderObject.gender = gender;
@@ -147,6 +88,7 @@ function checkGender(userData, newUserData, genderObject) {
 }
 
 function checkPhoneNumbersUpdate(userData, newUserData, phoneNumbersObject) {
+    Ti.API.info("checkPhoneNumbersUpdate");
     var phoneNumbers = newUserData.phone_numbers;
     if (userData.phone_numbers != phoneNumbers) {
         var currentNumbers = userData.phone_numbers.split(Alloy.Globals.splitValue);
@@ -171,6 +113,7 @@ function checkPhoneNumbersUpdate(userData, newUserData, phoneNumbersObject) {
 }
 
 function checkMailsUpdate(userData, newUserData, mailsObject) {
+    Ti.API.info("checkMailsUpdate");
     var mails = newUserData.mails;
     if (userData.mails != mails) {
         var currentMails = userData.mails.split(Alloy.Globals.splitValue);
@@ -195,6 +138,7 @@ function checkMailsUpdate(userData, newUserData, mailsObject) {
 }
 
 function checkSocialLinksUpdate(userData, newUserData, socialLinksObject) {
+    Ti.API.info("checkSocialLinksUpdate");
     var socialLinks = newUserData.social_links;
     if (userData.social_links != socialLinks) {
         var currentSocialLinks = userData.social_links.split(Alloy.Globals.splitValue);
@@ -219,6 +163,7 @@ function checkSocialLinksUpdate(userData, newUserData, socialLinksObject) {
 }
 
 function checkResidenceUpdate(userData, newUserData, residenceObject) {
+    Ti.API.info("checkResidenceUpdate");
     var residences = newUserData.residence;
     if (userData.residence != residences) {
         residenceObject.residences = residences;
@@ -228,6 +173,7 @@ function checkResidenceUpdate(userData, newUserData, residenceObject) {
 }
 
 function checkJobTitleUpdate(userData, newUserData, jobTitleObject) {
+    Ti.API.info("checkJobTitleUpdate");
     var jobTitle = newUserData.job_title;
     if (userData.job_title != jobTitle) {
         jobTitleObject.title = jobTitle;
@@ -237,6 +183,7 @@ function checkJobTitleUpdate(userData, newUserData, jobTitleObject) {
 }
 
 function checkBirthdayUpdate(userData, newUserData, birthdayObject) {
+    Ti.API.info("checkBirthdayUpdate");
     var birthday = newUserData.birthday_date;
     if (userData.birthday_date != birthday) {
         birthdayObject.date = birthday;
@@ -246,6 +193,7 @@ function checkBirthdayUpdate(userData, newUserData, birthdayObject) {
 }
 
 function checkCompanyUpdate(userData, newUserData, companyObject) {
+    Ti.API.info("checkCompanyUpdate");
     var company = newUserData.company;
     if (userData.company != company) {
         companyObject.company = company;
@@ -255,6 +203,7 @@ function checkCompanyUpdate(userData, newUserData, companyObject) {
 }
 
 function manageUserUpdates(oldUserData, pin, bofffsSpecificData) {
+    Ti.API.info("manageUserUpdates");
     var url = "http://www.bofffme.com/api/index.php/home/";
     var xhr = Ti.Network.createHTTPClient({
         onload: function() {
@@ -270,6 +219,7 @@ function manageUserUpdates(oldUserData, pin, bofffsSpecificData) {
 }
 
 function createUpdateString(userData, newData, userPin, bofffsSpecificData) {
+    Ti.API.info("createUpdateString");
     var added = [];
     var deleted = [];
     var friendsToSendAdded = [];
@@ -422,6 +372,7 @@ function createUpdateString(userData, newData, userPin, bofffsSpecificData) {
 }
 
 function checkPrivacySettings(fieldToUpdate, fieldPrivacy, valueOfField, newUserData, bofffsSpecificData, friendsToSendTo) {
+    Ti.API.info("checkPrivacySettings");
     var privacyNumber = {
         "public": 0,
         "not favorite": 1,
@@ -440,6 +391,7 @@ function checkPrivacySettings(fieldToUpdate, fieldPrivacy, valueOfField, newUser
 }
 
 function addUpdatesToFriends(dataAdded, dataDeleted, friendsToSendAdded, friendsToSendDeleted, userPin) {
+    Ti.API.info("addUpdatesToFriends");
     var url = "http://www.bofffme.com/api/index.php/home/";
     var xhr = Ti.Network.createHTTPClient({
         onload: function() {
@@ -460,10 +412,11 @@ function addUpdatesToFriends(dataAdded, dataDeleted, friendsToSendAdded, friends
 }
 
 function applyUpdatesOfFriend(friend_pin, bofffsList, bofffsData) {
+    Ti.API.info("applyUpdatesOfFriend: " + friend_pin);
+    Ti.include("/applyUpdatesToPhonebook.js");
     for (var record in bofffsList) if (bofffsList[record].friend_pin_code == friend_pin) {
         var stringToUpdate = bofffsList[record].friend_added_data;
         if ("" != stringToUpdate) {
-            deleteUpdatesOffriend(bofffsList[record].id);
             parsingUpdateString(stringToUpdate, "add", record, bofffsList, bofffsData);
             bofffsList[record].friend_added_data = "";
         }
@@ -472,10 +425,12 @@ function applyUpdatesOfFriend(friend_pin, bofffsList, bofffsData) {
             parsingUpdateString(stringToUpdate, "delete", record, bofffsList, bofffsData);
             bofffsList[record].friend_deleted_data = "";
         }
+        deleteUpdatesOffriend(bofffsList[record].id);
     }
 }
 
 function deleteUpdatesOffriend(friendId) {
+    Ti.API.info("deleteUpdatesOffriend");
     var url = "http://www.bofffme.com/api/index.php/home/";
     var xhr = Ti.Network.createHTTPClient({
         onload: function() {
@@ -486,96 +441,23 @@ function deleteUpdatesOffriend(friendId) {
         }
     });
     xhr.open("POST", url + "update_with_id/bofff/user_friends/" + friendId);
-    var params = {
-        friend_added_data: "",
-        friend_deleted_data: ""
-    };
-    xhr.send(params);
 }
 
 function parsingUpdateString(updateString, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData) {
+    Ti.API.info("parsingUpdateString");
+    InitializeContact(bofffsData[userFriendAppId].contact_id);
     var stringLines = updateString.split("\n");
     var stringObjects = {};
     for (var line in stringLines) if ("" != stringLines[line]) {
         var stringColon = stringLines[line].split(Alloy.Globals.splitValue);
         stringObjects[stringColon[0]] = stringColon[1];
-        determineUpdateType(stringColon[0], stringObjects, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData);
+        "add" == addOrDelete ? determineAndApplyUpdate(stringColon[0], stringObjects, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData) : alert("It's a delete !");
     }
-}
-
-function determineUpdateType_alerts(fieldType, stringObjects, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData) {
-    alert("fieldType: " + fieldType + "\n+addOrDelete: " + addOrDelete + "\n+userFriendAppId: " + userFriendAppId + "\n+bofffsSpecificData: " + bofffsSpecificData + "\n+bofffsData: " + bofffsData);
-    switch (fieldType) {
-      case "phone_number":
-        alert("phone: " + stringObjects[fieldType]);
-        break;
-
-      case "mails":
-        alert("mails: " + stringObjects[fieldType]);
-        break;
-
-      case "social_links":
-        alert("sociallinks: " + stringObjects[fieldType]);
-        break;
-
-      case "residence":
-        alert("residence: " + stringObjects[fieldType]);
-        break;
-
-      case "job_title":
-        alert("jobtitle: " + stringObjects[fieldType]);
-        break;
-
-      case "birthday_date":
-        alert("birthdate: " + stringObjects[fieldType]);
-        break;
-
-      case "company":
-        alert("company: " + stringObjects[fieldType]);
-        break;
-
-      default:
-        alert("no known");
-    }
-}
-
-function determineUpdateType(fieldType, stringObjects, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData) {
-    switch (fieldType) {
-      case "phone_number":
-        "add" == addOrDelete ? addNumber(bofffsData[userFriendAppId].contact_id, "mobile", stringObjects[fieldType]) : deleteNumber(bofffsData[userFriendAppId].contact_id, stringObjects[fieldType]);
-        break;
-
-      case "mails":
-        "add" == addOrDelete ? addEmail(bofffsData[userFriendAppId].contact_id, "work", stringObjects[fieldType]) : deleteEmail(bofffsData[userFriendAppId].contact_id, stringObjects[fieldType]);
-        break;
-
-      case "social_links":
-        "add" == addOrDelete ? addSocialLink(bofffsData[userFriendAppId].contact_id, "home", stringObjects[fieldType]) : deleteSocialLink(bofffsData[userFriendAppId].contact_id, stringObjects[fieldType]);
-        break;
-
-      case "residence":
-        "add" == addOrDelete && alert("residence is incomplete");
-        alert("residence: " + stringObjects[fieldType]);
-        break;
-
-      case "job_title":
-        "add" == addOrDelete && addJobTitle(bofffsData[userFriendAppId].contact_id, stringObjects[fieldType]);
-        break;
-
-      case "birthday_date":
-        "add" == addOrDelete && addBirthday(bofffsData[userFriendAppId].contact_id, stringObjects[fieldType]);
-        break;
-
-      case "company":
-        "add" == addOrDelete && addCompany(bofffsData[userFriendAppId].contact_id, stringObjects[fieldType]);
-        break;
-
-      default:
-        alert("no known");
-    }
+    SaveUpdatedContactToPhonebook();
 }
 
 function updateBofff(pin, userData, newData, bofffsSpecificData) {
+    Ti.API.info("updateBofff");
     var url = "http://www.bofffme.com/api/index.php/home/";
     var xhr = Ti.Network.createHTTPClient({
         onload: function() {
