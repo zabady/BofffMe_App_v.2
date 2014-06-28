@@ -1,3 +1,8 @@
+/*
+ * This file contained 900+ lines of code
+ * After optimization it's --> 688 + 171 (applyUpdatesToPhonebook.js) = 859
+ */
+
 /*This file contains functions to update the user friends' data in his contact list
  Functions include:
  - saveUpdate(contact)
@@ -17,106 +22,6 @@
  - UpdateAddress(id, key, street, city, country)
  1 updateAddress(id, key, street, city, country)
  */
-
-// Defining a new contact that will be used to insert a new contact for android
-var contact = new Object();
-var newContact = new Object();
-var aContact = Ti.Contacts.createPerson({
-	firstName : 'John',
-	lastName : 'Smith',
-	kind : Ti.Contacts.CONTACTS_KIND_PERSON,
-	URL : {
-		'homepage' : ['http://example.com'],
-		'url' : ['http://example.com']
-	},
-	phone : {
-		'work' : ['18885551212'],
-		'home' : ['18885551212'],
-		'mobile' : ['18885551212'],
-		'other' : ['18885551212']
-	},
-	email : {
-		'work' : ['jsmith@example.com'],
-		'home' : ['jsmith@example.com']
-	},
-	address : {
-		'work' : [{
-			'Street' : '123 Main',
-			'City' : 'Boston',
-			'State' : 'MA',
-			'ZIP' : '02134',
-			'Country' : 'United States'
-		}],
-		'home' : [{
-			'Street' : '456 North',
-			'City' : 'Boston',
-			'State' : 'MA',
-			'ZIP' : '02134',
-			'Country' : 'United States'
-		}]
-	}
-});
-
-function saveUpdate(contact)
-{
-	Ti.API.info("saveUpdate");
-	if(OS_ANDROID)
-	{
-		Titanium.Contacts.save([contact]);
-	}
-	else
-	if(OS_IOS)
-	{
-		Titanium.Contacts.save();
-	}
-	alert("contact updated");
-}
-
-function addNumber(id, key, value)
-{
-	Ti.API.info("addNumber");
-	// var contacts=Titanium.Contacts.getPeopleWithName("Zabady");
-	// for(var contact in contacts) {
-		// alert(contacts[contact].fullName);
-	// }
-	if(OS_IOS)
-	{
-		var contact = Titanium.Contacts.getPersonByID(id);
-		var phone = contact.phone;
-		try
-		{
-		    phone[key].push(value);
-		}
-		catch(error)
-		{
-			phone[key] = [value];
-		}
-		contact.phone = phone;
-		saveUpdate(contact);
-	}
-	else {
-		
-		var contact = Titanium.Contacts.getPersonByID(id);
-		
-		Titanium.Contacts.removePerson(contact);
-		
-		alert(contact.fullName);
-		
-		var phones = contact.phone;
-		phones[key].push(value);
-		
-		Ti.Contacts.createPerson({
-			firstName : "New " + contact.fullName,
-			lastName : contact.lastName ? contact.lastName : "",
-			kind : Ti.Contacts.CONTACTS_KIND_PERSON,
-			phone : phones,
-			email : contact.email ? contact.email : null,
-		});
-		
-	}
-	// TODO: Find a workaround for android _|_
-	// TODO: Workaround found BITCH _!_ 
-}
 
 function deleteNumber(id,value)
 {
@@ -162,40 +67,6 @@ function deleteNumber(id,value)
 	saveUpdate(contact);
 }
 
-function addNickname(id,bofffFullName)
-{
-	Ti.API.info("addNickname");
-	var contact = Titanium.Contacts.getPersonByID(id);
-	var nickname = contact.nickname;
-	if(nickname.length == 0)
-	{
-		nickname="Bofff Name: "+ bofffFullName;
-	}
-	else
-	{
-		nickname+="\n"+"Bofff Name: "+ bofffFullName;
-	}
-	contact.setNickname(nickname);
-	saveUpdate(contact);
-}
-
-function addEmail(id,key,value)
-{
-	Ti.API.info("addEmail");
-	var contact=Titanium.Contacts.getPersonByID(id);
-	var email= contact.email;
-	try
-	{
-		email[key].push(value);
-	}
-	catch(error)
-	{
-		email[key]=[value];
-	}
-	 contact.email=email;
-	 saveUpdate(contact);
-}
-
 function deleteEmail(id,value)
 {
 	Ti.API.info("deleteEmail");
@@ -220,23 +91,6 @@ function deleteEmail(id,value)
 		}
 	}
 	contact.email=emailAfterDeletion;
-	saveUpdate(contact);
-}
-
-function addSocialLink(id,key,value)
-{
-	Ti.API.info("addSocialLink");
-	var contact=Titanium.Contacts.getPersonByID(id);
-	var url= contact.url;
-	try
-	{
-		url[key].push(value);
-	}
-	catch(error)
-	{
-		url[key]=[value];
-	}
-	contact.url=url;
 	saveUpdate(contact);
 }
 
@@ -267,47 +121,6 @@ function deleteSocialLink(id,value)
 	}
 	contact.url=urlAfterDeletion;
 	saveUpdate(contact);
-}
-
-//IOS_ONLY
-function addJobTitle(id,jobTitle)
-{
-	Ti.API.info("addJobTitle");
-	var contact=Titanium.Contacts.getPersonByID(id);
-	contact.jobTitle=jobTitle;
-	saveUpdate(contact);
-}
-
-function addCompany(id,company)
-{
-	Ti.API.info("addCompany");
-	var contact=Titanium.Contacts.getPersonByID(id);
-	contact.organization=company;
-	saveUpdate(contact);
-}
-
-//Date format is "yyyy-MM-ddTHH:mm:ss.SSS+0000"
-function addBirthday(id,birthday)
-{
-	Ti.API.info("addBirthday");
-	var contact=Titanium.Contacts.getPersonByID(id);
-	contact.birthday=birthday;
-	saveUpdate(contact);
-}
-
-function addNote(id,note)
-{
-	Ti.API.info("addNote");
-	var contact=Titanium.Contacts.getPersonByID(id);
-	contact.note=note;
-	saveUpdate(contact);
-}
-
-function UpdateNonAddableField(fieldName, fieldValue) {
-	// Job title is supported only by iOS
-	if(fieldName == 'jobTitle' && OS_ANDROID) return;
-	
-	contact[fieldName] = fieldValue;
 }
 
 function addAddress(id,key,street,city,country)
@@ -783,9 +596,20 @@ function addUpdatesToFriends(dataAdded,dataDeleted,friendsToSendAdded,friendsToS
 	xhr.send(params);  
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////// START OF APPLYING UPDATES TO PHONEBOOK
 function applyUpdatesOfFriend(friend_pin, bofffsList, bofffsData)
 {
-	Ti.API.info("applyUpdatesOfFriend");
+	Ti.API.info("applyUpdatesOfFriend: " + friend_pin);
+	
+	Ti.include("/applyUpdatesToPhonebook.js");
+	
+	// Get the required friend
+	// Get the Added Updates string
+	// Parse added update string
+	// Get Deleted Updates string
+	// Parse deleted updates string
+	// Delete both added and deleted updates from server
+	
 	// Loop over all bofffs List (friends) untill the required pin is found
 	for(var record in bofffsList)
 	{
@@ -846,7 +670,6 @@ function parsingUpdateString(updateString, addOrDelete, userFriendAppId, bofffsS
 	// Get the updates
 	// Determine each update's type and apply it
 	// Save contact to phonebook
-	// Delete the updates from the server
 	
 	InitializeContact(bofffsData[userFriendAppId].contact_id);
 	
@@ -860,118 +683,13 @@ function parsingUpdateString(updateString, addOrDelete, userFriendAppId, bofffsS
 			var stringColon = stringLines[line].split(Alloy.Globals.splitValue);
 			stringObjects[stringColon[0]] = stringColon[1];
 			// Determine each update's type and apply it
-			determineAndApplyUpdate(stringColon[0], stringObjects, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData);
+			if(addOrDelete == "add")
+				determineAndApplyUpdate(stringColon[0], stringObjects, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData);
+			else alert("It's a delete !");
 		}
 	}
 	
 	SaveUpdatedContactToPhonebook();
-	deleteUpdatesOffriend(bofffsList[record].id);
-}
-
-function parsingUpdateStringZeez(updateString, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData)
-{
-	Ti.API.info("parsingUpdateString");
-	var stringLines = updateString.split("\n");
-	var stringObjects = {};
-	for(var line in stringLines)
-	{
-		if(stringLines[line] != "")
-		{
-			var stringColon = stringLines[line].split(Alloy.Globals.splitValue);
-			stringObjects[stringColon[0]] = stringColon[1];
-			determineUpdateType(stringColon[0], stringObjects, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData);
-		}
-	}
-}
-
-// This is where the contacts data are changed on the user's phonebook
-function determineUpdateType(fieldType, stringObjects, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData)
-{
-	Ti.API.info("determineUpdateType");
-	
-	switch(fieldType)
-		{
-			case 'phone_number':
-			{
-				if(addOrDelete == "add")
-				{
-					addNumber(bofffsData[userFriendAppId].contact_id, "mobile", stringObjects[fieldType]);
-				}
-				else
-					deleteNumber(bofffsData[userFriendAppId].contact_id,stringObjects[fieldType]);
-				//alert('phone: '+ stringObjects[fieldType]);
-				break;
-			}
-			case 'mails':
-			{
-				if(addOrDelete=="add")
-				{
-					addEmail(bofffsData[userFriendAppId].contact_id,"work",stringObjects[fieldType]);
-				}
-				else
-					deleteEmail(bofffsData[userFriendAppId].contact_id,stringObjects[fieldType]);
-				
-				//alert('mails: '+stringObjects[fieldType]);
-				break;
-			}
-			case 'social_links':
-			{
-				if(addOrDelete=="add")
-				{
-					addSocialLink(bofffsData[userFriendAppId].contact_id,"home",stringObjects[fieldType]);
-				}
-				else
-					deleteSocialLink(bofffsData[userFriendAppId].contact_id,stringObjects[fieldType]);
-				//alert('sociallinks: '+stringObjects[fieldType]);
-				break;
-			}
-			case 'residence':
-			{
-				if(addOrDelete=="add")
-				{
-					//TODO: residence
-					//addAddress()
-					alert("residence is incomplete");
-				}
-			
-				alert('residence: '+stringObjects[fieldType]);
-				break;
-			}
-			case 'job_title':
-			{
-				if(addOrDelete=="add")
-				{
-					addJobTitle(bofffsData[userFriendAppId].contact_id,stringObjects[fieldType]);
-				}
-				
-				//alert('jobtitle: '+stringObjects[fieldType]);
-				break;
-			}
-			case 'birthday_date':
-			{
-				if(addOrDelete=="add")
-				{
-					addBirthday(bofffsData[userFriendAppId].contact_id,stringObjects[fieldType]);
-				}
-				
-				//alert('birthdate: '+stringObjects[fieldType]);
-				break;
-			}
-			case 'company':
-			{
-				if(addOrDelete=="add")
-				{
-					addCompany(bofffsData[userFriendAppId].contact_id,stringObjects[fieldType]);
-				}
-				//alert('company: '+stringObjects[fieldType]);
-				break;
-			}
-			default:
-			{
-				alert("no known");
-				break;
-			}
-		}
 }
 
  // TODO: De msh bel tarteeb 3shan zeez myz3alsh

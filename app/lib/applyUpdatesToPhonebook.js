@@ -31,7 +31,7 @@ function InitializeContact(id)
 function UpdateAddableField(fieldType, fieldKey, fieldValue)
 {
 	// fildKey is the key required to save the fieldType, ex. mobile: 01009091995, mobile is the key
-	Ti.API.info("UpdateAddableField: " + fieldType + ", " + fieldkey + ", " + fieldValue);
+	Ti.API.info("UpdateAddableField: " + fieldType + ", " + fieldKey + ", " + fieldValue);
 	
 	// Add the new addable field to its array in contact
 	// If contact[fieldType] is not empty, append to it, else create a new array
@@ -43,6 +43,8 @@ function UpdateAddableField(fieldType, fieldKey, fieldValue)
 	{
 		contact[fieldType][fieldKey] = [fieldValue];
 	}
+	alert(contact[fieldType]);
+	Ti.API.info(contact[fieldType]);
 }
 
 
@@ -76,7 +78,24 @@ function SaveUpdatedContactToPhonebook()
 		//Titanium.Contacts.save();
 	} 
 	else if(OS_ANDROID) {
-		// TODO: DO THE SHIT
+		/*
+		var contact = Titanium.Contacts.getPersonByID(id);
+		
+		Titanium.Contacts.removePerson(contact);
+		
+		alert(contact.fullName);
+		
+		var phones = contact.phone;
+		phones[key].push(value);
+		
+		Ti.Contacts.createPerson({
+			firstName : "New " + contact.fullName,
+			lastName : contact.lastName ? contact.lastName : "",
+			kind : Ti.Contacts.CONTACTS_KIND_PERSON,
+			phone : phones,
+			email : contact.email ? contact.email : null,
+		});
+		*/
 	}
 	
 	alert(contact);
@@ -114,7 +133,7 @@ function determineAndApplyUpdate(fieldType, stringObjects, addOrDelete, userFrie
 				key = "home";
 			}
 			
-			UpdateAddableField(bofffsData[userFriendAppId].contact_id, type, key, stringObjects[fieldType]);
+			UpdateAddableField(type, key, stringObjects[fieldType]);
 			
 			break;
 		}
