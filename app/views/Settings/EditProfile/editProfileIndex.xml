@@ -12,7 +12,7 @@
 		<!-- Tab 1 : Contact Information Window -->
         <Tab title="Contact Info" icon="/images/man-7aram.png" >
         	
-        	<Window id="win" windowSoftInputMode="Titanium.UI.Android.SOFT_INPUT_ADJUST_PAN">
+        	<Window id="win">
 		
 				<RightNavButton>
 					<View layout="horizontal">

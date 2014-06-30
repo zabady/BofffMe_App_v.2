@@ -1,6 +1,6 @@
 /*
  * This file contained 900+ lines of code
- * After optimization it's --> 688 + 171 (applyUpdatesToPhonebook.js) = 859
+ * After optimization it's --> (Without comments) 550 + 150 (applyUpdatesToPhonebook.js) = 700 
  */
 
 /*This file contains functions to update the user friends' data in his contact list
@@ -22,106 +22,6 @@
  - UpdateAddress(id, key, street, city, country)
  1 updateAddress(id, key, street, city, country)
  */
-
-function deleteNumber(id,value)
-{
-	Ti.API.info("deleteNumber");
-	var contact=Titanium.Contacts.getPersonByID(id);
-	var phone= contact.phone;
-	var phoneAfterDeletion={};
-	for(var key in phone)
-	{
-		for(var number in phone[key])
-		{
-			var phoneNumber=phone[key][number];
-			var trimmedPhoneNumber="";
-			var expression = /^\d+$/;
-			if(!expression.test(phoneNumber))
-			{
-				for(var digit in phoneNumber)
-				{
-					if(expression.test(phoneNumber[digit]))
-					{
-						trimmedPhoneNumber += phoneNumber[digit];
-					}
-				}
-			}
-			else
-			{
-				trimmedPhoneNumber = phoneNumber;
-			}
-			if(trimmedPhoneNumber != value)
-			{
-				try
-				{
-					phoneAfterDeletion[key].push(trimmedPhoneNumber);
-				}
-				catch(error)
-				{
-					phoneAfterDeletion[key]=[trimmedPhoneNumber];
-				}
-			}
-		}
-	}
-	contact.phone = phoneAfterDeletion;
-	saveUpdate(contact);
-}
-
-function deleteEmail(id,value)
-{
-	Ti.API.info("deleteEmail");
-	var contact=Titanium.Contacts.getPersonByID(id);
-	var email= contact.email;
-	var emailAfterDeletion={};
-	for(var key in email)
-	{
-		for(var record in email[key])
-		{
-			if(email[key][record]!=value)
-			{
-				try
-				{
-					emailAfterDeletion[key].push(email[key][record]);
-				}
-				catch(error)
-				{
-					emailAfterDeletion[key]=[email[key][record]];
-				}
-			}
-		}
-	}
-	contact.email=emailAfterDeletion;
-	saveUpdate(contact);
-}
-
-function deleteSocialLink(id,value)
-{
-	Ti.API.info("deleteSocialLink");
-	value= value.replace("http://","");
-	var contact=Titanium.Contacts.getPersonByID(id);
-	var url= contact.url;
-	var urlAfterDeletion={};
-	for(var key in url)
-	{
-		for(var record in url[key])
-		{
-			url[key][record]=url[key][record].replace("http://","");
-			if(url[key][record]!=value)
-			{
-				try
-				{
-					urlAfterDeletion[key].push(url[key][record]);
-				}
-				catch(error)
-				{
-					urlAfterDeletion[key]=[url[key][record]];
-				}
-			}
-		}
-	}
-	contact.url=urlAfterDeletion;
-	saveUpdate(contact);
-}
 
 function addAddress(id,key,street,city,country)
 {
@@ -599,7 +499,7 @@ function addUpdatesToFriends(dataAdded,dataDeleted,friendsToSendAdded,friendsToS
 //////////////////////////////////////////////////////////////////////////////////////////// START OF APPLYING UPDATES TO PHONEBOOK
 function applyUpdatesOfFriend(friend_pin, bofffsList, bofffsData)
 {
-	Ti.API.info("applyUpdatesOfFriend: " + friend_pin);
+	alert("applyUpdatesOfFriend: " + friend_pin);
 	
 	Ti.include("/applyUpdatesToPhonebook.js");
 	
@@ -664,7 +564,7 @@ function deleteUpdatesOffriend(friendId)
 
 function parsingUpdateString(updateString, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData)
 {
-	Ti.API.info("parsingUpdateString");
+	alert("parsingUpdateString: " + addOrDelete);
 	
 	// Initialize Contact
 	// Get the updates
@@ -682,13 +582,13 @@ function parsingUpdateString(updateString, addOrDelete, userFriendAppId, bofffsS
 		{
 			var stringColon = stringLines[line].split(Alloy.Globals.splitValue);
 			stringObjects[stringColon[0]] = stringColon[1];
+			
 			// Determine each update's type and apply it
-			if(addOrDelete == "add")
-				determineAndApplyUpdate(stringColon[0], stringObjects, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData);
-			else alert("It's a delete !");
+			determineAndApplyUpdate(stringColon[0], stringObjects, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData);
 		}
 	}
 	
+	//alert("After all, save contact ! :D");
 	SaveUpdatedContactToPhonebook();
 }
 

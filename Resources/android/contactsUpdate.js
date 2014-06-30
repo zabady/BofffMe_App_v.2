@@ -412,7 +412,7 @@ function addUpdatesToFriends(dataAdded, dataDeleted, friendsToSendAdded, friends
 }
 
 function applyUpdatesOfFriend(friend_pin, bofffsList, bofffsData) {
-    Ti.API.info("applyUpdatesOfFriend: " + friend_pin);
+    alert("applyUpdatesOfFriend: " + friend_pin);
     Ti.include("/applyUpdatesToPhonebook.js");
     for (var record in bofffsList) if (bofffsList[record].friend_pin_code == friend_pin) {
         var stringToUpdate = bofffsList[record].friend_added_data;
@@ -444,14 +444,14 @@ function deleteUpdatesOffriend(friendId) {
 }
 
 function parsingUpdateString(updateString, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData) {
-    Ti.API.info("parsingUpdateString");
+    alert("parsingUpdateString: " + addOrDelete);
     InitializeContact(bofffsData[userFriendAppId].contact_id);
     var stringLines = updateString.split("\n");
     var stringObjects = {};
     for (var line in stringLines) if ("" != stringLines[line]) {
         var stringColon = stringLines[line].split(Alloy.Globals.splitValue);
         stringObjects[stringColon[0]] = stringColon[1];
-        "add" == addOrDelete ? determineAndApplyUpdate(stringColon[0], stringObjects, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData) : alert("It's a delete !");
+        determineAndApplyUpdate(stringColon[0], stringObjects, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData);
     }
     SaveUpdatedContactToPhonebook();
 }

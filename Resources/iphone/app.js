@@ -9,14 +9,13 @@ if (null == Alloy.Globals.userPin) {
     Titanium.App.Properties.setObject("pin", Alloy.Globals.userPin);
 }
 
-alert(Alloy.Globals.userPin);
-
 Alloy.Globals.splitValue = "$";
 
 var xhr = Ti.Network.createHTTPClient({
     onload: function() {
         var userData = JSON.parse(this.responseText).rows[0];
         Titanium.App.Properties.setObject("userData", userData);
+        alert(userData.fullName);
     },
     onerror: function() {
         alert(this.responseText);

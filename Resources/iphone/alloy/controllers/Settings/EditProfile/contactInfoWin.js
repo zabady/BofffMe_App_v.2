@@ -29,15 +29,12 @@ function Controller() {
         alert("How will we allow the user to change primary phone ?\nMaybe with FTR.");
     }
     function TextFieldFocused(e) {
-        true && clickedPrivacyLabel && $.pickerContainer.btn_toolBarDone.fireEvent("click");
+        true && clickedPrivacyLabel && DismissPicker();
         e.source.fieldType && (addableTextOldValue = e.source.value);
         clickedTextField = e.source;
     }
     function AndroidEditViewTextChanged() {
         clickedTextField.value = $.fieldValue.value;
-    }
-    function AndroidEditViewBlur() {
-        $.androidEditView.visible = false;
     }
     function NonAddableTextChanged(e) {
         changeValueOfNonAddableField(userDataInArrays, e.source.id, e.source.value);
@@ -48,10 +45,26 @@ function Controller() {
     }
     function PrivacyLabelClicked(e) {
         DismissKeyboardClicked();
+        $.pickerContainer.pickerView.visible = true;
+        $.pickerContainer.picker.setSelectedRow(0, privacyIndex[e.source.text], {
+            animated: true
+        });
         clickedPrivacyLabel = e.source;
+    }
+    function SelectedPrivacyChanged() {
+        var newPrivacy = $.pickerContainer.picker.getSelectedRow(0).title;
+        var newPrivacy;
+        clickedPrivacyLabel.id ? changePrivacyOfNonAddableField(userDataInArrays, clickedPrivacyLabel.id, newPrivacy) : changePrivacyOfAddableField(userDataInArrays, clickedPrivacyLabel.fieldType, clickedPrivacyLabel.text, newPrivacy);
+        clickedPrivacyLabel.text = newPrivacy;
+    }
+    function AndroidEditViewBlur() {
+        $.androidEditView.visible = false;
     }
     function DismissKeyboardClicked() {
         clickedTextField && clickedTextField.blur();
+    }
+    function DismissPicker() {
+        $.pickerContainer.pickerView.visible = false;
     }
     function addNewRowAfter(data, rowNum) {
         var fieldTitleLabel = Ti.UI.createLabel({
@@ -365,8 +378,17 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     Ti.include("/userDataProcessing.js");
-    arguments[0] || {};
     userDataInArrays = convertAddableFieldsToArrays(userData);
+    var addNewRow = false;
+    var addableTextOldValue = "";
+    var clickedPrivacyLabel;
+    var privacyIndex = {
+        "public": 0,
+        friends: 1,
+        favorites: 2,
+        onlyMe: 3
+    };
+    var clickedTextField;
     var rows = $.tableView.sections[0].rows;
     for (var i = 0; rows.length > i; i++) {
         var children = rows[i].children;
@@ -389,18 +411,8 @@ function Controller() {
         var data = createBindingRowData(userDataInArrays.phone_numbers[i], userDataInArrays.phone_numbers_privacy[i], true);
         addNewRowAfter(data, 1);
     }
-    var addNewRow = false;
-    var addableTextOldValue = "";
-    var clickedPrivacyLabel;
-    var clickedTextField;
-    $.pickerContainer.picker.addEventListener("change", function() {
-        var newPrivacy = $.pickerContainer.picker.getSelectedRow(0).title;
-        clickedPrivacyLabel.id ? changePrivacyOfNonAddableField(userDataInArrays, clickedPrivacyLabel.id, newPrivacy) : changePrivacyOfAddableField(userDataInArrays, clickedPrivacyLabel.fieldType, clickedPrivacyLabel.text, newPrivacy);
-        clickedPrivacyLabel.text = newPrivacy;
-    });
-    $.pickerContainer.btn_toolBarDone.addEventListener("click", function() {
-        $.pickerContainer.pickerView.visible = false;
-    });
+    $.pickerContainer.picker.addEventListener("change", SelectedPrivacyChanged);
+    $.pickerContainer.btn_toolBarDone.addEventListener("click", DismissPicker);
     __defers["$.__views.__alloyId99!click!AddRowButtonClicked"] && $.__views.__alloyId99.addEventListener("click", AddRowButtonClicked);
     __defers["$.__views.__alloyId100!click!AddRowButtonClicked"] && $.__views.__alloyId100.addEventListener("click", AddRowButtonClicked);
     __defers["$.__views.__alloyId107!click!DismissKeyboardClicked"] && $.__views.__alloyId107.addEventListener("click", DismissKeyboardClicked);

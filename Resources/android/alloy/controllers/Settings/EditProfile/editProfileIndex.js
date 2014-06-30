@@ -37,8 +37,7 @@ function Controller() {
     var __alloyId131 = [];
     $.__views.win = Ti.UI.createWindow({
         backgroundColor: "white",
-        id: "win",
-        windowSoftInputMode: Titanium.UI.Android.SOFT_INPUT_ADJUST_PAN
+        id: "win"
     });
     $.__views.__alloyId134 = Ti.UI.createView({
         layout: "horizontal",

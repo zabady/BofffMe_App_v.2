@@ -12,12 +12,13 @@
 
 // Adding APIs url to Alloy.Globals
 Alloy.Globals.apiUrl = 'http://www.bofffme.com/api/index.php/home/';
+
+// Debugging
 Alloy.Globals.userPin = Titanium.App.Properties.getObject('pin');
 if(Alloy.Globals.userPin == null) {
 	Alloy.Globals.userPin = "95190228ae42e7652b098b5bce990aa8";	// Ahmed Atif's Pin
 	Titanium.App.Properties.setObject('pin', Alloy.Globals.userPin);
 }
-alert(Alloy.Globals.userPin);
 
 //Split value to split update strings
 Alloy.Globals.splitValue = "$";
@@ -29,6 +30,7 @@ var xhr = Ti.Network.createHTTPClient(
     {
     	var userData = JSON.parse(this.responseText).rows[0];
     	Titanium.App.Properties.setObject("userData", userData);
+    	alert(userData.fullName);
     },
     onerror: function(e)
     {
