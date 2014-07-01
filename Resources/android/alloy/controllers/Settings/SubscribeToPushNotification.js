@@ -9,6 +9,17 @@ function Controller() {
     function deviceTokenSuccess(e) {
         CloudPush.enabled = true;
         deviceToken = e.deviceToken;
+        alert("Got device token.");
+        var xhr = Ti.Network.createHTTPClient({
+            onload: function() {
+                alert("Device token saved on server !");
+                alert(deviceToken);
+            },
+            onerror: function() {
+                alert(this.responseText);
+            }
+        });
+        xhr.open("POST", Alloy.Globals.apiUrl + "update_device_token_with_pin/bofff/" + Alloy.Globals.userPin + "/" + deviceToken);
     }
     function deviceTokenError(e) {
         alert("Failed to register for push notifications! " + e.error);
@@ -24,9 +35,16 @@ function Controller() {
     }
     function sendTestNotification() {
         Cloud.PushNotifications.notifyTokens({
-            to_tokens: deviceToken,
+            to_tokens: deviceTokens,
             channel: "test",
-            payload: "This is a test."
+            payload: {
+                customField: "Any Custom Data",
+                title: "Friend Profile Updated !",
+                icon: "appicon",
+                vibrate: true,
+                sound: "default",
+                alert: "Testing sending the notification only to friends"
+            }
         }, function(e) {
             e.success ? alert("Push notification sent") : alert("Error:\n" + (e.error && e.message || JSON.stringify(e)));
         });
@@ -69,6 +87,18 @@ function Controller() {
     CloudPush.addEventListener("trayClickFocusedApp", function() {
         alert("Tray Click Focused App (app was already running)");
     });
+    var deviceTokens;
+    var xhr = Ti.Network.createHTTPClient({
+        onload: function() {
+            deviceTokens = JSON.parse(this.responseText) + "," + deviceToken;
+            alert(deviceTokens);
+        },
+        onerror: function() {
+            alert(this.responseText);
+        }
+    });
+    xhr.open("POST", Alloy.Globals.apiUrl + "return_device_tokens_of_friends_in_string/" + Alloy.Globals.userPin);
+    xhr.send();
     var Cloud = require("ti.cloud");
     var subscribe = Ti.UI.createButton({
         title: "Subscribe",

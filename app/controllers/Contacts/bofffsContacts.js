@@ -252,33 +252,33 @@ function starClicked(e)
 
 function changeStar(listItem)
 {
-	privacyClicked=false;
+	privacyClicked = false;
 	var item = listItem.section.getItemAt(listItem.itemIndex);
 	// it means that the user clicked an empty star so we have to change it to a full star
-	if (item.userPrivacy_towards_friend=="not favorite")
+	if (item.userPrivacy_towards_friend == "not favorite")
 	{
-		item.userPrivacy_towards_friend="favorite";
+		item.userPrivacy_towards_friend = "favorite";
 		item.bofff_pic.image = "/images/favoritecontact.png";
 		listItem.section.updateItemAt(listItem.itemIndex, item); 
-		bofffsList[listItem.itemId].userPrivacy_towards_friend="favorite"; 
+		bofffsList[listItem.itemId].userPrivacy_towards_friend = "favorite"; 
 	}
 	// it means that the user clicked a full star so we have to change it to an empty star
 	else
 	{
-		item.userPrivacy_towards_friend="not favorite";
+		item.userPrivacy_towards_friend = "not favorite";
 		item.bofff_pic.image = "/images/notfavoritecontact.png";
 		listItem.section.updateItemAt(listItem.itemIndex, item);
-		bofffsList[listItem.itemId].userPrivacy_towards_friend="not favorite";
+		bofffsList[listItem.itemId].userPrivacy_towards_friend = "not favorite";
 	}
 }
 
 function updatePrivacy(listItem)
 {
 	var item = listItem.section.getItemAt(listItem.itemIndex);
-	var newStatus="not favorite";
-	if(item.userPrivacy_towards_friend=="not favorite")
+	var newStatus = "not favorite";
+	if(item.userPrivacy_towards_friend == "not favorite")
 	{
-		newStatus="favorite";
+		newStatus = "favorite";
 	}
 	var url =  'http://www.bofffme.com/api/index.php/home/';
 	
@@ -288,6 +288,8 @@ function updatePrivacy(listItem)
 	    {
 	    	var response = JSON.parse(this.responseText);
 	    	changeStar(listItem);
+	    	
+	    	// TODO: Send push notification to friend when he is added to favorites
 	    },
 	    onerror: function(e) 
 	    {
@@ -317,7 +319,7 @@ function showContact(e)
 	{
 		ifImageClicked=false;
 		var bofffId = bofffs[e.itemId].contact_id;
-		applyUpdatesOfFriend('95190228ae42e7652b098b5bce990aa8',bofffsList,bofffs);
+		applyUpdatesOfFriend('95190228ae42e7652b098b5bce990aa8', bofffsList, bofffs);
 		
 		// TODO: --> The next
 		//if(getUserData(Alloy.Globals.userPin,bofffsList)) {

@@ -49,7 +49,6 @@ function convertAddableFieldsToArrays(dataInStrings) {
 	return dataInArrays;
 }
 
-
 // A function that converts the addable fields from an array to a string splitted by $
 function convertAddableFieldsToStrings(dataInArrays) {
 	var dataInStrings = copyObjectAndReturnRefrence(dataInArrays);
@@ -152,7 +151,11 @@ function postUserDataUpdatesOnServer(oldUserDataInStrings, newUserDataInArrays) 
 		var bofffsSpecificData = Titanium.App.Properties.getObject("bofffsSpecificData");
 		var userUpdatesInStrings = convertAddableFieldsToStrings(newUserDataInArrays);
 		// TODO: comment or uncomment the next line to not send or send the data to the server
-		updateBofff(Alloy.Globals.userPin, oldUserDataInStrings, userUpdatesInStrings, bofffsSpecificData);
+		//updateBofff(Alloy.Globals.userPin, oldUserDataInStrings, userUpdatesInStrings, bofffsSpecificData);
+		//sendPushNotificationToFriends();
+		Ti.include('/pushNotificationAPIs.js');
+		NotifyAllUserFriendsWithMessage(newUserDataInArrays.fullName + ' has updated his profile, click here so these updates are applied to your phonebook.',
+										'test');
 	}
 	catch(exp) { /*TODO: remove this line*/ alert(exp); }
 	finally{ return ""; }
@@ -206,4 +209,67 @@ function validateEmail(email) {
 	
 	if (email.match(emailRegex)) return true;
 	else return false;
+}
+
+
+// A function that sends push notifications to user's friends notifying them that he has made some changes to his profile
+function sendPushNotificationToFriends() {
+	var xhr = Ti.Network.createHTTPClient(
+	{
+		onload: function(e) 
+	    {
+	    	var deviceTokens = JSON.parse(this.responseText); 
+	    	alert(deviceTokens);
+	    	notifyFriends(notifyFriends);
+	    },
+	    onerror: function(e)
+	    {
+	    	alert(this.responseText);
+	    },
+	});
+	xhr.open("POST", Alloy.Globals.apiUrl + "return_device_tokens_of_friends_in_string/" + Alloy.Globals.userPin);
+	xhr.send();
+}
+
+// A function that sends the push notification 
+function notifyFriends(friendsDeviceTokens) {
+	
+	// Require in the Cloud module
+	var Cloud = require("ti.cloud");
+	
+	Cloud.PushNotifications.notifyTokens({
+        to_tokens: 'everyone',
+        channel: 'test',
+        payload: 'Test-test, ' + new Date()
+    }, function (e) {
+        if (e.success) {
+            alert('Push notification sent');
+        } else {
+            alert('Error:\n' + ((e.error && e.message) || JSON.stringify(e)));
+        }
+    });
+	
+	// Sends an 'This is a test.' alert to specified device if its subscribed to the 'test' channel.
+    // Cloud.PushNotifications.notifyTokens({
+        // to_tokens: friendsDeviceTokens,
+        // channel: 'test',
+//         
+        // payload: {
+        	// "customField" : "Any Custom Data",
+//         	
+        	// "title" : "Friend Profile Updated !",	// Android only
+        	// "icon" : "appicon",						// Android only
+        	// "vibrate" : true,						// Android only
+		    // "sound" : "default",
+// 		    
+		    // "alert" : "One of your friends has just updated his profile, click here so these updates are applied to your phonebook ;)",
+		// }
+//         
+    // }, function (e) {
+        // if (e.success) {
+            // alert('Push notification sent');
+        // } else {
+            // alert('Error:\n' + ((e.error && e.message) || JSON.stringify(e)));
+        // }
+    // });
 }

@@ -578,7 +578,7 @@ function parsingUpdateString(updateString, addOrDelete, userFriendAppId, bofffsS
 	var stringObjects = {};
 	for(var line in stringLines)
 	{
-		if(stringLines[line] != "")
+		if(stringLines[line] != "" && stringLines[line] != null)
 		{
 			var stringColon = stringLines[line].split(Alloy.Globals.splitValue);
 			stringObjects[stringColon[0]] = stringColon[1];

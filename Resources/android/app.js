@@ -1,5 +1,9 @@
 var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
+Ti.include("/pushNotificationAPIs.js");
+
+SetPushNotificationAndGetDeviceToken();
+
 Alloy.Globals.apiUrl = "http://www.bofffme.com/api/index.php/home/";
 
 Alloy.Globals.userPin = Titanium.App.Properties.getObject("pin");

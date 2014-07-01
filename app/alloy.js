@@ -10,6 +10,9 @@
 //
 // Alloy.Globals.someGlobalFunction = function(){};
 
+Ti.include('/pushNotificationAPIs.js');
+SetPushNotificationAndGetDeviceToken();
+
 // Adding APIs url to Alloy.Globals
 Alloy.Globals.apiUrl = 'http://www.bofffme.com/api/index.php/home/';
 

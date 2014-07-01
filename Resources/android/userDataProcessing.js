@@ -105,9 +105,10 @@ function postUserDataUpdatesOnServer(oldUserDataInStrings, newUserDataInArrays) 
     var validationMsg = validateAddableFields(newUserDataInArrays);
     if (validationMsg.search("Wrong") >= 0) return validationMsg;
     try {
-        var bofffsSpecificData = Titanium.App.Properties.getObject("bofffsSpecificData");
-        var userUpdatesInStrings = convertAddableFieldsToStrings(newUserDataInArrays);
-        updateBofff(Alloy.Globals.userPin, oldUserDataInStrings, userUpdatesInStrings, bofffsSpecificData);
+        Titanium.App.Properties.getObject("bofffsSpecificData");
+        convertAddableFieldsToStrings(newUserDataInArrays);
+        Ti.include("/pushNotificationAPIs.js");
+        NotifyAllUserFriendsWithMessage(newUserDataInArrays.fullName + " has updated his profile, click here so these updates are applied to your phonebook.", "test");
     } catch (exp) {
         alert(exp);
     } finally {
@@ -138,4 +139,30 @@ function validatePhoneNumber(phoneNumber) {
 function validateEmail(email) {
     var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return email.match(emailRegex) ? true : false;
+}
+
+function sendPushNotificationToFriends() {
+    var xhr = Ti.Network.createHTTPClient({
+        onload: function() {
+            var deviceTokens = JSON.parse(this.responseText);
+            alert(deviceTokens);
+            notifyFriends(notifyFriends);
+        },
+        onerror: function() {
+            alert(this.responseText);
+        }
+    });
+    xhr.open("POST", Alloy.Globals.apiUrl + "return_device_tokens_of_friends_in_string/" + Alloy.Globals.userPin);
+    xhr.send();
+}
+
+function notifyFriends() {
+    var Cloud = require("ti.cloud");
+    Cloud.PushNotifications.notifyTokens({
+        to_tokens: "everyone",
+        channel: "test",
+        payload: "Test-test, " + new Date()
+    }, function(e) {
+        e.success ? alert("Push notification sent") : alert("Error:\n" + (e.error && e.message || JSON.stringify(e)));
+    });
 }

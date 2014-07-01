@@ -32,7 +32,7 @@ else if(OS_ANDROID)
 {
 	// Require in the module
 	var CloudPush = require('ti.cloudpush');
-	 
+	
 	// Initialize the module
 	CloudPush.retrieveDeviceToken({
 	    success: deviceTokenSuccess,
@@ -44,6 +44,24 @@ else if(OS_ANDROID)
 	function deviceTokenSuccess(e) {
 	    CloudPush.enabled = true;
 	    deviceToken = e.deviceToken;
+	    alert("Got device token.");
+	    
+	    // Send device token to the server with the user's pin
+	    var xhr = Ti.Network.createHTTPClient(
+		{
+			onload: function(e) 
+		    {
+		    	alert("Device token saved on server !");
+		    	alert(deviceToken);
+		    },
+		    onerror: function(e)
+		    {
+		    	alert(this.responseText);
+		    },
+		});
+		xhr.open("POST", Alloy.Globals.apiUrl + "update_device_token_with_pin/bofff/" + Alloy.Globals.userPin + "/" + deviceToken);
+		// TODO: Remove this comment xhr.send();
+	    
 	}
 	function deviceTokenError(e) {
 	    alert('Failed to register for push notifications! ' + e.error);
@@ -86,7 +104,21 @@ else if(OS_ANDROID)
  * 
  */
 
-
+var deviceTokens;
+var xhr = Ti.Network.createHTTPClient(
+{
+	onload: function(e) 
+    {
+    	deviceTokens = JSON.parse(this.responseText) + "," + deviceToken;
+    	alert(deviceTokens);
+    },
+    onerror: function(e)
+    {
+    	alert(this.responseText);
+    },
+});
+xhr.open("POST", Alloy.Globals.apiUrl + "return_device_tokens_of_friends_in_string/" + Alloy.Globals.userPin);
+xhr.send();
 
 //////////////////////////////////////////////////////////////// Subscribe for Push Notifications
 // Require in the Cloud module
@@ -110,9 +142,23 @@ function subscribeToChannel () {
 function sendTestNotification () {
     // Sends an 'This is a test.' alert to specified device if its subscribed to the 'test' channel.
     Cloud.PushNotifications.notifyTokens({
-        to_tokens: deviceToken,
+        to_tokens: deviceTokens,
         channel: 'test',
-        payload: 'This is a test.'
+        //payload: 'Testing device tokens in CS string !',
+        
+        payload: {
+        	"customField" : "Any Custom Data",
+        	
+        	"title" : "Friend Profile Updated !",	// Android only
+        	"icon" : "appicon",						// Android only
+        	"vibrate" : true,						// Android only
+		    "sound" : "default",
+		    
+		    //"alert" : "One of your friends has just updated his profile, click here so these updates are applied to your phonebook ;)",
+		    "alert" : "Testing sending the notification only to friends",
+		},
+        
+        
     }, function (e) {
         if (e.success) {
             alert('Push notification sent');
