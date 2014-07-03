@@ -35,13 +35,13 @@ function UnsubscribeFromChannel(channelName) {
     });
 }
 
-function NotifyAllUserFriendsWithMessage(message, channelName) {
+function NotifyAllUserFriendsWithMessage(message, channelName, iconImage) {
     var deviceTokens;
     var xhr = Ti.Network.createHTTPClient({
         onload: function() {
             deviceTokens = JSON.parse(this.responseText);
             alert(deviceTokens);
-            sendNotificationTo(deviceTokens, message, channelName, "Friend's Profile Updated !");
+            sendNotificationTo(deviceTokens, message, channelName, "Friend's Profile Update !", iconImage);
         },
         onerror: function() {
             alert(this.responseText);
@@ -55,6 +55,23 @@ function NotifySpecificUserFriendWithMessage(message, channelName, deviceToken) 
     sendNotificationTo(deviceToken, message, channelName, "Favorite to someone");
 }
 
+function receivePushNotification(e) {
+    var payload = JSON.parse(e.payload);
+    var allNotifications = Titanium.App.Properties.getObject("notifications", []);
+    if (allNotifications.length >= 10) {
+        allNotifications.splice(0, 1);
+        alert("Remove first notification");
+    }
+    var newNotification = {
+        notificationTitle: payload.notificationTitle,
+        notificationMessage: payload.notificationMessage,
+        iconImage: payload.iconImage
+    };
+    allNotifications.push(newNotification);
+    Titanium.App.Properties.setObject("notifications", allNotifications);
+    Alloy.Globals.OpenNotificationCenter();
+}
+
 function deviceTokenSuccess(e) {
     CloudPush.enabled = true;
     deviceToken = e.deviceToken;
@@ -63,11 +80,6 @@ function deviceTokenSuccess(e) {
 
 function deviceTokenError(e) {
     alert("Failed to register for push notifications! " + e.error);
-}
-
-function receivePushNotification(e) {
-    alert("Received push: " + e.payload.alert);
-    resetBadge();
 }
 
 function sendDeviceTokenToServer() {
@@ -84,7 +96,7 @@ function sendDeviceTokenToServer() {
     xhr.send();
 }
 
-function sendNotificationTo(deviceTokens, message, channelName, title) {
+function sendNotificationTo(deviceTokens, message, channelName, title, iconImage) {
     if (null == deviceTokens || "" == deviceToken || null == message || "" == message || null == channelName || "" == channelName) {
         alert("Device tokens or message or channelName cannot be empty !");
         return;
@@ -93,6 +105,9 @@ function sendNotificationTo(deviceTokens, message, channelName, title) {
         to_tokens: deviceTokens,
         channel: channelName,
         payload: {
+            notificationTitle: title ? title : "Notification",
+            notificationMessage: message,
+            iconImage: iconImage ? iconImage : null,
             title: title ? title : "Bofff Me !",
             icon: "appicon",
             vibrate: true,
@@ -109,7 +124,7 @@ function resetBadge() {
     Cloud.PushNotifications.resetBadge({
         device_token: deviceToken
     }, function(e) {
-        e.success ? Ti.API.info("Badge Reset!") : Ti.API.error(e);
+        e.success ? alert("Badge Reset!") : Ti.API.error(e);
     });
 }
 

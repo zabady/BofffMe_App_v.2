@@ -1,0 +1,43 @@
+<Alloy>
+    <Window backgroundColor="white" onFocus="LoadNotifications">
+    	
+    	<RightNavButton>
+			<Button id="btn_settings" class="settingsBtn"/>
+		</RightNavButton>
+		<LeftNavButton>
+			<ImageView class="logo"/>
+		</LeftNavButton>
+    	
+        <ListView id="listView" defaultItemTemplate="template">
+
+            <!-- The Templates tag sets the ListView's templates property -->
+
+            <Templates>
+
+                <!-- Define your item templates within the Templates tags or use the
+                     Require tag to include a view that only contains an ItemTemplate -->
+
+                <ItemTemplate name="template">
+                    <ImageView bindId="pic" id="icon" />
+                    <Label bindId="notificationTitle" id="title" />
+                    <Label bindId="message" id="subtitle" />
+                </ItemTemplate>
+
+            </Templates>
+
+			<!--
+            <ListSection headerTitle="Fruit / Frutas">
+
+                <!-- You can specify any ListItem or ListDataItem properties in ListItem -->
+
+                <!-- Specify data to bind to the item template with inline attributes
+                     defined as <bindId>:<Ti.UI.Component.property> ->
+
+                <ListItem info:text="Apple" es_info:text="Manzana" pic:image="/images/QR-code-7aram.png" />
+                <ListItem info:text="Banana" es_info:text="Banana" pic:image="/images/man-7aram.png" />
+            </ListSection>
+           -->
+            
+        </ListView>
+    </Window>
+</Alloy>

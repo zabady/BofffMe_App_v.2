@@ -101,7 +101,7 @@ function UnsubscribeFromChannel (channelName)
  * Must be used when the user updates his profile, so, his friends know about these updates.
  * message and channelName are required.
  */
-function NotifyAllUserFriendsWithMessage(message, channelName)
+function NotifyAllUserFriendsWithMessage(message, channelName, iconImage)
 {
 	var deviceTokens;
 	var xhr = Ti.Network.createHTTPClient(
@@ -110,7 +110,7 @@ function NotifyAllUserFriendsWithMessage(message, channelName)
 	    {
 	    	deviceTokens = JSON.parse(this.responseText);
 	    	alert(deviceTokens);
-	    	sendNotificationTo(deviceTokens, message, channelName, "Friend's Profile Updated !");
+	    	sendNotificationTo(deviceTokens, message, channelName, "Friend's Profile Update !", iconImage);
 	    },
 	    onerror: function(e)
 	    {
@@ -133,6 +133,41 @@ function NotifySpecificUserFriendWithMessage(message, channelName, deviceToken)
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////// PRIVATE FUNCTIONS
+/* Callback function that processes incoming push notifications.
+ * It will save append the new notification to an array of notification saved in the app properties.
+ * This array is used by the notification center to dispaly all the received notifications.
+ */
+function receivePushNotification(e)
+{
+	// TODO: BUG: Unexpected token U, when the app is closed and get open by clicking on the notification
+	var payload = JSON.parse(e.payload);
+	
+	// Get notifications array from properties, if does not exist, get empty array
+	// TODO: Uncomment next line
+	var allNotifications = Titanium.App.Properties.getObject('notifications', []);
+	//var allNotifications = [];
+	
+	// If notifications are greater than 25, removes the first notification (the oldest one)
+	if(allNotifications.length >= 25) allNotifications.splice(0, 1);
+	
+	var newNotification = {
+		notificationTitle : payload.notificationTitle,
+		notificationMessage : payload.notificationMessage,
+		iconImage : payload.iconImage,
+	};
+	
+	allNotifications.push(newNotification);
+	Titanium.App.Properties.setObject('notifications', allNotifications);
+	Alloy.Globals.OpenNotificationCenter();
+	
+	// TODO: Save notification in properties to display them in notification center
+	
+    //alert('Received push: ' + payload.customField);
+    //alert(payload);
+    //alert(payload.android.alert);
+    //resetBadge();
+}
+
 // Callback function after getting device token successfully				// PRIVATE FUNCTION
 function deviceTokenSuccess(e)
 {
@@ -151,14 +186,6 @@ function deviceTokenSuccess(e)
 function deviceTokenError(e)
 {
     alert('Failed to register for push notifications! ' + e.error);
-}
-
-// Callbank function that processes incoming push notifications				// PRIVATE FUNCTION
-function receivePushNotification(e)
-{
-	// TODO: Save notification in properties to display them in notification center
-    alert('Received push: ' + e.payload.alert);
-    resetBadge();
 }
 
 // Posts the device token to server in order to save it in user's data		// PRIVATE FUNCTION
@@ -187,7 +214,7 @@ function sendDeviceTokenToServer()
  * deviceTokens is a comma-sperated string containing device tokens.
  * If tittle is not specified, it will be set to 'Bofff Me !'.
  */
-function sendNotificationTo (deviceTokens, message, channelName, title)			// PRIVATE FUNCTION
+function sendNotificationTo (deviceTokens, message, channelName, title, iconImage)			// PRIVATE FUNCTION
 {
 	if(deviceTokens == null || deviceToken == '' ||
 		message == null || message == '' ||
@@ -202,15 +229,17 @@ function sendNotificationTo (deviceTokens, message, channelName, title)			// PRI
         channel: channelName,
         
         payload: {
-        	//"customField" : "Any Custom Data",
+        	notificationTitle : title ? title : 'Notification',
+        	notificationMessage: message,
+        	iconImage: iconImage ? iconImage : null,
         	
-        	"title" : title ? title : 'Bofff Me !',	// Android only
-        	"icon" : "appicon",						// Android only
-        	"vibrate" : true,						// Android only
-		    "sound" : "default",
-		    "badge" : "+1",
+        	title : title ? title : 'Bofff Me !',	// Android only
+        	icon : "appicon",						// Android only
+        	vibrate : true,							// Android only
+		    sound : "default",
+		    badge : "+1",
 		    
-		    "alert" : message,
+		    alert : message,
 		},
         
         

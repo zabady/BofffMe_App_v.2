@@ -130,22 +130,22 @@ function Controller() {
         id: "btn_settings"
     });
     $.__views.win_boffsList.rightNavButton = $.__views.btn_settings;
-    $.__views.__alloyId56 = Ti.UI.createImageView({
-        id: "__alloyId56"
+    $.__views.__alloyId61 = Ti.UI.createImageView({
+        id: "__alloyId61"
     });
-    $.__views.win_boffsList.leftNavButton = $.__views.__alloyId56;
-    $.__views.__alloyId57 = Ti.UI.createView({
+    $.__views.win_boffsList.leftNavButton = $.__views.__alloyId61;
+    $.__views.__alloyId62 = Ti.UI.createView({
         layout: "vertical",
-        id: "__alloyId57"
+        id: "__alloyId62"
     });
-    $.__views.win_boffsList.add($.__views.__alloyId57);
-    var __alloyId58 = [];
+    $.__views.win_boffsList.add($.__views.__alloyId62);
+    var __alloyId63 = [];
     $.__views.scrollableview_mainContactsView = Ti.UI.createScrollableView({
-        views: __alloyId58,
+        views: __alloyId63,
         showPagingControl: "true",
         id: "scrollableview_mainContactsView"
     });
-    $.__views.__alloyId57.add($.__views.scrollableview_mainContactsView);
+    $.__views.__alloyId62.add($.__views.scrollableview_mainContactsView);
     changeRightNavButton ? $.__views.scrollableview_mainContactsView.addEventListener("scrollend", changeRightNavButton) : __defers["$.__views.scrollableview_mainContactsView!scrollend!changeRightNavButton"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);

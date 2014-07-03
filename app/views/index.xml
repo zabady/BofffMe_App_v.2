@@ -24,18 +24,8 @@
 		
 		
 		<!-- Tab 3 -->
-		<Tab title="Tab 3" icon="/images/love-7aram.png">
-			<Window title="Tab 3">
-				
-				<RightNavButton>
-					<Button class="settingsBtn" onClick="settingsClicked" />
-				</RightNavButton>
-				<LeftNavButton>
-					<ImageView class="logo"/>
-				</LeftNavButton>
-				
-				<Label>I am Window 2</Label>
-			</Window>
+		<Tab title="Notifications" icon="/images/love-7aram.png">
+			<Require id="notificationCenterWin" src="notificationCenterWin" type="view" />
 		</Tab>
 		
 	</TabGroup>

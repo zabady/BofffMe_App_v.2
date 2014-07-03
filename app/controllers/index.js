@@ -46,3 +46,10 @@ if(OS_IOS){
 else if(OS_ANDROID) { 
 	$.tabGroup.open();
 }
+
+// Defining and adding a function to globals that sets the active tab to notification center.
+// Used in push notification callback function defined in (pushNotificationAPIs.js)
+Alloy.Globals.OpenNotificationCenter = function SetActiveTabToNotifications() {
+	if($.tabGroup.activeTab.title == "Notifications") Alloy.Globals.LoadNotifications();
+	else $.tabGroup.setActiveTab(2);
+};

@@ -1,15 +1,15 @@
 function Controller() {
-    function __alloyId14() {
-        $.__views.tabGroup.removeEventListener("open", __alloyId14);
+    function __alloyId9() {
+        $.__views.tabGroup.removeEventListener("open", __alloyId9);
         if ($.__views.tabGroup.activity) $.__views.tabGroup.activity.onCreateOptionsMenu = function(e) {
-            var __alloyId13 = {
+            var __alloyId8 = {
                 icon: "/images/icon_settings.png",
                 showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM,
-                id: "__alloyId12"
+                id: "__alloyId7"
             };
-            $.__views.__alloyId12 = e.menu.add(_.pick(__alloyId13, Alloy.Android.menuItemCreateArgs));
-            $.__views.__alloyId12.applyProperties(_.omit(__alloyId13, Alloy.Android.menuItemCreateArgs));
-            settingsClicked ? $.__views.__alloyId12.addEventListener("click", settingsClicked) : __defers["$.__views.__alloyId12!click!settingsClicked"] = true;
+            $.__views.__alloyId7 = e.menu.add(_.pick(__alloyId8, Alloy.Android.menuItemCreateArgs));
+            $.__views.__alloyId7.applyProperties(_.omit(__alloyId8, Alloy.Android.menuItemCreateArgs));
+            settingsClicked ? $.__views.__alloyId7.addEventListener("click", settingsClicked) : __defers["$.__views.__alloyId7!click!settingsClicked"] = true;
         }; else {
             Ti.API.warn("You attempted to attach an Android Menu to a lightweight Window");
             Ti.API.warn("or other UI component which does not have an Android activity.");
@@ -59,28 +59,14 @@ function Controller() {
         id: "__alloyId3"
     });
     __alloyId0.push($.__views.__alloyId3);
-    $.__views.__alloyId5 = Ti.UI.createWindow({
-        backgroundColor: "white",
-        title: "Tab 3",
-        id: "__alloyId5"
+    $.__views.notificationCenterWin = Alloy.createController("notificationCenterWin", {
+        id: "notificationCenterWin"
     });
-    $.__views.__alloyId7 = Ti.UI.createButton({
-        id: "__alloyId7"
-    });
-    settingsClicked ? $.__views.__alloyId7.addEventListener("click", settingsClicked) : __defers["$.__views.__alloyId7!click!settingsClicked"] = true;
-    $.__views.__alloyId5.rightNavButton = $.__views.__alloyId7;
-    $.__views.__alloyId9 = Ti.UI.createImageView({
-        id: "__alloyId9"
-    });
-    $.__views.__alloyId5.leftNavButton = $.__views.__alloyId9;
-    $.__views.__alloyId10 = Ti.UI.createLabel({
-        text: "I am Window 2",
-        id: "__alloyId10"
-    });
-    $.__views.__alloyId5.add($.__views.__alloyId10);
     $.__views.__alloyId4 = Ti.UI.createTab({
-        window: $.__views.__alloyId5,
-        title: "Tab 3",
+        window: $.__views.notificationCenterWin.getViewEx({
+            recurse: true
+        }),
+        title: "Notifications",
         icon: "/images/love-7aram.png",
         id: "__alloyId4"
     });
@@ -89,13 +75,18 @@ function Controller() {
         tabs: __alloyId0,
         id: "tabGroup"
     });
-    $.__views.tabGroup.addEventListener("open", __alloyId14);
+    $.__views.tabGroup.addEventListener("open", __alloyId9);
     $.__views.tabGroup && $.addTopLevelView($.__views.tabGroup);
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.tabGroup.open();
+    Alloy.Globals.OpenNotificationCenter = function() {
+        if ("Notifications" == $.tabGroup.activeTab.title) {
+            Alloy.Globals.LoadNotifications();
+            alert("not gdida");
+        } else $.tabGroup.setActiveTab(2);
+    };
     __defers["$.__views.__alloyId7!click!settingsClicked"] && $.__views.__alloyId7.addEventListener("click", settingsClicked);
-    __defers["$.__views.__alloyId12!click!settingsClicked"] && $.__views.__alloyId12.addEventListener("click", settingsClicked);
     _.extend($, exports);
 }
 

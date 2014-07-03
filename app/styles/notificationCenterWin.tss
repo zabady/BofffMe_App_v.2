@@ -1,0 +1,22 @@
+"ListView": {
+	separatorColor: "#2279bc",
+	// separatorStyle: Titanium.UI.iPhone.ListViewSeparatorStyle.SINGLE_LINE,
+},
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////// OBJECTS STYLES 
+"#icon": {
+    width: '75', height: '75', left: 0
+},
+"#title": {
+    color: "#2279bc",
+    font: { fontFamily:'Arial', fontSize: '18dp', fontWeight:'bold' },
+    left: '90',
+    top: 4,
+},
+"#subtitle": {
+    color: 'black',
+    font: { fontFamily:'Arial', fontSize: '14dp' },
+    left: '90', top: 29,
+    width: "70%",
+}
