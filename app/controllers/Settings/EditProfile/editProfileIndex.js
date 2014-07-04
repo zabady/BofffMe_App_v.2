@@ -3,7 +3,7 @@
  */
 
 var args = arguments[0] || {};
-Ti.include("/userDataProcessing.js");	// TODO: Try to remove it
+Ti.include("/editProfileHelper.js");	// TODO: Try to remove it
 
 
 //////////////////////////////////////////////////////////////////////////////////////// EVENT LISTENRES
@@ -31,7 +31,7 @@ function SubmitDataToServer() {
 		// mails_privacy: userDataInArrays.mails_privacy
 	// };
 	
-	var validReturnString = postUserDataUpdatesOnServer(userData, userDataInArrays);	// userDataProcessing.js 
+	var validReturnString = postUserDataUpdatesOnServer(userData, userDataInArrays);	// editProfileHelper.js 
 	if(validReturnString.search("Wrong") >= 0) alert(validReturnString);
 	// TODO: Close the window when done
 	// $.win.close();

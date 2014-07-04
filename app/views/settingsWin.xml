@@ -53,11 +53,6 @@
 			<!------------------------------------ Horizontal Line for Android -->
 			<TableViewRow platform="android" height="1" backgroundColor="black" />
 			
-			<!-- Change User Pin Window (DEBUG MODE) -->
-			<TableViewRow window="SubscribeToPushNotification">
-				<Label window="SubscribeToPushNotification">Subscribe to Push Notifications (DEBUG)</Label>
-			</TableViewRow>
-			
 		</TableView>
 		
 	</Window>

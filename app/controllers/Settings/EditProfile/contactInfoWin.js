@@ -1,8 +1,8 @@
-Ti.include("/userDataProcessing.js");	// Including userDataProcessing APIs
+Ti.include("/editProfileHelper.js");	// Including editProfileHelper APIs
 
 //////////////////////////////////////////////////////////////////////////////////////// INITIALIZING VARIABLES
 // Initialize userDataInArrays here as this is the first required view
-userDataInArrays = convertAddableFieldsToArrays(userData); // Convert the addable fields into arrays	// userDataProcessing.js
+userDataInArrays = convertAddableFieldsToArrays(userData); // Convert the addable fields into arrays	// editProfileHelper.js
 
 var addNewRow = false;	// Used to flag that the add button was clicked
 var addableTextOldValue = "";	// Used to know the old field's value when focused before editing, to get its index in array
@@ -105,7 +105,7 @@ function TableViewRowClicked(e) {
 
 // Event listener for deleting any row of the table view
 function DeletePressed(e) {
-	deleteAddableField(userDataInArrays, e.source.fieldType, e.source.fieldValue);	// userDataProcessing.js
+	deleteAddableField(userDataInArrays, e.source.fieldType, e.source.fieldValue);	// editProfileHelper.js
 }
 
 // Event listener for clicking the primary phone number
@@ -138,12 +138,12 @@ function AndroidEditViewTextChanged(e) {
 
 // Event listener for text change in non addable fields
 function NonAddableTextChanged(e) {
-	changeValueOfNonAddableField(userDataInArrays, e.source.id, e.source.value);	// userDataProcessing.js
+	changeValueOfNonAddableField(userDataInArrays, e.source.id, e.source.value);	// editProfileHelper.js
 }
 
 // Event listener for text change in non addable fields
 function AddableTextChanged(e) {
-	changeValueOfAddableField(userDataInArrays, e.source.fieldType, addableTextOldValue, e.source.value);	// userDataProcessing.js
+	changeValueOfAddableField(userDataInArrays, e.source.fieldType, addableTextOldValue, e.source.value);	// editProfileHelper.js
 	addableTextOldValue = e.source.value;
 }
 
@@ -165,8 +165,8 @@ function SelectedPrivacyChanged(e) {
 	}
 	
 	if(clickedPrivacyLabel.id) // Non addable field
-		changePrivacyOfNonAddableField(userDataInArrays, clickedPrivacyLabel.id, newPrivacy);	// userDataProcessing.js
-	else changePrivacyOfAddableField(userDataInArrays, clickedPrivacyLabel.fieldType, clickedPrivacyLabel.text, newPrivacy);	// userDataProcessing.js
+		changePrivacyOfNonAddableField(userDataInArrays, clickedPrivacyLabel.id, newPrivacy);	// editProfileHelper.js
+	else changePrivacyOfAddableField(userDataInArrays, clickedPrivacyLabel.fieldType, clickedPrivacyLabel.text, newPrivacy);	// editProfileHelper.js
 		
 	clickedPrivacyLabel.text = newPrivacy; 	// Apply this change to the privacy label's text
 }

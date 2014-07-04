@@ -160,12 +160,7 @@ function receivePushNotification(e)
 	Titanium.App.Properties.setObject('notifications', allNotifications);
 	Alloy.Globals.OpenNotificationCenter();
 	
-	// TODO: Save notification in properties to display them in notification center
-	
-    //alert('Received push: ' + payload.customField);
-    //alert(payload);
-    //alert(payload.android.alert);
-    //resetBadge();
+    resetBadge();	// Reset the badge to zero
 }
 
 // Callback function after getting device token successfully				// PRIVATE FUNCTION
