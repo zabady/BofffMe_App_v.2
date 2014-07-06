@@ -26,33 +26,33 @@ function Controller() {
         useSpinner: "true"
     });
     $.__views.pickerView.add($.__views.picker);
-    var __alloyId167 = [];
-    $.__views.__alloyId168 = Ti.UI.createPickerRow({
+    var __alloyId165 = [];
+    $.__views.__alloyId166 = Ti.UI.createPickerRow({
         title: "public",
+        id: "__alloyId166"
+    });
+    __alloyId165.push($.__views.__alloyId166);
+    $.__views.__alloyId167 = Ti.UI.createPickerRow({
+        title: "friends",
+        id: "__alloyId167"
+    });
+    __alloyId165.push($.__views.__alloyId167);
+    $.__views.__alloyId168 = Ti.UI.createPickerRow({
+        title: "favorites",
         id: "__alloyId168"
     });
-    __alloyId167.push($.__views.__alloyId168);
+    __alloyId165.push($.__views.__alloyId168);
     $.__views.__alloyId169 = Ti.UI.createPickerRow({
-        title: "friends",
+        title: "onlyMe",
         id: "__alloyId169"
     });
-    __alloyId167.push($.__views.__alloyId169);
+    __alloyId165.push($.__views.__alloyId169);
     $.__views.__alloyId170 = Ti.UI.createPickerRow({
-        title: "favorites",
+        title: "                                             ",
         id: "__alloyId170"
     });
-    __alloyId167.push($.__views.__alloyId170);
-    $.__views.__alloyId171 = Ti.UI.createPickerRow({
-        title: "onlyMe",
-        id: "__alloyId171"
-    });
-    __alloyId167.push($.__views.__alloyId171);
-    $.__views.__alloyId172 = Ti.UI.createPickerRow({
-        title: "                                             ",
-        id: "__alloyId172"
-    });
-    __alloyId167.push($.__views.__alloyId172);
-    $.__views.picker.add(__alloyId167);
+    __alloyId165.push($.__views.__alloyId170);
+    $.__views.picker.add(__alloyId165);
     $.__views.transparentView2 = Ti.UI.createView({
         id: "transparentView2",
         opacity: "0.4",

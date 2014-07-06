@@ -39,11 +39,10 @@ function Controller() {
         id: "qrCodeWin"
     });
     $.__views.__alloyId1 = Ti.UI.createTab({
+        icon: Ti.App.Android.R.drawable.qrcodeicon2,
         window: $.__views.qrCodeWin.getViewEx({
             recurse: true
         }),
-        title: "QR Code",
-        icon: "/images/QR-code-7aram.png",
         id: "__alloyId1"
     });
     __alloyId0.push($.__views.__alloyId1);
@@ -51,11 +50,10 @@ function Controller() {
         id: "contactsWin"
     });
     $.__views.__alloyId3 = Ti.UI.createTab({
+        icon: Ti.App.Android.R.drawable.contacticon,
         window: $.__views.contactsWin.getViewEx({
             recurse: true
         }),
-        title: "Contacts",
-        icon: "/images/man-7aram.png",
         id: "__alloyId3"
     });
     __alloyId0.push($.__views.__alloyId3);
@@ -63,11 +61,10 @@ function Controller() {
         id: "notificationCenterWin"
     });
     $.__views.__alloyId4 = Ti.UI.createTab({
+        icon: Ti.App.Android.R.drawable.notificationicon,
         window: $.__views.notificationCenterWin.getViewEx({
             recurse: true
         }),
-        title: "Notifications",
-        icon: "/images/love-7aram.png",
         id: "__alloyId4"
     });
     __alloyId0.push($.__views.__alloyId4);
@@ -81,10 +78,7 @@ function Controller() {
     _.extend($, $.__views);
     $.tabGroup.open();
     Alloy.Globals.OpenNotificationCenter = function() {
-        if ("Notifications" == $.tabGroup.activeTab.title) {
-            Alloy.Globals.LoadNotifications();
-            alert("not gdida");
-        } else $.tabGroup.setActiveTab(2);
+        "Notifications" == $.tabGroup.activeTab.window.title ? Alloy.Globals.LoadNotifications() : $.tabGroup.setActiveTab(2);
     };
     __defers["$.__views.__alloyId7!click!settingsClicked"] && $.__views.__alloyId7.addEventListener("click", settingsClicked);
     _.extend($, exports);

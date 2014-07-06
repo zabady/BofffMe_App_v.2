@@ -1,5 +1,5 @@
 <Alloy>
-    <Window backgroundColor="white" onFocus="LoadNotifications">
+    <Window title="Notifications" backgroundColor="white" onFocus="LoadNotifications">
     	
     	<RightNavButton>
 			<Button id="btn_settings" class="settingsBtn"/>

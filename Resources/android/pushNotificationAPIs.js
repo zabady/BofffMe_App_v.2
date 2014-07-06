@@ -58,10 +58,7 @@ function NotifySpecificUserFriendWithMessage(message, channelName, deviceToken) 
 function receivePushNotification(e) {
     var payload = JSON.parse(e.payload);
     var allNotifications = Titanium.App.Properties.getObject("notifications", []);
-    if (allNotifications.length >= 10) {
-        allNotifications.splice(0, 1);
-        alert("Remove first notification");
-    }
+    allNotifications.length >= 25 && allNotifications.splice(0, 1);
     var newNotification = {
         notificationTitle: payload.notificationTitle,
         notificationMessage: payload.notificationMessage,
@@ -70,6 +67,7 @@ function receivePushNotification(e) {
     allNotifications.push(newNotification);
     Titanium.App.Properties.setObject("notifications", allNotifications);
     Alloy.Globals.OpenNotificationCenter();
+    resetBadge();
 }
 
 function deviceTokenSuccess(e) {

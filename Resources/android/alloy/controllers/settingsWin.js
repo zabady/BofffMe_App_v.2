@@ -172,22 +172,6 @@ function Controller() {
         id: "__alloyId47"
     });
     __alloyId29.push($.__views.__alloyId47);
-    $.__views.__alloyId48 = Ti.UI.createTableViewRow({
-        window: "SubscribeToPushNotification",
-        id: "__alloyId48"
-    });
-    __alloyId29.push($.__views.__alloyId48);
-    $.__views.__alloyId49 = Ti.UI.createLabel({
-        font: {
-            fontSize: "24"
-        },
-        color: "black",
-        height: "60",
-        text: "Subscribe to Push Notifications (DEBUG)",
-        window: "SubscribeToPushNotification",
-        id: "__alloyId49"
-    });
-    $.__views.__alloyId48.add($.__views.__alloyId49);
     $.__views.__alloyId28 = Ti.UI.createTableView({
         top: "23%",
         rowHeight: 60,

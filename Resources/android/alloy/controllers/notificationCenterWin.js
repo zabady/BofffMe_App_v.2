@@ -49,6 +49,7 @@ function Controller() {
     var __defers = {};
     $.__views.notificationCenterWin = Ti.UI.createWindow({
         backgroundColor: "white",
+        title: "Notifications",
         id: "notificationCenterWin"
     });
     $.__views.notificationCenterWin && $.addTopLevelView($.__views.notificationCenterWin);

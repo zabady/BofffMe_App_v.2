@@ -12,19 +12,19 @@
 		
 		
 		<!-- Tab 1 : QrCode Window -->
-		<Tab title="QR Code" icon="/images/QR-code-7aram.png">
+		<Tab class="tab1Style" >
     		<Require id="qrCodeWin" src="qrCodeWin" type="view" />
         </Tab>
         
         
         <!-- Tab 2 : Contacts Window -->
-        <Tab title="Contacts" icon="/images/man-7aram.png">
+        <Tab class="tab2Style" >
     		<Require id="contactsWin" src="Contacts/coreContactsWin" type="view" />
         </Tab>
 		
 		
 		<!-- Tab 3 -->
-		<Tab title="Notifications" icon="/images/love-7aram.png">
+		<Tab class="tab3Style" >
 			<Require id="notificationCenterWin" src="notificationCenterWin" type="view" />
 		</Tab>
 		
