@@ -1,0 +1,11 @@
+<Alloy>
+	<Window id="win">
+		<View>
+
+			<Label>WELCOME TO BOFFF ME!</Label>
+			<ImageView />
+			<Button onClick="openPhoneNumberWin">Continue</Button>
+
+		</View>
+	</Window>
+</Alloy>

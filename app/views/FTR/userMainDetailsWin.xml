@@ -1,0 +1,38 @@
+<Alloy>
+	<Window class="container" id="win">
+
+		<ScrollView id="scrollView" layout="vertical" scrollingEnabled="false" >
+			
+			<Label class="allStyles" platform="android">Enter Your Details</Label>
+			
+			<ImageView id="img_facebook" onClick="facebookImgPressed" />
+			
+			<Label class="allStyles">OR</Label>
+			
+			<View width="200" height="100"><ImageView id="img_user" onClick="imgPressed" /></View>
+			
+			<TextField id="txt_name" class="allStyles" onReturn="txtNameReturnKeyPressed" onFocus="allowScroll" onBlur="disableScroll"/>
+			
+			<TextField id="txt_email" class="allStyles" onFocus="allowScroll" onBlur="disableScroll"></TextField>
+			
+			<View layout="horizontal" height="Ti.UI.SIZE" width="Ti.UI.SIZE">
+				<Label class="genderLabelsStyle" id="lbl_gender_male" textAlign="right">Male  </Label>
+				<ImageView id="img_gender_male" onClick="genderSelected" />
+				<ImageView id="img_gender_female" onClick="genderSelected" />
+				<Label class="genderLabelsStyle" id="lbl_gender_female" textAlign="left">Female</Label>
+			</View>
+			
+			<Button onClick="continueBtnPressed">Continue</Button>
+			
+		</ScrollView>
+		
+		<OptionDialog id="optionDialog" cancel="2" onClick="optionDialogClick">
+			<Options>
+				<Option>Open Camera</Option>
+				<Option>Choose from Library</Option>
+				<Option>Cancel</Option>
+			</Options>
+		</OptionDialog>
+		
+	</Window>
+</Alloy>

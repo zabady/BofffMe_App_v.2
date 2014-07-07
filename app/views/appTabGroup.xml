@@ -1,0 +1,33 @@
+<Alloy>
+	
+	<Require id="settingsWin" src="settingsWin" type="view" platform="ios" />
+	
+	<TabGroup id="tabGroup">
+		
+		<!-- Android Menu -->
+		<Menu platform="android">
+            <!-- Cannot specify node text.  Use attributes only. -->
+            <MenuItem icon="/images/icon_settings.png" onClick="settingsClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
+        </Menu>
+		
+		
+		<!-- Tab 1 : QrCode Window -->
+		<Tab class="tab1Style" >
+    		<Require id="qrCodeWin" src="qrCodeWin" type="view" />
+        </Tab>
+        
+        
+        <!-- Tab 2 : Contacts Window -->
+        <Tab class="tab2Style" >
+    		<Require id="contactsWin" src="Contacts/coreContactsWin" type="view" />
+        </Tab>
+		
+		
+		<!-- Tab 3 -->
+		<Tab class="tab3Style" >
+			<Require id="notificationCenterWin" src="notificationCenterWin" type="view" />
+		</Tab>
+		
+	</TabGroup>
+	
+</Alloy>

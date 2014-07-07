@@ -4,14 +4,16 @@ function LoadNotifications()
 {
 	// Getting all notifications array from properties (saved in callback function of receiving push notifcation, pushNotifcationAPIs.js)
 	var allNotifications = Titanium.App.Properties.getObject('notifications');
-	
 	// Creating the main list section that will contain all listItems (all notifications)
 	var mainSection = Ti.UI.createListSection({ headerTitle: 'All Notifications'});
 	
 	// If the user didn't receive any notification yet, show 'no notifications' on a list item
 	if(!allNotifications) {
-		alert("allNotifications is empty !");
-		var listItems = [ {notificationTitle: {text: 'No Notifications'}, message: {text: 'No friend updates, you will be notified when one of your friends updates his profile.' } } ];
+		var listItems = [{
+			notificationTitle: {text: 'No Notifications'},
+			message: {text: 'No friend updates, you will be notified when one of your friends updates his profile.' },
+			properties: { height : 90 },
+		}];
 	} else {
 		
 		// Create listItems array containg all the notifications
@@ -38,3 +40,5 @@ function LoadNotifications()
 
 // We add it to Globals in order to be fired in the case that the device receives a new notification and the tab is active
 Alloy.Globals.LoadNotifications = LoadNotifications;
+
+LoadNotifications();

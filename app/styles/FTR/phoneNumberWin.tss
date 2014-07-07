@@ -1,0 +1,42 @@
+/////////////////////////////////////////////////////// Objects common styles
+"Window": {
+	exitOnClose: true,
+},
+"Label": {
+	top: "8%",
+	color: "#2279bc",
+	textAlign: "center",
+	width: "75%",
+	font: { fontSize: "15" },
+},
+"TextField": {
+	top: "5",
+	width: "85%",
+	font: { fontSize: "15" },
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	keyboardType : Ti.UI.KEYBOARD_PHONE_PAD,
+},
+"TextField[platform=android]": {
+	width: "80%",
+	height: "42",
+}
+"Button": {
+	top: 20,
+	color: "white",
+	backgroundColor: "#2279bc",
+	borderRadius: 5,
+	font: {fontSize: "15", fontWeight: "bold"},
+	height: "40",
+	width: "50%",
+	bubbleParent: false,
+},
+"Picker": {
+	 selectionIndicator: true,
+	 width: "80%",
+	 height: "42",
+},
+"Picker[platform=ios]": {
+	bottom: 0,
+	bubbleParent: false,
+	visible: false,
+}

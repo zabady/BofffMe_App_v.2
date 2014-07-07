@@ -1,0 +1,19 @@
+<Alloy>
+	<Window class="container" id="win" title="SMS Confirmation">
+
+		<View layout="vertical">
+			
+			<Label class="allStyles" id="lbl_gotYourCode" text="Got your code ?\nJust COPY it."></Label>
+		
+			<TextField class="allStyles" id="txt_SMSCode" onChange="onChangeSMSCodeTxtField"></TextField>
+			
+			<Button class="allStyles" id="btn_continue" title="Continue" onClick="continueBtnPressed" enabled="false"></Button>
+			
+			<Label class="allStyles">A code was sent to you via SMS.</Label>
+			
+			<Label class="allStyles">It can take up to a minute, thank you for your patience.</Label>
+			
+		</View>
+		
+	</Window>
+</Alloy>

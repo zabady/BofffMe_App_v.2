@@ -16,15 +16,15 @@ function Controller() {
         id: "view_customField"
     });
     $.__views.view_customField && $.addTopLevelView($.__views.view_customField);
-    $.__views.__alloyId78 = Ti.UI.createView({
+    $.__views.__alloyId81 = Ti.UI.createView({
         backgroundColor: "#2279bc",
         top: 0,
         width: "100%",
         height: Ti.UI.SIZE,
-        id: "__alloyId78"
+        id: "__alloyId81"
     });
-    $.__views.view_customField.add($.__views.__alloyId78);
-    $.__views.__alloyId79 = Ti.UI.createLabel({
+    $.__views.view_customField.add($.__views.__alloyId81);
+    $.__views.__alloyId82 = Ti.UI.createLabel({
         color: "black",
         left: "10",
         width: Ti.UI.SIZE,
@@ -33,9 +33,9 @@ function Controller() {
             fontSize: "20dp"
         },
         text: "Custom Field",
-        id: "__alloyId79"
+        id: "__alloyId82"
     });
-    $.__views.__alloyId78.add($.__views.__alloyId79);
+    $.__views.__alloyId81.add($.__views.__alloyId82);
     $.__views.img_closeCustomView = Ti.UI.createImageView({
         id: "img_closeCustomView",
         image: "/images/close-icon.png",
@@ -43,13 +43,13 @@ function Controller() {
         height: "40",
         width: "40"
     });
-    $.__views.__alloyId78.add($.__views.img_closeCustomView);
+    $.__views.__alloyId81.add($.__views.img_closeCustomView);
     $.__views.txt_customField = Ti.UI.createTextField({
+        bubbleParent: "false",
         id: "txt_customField",
         hintText: "Type in the custom attribute",
         height: Ti.UI.SIZE,
-        width: "90%",
-        bubbleParent: "false"
+        width: "90%"
     });
     $.__views.view_customField.add($.__views.txt_customField);
     exports.destroy = function() {};

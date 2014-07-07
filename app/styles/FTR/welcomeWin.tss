@@ -1,0 +1,44 @@
+"Window": {
+	exitOnClose: true,
+},
+"Window[platform=android]": {
+	backgroundGradient: {
+        type: 'linear',
+        startPoint: { x: '50%', y: '0%' },
+        endPoint: { x: '50%', y: '100%' },
+        colors: [ { color: '#6abede', offset: 0.0}, { color: '#3592b5', offset: 0.4 }, { color: '#136b8c', offset: 0.8 } ],
+    }
+},
+"Window[platform=ios]": {
+	backgroundGradient: {
+        type: 'linear',
+        startPoint: { x: '50%', y: '0%' },
+        endPoint: { x: '50%', y: '100%' },
+        colors: [ { color: '#58c8f3', offset: 0.0}, { color: '#41bae8', offset: 0.4 }, { color: '#2585b7', offset: 0.9 } ],
+    }
+}
+
+"Label": {
+	left: 10,
+	top:"5%",
+	width: Ti.UI.SIZE,
+	height: Ti.UI.SIZE,
+	color: "white",
+	font: { fontSize: "18" },
+} 
+
+"ImageView": {
+	image: "/images/bofffme_logo_512x512.png",
+	width: "200",
+	height: "200",
+	top: "25%",
+}
+
+"Button":{
+	bottom: 0,
+	font: {fontSize: "22", fontWeight: "bold"},
+	height: "10%",
+	width: "100%",
+	backgroundColor: "transparent",
+	color: "white",
+}

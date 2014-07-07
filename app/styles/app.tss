@@ -11,6 +11,13 @@
 	//tabsTintColor: "green",
 	//barColor: 'blue',
 	//tabsBackgroundColor: "transparent",
+},
+"TextField":{
+	bubbleParent: false,
+}
+"TextField[platform=android]": {
+	color: "white",
+	softKeyboardOnFocus: Ti.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS,
 }
 
 

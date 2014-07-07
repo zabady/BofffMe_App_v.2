@@ -9,8 +9,8 @@ function Controller() {
     var __defers = {};
     exports.destroy = function() {};
     _.extend($, $.__views);
-    __defers["$.__views.__alloyId124!click!Zeby"] && $.__views.__alloyId124.addEventListener("click", Zeby);
-    __defers["$.__views.__alloyId126!click!Zeby"] && $.__views.__alloyId126.addEventListener("click", Zeby);
+    __defers["$.__views.__alloyId152!click!Zeby"] && $.__views.__alloyId152.addEventListener("click", Zeby);
+    __defers["$.__views.__alloyId154!click!Zeby"] && $.__views.__alloyId154.addEventListener("click", Zeby);
     _.extend($, exports);
 }
 

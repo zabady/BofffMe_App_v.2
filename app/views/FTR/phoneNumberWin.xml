@@ -1,0 +1,31 @@
+<Alloy>
+	<Window id="win" title="Bofff Me Setup">
+		
+		<View layout="vertical">
+		
+			<Label>Type in your phone number</Label>
+			
+			<TextField top="20" platform="ios" id="txt_country_ios" class="entryFields" onFocus="openPicker" />
+			<Picker top="20" platform="android" id="picker" onChange="changeCountryAndCountryCode" />
+			
+			<TextField class="entryFields" id="txt_phoneNumber" hintText="Phone Number without country code" />
+		
+			<Button onClick="continueBtnPressed">Continue</Button>
+			
+			<Label color="gray">
+				Keep your bofff friends in sync with your contact list by registering your phone number.
+			</Label>
+			
+		</View>
+		
+		<Picker platform="ios" id="picker" onChange="changeCountryAndCountryCode" />
+		
+		<AlertDialog id="dialog_confirm" onClick="dialogConfirmPressed" title="Confirm your number">
+            <ButtonNames>
+                <ButtonName>Edit</ButtonName>
+                <ButtonName>Confirm</ButtonName>
+            </ButtonNames>
+        </AlertDialog>
+		
+	</Window>
+</Alloy>

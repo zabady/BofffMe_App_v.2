@@ -1,55 +1,3 @@
-function deleteNumber(id, value) {
-    Ti.API.info("deleteNumber");
-    var contact = Titanium.Contacts.getPersonByID(id);
-    var phone = contact.phone;
-    var phoneAfterDeletion = {};
-    for (var key in phone) for (var number in phone[key]) {
-        var phoneNumber = phone[key][number];
-        var trimmedPhoneNumber = "";
-        var expression = /^\d+$/;
-        if (expression.test(phoneNumber)) trimmedPhoneNumber = phoneNumber; else for (var digit in phoneNumber) expression.test(phoneNumber[digit]) && (trimmedPhoneNumber += phoneNumber[digit]);
-        if (trimmedPhoneNumber != value) try {
-            phoneAfterDeletion[key].push(trimmedPhoneNumber);
-        } catch (error) {
-            phoneAfterDeletion[key] = [ trimmedPhoneNumber ];
-        }
-    }
-    contact.phone = phoneAfterDeletion;
-    saveUpdate(contact);
-}
-
-function deleteEmail(id, value) {
-    Ti.API.info("deleteEmail");
-    var contact = Titanium.Contacts.getPersonByID(id);
-    var email = contact.email;
-    var emailAfterDeletion = {};
-    for (var key in email) for (var record in email[key]) if (email[key][record] != value) try {
-        emailAfterDeletion[key].push(email[key][record]);
-    } catch (error) {
-        emailAfterDeletion[key] = [ email[key][record] ];
-    }
-    contact.email = emailAfterDeletion;
-    saveUpdate(contact);
-}
-
-function deleteSocialLink(id, value) {
-    Ti.API.info("deleteSocialLink");
-    value = value.replace("http://", "");
-    var contact = Titanium.Contacts.getPersonByID(id);
-    var url = contact.url;
-    var urlAfterDeletion = {};
-    for (var key in url) for (var record in url[key]) {
-        url[key][record] = url[key][record].replace("http://", "");
-        if (url[key][record] != value) try {
-            urlAfterDeletion[key].push(url[key][record]);
-        } catch (error) {
-            urlAfterDeletion[key] = [ url[key][record] ];
-        }
-    }
-    contact.url = urlAfterDeletion;
-    saveUpdate(contact);
-}
-
 function addAddress(id, key, street, city, country) {
     Ti.API.info("addAddress");
     var contact = Titanium.Contacts.getPersonByID(id);
@@ -448,7 +396,7 @@ function parsingUpdateString(updateString, addOrDelete, userFriendAppId, bofffsS
     InitializeContact(bofffsData[userFriendAppId].contact_id);
     var stringLines = updateString.split("\n");
     var stringObjects = {};
-    for (var line in stringLines) if ("" != stringLines[line]) {
+    for (var line in stringLines) if ("" != stringLines[line] && null != stringLines[line]) {
         var stringColon = stringLines[line].split(Alloy.Globals.splitValue);
         stringObjects[stringColon[0]] = stringColon[1];
         determineAndApplyUpdate(stringColon[0], stringObjects, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData);

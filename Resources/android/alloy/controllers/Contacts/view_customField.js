@@ -45,11 +45,13 @@ function Controller() {
     });
     $.__views.__alloyId90.add($.__views.img_closeCustomView);
     $.__views.txt_customField = Ti.UI.createTextField({
+        bubbleParent: "false",
+        color: "white",
+        softKeyboardOnFocus: Ti.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS,
         id: "txt_customField",
         hintText: "Type in the custom attribute",
         height: Ti.UI.SIZE,
-        width: "90%",
-        bubbleParent: "false"
+        width: "90%"
     });
     $.__views.view_customField.add($.__views.txt_customField);
     exports.destroy = function() {};

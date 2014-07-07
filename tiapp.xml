@@ -44,8 +44,15 @@
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <manifest>
+            <!-- Permission to read and write contacts from and into phonebook -->
             <uses-permission android:name="android.permission.READ_CONTACTS"/>
             <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+            <!-- Supporting only portrait mode for android -->
+            <application>
+                <activity android:configChanges="keyboardHidden"
+                    android:name="org.appcelerator.titanium.TiActivity" android:screenOrientation="portrait"/>
+                <activity android:configChanges="keyboardHidden" android:name="ti.modules.titanium.ui.TiTabActivity"/>
+            </application>
         </manifest>
     </android>
     <mobileweb>
@@ -62,6 +69,8 @@
         <module platform="iphone">ti.barcode</module>
         <module platform="android">ti.barcode</module>
         <module platform="android">ti.cloudpush</module>
+        <module platform="android">facebook</module>
+        <module platform="iphone">facebook</module>
     </modules>
     <deployment-targets>
         <target device="android">true</target>

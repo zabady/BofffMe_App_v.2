@@ -1,0 +1,77 @@
+/////////////////////////////////////////////////////// Objects common styles
+"Window": {
+	exitOnClose: true,
+},
+"Window[platform=android]": {
+	title: "Bofff Me Setup",
+},
+"Window[platform=ios]": {
+	title: "Enter Your Details",
+},
+"ScrollView": {
+	height: Ti.UI.SIZE,
+	top: "10dp",
+},
+"Button": {
+	top: "10dp",
+	borderRadius: 5,
+	font: {fontSize: "16dp", fontWeight: "bold"},
+	height: "40dp",
+	width: "55%",
+	backgroundColor: "#2279bc", // Dark Blue
+	color: "white",
+	bubbleParent: false,
+},
+"Label": {
+	font: {fontSize: "17dp"},
+	color: "#2279bc", // Dark blue
+}
+
+
+/////////////////////////////////////////////////////// Class Styles
+	".allStyles": {
+		width: "75%",
+		top: "8dp",
+		height: Ti.UI.SIZE,
+		textAlign: "center",
+		borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED, // For text fields
+	},
+	".genderLabelsStyle": {
+		width: "75",
+		color: "gray",
+	}
+
+
+/////////////////////////////////////////////////////// Specific Styles
+	"#img_facebook": {
+		top: "10",
+		bottom: "12",
+		height: "40",
+		width: "200",
+		image: "/images/facebook_btn.png",
+	},
+	"#img_user": {
+		top: "12",
+		height :"100",
+		width: "100",
+	    image: "/images/contact_photo.png",
+	},
+	"#txt_name": {
+		hintText: "Your Name",
+		returnKeyType: Ti.UI.RETURNKEY_NEXT,
+	},
+	"#txt_email": {
+		hintText: "Your email",
+		keyboardType: Ti.UI.KEYBOARD_EMAIL,
+		returnKeyType: Ti.UI.RETURNKEY_DONE,
+	},
+	"#img_gender_male": {
+		image: "/images/gender_male[shaded].png",
+		width: "75",
+		height: "75",
+	},
+	"#img_gender_female": {
+		image: "/images/gender_female[shaded].png",
+		width: "75",
+		height: "75",
+	}
