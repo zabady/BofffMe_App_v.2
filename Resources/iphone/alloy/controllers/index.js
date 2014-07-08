@@ -10,7 +10,7 @@ function Controller() {
     _.extend($, $.__views);
     var appOrFTRWin;
     var prefixWin = "";
-    appOrFTRWin = firstTime ? Alloy.createController(prefixWin + "FTR/index").getView() : Alloy.createController(prefixWin + "appTabGroup").getView();
+    appOrFTRWin = Alloy.Globals.firstTimeRun ? Alloy.createController(prefixWin + "FTR/index").getView() : Alloy.createController(prefixWin + "appTabGroup").getView();
     _.extend($, exports);
 }
 

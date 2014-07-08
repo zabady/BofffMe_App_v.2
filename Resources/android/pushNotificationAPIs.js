@@ -1,3 +1,7 @@
+function GetDeviceToken() {
+    return deviceToken;
+}
+
 function SetPushNotificationAndGetDeviceToken() {
     CloudPush.retrieveDeviceToken({
         success: deviceTokenSuccess,
@@ -73,7 +77,7 @@ function receivePushNotification(e) {
 function deviceTokenSuccess(e) {
     CloudPush.enabled = true;
     deviceToken = e.deviceToken;
-    alert("Got device token: " + e.deviceToken);
+    Ti.API.info("Got device token: " + e.deviceToken);
 }
 
 function deviceTokenError(e) {

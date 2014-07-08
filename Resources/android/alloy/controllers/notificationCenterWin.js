@@ -23,17 +23,17 @@ function Controller() {
                 };
                 listItems.push(notification);
             }
-        } else {
-            alert("allNotifications is empty !");
-            var listItems = [ {
-                notificationTitle: {
-                    text: "No Notifications"
-                },
-                message: {
-                    text: "No friend updates, you will be notified when one of your friends updates his profile."
-                }
-            } ];
-        }
+        } else var listItems = [ {
+            notificationTitle: {
+                text: "No Notifications"
+            },
+            message: {
+                text: "No friend updates, you will be notified when one of your friends updates his profile."
+            },
+            properties: {
+                height: 90
+            }
+        } ];
         mainSection.setItems(listItems);
         var sections = [];
         sections.push(mainSection);
@@ -124,6 +124,7 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     Alloy.Globals.LoadNotifications = LoadNotifications;
+    LoadNotifications();
     __defers["$.__views.notificationCenterWin!focus!LoadNotifications"] && $.__views.notificationCenterWin.addEventListener("focus", LoadNotifications);
     _.extend($, exports);
 }

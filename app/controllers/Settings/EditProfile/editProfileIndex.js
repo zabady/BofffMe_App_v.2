@@ -19,17 +19,6 @@ function EditClicked(e) {
 
 // An event listener to done button that sends the new data to the server after validating it
 function SubmitDataToServer() {
-	// Could be useful
-	// var thisPageData = {
-		// primary_mobile: userDataInArrays.primary_mobile,
-		// primary_mobile_privacy: userDataInArrays.primary_mobile_privacy,
-		// phone_numbers: userDataInArrays.phone_numbers,
-		// phone_numbers_privacy: userDataInArrays.phone_numbers_privacy,
-		// primary_email: userDataInArrays.primary_email,
-		// primary_email_privacy: userDataInArrays.primary_email_privacy,
-		// mails: userDataInArrays.mails,
-		// mails_privacy: userDataInArrays.mails_privacy
-	// };
 	
 	var validReturnString = postUserDataUpdatesOnServer(userData, userDataInArrays);	// editProfileHelper.js 
 	if(validReturnString.search("Wrong") >= 0) alert(validReturnString);

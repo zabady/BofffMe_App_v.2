@@ -1,4 +1,10 @@
 function Controller() {
+    function continueClicked() {
+        if (Alloy.Globals.countryCode) openPhoneNumberWin(); else {
+            continueBtnClicked = true;
+            Alloy.Globals.loading.show("Please Wait ..", false);
+        }
+    }
     function openPhoneNumberWin() {
         var phoneNumberWin = Alloy.createController("FTR/phoneNumberWin").getView();
         phoneNumberWin.open({
@@ -79,12 +85,30 @@ function Controller() {
         id: "__alloyId116"
     });
     $.__views.__alloyId113.add($.__views.__alloyId116);
-    openPhoneNumberWin ? $.__views.__alloyId116.addEventListener("click", openPhoneNumberWin) : __defers["$.__views.__alloyId116!click!openPhoneNumberWin"] = true;
+    continueClicked ? $.__views.__alloyId116.addEventListener("click", continueClicked) : __defers["$.__views.__alloyId116!click!continueClicked"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
+    var continueBtnClicked = false;
+    var xhr = Ti.Network.createHTTPClient({
+        onload: function() {
+            var response = JSON.parse(this.responseText);
+            Alloy.Globals.countryCode = response[0].cc.toLowerCase();
+            setTimeout(function() {
+                if (continueBtnClicked) {
+                    Alloy.Globals.loading.hide();
+                    openPhoneNumberWin();
+                }
+            }, 1e3);
+        },
+        onerror: function(e) {
+            alert(JSON.stringify(e));
+        }
+    });
+    xhr.open("POST", Alloy.Globals.apiUrl + "get_country_from_ip");
+    xhr.send();
     $.win.navBarHidden = true;
     $.win.open();
-    __defers["$.__views.__alloyId116!click!openPhoneNumberWin"] && $.__views.__alloyId116.addEventListener("click", openPhoneNumberWin);
+    __defers["$.__views.__alloyId116!click!continueClicked"] && $.__views.__alloyId116.addEventListener("click", continueClicked);
     _.extend($, exports);
 }
 

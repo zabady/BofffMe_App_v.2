@@ -1,4 +1,7 @@
 /////////////////////////////////////////////////////////////////////////// CLASS STYLES
+"TabGroup": {
+	exitOnClose: true,
+},
 // Tab 1 style for ios and android
 ".tab1Style[platform=ios]": {
 	title : "QR Code",

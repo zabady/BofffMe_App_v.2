@@ -4,7 +4,7 @@
 
 			<Label>WELCOME TO BOFFF ME!</Label>
 			<ImageView />
-			<Button onClick="openPhoneNumberWin">Continue</Button>
+			<Button onClick="continueClicked">Continue</Button>
 
 		</View>
 	</Window>

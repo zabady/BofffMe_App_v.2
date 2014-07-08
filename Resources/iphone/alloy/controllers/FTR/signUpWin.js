@@ -1,29 +1,14 @@
 function Controller() {
-    function generateQrCode() {
-        var url = "https://chart.googleapis.com/chart?cht=qr&chs=500x500&chl=MECARD:N:" + Alloy.Globals.userSignUpData.name + ";" + "TEL:" + Alloy.Globals.userSignUpData.phone + ";" + "EMAIL:" + Alloy.Globals.userSignUpData.email + ";" + "NOTE:pin:" + Alloy.Globals.userPin + ";";
-        var client = Titanium.Network.createHTTPClient({
-            onload: function() {
-                var qrFile = Ti.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, "qrcode.jpg");
-                qrFile.write(this.responseData);
-                Ti.API.info("Got QR Code!");
-            },
-            onerror: function(e) {
-                alert(e.error);
-            }
-        });
-        client.open("GET", url);
-        client.send();
+    function signUpOnload() {
+        var response = JSON.parse(this.responseText);
+        Alloy.Globals.userPin = Titanium.Utils.md5HexDigest(response.rows);
+        alert(response);
+        alert(response.rows);
     }
     function signUp() {
         var xhr = Ti.Network.createHTTPClient({
-            onload: function() {
-                Alloy.Globals.loading.hide();
-                var response = JSON.parse(this.responseText);
-                Alloy.Globals.userPin = Titanium.Utils.md5HexDigest(response.rows);
-                alert(response + "\n" + response.rows);
-            },
+            onload: signUpOnload,
             onerror: function() {
-                Alloy.Globals.loading.hide();
                 alert("Check your internet connection.");
             }
         });
@@ -44,12 +29,14 @@ function Controller() {
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
+    $.__views.signUpWin = Ti.UI.createWindow({
+        backgroundColor: "white",
+        id: "signUpWin"
+    });
+    $.__views.signUpWin && $.addTopLevelView($.__views.signUpWin);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    Alloy.Globals.loading.show("Please Wait ..", false);
     signUp();
-    generateQrCode();
-    Alloy.Globals.loading.hide();
     _.extend($, exports);
 }
 

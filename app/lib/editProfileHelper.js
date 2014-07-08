@@ -150,10 +150,12 @@ function postUserDataUpdatesOnServer(oldUserDataInStrings, newUserDataInArrays) 
 	try {
 		var bofffsSpecificData = Titanium.App.Properties.getObject("bofffsSpecificData");
 		var userUpdatesInStrings = convertAddableFieldsToStrings(newUserDataInArrays);
+		
 		// TODO: comment or uncomment the next line to not send or send the data to the server
-		//updateBofff(Alloy.Globals.userPin, oldUserDataInStrings, userUpdatesInStrings, bofffsSpecificData);
-		//sendPushNotificationToFriends();
-		Ti.include('/pushNotificationAPIs.js');
+		// Update these changes on server, on userData property and on userData global vairable --> (contactsUpdate.js)
+		updateUserDataOnServerAndProperties(Alloy.Globals.userPin, oldUserDataInStrings, userUpdatesInStrings, bofffsSpecificData);
+		
+		Ti.include('/pushNotificationAPIs.js');	// TODO: Remove this line, it's included in alloy.js
 		NotifyAllUserFriendsWithMessage(newUserDataInArrays.fullName + ' has updated his profile, click here so these updates are applied to your phonebook.',
 										'test', newUserDataInArrays.icon_image);
 	}

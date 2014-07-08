@@ -593,9 +593,9 @@ function parsingUpdateString(updateString, addOrDelete, userFriendAppId, bofffsS
 }
 
  // TODO: De msh bel tarteeb 3shan zeez myz3alsh
-function updateBofff(pin, userData, newData, bofffsSpecificData)
+function updateUserDataOnServerAndProperties(pin, oldData, newData, bofffsSpecificData)
 {
-	Ti.API.info("updateBofff");
+	Ti.API.info("updateUserDataOnServerAndProperties");
 	var url =  'http://www.bofffme.com/api/index.php/home/';
 	var xhr = Ti.Network.createHTTPClient(
 	{
@@ -603,7 +603,11 @@ function updateBofff(pin, userData, newData, bofffsSpecificData)
 	    {
 	    	alert(this.responseText);
 	    	//manageUserUpdates(userData,pin,bofffsSpecificData);
-	    	createUpdateString(userData,newData,pin,bofffsSpecificData);
+	    	createUpdateString(oldData, newData, pin, bofffsSpecificData);
+	    	
+	    	// Save the new user data to properties and to golbal variable userData
+	    	userData = newData;
+	    	Titanium.App.Properties.setObject("userData", newData);
 	    },
 	    onerror: function(e) 
 	    {

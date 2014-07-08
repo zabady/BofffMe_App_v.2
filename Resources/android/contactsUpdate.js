@@ -404,13 +404,15 @@ function parsingUpdateString(updateString, addOrDelete, userFriendAppId, bofffsS
     SaveUpdatedContactToPhonebook();
 }
 
-function updateBofff(pin, userData, newData, bofffsSpecificData) {
-    Ti.API.info("updateBofff");
+function updateUserDataOnServerAndProperties(pin, oldData, newData, bofffsSpecificData) {
+    Ti.API.info("updateUserDataOnServerAndProperties");
     var url = "http://www.bofffme.com/api/index.php/home/";
     var xhr = Ti.Network.createHTTPClient({
         onload: function() {
             alert(this.responseText);
-            createUpdateString(userData, newData, pin, bofffsSpecificData);
+            createUpdateString(oldData, newData, pin, bofffsSpecificData);
+            userData = newData;
+            Titanium.App.Properties.setObject("userData", newData);
         },
         onerror: function() {
             alert("error");

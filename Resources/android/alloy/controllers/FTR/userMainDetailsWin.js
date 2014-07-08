@@ -45,28 +45,6 @@ function Controller() {
         $.img_user.height = 100;
         $.img_user.width = Ti.UI.SIZE;
     }
-    function signUp() {
-        var xhr = Ti.Network.createHTTPClient({
-            onload: function() {
-                Alloy.Globals.loading.hide();
-                var response = JSON.parse(this.responseText);
-                Alloy.Globals.userSignUpData.pin = Titanium.Utils.md5HexDigest(response.rows);
-                alert(response + "\n" + response.rows);
-            },
-            onerror: function() {
-                Alloy.Globals.loading.hide();
-                alert("Check your internet connection.");
-            }
-        });
-        xhr.open("POST", Alloy.Globals.apiUrl + "insert/bofff/user_accounts");
-        ({
-            fullName: Alloy.Globals.userSignUpData.name,
-            gender: Alloy.Globals.userSignUpData.gender,
-            primary_mobile: Alloy.Globals.userSignUpData.phone,
-            primary_email: Alloy.Globals.userSignUpData.email,
-            profile_picture: Alloy.Globals.userSignUpData.profilePicture.large ? Alloy.Globals.userSignUpData.profilePicture.large.read() : null
-        });
-    }
     function allowScroll() {
         $.scrollView.scrollingEnabled = true;
     }
@@ -141,8 +119,10 @@ function Controller() {
     function continueBtnPressed() {
         if (validate_name() && validate_email() && checkGender()) {
             $.win.fireEvent("click");
-            Alloy.Globals.loading.show("Please Wait ..", false);
-            signUp();
+            var singUpWin = Alloy.createController("FTR/signUpWin").getView();
+            singUpWin.open({
+                activityEnterAnimation: Ti.Android.R.anim.slide_in_left
+            });
         }
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));

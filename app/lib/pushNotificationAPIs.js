@@ -8,9 +8,18 @@ var Cloud = require("ti.cloud");
 if(OS_ANDROID) var CloudPush = require('ti.cloudpush');
 
 
-/*
- * Defining a function that gets the device token and set push notification service and callback functions.
- * TODO: It FTR, this function should pass the device token to the server or add it to user data that will be posted on server.
+/* Defining a function that returns the device token.
+ * This get function will be used in FTR to save the device token on the server with user data
+ */
+function GetDeviceToken()
+{
+	// Device token is already initialized with null, so, it will return null if not know
+	return deviceToken;
+}
+
+
+/* Defining a function that gets the device token and set push notification service and callback functions.
+ * This function is called in alloy.js to set up push notifications with callback functions when the app starts.
  */
 function SetPushNotificationAndGetDeviceToken()
 {
@@ -172,9 +181,7 @@ function deviceTokenSuccess(e)
 	// Save device token
 	deviceToken = e.deviceToken;
 	
-	// TODO: sendDeviceTokenToServer(); if it's not on server
-	// TODO: Subscribe for push notification in FTR.
-	alert("Got device token: " + e.deviceToken);
+	Ti.API.info("Got device token: " + e.deviceToken);
 }
 
 // Callback function if device token is not received						// PRIVATE FUNCTION

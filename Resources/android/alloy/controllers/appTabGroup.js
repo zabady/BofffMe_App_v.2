@@ -72,6 +72,7 @@ function Controller() {
     });
     __alloyId0.push($.__views.__alloyId4);
     $.__views.tabGroup = Ti.UI.createTabGroup({
+        exitOnClose: true,
         tabs: __alloyId0,
         id: "tabGroup"
     });
@@ -81,7 +82,8 @@ function Controller() {
     _.extend($, $.__views);
     $.tabGroup.open();
     Alloy.Globals.OpenNotificationCenter = function() {
-        "Notifications" == $.tabGroup.activeTab.window.title ? Alloy.Globals.LoadNotifications() : $.tabGroup.setActiveTab(2);
+        Alloy.Globals.LoadNotifications();
+        $.tabGroup.setActiveTab(2);
     };
     __defers["$.__views.__alloyId7!click!settingsClicked"] && $.__views.__alloyId7.addEventListener("click", settingsClicked);
     _.extend($, exports);
