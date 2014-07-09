@@ -1,3 +1,19 @@
+/*	This global variable is used through FTR to save all the inputs
+ *	Alloy.Globals.userSignUpData = new Object({
+ *		//pin: 'temp',
+ *		name: 'temp',
+ *		phone: 'temp',
+ *		email: 'email@temp.com',
+ *		gender: "male",
+ *		deviceToken: 'temp',
+ *		profilePicture: new Object(),
+ *	});
+ * 
+ * This is the index file of FTR project, it starts creating a navigation window for iOS and
+ * 	opening welcome window.
+ * For iOS, mainNav is added to globals to be used through opening FTR windows.
+ */
+
 
 var welcomeWin = Alloy.createController("FTR/welcomeWin").getView();
 

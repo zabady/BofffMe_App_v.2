@@ -25,7 +25,17 @@ module.exports = [ {
     style: {}
 }, {
     isClass: true,
-    priority: 10000.0002,
+    priority: 10000.0005,
+    key: "appTitleLabel",
+    style: {
+        font: {
+            fontSize: "20dp"
+        },
+        color: "#2279bc"
+    }
+}, {
+    isClass: true,
+    priority: 10000.001,
     key: "loadingMask",
     style: {
         backgroundColor: "#5000",
@@ -37,7 +47,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0003,
+    priority: 10000.0011,
     key: "loadingOuter",
     style: {
         width: Ti.UI.SIZE,
@@ -47,7 +57,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0004,
+    priority: 10000.0012,
     key: "loadingInner",
     style: {
         top: "20dp",
@@ -60,17 +70,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0005,
-    key: "appTitleLabel",
-    style: {
-        font: {
-            fontSize: "20dp"
-        },
-        color: "#2279bc"
-    }
-}, {
-    isClass: true,
-    priority: 10000.0005,
+    priority: 10000.0013,
     key: "loadingIndicator",
     style: {
         top: "0dp",
@@ -78,7 +78,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0007,
+    priority: 10000.0015,
     key: "loadingImages",
     style: {
         top: "0dp",
@@ -86,7 +86,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0008,
+    priority: 10000.0016,
     key: "loadingMessage",
     style: {
         top: "20dp",
@@ -111,18 +111,18 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10101.0006,
-    key: "loadingIndicator",
-    style: {
-        style: Ti.UI.iPhone.ActivityIndicatorStyle.BIG
-    }
-}, {
-    isClass: true,
     priority: 10101.0007,
     key: "logo",
     style: {
         image: "/images/app_icon_60x60.png",
         width: 40,
         height: 40
+    }
+}, {
+    isClass: true,
+    priority: 10101.0014,
+    key: "loadingIndicator",
+    style: {
+        style: Ti.UI.iPhone.ActivityIndicatorStyle.BIG
     }
 } ];

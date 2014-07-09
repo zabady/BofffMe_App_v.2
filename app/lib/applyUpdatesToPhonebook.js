@@ -4,6 +4,7 @@
  * 3. Remove the old contact and add a new one for android
  */
 
+// TODO: Fix bug, cannot read property of null, contact.fullName
 
 // Defining a new contact that will be used to insert a new contact for android
 var contact = new Object();

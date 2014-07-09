@@ -505,6 +505,8 @@ function Controller() {
     try {
         var bofffs = args.bofffFriends;
         var bofffsList = args.bofffsList;
+        alert(bofffs);
+        alert(bofffsList);
         createBofffListView(bofffsList, "fullName");
     } catch (error) {}
     var searchbarIsOnFocus = false;

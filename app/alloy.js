@@ -44,7 +44,7 @@ Alloy.Globals.userPin = Titanium.App.Properties.getObject('pin');
 
 // Defining a boolean for detecting if it's FTR or not
 //Alloy.Globals.firstTimeRun = Titanium.App.Properties.getObject('FTR', true);
-Alloy.Globals.firstTimeRun = true; // TODO: For testing FTR
+Alloy.Globals.firstTimeRun = false; // TODO: For testing FTR
 
 
 /* Creating the open function that creates a navigation window that works with the tabgroup,
@@ -76,22 +76,3 @@ Alloy.Globals.openNavigationWindow = function(window, isWindowAfterRoot) {
 };
 
 // TODO: Handle last task in integration ;)
-if(!Alloy.Globals.firstTimeRun) {
-	
-}
-/* If first time run:
- *  - Create userSignUpData
- *  - Get country code using device ip address and server's APIs
- */
-else {
-	// Defining an associative array to save users data
-	Alloy.Globals.userSignUpData = new Object({
-		//pin: 'temp',
-		name: 'temp',
-		phone: 'temp',
-		email: 'email@temp.com',
-		gender: "male",
-		deviceToken: 'temp',
-		profilePicture: new Object(),
-	});
-}

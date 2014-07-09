@@ -15,7 +15,7 @@ else {
 		
 		// Else display a msg to the user to connect to the internet 
 		else {
-		     var alertDialog = Titanium.UI.createAlertDialog({
+			var alertDialog = Titanium.UI.createAlertDialog({
 				title: 'WARNING!',
 				message: 'Your device is not online, please connect to the internet.',
 				buttonNames: ['OK']

@@ -160,7 +160,6 @@ function Controller() {
         if (privacyClicked) updatePrivacy(e); else if (ifImageClicked) {
             ifImageClicked = false;
             bofffs[e.itemId].contact_id;
-            applyUpdatesOfFriend("95190228ae42e7652b098b5bce990aa8", bofffsList, bofffs);
         } else {
             $.search.blur();
             var bofff = bofffs[e.itemId]["bofff"];
@@ -496,6 +495,19 @@ function Controller() {
         var bofffsList = args.bofffsList;
         createBofffListView(bofffsList, "fullName");
     } catch (error) {}
+    var friendPin;
+    var alertDialog = Ti.UI.createAlertDialog({
+        title: "Update Phonebook",
+        buttonNames: [ "Not Now", "Apply" ]
+    });
+    alertDialog.addEventListener("click", function(e) {
+        1 == e.index && applyUpdatesOfFriend(friendPin, bofffsList, bofffs);
+    });
+    for (var i in bofffsList) if ("" != bofffsList[i].friend_added_data && null != bofffsList[i].friend_added_data || "" != bofffsList[i].friend_deleted_data && null != bofffsList[i].friend_deleted_data) {
+        friendPin = bofffsList[i].friend_pin_code;
+        alertDialog.message = bofffsList[i].contactName + " has updated his profile, click Apply to be applied to your phonebook.";
+        alertDialog.show();
+    }
     var searchbarIsOnFocus = false;
     var firstFocus = true;
     var searchButtonPressed = false;

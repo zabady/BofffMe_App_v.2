@@ -16,7 +16,7 @@ Alloy.Globals.splitValue = "$";
 
 Alloy.Globals.userPin = Titanium.App.Properties.getObject("pin");
 
-Alloy.Globals.firstTimeRun = true;
+Alloy.Globals.firstTimeRun = false;
 
 var tempRootWin;
 
@@ -31,14 +31,5 @@ Alloy.Globals.openNavigationWindow = function(window, isWindowAfterRoot) {
     });
     window.open();
 };
-
-Alloy.Globals.firstTimeRun && (Alloy.Globals.userSignUpData = new Object({
-    name: "temp",
-    phone: "temp",
-    email: "email@temp.com",
-    gender: "male",
-    deviceToken: "temp",
-    profilePicture: new Object()
-}));
 
 Alloy.createController("index");

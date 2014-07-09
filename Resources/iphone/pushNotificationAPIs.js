@@ -1,3 +1,7 @@
+function GetDeviceToken() {
+    return deviceToken;
+}
+
 function SetPushNotificationAndGetDeviceToken() {
     Ti.Network.registerForPushNotifications({
         types: [ Ti.Network.NOTIFICATION_TYPE_BADGE, Ti.Network.NOTIFICATION_TYPE_ALERT, Ti.Network.NOTIFICATION_TYPE_SOUND ],
@@ -71,7 +75,7 @@ function receivePushNotification(e) {
 
 function deviceTokenSuccess(e) {
     deviceToken = e.deviceToken;
-    alert("Got device token: " + e.deviceToken);
+    Ti.API.info("Got device token: " + e.deviceToken);
 }
 
 function deviceTokenError(e) {

@@ -93,12 +93,10 @@ function Controller() {
         onload: function() {
             var response = JSON.parse(this.responseText);
             Alloy.Globals.countryCode = response[0].cc.toLowerCase();
-            setTimeout(function() {
-                if (continueBtnClicked) {
-                    Alloy.Globals.loading.hide();
-                    openPhoneNumberWin();
-                }
-            }, 1e3);
+            if (continueBtnClicked) {
+                Alloy.Globals.loading.hide();
+                openPhoneNumberWin();
+            }
         },
         onerror: function(e) {
             alert(JSON.stringify(e));

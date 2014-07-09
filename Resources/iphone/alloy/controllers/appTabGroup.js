@@ -55,6 +55,7 @@ function Controller() {
     });
     __alloyId0.push($.__views.__alloyId4);
     $.__views.tabGroup = Ti.UI.createTabGroup({
+        exitOnClose: true,
         tabs: __alloyId0,
         id: "tabGroup"
     });

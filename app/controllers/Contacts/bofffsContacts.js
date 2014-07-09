@@ -6,8 +6,39 @@ try
 {
 	var bofffs = args.bofffFriends;
 	var bofffsList = args.bofffsList;
+	//alert(bofffs);
+	//alert(bofffsList);
 	createBofffListView(bofffsList,"fullName");
-}catch(error){}
+} catch(error){}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////// ZABADY'S CODE
+///////////////////////////////////////////////////////////////// THIS CODE APPLY'S FRIENDS' UPDATES TO PHONEBOOK 
+var friendPin;	// The friend's pin who has updates
+var alertDialog = Ti.UI.createAlertDialog({
+	title : "Update Phonebook",
+	buttonNames : ['Not Now', 'Apply']
+});
+alertDialog.addEventListener('click', function(e){
+	// Apply
+	if(e.index == 1) {
+		applyUpdatesOfFriend(friendPin, bofffsList, bofffs);
+	}
+});
+
+for(var i in bofffsList) {
+	if( (bofffsList[i].friend_added_data != "" && bofffsList[i].friend_added_data != null) ||	//friend_added_data contains updates
+		(bofffsList[i].friend_deleted_data != "" && bofffsList[i].friend_deleted_data != null)) //friend_deleted_data contains updates
+	{
+		// Coming here means that this friend has updated his profile
+		friendPin = bofffsList[i].friend_pin_code;
+		alertDialog.message = bofffsList[i].contactName + " has updated his profile, click Apply to be applied to your phonebook.";
+		alertDialog.show();  
+	}
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////// END ZABADY'S CODE
+
 
 var searchbarIsOnFocus= false;
 var firstFocus=true;
@@ -319,7 +350,7 @@ function showContact(e)
 	{
 		ifImageClicked=false;
 		var bofffId = bofffs[e.itemId].contact_id;
-		applyUpdatesOfFriend('95190228ae42e7652b098b5bce990aa8', bofffsList, bofffs);
+		// TODO: applyUpdatesOfFriend('95190228ae42e7652b098b5bce990aa8', bofffsList, bofffs);
 		
 		// TODO: --> The next
 		//if(getUserData(Alloy.Globals.userPin,bofffsList)) {

@@ -105,8 +105,9 @@ function postUserDataUpdatesOnServer(oldUserDataInStrings, newUserDataInArrays) 
     var validationMsg = validateAddableFields(newUserDataInArrays);
     if (validationMsg.search("Wrong") >= 0) return validationMsg;
     try {
-        Titanium.App.Properties.getObject("bofffsSpecificData");
-        convertAddableFieldsToStrings(newUserDataInArrays);
+        var bofffsSpecificData = Titanium.App.Properties.getObject("bofffsSpecificData");
+        var userUpdatesInStrings = convertAddableFieldsToStrings(newUserDataInArrays);
+        updateUserDataOnServerAndProperties(Alloy.Globals.userPin, oldUserDataInStrings, userUpdatesInStrings, bofffsSpecificData);
         Ti.include("/pushNotificationAPIs.js");
         NotifyAllUserFriendsWithMessage(newUserDataInArrays.fullName + " has updated his profile, click here so these updates are applied to your phonebook.", "test", newUserDataInArrays.icon_image);
     } catch (exp) {
