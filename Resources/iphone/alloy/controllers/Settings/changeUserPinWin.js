@@ -19,6 +19,31 @@ function Controller() {
     function RowClicked(e) {
         alert(e.row.pin + "\nPlease Restart the App.");
         Titanium.App.Properties.setObject("pin", e.row.pin);
+        getUserData();
+    }
+    function getUserData() {
+        var xhr = Ti.Network.createHTTPClient({
+            onload: function() {
+                userData = JSON.parse(this.responseText).rows[0];
+                userData.phone_numbers || (userData.phone_numbers = []);
+                userData.phone_numbers_privacy || (userData.phone_numbers_privacy = []);
+                userData.mails || (userData.mails = []);
+                userData.mails_privacy || (userData.mails_privacy = []);
+                userData.social_links || (userData.social_links = []);
+                userData.social_links_privacy || (userData.social_links_privacy = []);
+                userData.interests || (userData.interests = []);
+                userData.interests_privacy || (userData.interests_privacy = []);
+                userData.favorite_places || (userData.favorite_places = []);
+                userData.favorite_places_privacy || (userData.favorite_places_privacy = []);
+                Titanium.App.Properties.setObject("userData", userData);
+                alert(userData.fullName);
+            },
+            onerror: function() {
+                alert(this.responseText);
+            }
+        });
+        xhr.open("POST", Alloy.Globals.apiUrl + "search_user_by/bofff/user_accounts/pin/" + Alloy.Globals.userPin);
+        xhr.send();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Settings/changeUserPinWin";

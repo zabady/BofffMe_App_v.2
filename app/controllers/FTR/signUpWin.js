@@ -1,9 +1,12 @@
 /* 1. Sign Up
  * 2. Subscribe for push notifications
  * 3. Generate QR Code
- * 4. Set user data
- * 5. Set user pin
- * 6. Navigate to the app after finishing all of previous tasks
+ * 4. Send a Notification to friends informing them that a friend has joined bofff me
+ * TODO: --> It will be placed inside a timeout for 5 seconds to make sure that everything about contacts is set,
+ * 			this is only for Graduation Project :D
+ * 5. Set user data
+ * 6. Set user pin
+ * 7. Navigate to the app after finishing all of previous tasks
  */
 // TODO: Replace getting user data by onload function of signup
 
@@ -91,11 +94,17 @@ function signUp()
 // Defining a function that generates the qr code
 function generateQrCode()
 {
-	var url = "https://chart.googleapis.com/chart?cht=qr&chs=500x500&chl=MECARD:" +
-					"N:" + Alloy.Globals.userSignUpData.name + ";" +
-					"TEL:" + Alloy.Globals.userSignUpData.phone + ";" +
-					"EMAIL:" + Alloy.Globals.userSignUpData.email + ";" +
-					"NOTE:pin:" + Alloy.Globals.userPin + ";";
+	// The next code creates a MECARD, no need to it for simplicity
+	// var url = "https://chart.googleapis.com/chart?cht=qr&chs=500x500&chl=MECARD:" +
+					// "N:" + Alloy.Globals.userSignUpData.name + ";" +
+					// "TEL:" + Alloy.Globals.userSignUpData.phone + ";" +
+					// "EMAIL:" + Alloy.Globals.userSignUpData.email + ";" +
+					// "NOTE:pin:" + Alloy.Globals.userPin + ";";
+	
+	var url = "https://chart.googleapis.com/chart?cht=qr&chs=500x500&chl=" +
+				Alloy.Globals.userSignUpData.name + ";" +
+				Alloy.Globals.userSignUpData.phone + ";" +
+				Alloy.Globals.userSignUpData.email + ";";
 	
 	// Get the qr code from google APIs
 	var client = Titanium.Network.createHTTPClient({
@@ -133,7 +142,10 @@ function getUserData()
 	    	userData.favorite_places_privacy = [];
 	    	
 	    	Titanium.App.Properties.setObject("userData", userData);
+	    	
 	    	alert(userData.fullName);
+    		// TODO: Handle informing friends with more innovative way !
+			Alloy.Globals.notifyFriendsAboutJoining();
 	    },
 	    onerror: function(e)
 	    {

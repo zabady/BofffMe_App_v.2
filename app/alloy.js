@@ -43,8 +43,8 @@ Alloy.Globals.userPin = Titanium.App.Properties.getObject('pin');
 
 
 // Defining a boolean for detecting if it's FTR or not
-//Alloy.Globals.firstTimeRun = Titanium.App.Properties.getObject('FTR', true);
-Alloy.Globals.firstTimeRun = false; // TODO: For testing FTR
+Alloy.Globals.firstTimeRun = Titanium.App.Properties.getObject('FTR', false);
+//Alloy.Globals.firstTimeRun = false; // TODO: For testing FTR
 
 
 /* Creating the open function that creates a navigation window that works with the tabgroup,
@@ -76,3 +76,15 @@ Alloy.Globals.openNavigationWindow = function(window, isWindowAfterRoot) {
 };
 
 // TODO: Handle last task in integration ;)
+// TODO: Works only for graduation project and must be optimized in real app
+Alloy.Globals.notifyFriendsAboutJoining = function() {
+	setTimeout(function() {
+		// Notify user friends that he has just joined bofff me
+		NotifyAllUserFriendsWithMessage(userData.fullName + ' has joined Bofff Me, click here and explore his profile.',
+										'test', userData.icon_image, "New Friend !");
+		alert("The app will send a notification informing your friends that you has just joined Bofff Me.");
+	}, 8000);
+};
+
+// TODO: Remove the next line after the first run :D
+//Titanium.App.Properties.setObject('notifications', []);

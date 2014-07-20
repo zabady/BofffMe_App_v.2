@@ -4,12 +4,6 @@ function Controller() {
         Barcode.allowInstructions = false;
         Barcode.allowMenu = false;
         Barcode.displayedMessage = "You may need to rotate the device.";
-        Barcode.addEventListener("success", function(e) {
-            alert(e.result);
-        });
-        Barcode.addEventListener("error", function(e) {
-            alert(e.message);
-        });
         Barcode.capture({
             overlay: $.view_overlay,
             showCancel: true,
@@ -140,6 +134,12 @@ function Controller() {
         $.img.height = Ti.UI.SIZE;
     }
     var Barcode = require("ti.barcode");
+    Barcode.addEventListener("success", function(e) {
+        alert(e.result);
+    });
+    Barcode.addEventListener("error", function(e) {
+        alert(JSON.parse(e.message));
+    });
     __defers["$.__views.__alloyId24!click!scanBtnClicked"] && $.__views.__alloyId24.addEventListener("click", scanBtnClicked);
     __defers["$.__views.__alloyId25!click!openCloseLedBarcode"] && $.__views.__alloyId25.addEventListener("click", openCloseLedBarcode);
     __defers["$.__views.__alloyId26!click!cancelBarcode"] && $.__views.__alloyId26.addEventListener("click", cancelBarcode);

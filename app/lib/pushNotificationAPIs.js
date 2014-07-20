@@ -110,7 +110,7 @@ function UnsubscribeFromChannel (channelName)
  * Must be used when the user updates his profile, so, his friends know about these updates.
  * message and channelName are required.
  */
-function NotifyAllUserFriendsWithMessage(message, channelName, iconImage)
+function NotifyAllUserFriendsWithMessage(message, channelName, iconImage, title)
 {
 	var deviceTokens;
 	var xhr = Ti.Network.createHTTPClient(
@@ -119,7 +119,7 @@ function NotifyAllUserFriendsWithMessage(message, channelName, iconImage)
 	    {
 	    	deviceTokens = JSON.parse(this.responseText);
 	    	alert(deviceTokens);
-	    	sendNotificationTo(deviceTokens, message, channelName, "Friend's Profile Update !", iconImage);
+	    	sendNotificationTo(deviceTokens, message, channelName, title ? title : "Friend's Profile Update !", iconImage);
 	    },
 	    onerror: function(e)
 	    {
@@ -167,7 +167,7 @@ function receivePushNotification(e)
 	
 	allNotifications.push(newNotification);
 	Titanium.App.Properties.setObject('notifications', allNotifications);
-	Alloy.Globals.OpenNotificationCenter();
+	setTimeout(function(){ Alloy.Globals.OpenNotificationCenter(); }, 1000);
 	
     resetBadge();	// Reset the badge to zero
 }

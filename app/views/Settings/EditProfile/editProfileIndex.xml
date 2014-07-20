@@ -33,13 +33,13 @@
         
 		
 		<!-- Tab 2 : Basic Information Window -->
-		<Tab title="Basic Info" icon="/images/QR-code-7aram.png">
+		<Tab title="General Info" icon="/images/man-7aram.png">
     		<Require id="basicInfoWin" src="Settings/EditProfile/basicInfoWin" type="view" />
         </Tab>
         
         
         <!-- Tab 3 -->
-        <Tab title="Info" icon="/images/love-7aram.png">
+        <Tab title="Work" icon="/images/man-7aram.png">
         	<Window>
         		<RightNavButton>
 					<View layout="horizontal">

@@ -8,7 +8,7 @@ function LoadNotifications()
 	var mainSection = Ti.UI.createListSection({ headerTitle: 'All Notifications'});
 	
 	// If the user didn't receive any notification yet, show 'no notifications' on a list item
-	if(!allNotifications) {
+	if(!allNotifications || allNotifications.length == 0) {
 		var listItems = [{
 			notificationTitle: {text: 'No Notifications'},
 			message: {text: 'No friend updates, you will be notified when one of your friends updates his profile.' },

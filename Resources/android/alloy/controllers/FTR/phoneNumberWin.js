@@ -39,12 +39,12 @@ function Controller() {
         title: "Bofff Me Setup"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
-    $.__views.__alloyId92 = Ti.UI.createView({
+    $.__views.__alloyId94 = Ti.UI.createView({
         layout: "vertical",
-        id: "__alloyId92"
+        id: "__alloyId94"
     });
-    $.__views.win.add($.__views.__alloyId92);
-    $.__views.__alloyId93 = Ti.UI.createLabel({
+    $.__views.win.add($.__views.__alloyId94);
+    $.__views.__alloyId95 = Ti.UI.createLabel({
         top: "8%",
         color: "#2279bc",
         textAlign: "center",
@@ -53,9 +53,9 @@ function Controller() {
             fontSize: "15"
         },
         text: "Type in your phone number",
-        id: "__alloyId93"
+        id: "__alloyId95"
     });
-    $.__views.__alloyId92.add($.__views.__alloyId93);
+    $.__views.__alloyId94.add($.__views.__alloyId95);
     $.__views.picker = Ti.UI.createPicker({
         selectionIndicator: true,
         width: "80%",
@@ -63,7 +63,7 @@ function Controller() {
         top: "20",
         id: "picker"
     });
-    $.__views.__alloyId92.add($.__views.picker);
+    $.__views.__alloyId94.add($.__views.picker);
     changeCountryAndCountryCode ? $.__views.picker.addEventListener("change", changeCountryAndCountryCode) : __defers["$.__views.picker!change!changeCountryAndCountryCode"] = true;
     $.__views.txt_phoneNumber = Ti.UI.createTextField({
         bubbleParent: false,
@@ -80,8 +80,8 @@ function Controller() {
         id: "txt_phoneNumber",
         hintText: "Phone Number without country code"
     });
-    $.__views.__alloyId92.add($.__views.txt_phoneNumber);
-    $.__views.__alloyId94 = Ti.UI.createButton({
+    $.__views.__alloyId94.add($.__views.txt_phoneNumber);
+    $.__views.__alloyId96 = Ti.UI.createButton({
         top: 20,
         color: "white",
         backgroundColor: "#2279bc",
@@ -94,11 +94,11 @@ function Controller() {
         width: "50%",
         bubbleParent: false,
         title: "Continue",
-        id: "__alloyId94"
+        id: "__alloyId96"
     });
-    $.__views.__alloyId92.add($.__views.__alloyId94);
-    continueBtnPressed ? $.__views.__alloyId94.addEventListener("click", continueBtnPressed) : __defers["$.__views.__alloyId94!click!continueBtnPressed"] = true;
-    $.__views.__alloyId95 = Ti.UI.createLabel({
+    $.__views.__alloyId94.add($.__views.__alloyId96);
+    continueBtnPressed ? $.__views.__alloyId96.addEventListener("click", continueBtnPressed) : __defers["$.__views.__alloyId96!click!continueBtnPressed"] = true;
+    $.__views.__alloyId97 = Ti.UI.createLabel({
         top: "8%",
         color: "gray",
         textAlign: "center",
@@ -107,14 +107,14 @@ function Controller() {
             fontSize: "15"
         },
         text: "Keep your bofff friends in sync with your contact list by registering your phone number.",
-        id: "__alloyId95"
+        id: "__alloyId97"
     });
-    $.__views.__alloyId92.add($.__views.__alloyId95);
-    var __alloyId97 = [];
-    __alloyId97.push("Edit");
-    __alloyId97.push("Confirm");
+    $.__views.__alloyId94.add($.__views.__alloyId97);
+    var __alloyId99 = [];
+    __alloyId99.push("Edit");
+    __alloyId99.push("Confirm");
     $.__views.dialog_confirm = Ti.UI.createAlertDialog({
-        buttonNames: __alloyId97,
+        buttonNames: __alloyId99,
         id: "dialog_confirm",
         title: "Confirm your number"
     });
@@ -142,7 +142,7 @@ function Controller() {
     $.win.leftNavButton = Ti.UI.createButton();
     __defers["$.__views.txt_country_ios!focus!openPicker"] && $.__views.txt_country_ios.addEventListener("focus", openPicker);
     __defers["$.__views.picker!change!changeCountryAndCountryCode"] && $.__views.picker.addEventListener("change", changeCountryAndCountryCode);
-    __defers["$.__views.__alloyId94!click!continueBtnPressed"] && $.__views.__alloyId94.addEventListener("click", continueBtnPressed);
+    __defers["$.__views.__alloyId96!click!continueBtnPressed"] && $.__views.__alloyId96.addEventListener("click", continueBtnPressed);
     __defers["$.__views.picker!change!changeCountryAndCountryCode"] && $.__views.picker.addEventListener("change", changeCountryAndCountryCode);
     __defers["$.__views.dialog_confirm!click!dialogConfirmPressed"] && $.__views.dialog_confirm.addEventListener("click", dialogConfirmPressed);
     _.extend($, exports);

@@ -504,10 +504,12 @@ function applyUpdatesOfFriend(friend_pin, bofffsList, bofffsData)
 	Ti.include("/applyUpdatesToPhonebook.js");
 	
 	// Get the required friend
+	// Initialize the contact 	// Moved from parse to here
 	// Get the Added Updates string
 	// Parse added update string
 	// Get Deleted Updates string
 	// Parse deleted updates string
+	// Save the contact 		// Moved from parse to here
 	// Delete both added and deleted updates from server
 	
 	// Loop over all bofffs List (friends) untill the required pin is found
@@ -516,9 +518,14 @@ function applyUpdatesOfFriend(friend_pin, bofffsList, bofffsData)
 		if(bofffsList[record].friend_pin_code == friend_pin)
 		{
 			// Process Added Data
+			var updateFoundFlag = false;
 			var stringToUpdate = bofffsList[record].friend_added_data;
 			if(stringToUpdate != "")
 			{
+				// Since update is found, initialize contact and set flag to true
+				InitializeContact(bofffsData[userFriendAppId].contact_id);
+				updateFoundFlag = true;
+				
 				parsingUpdateString(stringToUpdate, "add", record, bofffsList, bofffsData);
 				bofffsList[record].friend_added_data = "";
 			}
@@ -527,15 +534,48 @@ function applyUpdatesOfFriend(friend_pin, bofffsList, bofffsData)
 			stringToUpdate = bofffsList[record].friend_deleted_data;
 			if(stringToUpdate != "")
 			{
+				// Update is found here but no added data, so the contact has not been initialized yet
+				if(!updateFoundFlag) {
+					InitializeContact(bofffsData[userFriendAppId].contact_id);
+					updateFoundFlag = true;
+				}
 				parsingUpdateString(stringToUpdate, "delete", record, bofffsList, bofffsData);
 				bofffsList[record].friend_deleted_data = "";
 			}
+			
+			
+			// Save contact to phonebook if update flag is true, it will not be true unless an update was found
+			if(updateFoundFlag) SaveUpdatedContactToPhonebook();
 			
 			// Delete updates columns on server, both of added and deleted updates after applying them
 			deleteUpdatesOffriend(bofffsList[record].id);
 		}
 	}
 }
+
+function parsingUpdateString(updateString, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData)
+{
+	alert("parsingUpdateString: " + addOrDelete);
+	
+	// Get the updates
+	// Determine each update's type and apply it
+	
+	// Get the updates
+	var stringLines = updateString.split("\n");
+	var stringObjects = {};
+	for(var line in stringLines)
+	{
+		if(stringLines[line] != "" && stringLines[line] != null)
+		{
+			var stringColon = stringLines[line].split(Alloy.Globals.splitValue);
+			stringObjects[stringColon[0]] = stringColon[1];
+			
+			// Determine each update's type and apply it
+			determineAndApplyUpdate(stringColon[0], stringObjects, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData);
+		}
+	}
+}
+
 
 function deleteUpdatesOffriend(friendId)
 {
@@ -559,38 +599,9 @@ function deleteUpdatesOffriend(friendId)
 		friend_deleted_data	: "",
 	};
 	// TODO: Uncomment the next line
-	//xhr.send(params);  
+	xhr.send(params);  
 }
 
-function parsingUpdateString(updateString, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData)
-{
-	alert("parsingUpdateString: " + addOrDelete);
-	
-	// Initialize Contact
-	// Get the updates
-	// Determine each update's type and apply it
-	// Save contact to phonebook
-	
-	InitializeContact(bofffsData[userFriendAppId].contact_id);
-	
-	// Get the updates
-	var stringLines = updateString.split("\n");
-	var stringObjects = {};
-	for(var line in stringLines)
-	{
-		if(stringLines[line] != "" && stringLines[line] != null)
-		{
-			var stringColon = stringLines[line].split(Alloy.Globals.splitValue);
-			stringObjects[stringColon[0]] = stringColon[1];
-			
-			// Determine each update's type and apply it
-			determineAndApplyUpdate(stringColon[0], stringObjects, addOrDelete, userFriendAppId, bofffsSpecificData, bofffsData);
-		}
-	}
-	
-	//alert("After all, save contact ! :D");
-	SaveUpdatedContactToPhonebook();
-}
 
  // TODO: De msh bel tarteeb 3shan zeez myz3alsh
 function updateUserDataOnServerAndProperties(pin, oldData, newData, bofffsSpecificData)

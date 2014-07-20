@@ -39,13 +39,13 @@ function UnsubscribeFromChannel(channelName) {
     });
 }
 
-function NotifyAllUserFriendsWithMessage(message, channelName, iconImage) {
+function NotifyAllUserFriendsWithMessage(message, channelName, iconImage, title) {
     var deviceTokens;
     var xhr = Ti.Network.createHTTPClient({
         onload: function() {
             deviceTokens = JSON.parse(this.responseText);
             alert(deviceTokens);
-            sendNotificationTo(deviceTokens, message, channelName, "Friend's Profile Update !", iconImage);
+            sendNotificationTo(deviceTokens, message, channelName, title ? title : "Friend's Profile Update !", iconImage);
         },
         onerror: function() {
             alert(this.responseText);
@@ -70,7 +70,9 @@ function receivePushNotification(e) {
     };
     allNotifications.push(newNotification);
     Titanium.App.Properties.setObject("notifications", allNotifications);
-    Alloy.Globals.OpenNotificationCenter();
+    setTimeout(function() {
+        Alloy.Globals.OpenNotificationCenter();
+    }, 1e3);
     resetBadge();
 }
 

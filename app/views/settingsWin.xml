@@ -53,6 +53,11 @@
 			<!------------------------------------ Horizontal Line for Android -->
 			<TableViewRow platform="android" height="1" backgroundColor="black" />
 			
+			<!-- Change User Pin Window (DEBUG MODE) -->
+			<TableViewRow window="FTR">
+				<Label window="FTR">Start FTR (DEBUG)</Label>
+			</TableViewRow>
+			
 		</TableView>
 		
 	</Window>

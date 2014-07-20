@@ -8,6 +8,15 @@ function Controller() {
     var exports = {};
     exports.destroy = function() {};
     _.extend($, $.__views);
+    Alloy.Globals.userSignUpData = new Object({
+        pin: "temp",
+        name: "temp",
+        phone: "temp",
+        email: "email@temp.com",
+        gender: "male",
+        deviceToken: "temp",
+        profilePicture: new Object()
+    });
     var welcomeWin = Alloy.createController("FTR/welcomeWin").getView();
     welcomeWin.open();
     _.extend($, exports);

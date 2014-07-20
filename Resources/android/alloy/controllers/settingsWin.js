@@ -1,5 +1,10 @@
 function Controller() {
     function openClickedSettings(e) {
+        if ("FTR" == e.source.window) {
+            Titanium.App.Properties.setObject("FTR", true);
+            alert("FTR will start after restarting the app.");
+            return;
+        }
         var selectedSettingWin;
         if (-1 != e.source.window.search("http")) selectedSettingWin = Alloy.createController("webViewWin", {
             url: e.source.window
@@ -172,6 +177,22 @@ function Controller() {
         id: "__alloyId47"
     });
     __alloyId29.push($.__views.__alloyId47);
+    $.__views.__alloyId48 = Ti.UI.createTableViewRow({
+        window: "FTR",
+        id: "__alloyId48"
+    });
+    __alloyId29.push($.__views.__alloyId48);
+    $.__views.__alloyId49 = Ti.UI.createLabel({
+        font: {
+            fontSize: "24"
+        },
+        color: "black",
+        height: "60",
+        text: "Start FTR (DEBUG)",
+        window: "FTR",
+        id: "__alloyId49"
+    });
+    $.__views.__alloyId48.add($.__views.__alloyId49);
     $.__views.__alloyId28 = Ti.UI.createTableView({
         top: "23%",
         rowHeight: 60,

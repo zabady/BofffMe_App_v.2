@@ -16,6 +16,17 @@ if(Ti.Platform.displayCaps.platformHeight < 500) {
 }
 
 var Barcode = require("ti.barcode");
+
+// Adding event listeners for scanning
+Barcode.addEventListener('success', function(e){
+	// TODO: Add the scanned bofff to contacts and to friends
+	alert(e.result);
+});
+
+Barcode.addEventListener('error', function(e){
+	alert(JSON.parse(e.message));
+});
+
 //////////////////////////////////////////////////////////////////////////////// UI FUNCTIONS
 // Defining a function to open the qr code scanner
 function scanBtnClicked() {
@@ -23,15 +34,6 @@ function scanBtnClicked() {
 	Barcode.allowInstructions = false;
 	Barcode.allowMenu = false;
 	if(OS_ANDROID) Barcode.displayedMessage = "You may need to rotate the device.";
-	
-	Barcode.addEventListener('success', function(e){
-		// TODO: Add the scanned bofff to contacts and to friends
-		alert(e.result);
-	});
-	
-	Barcode.addEventListener('error', function(e){
-		alert(e.message);
-	});
 	
 	Barcode.capture({
 		overlay: $.view_overlay,

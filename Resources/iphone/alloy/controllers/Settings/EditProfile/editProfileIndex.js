@@ -66,8 +66,8 @@ function Controller() {
         window: $.__views.basicInfoWin.getViewEx({
             recurse: true
         }),
-        title: "Basic Info",
-        icon: "/images/QR-code-7aram.png",
+        title: "General Info",
+        icon: "/images/man-7aram.png",
         id: "__alloyId163"
     });
     __alloyId155.push($.__views.__alloyId163);
@@ -99,8 +99,8 @@ function Controller() {
     $.__views.__alloyId166.leftNavButton = $.__views.__alloyId172;
     $.__views.__alloyId165 = Ti.UI.createTab({
         window: $.__views.__alloyId166,
-        title: "Info",
-        icon: "/images/love-7aram.png",
+        title: "Work",
+        icon: "/images/man-7aram.png",
         id: "__alloyId165"
     });
     __alloyId155.push($.__views.__alloyId165);

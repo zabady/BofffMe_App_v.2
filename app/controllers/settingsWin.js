@@ -1,6 +1,14 @@
 
 // Setting a function that gets and opens the clicked settings item in a new window
 function openClickedSettings(e) {
+	
+	// TODO: Remove this shit in real app
+	if(e.source.window == "FTR") {
+		Titanium.App.Properties.setObject('FTR', true);
+		alert("FTR will start after restarting the app.");
+		return;
+	}
+	
 	var selectedSettingWin;
 	
 	// Checking weather the window need a webview or it has its own window

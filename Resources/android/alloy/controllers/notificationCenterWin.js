@@ -4,7 +4,7 @@ function Controller() {
         var mainSection = Ti.UI.createListSection({
             headerTitle: "All Notifications"
         });
-        if (allNotifications) {
+        if (allNotifications && 0 != allNotifications.length) {
             var listItems = [];
             for (var i in allNotifications) {
                 var notification = {

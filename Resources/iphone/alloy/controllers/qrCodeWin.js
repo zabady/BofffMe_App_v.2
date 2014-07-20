@@ -5,9 +5,11 @@ function Controller() {
         Barcode.allowMenu = false;
         Barcode.addEventListener("success", function(e) {
             alert(e.result);
+            var mecard = e.result;
+            alert(mecard);
         });
         Barcode.addEventListener("error", function(e) {
-            alert(e.message);
+            alert(JSON.parse(e.message));
         });
         Barcode.capture({
             overlay: $.view_overlay,

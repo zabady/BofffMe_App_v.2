@@ -41,7 +41,7 @@ function convertAddableFieldsToArrays(dataInStrings) {
 					// Convert those fields' strings into arrays
 					dataInArrays[field] = dataInArrays[field].split('$');
 				}
-				catch(exp) { /*TODO: remove this line*/ alert(exp); }
+				catch(exp) { /*TODO: remove this line*/ Ti.API.info("Error in function convertAddableFieldsToArrays"); }
 			}
 		}
 	}
@@ -72,7 +72,7 @@ function convertAddableFieldsToStrings(dataInArrays) {
 					// Convert those fields' arrays into strings
 					dataInStrings[field] = dataInStrings[field].join('$');
 				}
-				catch(exp) { /*TODO: remove this line*/ alert(exp); }
+				catch(exp) { /*TODO: remove this line*/ Ti.API.info("Error in function convertAddableFieldsToStrings"); }
 			}
 		}
 	}

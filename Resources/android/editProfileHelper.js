@@ -20,7 +20,7 @@ function convertAddableFieldsToArrays(dataInStrings) {
         try {
             dataInArrays[field] = dataInArrays[field].split("$");
         } catch (exp) {
-            alert(exp);
+            Ti.API.info("Error in function convertAddableFieldsToArrays");
         }
     }
     return dataInArrays;
@@ -42,7 +42,7 @@ function convertAddableFieldsToStrings(dataInArrays) {
         try {
             dataInStrings[field] = dataInStrings[field].join("$");
         } catch (exp) {
-            alert(exp);
+            Ti.API.info("Error in function convertAddableFieldsToStrings");
         }
     }
     return dataInStrings;

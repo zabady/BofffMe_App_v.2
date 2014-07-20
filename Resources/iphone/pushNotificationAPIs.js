@@ -69,7 +69,9 @@ function receivePushNotification(e) {
     };
     allNotifications.push(newNotification);
     Titanium.App.Properties.setObject("notifications", allNotifications);
-    Alloy.Globals.OpenNotificationCenter();
+    setTimeout(function() {
+        Alloy.Globals.OpenNotificationCenter();
+    }, 1e3);
     resetBadge();
 }
 
