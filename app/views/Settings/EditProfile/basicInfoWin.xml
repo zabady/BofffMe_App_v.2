@@ -3,7 +3,7 @@
 		
 		<TableView>
 			<TableViewRow>
-				<TextField hintText="Zeby">
+				<TextField hintText="Text Field" />
 			</TableViewRow>
 		</TableView>
 		

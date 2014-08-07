@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function initializeSearch() {
         if (firstFocus && false) {
@@ -359,9 +368,11 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Contacts/bofffsContacts";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -429,9 +440,9 @@ function Controller() {
     updateSearch ? $.__views.search.addEventListener("change", updateSearch) : __defers["$.__views.search!change!updateSearch"] = true;
     stopSearch ? $.__views.search.addEventListener("blur", stopSearch) : __defers["$.__views.search!blur!stopSearch"] = true;
     searchBofff ? $.__views.search.addEventListener("return", searchBofff) : __defers["$.__views.search!return!searchBofff"] = true;
-    var __alloyId42 = {};
-    var __alloyId44 = [];
-    var __alloyId45 = {
+    var __alloyId43 = {};
+    var __alloyId45 = [];
+    var __alloyId46 = {
         type: "Ti.UI.ImageView",
         bindId: "pic",
         properties: {
@@ -444,8 +455,8 @@ function Controller() {
             click: imageClicked
         }
     };
-    __alloyId44.push(__alloyId45);
-    var __alloyId46 = {
+    __alloyId45.push(__alloyId46);
+    var __alloyId47 = {
         type: "Ti.UI.ImageView",
         bindId: "bofff_pic",
         properties: {
@@ -458,14 +469,15 @@ function Controller() {
             click: starClicked
         }
     };
-    __alloyId44.push(__alloyId46);
-    var __alloyId47 = {
+    __alloyId45.push(__alloyId47);
+    var __alloyId48 = {
         type: "Ti.UI.Label",
         bindId: "textLabel",
         properties: {
             color: "#000",
             font: {
-                fontSize: "20dp"
+                fontSize: "20dp",
+                fontFamily: "Helvetica Neue"
             },
             left: "60dp",
             top: 0,
@@ -473,18 +485,18 @@ function Controller() {
             bindId: "textLabel"
         }
     };
-    __alloyId44.push(__alloyId47);
-    var __alloyId43 = {
+    __alloyId45.push(__alloyId48);
+    var __alloyId44 = {
         properties: {
             height: "56dp",
             name: "template1"
         },
-        childTemplates: __alloyId44
+        childTemplates: __alloyId45
     };
-    __alloyId42["template1"] = __alloyId43;
+    __alloyId43["template1"] = __alloyId44;
     $.__views.list_bofffContacts = Ti.UI.createListView({
         width: "100%",
-        templates: __alloyId42,
+        templates: __alloyId43,
         id: "list_bofffContacts",
         left: "0",
         defaultItemTemplate: "template1"

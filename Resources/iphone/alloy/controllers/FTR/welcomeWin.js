@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function continueClicked() {
         if (Alloy.Globals.countryCode) openPhoneNumberWin(); else {
@@ -11,9 +20,11 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "FTR/welcomeWin";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -44,11 +55,11 @@ function Controller() {
         id: "win"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
-    $.__views.__alloyId104 = Ti.UI.createView({
-        id: "__alloyId104"
+    $.__views.__alloyId90 = Ti.UI.createView({
+        id: "__alloyId90"
     });
-    $.__views.win.add($.__views.__alloyId104);
-    $.__views.__alloyId105 = Ti.UI.createLabel({
+    $.__views.win.add($.__views.__alloyId90);
+    $.__views.__alloyId91 = Ti.UI.createLabel({
         left: 10,
         top: "5%",
         width: Ti.UI.SIZE,
@@ -58,18 +69,18 @@ function Controller() {
             fontSize: "18"
         },
         text: "WELCOME TO BOFFF ME!",
-        id: "__alloyId105"
+        id: "__alloyId91"
     });
-    $.__views.__alloyId104.add($.__views.__alloyId105);
-    $.__views.__alloyId106 = Ti.UI.createImageView({
+    $.__views.__alloyId90.add($.__views.__alloyId91);
+    $.__views.__alloyId92 = Ti.UI.createImageView({
         image: "/images/bofffme_logo_512x512.png",
         width: "200",
         height: "200",
         top: "25%",
-        id: "__alloyId106"
+        id: "__alloyId92"
     });
-    $.__views.__alloyId104.add($.__views.__alloyId106);
-    $.__views.__alloyId107 = Ti.UI.createButton({
+    $.__views.__alloyId90.add($.__views.__alloyId92);
+    $.__views.__alloyId93 = Ti.UI.createButton({
         bottom: 0,
         font: {
             fontSize: "22",
@@ -80,10 +91,10 @@ function Controller() {
         backgroundColor: "transparent",
         color: "white",
         title: "Continue",
-        id: "__alloyId107"
+        id: "__alloyId93"
     });
-    $.__views.__alloyId104.add($.__views.__alloyId107);
-    continueClicked ? $.__views.__alloyId107.addEventListener("click", continueClicked) : __defers["$.__views.__alloyId107!click!continueClicked"] = true;
+    $.__views.__alloyId90.add($.__views.__alloyId93);
+    continueClicked ? $.__views.__alloyId93.addEventListener("click", continueClicked) : __defers["$.__views.__alloyId93!click!continueClicked"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     var continueBtnClicked = false;
@@ -104,7 +115,7 @@ function Controller() {
     xhr.send();
     $.win.navBarHidden = true;
     $.win.open();
-    __defers["$.__views.__alloyId107!click!continueClicked"] && $.__views.__alloyId107.addEventListener("click", continueClicked);
+    __defers["$.__views.__alloyId93!click!continueClicked"] && $.__views.__alloyId93.addEventListener("click", continueClicked);
     _.extend($, exports);
 }
 

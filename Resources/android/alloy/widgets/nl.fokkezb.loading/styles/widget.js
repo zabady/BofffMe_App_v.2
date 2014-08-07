@@ -23,7 +23,8 @@ module.exports = [ {
     priority: 1101.0004,
     key: "TextField",
     style: {
-        color: "white",
+        color: "black",
+        ellipsize: true,
         softKeyboardOnFocus: Ti.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS
     }
 }, {
@@ -38,7 +39,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10101.0008,
+    priority: 10000.0008,
     key: "andoridEditViewField",
     style: {
         font: {
@@ -46,7 +47,6 @@ module.exports = [ {
             fontWeight: "bold"
         },
         textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
-        color: "white",
         bubbleParent: false,
         height: 60,
         width: "100%",

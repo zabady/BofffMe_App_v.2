@@ -18,7 +18,7 @@ function convertAddableFieldsToArrays(dataInStrings) {
       case "favorite_places":
       case "favorite_places_privacy":
         try {
-            dataInArrays[field] = dataInArrays[field].split("$");
+            dataInArrays[field] = "" != dataInArrays[field] && null != dataInArrays[field] ? dataInArrays[field].split("$") : [];
         } catch (exp) {
             Ti.API.info("Error in function convertAddableFieldsToArrays");
         }

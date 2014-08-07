@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function initializeSearch() {
         if (firstFocus && true) {
@@ -35,23 +44,6 @@ function Controller() {
             $.search.value = "";
             $.search.hide();
             $.search.show();
-        }
-    }
-    function openSearchPicker() {
-        if (pickerVisible) {
-            animation.fadeOut($.picker_searchBy.view_picker, 500, function() {
-                $.picker_searchBy.view_picker.width = 0;
-                $.picker_searchBy.view_picker.height = 0;
-                pickerVisible = false;
-                $.search.focus();
-            });
-            changeSearchableText(searchableText, searchableTextPrivacy);
-        } else {
-            $.picker_searchBy.view_picker.width = Ti.UI.SIZE;
-            $.picker_searchBy.view_picker.height = Ti.UI.FILL;
-            animation.popIn($.picker_searchBy.view_picker);
-            pickerVisible = true;
-            $.search.blur();
         }
     }
     function changeSearchableText(searchableText, searchableTextPrivacy) {
@@ -362,9 +354,11 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Contacts/bofffsContacts";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -454,7 +448,8 @@ function Controller() {
         properties: {
             color: "#000",
             font: {
-                fontSize: "20dp"
+                fontSize: "20dp",
+                fontFamily: "Helvetica Neue"
             },
             left: "60dp",
             top: 0,
@@ -548,7 +543,6 @@ function Controller() {
     var imageFavorite;
     var privacyClicked = false;
     var ifImageClicked = false;
-    __defers["$.__views.lbl_searchField!click!openSearchPicker"] && $.__views.lbl_searchField.addEventListener("click", openSearchPicker);
     __defers["$.__views.search!focus!initializeSearch"] && $.__views.search.addEventListener("focus", initializeSearch);
     __defers["$.__views.search!cancel!cancelSearch"] && $.__views.search.addEventListener("cancel", cancelSearch);
     __defers["$.__views.search!change!updateSearch"] && $.__views.search.addEventListener("change", updateSearch);

@@ -39,7 +39,9 @@ function convertAddableFieldsToArrays(dataInStrings) {
 			{
 				try {
 					// Convert those fields' strings into arrays
-					dataInArrays[field] = dataInArrays[field].split('$');
+					if(dataInArrays[field] != "" && dataInArrays[field] != null)
+						dataInArrays[field] = dataInArrays[field].split('$');
+					else dataInArrays[field] = [];
 				}
 				catch(exp) { /*TODO: remove this line*/ Ti.API.info("Error in function convertAddableFieldsToArrays"); }
 			}

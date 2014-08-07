@@ -10,7 +10,7 @@
 		
 		
 		<!-- Tab 1 : Contact Information Window -->
-        <Tab title="Contact Info" icon="/images/man-7aram.png" >
+        <Tab title="Contact" icon="/images/man-7aram.png" >
         	
         	<Window id="win">
 		
@@ -33,13 +33,13 @@
         
 		
 		<!-- Tab 2 : Basic Information Window -->
-		<Tab title="General Info" icon="/images/man-7aram.png">
+		<Tab title="General" icon="/images/man-7aram.png">
     		<Require id="basicInfoWin" src="Settings/EditProfile/basicInfoWin" type="view" />
         </Tab>
         
         
         <!-- Tab 3 -->
-        <Tab title="Work" icon="/images/man-7aram.png">
+        <Tab title="Work & Ed." icon="/images/man-7aram.png">
         	<Window>
         		<RightNavButton>
 					<View layout="horizontal">

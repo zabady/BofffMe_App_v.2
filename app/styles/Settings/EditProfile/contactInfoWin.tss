@@ -67,7 +67,7 @@
 },
 ".fieldText[platform=android]": {
 	left: "25%",
-	color: "white",
+	//color: "white",
 	bubbleParent: false,
 }
 

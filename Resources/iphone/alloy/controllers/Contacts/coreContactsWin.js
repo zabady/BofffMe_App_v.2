@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function changeRightNavButton() {
         var currentView = $.scrollableview_mainContactsView.getCurrentPage();
@@ -114,9 +123,11 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Contacts/coreContactsWin";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -134,25 +145,25 @@ function Controller() {
         id: "btn_settings"
     });
     $.__views.win_boffsList.rightNavButton = $.__views.btn_settings;
-    $.__views.__alloyId50 = Ti.UI.createImageView({
+    $.__views.__alloyId51 = Ti.UI.createImageView({
         image: "/images/app_icon_60x60.png",
         width: 40,
         height: 40,
-        id: "__alloyId50"
-    });
-    $.__views.win_boffsList.leftNavButton = $.__views.__alloyId50;
-    $.__views.__alloyId51 = Ti.UI.createView({
-        layout: "vertical",
         id: "__alloyId51"
     });
-    $.__views.win_boffsList.add($.__views.__alloyId51);
-    var __alloyId52 = [];
+    $.__views.win_boffsList.leftNavButton = $.__views.__alloyId51;
+    $.__views.__alloyId52 = Ti.UI.createView({
+        layout: "vertical",
+        id: "__alloyId52"
+    });
+    $.__views.win_boffsList.add($.__views.__alloyId52);
+    var __alloyId53 = [];
     $.__views.scrollableview_mainContactsView = Ti.UI.createScrollableView({
-        views: __alloyId52,
+        views: __alloyId53,
         showPagingControl: "true",
         id: "scrollableview_mainContactsView"
     });
-    $.__views.__alloyId51.add($.__views.scrollableview_mainContactsView);
+    $.__views.__alloyId52.add($.__views.scrollableview_mainContactsView);
     changeRightNavButton ? $.__views.scrollableview_mainContactsView.addEventListener("scrollend", changeRightNavButton) : __defers["$.__views.scrollableview_mainContactsView!scrollend!changeRightNavButton"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);

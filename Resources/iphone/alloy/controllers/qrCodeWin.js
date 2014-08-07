@@ -1,16 +1,17 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function scanBtnClicked() {
         Barcode.allowRotation = false;
         Barcode.allowInstructions = false;
         Barcode.allowMenu = false;
-        Barcode.addEventListener("success", function(e) {
-            alert(e.result);
-            var mecard = e.result;
-            alert(mecard);
-        });
-        Barcode.addEventListener("error", function(e) {
-            alert(JSON.parse(e.message));
-        });
         Barcode.capture({
             overlay: $.view_overlay,
             showCancel: true,
@@ -28,9 +29,11 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "qrCodeWin";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -54,15 +57,15 @@ function Controller() {
         id: "btn_settings"
     });
     $.__views.qrCodeWin.rightNavButton = $.__views.btn_settings;
-    $.__views.__alloyId19 = Ti.UI.createImageView({
+    $.__views.__alloyId18 = Ti.UI.createImageView({
         top: "10%",
         width: 40,
         height: 40,
         image: "/images/app_icon_60x60.png",
-        id: "__alloyId19"
+        id: "__alloyId18"
     });
-    $.__views.qrCodeWin.leftNavButton = $.__views.__alloyId19;
-    $.__views.__alloyId20 = Ti.UI.createLabel({
+    $.__views.qrCodeWin.leftNavButton = $.__views.__alloyId18;
+    $.__views.__alloyId19 = Ti.UI.createLabel({
         top: 0,
         height: "10%",
         font: {
@@ -70,9 +73,9 @@ function Controller() {
         },
         color: "#2279bc",
         text: "Your Bofff Me Code!",
-        id: "__alloyId20"
+        id: "__alloyId19"
     });
-    $.__views.qrCodeWin.add($.__views.__alloyId20);
+    $.__views.qrCodeWin.add($.__views.__alloyId19);
     $.__views.img = Ti.UI.createImageView({
         top: "10%",
         width: Ti.UI.FILL,
@@ -80,7 +83,7 @@ function Controller() {
         id: "img"
     });
     $.__views.qrCodeWin.add($.__views.img);
-    $.__views.__alloyId21 = Ti.UI.createButton({
+    $.__views.__alloyId20 = Ti.UI.createButton({
         bottom: 0,
         height: "15%",
         width: Ti.UI.FILL,
@@ -91,15 +94,15 @@ function Controller() {
             fontWeight: "bold"
         },
         title: "Scan a Bofff QR Code",
-        id: "__alloyId21"
+        id: "__alloyId20"
     });
-    $.__views.qrCodeWin.add($.__views.__alloyId21);
-    scanBtnClicked ? $.__views.__alloyId21.addEventListener("click", scanBtnClicked) : __defers["$.__views.__alloyId21!click!scanBtnClicked"] = true;
+    $.__views.qrCodeWin.add($.__views.__alloyId20);
+    scanBtnClicked ? $.__views.__alloyId20.addEventListener("click", scanBtnClicked) : __defers["$.__views.__alloyId20!click!scanBtnClicked"] = true;
     $.__views.view_overlay = Ti.UI.createView({
         id: "view_overlay"
     });
     $.__views.view_overlay && $.addTopLevelView($.__views.view_overlay);
-    $.__views.__alloyId22 = Ti.UI.createButton({
+    $.__views.__alloyId21 = Ti.UI.createButton({
         bottom: 0,
         height: 50,
         width: 100,
@@ -113,11 +116,11 @@ function Controller() {
         borderRadius: 5,
         title: "Flash",
         left: "0",
-        id: "__alloyId22"
+        id: "__alloyId21"
     });
-    $.__views.view_overlay.add($.__views.__alloyId22);
-    openCloseLedBarcode ? $.__views.__alloyId22.addEventListener("click", openCloseLedBarcode) : __defers["$.__views.__alloyId22!click!openCloseLedBarcode"] = true;
-    $.__views.__alloyId23 = Ti.UI.createButton({
+    $.__views.view_overlay.add($.__views.__alloyId21);
+    openCloseLedBarcode ? $.__views.__alloyId21.addEventListener("click", openCloseLedBarcode) : __defers["$.__views.__alloyId21!click!openCloseLedBarcode"] = true;
+    $.__views.__alloyId22 = Ti.UI.createButton({
         bottom: 0,
         height: 50,
         width: 100,
@@ -131,10 +134,10 @@ function Controller() {
         borderRadius: 5,
         title: "Cancel",
         right: "0",
-        id: "__alloyId23"
+        id: "__alloyId22"
     });
-    $.__views.view_overlay.add($.__views.__alloyId23);
-    cancelBarcode ? $.__views.__alloyId23.addEventListener("click", cancelBarcode) : __defers["$.__views.__alloyId23!click!cancelBarcode"] = true;
+    $.__views.view_overlay.add($.__views.__alloyId22);
+    cancelBarcode ? $.__views.__alloyId22.addEventListener("click", cancelBarcode) : __defers["$.__views.__alloyId22!click!cancelBarcode"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.img.image = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory + "qrcode.jpg").read();
@@ -143,9 +146,15 @@ function Controller() {
         $.img.height = Ti.UI.SIZE;
     }
     var Barcode = require("ti.barcode");
-    __defers["$.__views.__alloyId21!click!scanBtnClicked"] && $.__views.__alloyId21.addEventListener("click", scanBtnClicked);
-    __defers["$.__views.__alloyId22!click!openCloseLedBarcode"] && $.__views.__alloyId22.addEventListener("click", openCloseLedBarcode);
-    __defers["$.__views.__alloyId23!click!cancelBarcode"] && $.__views.__alloyId23.addEventListener("click", cancelBarcode);
+    Barcode.addEventListener("success", function(e) {
+        alert(e.result);
+    });
+    Barcode.addEventListener("error", function(e) {
+        alert(JSON.parse(e.message));
+    });
+    __defers["$.__views.__alloyId20!click!scanBtnClicked"] && $.__views.__alloyId20.addEventListener("click", scanBtnClicked);
+    __defers["$.__views.__alloyId21!click!openCloseLedBarcode"] && $.__views.__alloyId21.addEventListener("click", openCloseLedBarcode);
+    __defers["$.__views.__alloyId22!click!cancelBarcode"] && $.__views.__alloyId22.addEventListener("click", cancelBarcode);
     _.extend($, exports);
 }
 

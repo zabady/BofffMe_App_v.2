@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function textFieldChanges(e) {
         switch (parseInt(e.source.switchValue)) {
@@ -57,9 +66,11 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Settings/insertBofffWin";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -88,6 +99,7 @@ function Controller() {
     $.__views.__alloyId121 = Ti.UI.createTextField({
         bubbleParent: false,
         color: "white",
+        ellipsize: true,
         softKeyboardOnFocus: Ti.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS,
         top: 40,
         switchValue: "1",
@@ -99,6 +111,7 @@ function Controller() {
     $.__views.__alloyId122 = Ti.UI.createTextField({
         bubbleParent: false,
         color: "white",
+        ellipsize: true,
         softKeyboardOnFocus: Ti.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS,
         top: 40,
         switchValue: "2",
@@ -110,6 +123,7 @@ function Controller() {
     $.__views.__alloyId123 = Ti.UI.createTextField({
         bubbleParent: false,
         color: "white",
+        ellipsize: true,
         softKeyboardOnFocus: Ti.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS,
         top: 40,
         switchValue: "3",
@@ -121,6 +135,7 @@ function Controller() {
     $.__views.__alloyId124 = Ti.UI.createTextField({
         bubbleParent: false,
         color: "white",
+        ellipsize: true,
         softKeyboardOnFocus: Ti.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS,
         top: 40,
         switchValue: "4",

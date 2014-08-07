@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function validate_name() {
         var regexp = /^[a-zA-Z]+(\s{1}[a-zA-Z]+)*$/;
@@ -127,9 +136,11 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "FTR/userMainDetailsWin";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -203,7 +214,8 @@ function Controller() {
     imgPressed ? $.__views.img_user.addEventListener("click", imgPressed) : __defers["$.__views.img_user!click!imgPressed"] = true;
     $.__views.txt_name = Ti.UI.createTextField({
         bubbleParent: false,
-        color: "white",
+        color: "black",
+        ellipsize: true,
         softKeyboardOnFocus: Ti.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS,
         width: "75%",
         top: "8dp",
@@ -220,7 +232,8 @@ function Controller() {
     disableScroll ? $.__views.txt_name.addEventListener("blur", disableScroll) : __defers["$.__views.txt_name!blur!disableScroll"] = true;
     $.__views.txt_email = Ti.UI.createTextField({
         bubbleParent: false,
-        color: "white",
+        color: "black",
+        ellipsize: true,
         softKeyboardOnFocus: Ti.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS,
         width: "75%",
         top: "8dp",

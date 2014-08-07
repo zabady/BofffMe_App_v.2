@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function onChangeSMSCodeTxtField(e) {
         if (4 == e.source.value.length) {
@@ -23,9 +32,11 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "FTR/smsWin";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -63,7 +74,8 @@ function Controller() {
         keyboardType: Ti.UI.KEYBOARD_PHONE_PAD,
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         hintText: "Enter your code here",
-        color: "white",
+        color: "black",
+        ellipsize: true,
         softKeyboardOnFocus: Ti.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS,
         top: "8%",
         height: Ti.UI.SIZE,

@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function viewLoading() {
         Alloy.Globals.loading.show("Please Wait ..", false);
@@ -39,7 +48,7 @@ function Controller() {
         xhr.send(params);
     }
     function generateQrCode() {
-        var url = "https://chart.googleapis.com/chart?cht=qr&chs=500x500&chl=MECARD:N:" + Alloy.Globals.userSignUpData.name + ";" + "TEL:" + Alloy.Globals.userSignUpData.phone + ";" + "EMAIL:" + Alloy.Globals.userSignUpData.email + ";" + "NOTE:pin:" + Alloy.Globals.userPin + ";";
+        var url = "https://chart.googleapis.com/chart?cht=qr&chs=500x500&chl=" + Alloy.Globals.userSignUpData.name + ";" + Alloy.Globals.userSignUpData.phone + ";" + Alloy.Globals.userSignUpData.email + ";";
         var client = Titanium.Network.createHTTPClient({
             onload: generetaQrCodeSuccess,
             onerror: function(e) {
@@ -65,6 +74,7 @@ function Controller() {
                 userData.favorite_places_privacy = [];
                 Titanium.App.Properties.setObject("userData", userData);
                 alert(userData.fullName);
+                Alloy.Globals.notifyFriendsAboutJoining();
             },
             onerror: function() {
                 alert(this.responseText);
@@ -75,9 +85,11 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "FTR/signUpWin";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     var __defers = {};

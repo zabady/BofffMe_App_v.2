@@ -1,9 +1,13 @@
-function Controller() {
-    function openPicker() {
-        $.txt_country_ios.blur();
-        false == $.picker.visible && ($.picker.visible = true);
-        animation.fadeIn($.picker, 500);
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
     }
+    return arg;
+}
+
+function Controller() {
     function changeCountryAndCountryCode() {
         currentCountryCode = $.picker.getSelectedRow(0).id.toLowerCase();
     }
@@ -26,9 +30,11 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "FTR/phoneNumberWin";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -74,7 +80,8 @@ function Controller() {
         },
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         keyboardType: Ti.UI.KEYBOARD_PHONE_PAD,
-        color: "white",
+        color: "black",
+        ellipsize: true,
         softKeyboardOnFocus: Ti.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS,
         height: "42",
         id: "txt_phoneNumber",
@@ -135,15 +142,12 @@ function Controller() {
     }
     $.picker.add(pickerRows);
     $.picker.setSelectedRow(0, selectedRow, true);
-    var animation;
     $.win.addEventListener("click", function() {
         $.txt_phoneNumber.blur();
     });
     $.win.leftNavButton = Ti.UI.createButton();
-    __defers["$.__views.txt_country_ios!focus!openPicker"] && $.__views.txt_country_ios.addEventListener("focus", openPicker);
     __defers["$.__views.picker!change!changeCountryAndCountryCode"] && $.__views.picker.addEventListener("change", changeCountryAndCountryCode);
     __defers["$.__views.__alloyId96!click!continueBtnPressed"] && $.__views.__alloyId96.addEventListener("click", continueBtnPressed);
-    __defers["$.__views.picker!change!changeCountryAndCountryCode"] && $.__views.picker.addEventListener("change", changeCountryAndCountryCode);
     __defers["$.__views.dialog_confirm!click!dialogConfirmPressed"] && $.__views.dialog_confirm.addEventListener("click", dialogConfirmPressed);
     _.extend($, exports);
 }

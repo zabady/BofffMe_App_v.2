@@ -35,6 +35,21 @@ module.exports = [ {
     }
 }, {
     isClass: true,
+    priority: 10000.0008,
+    key: "andoridEditViewField",
+    style: {
+        font: {
+            fontSize: 20,
+            fontWeight: "bold"
+        },
+        textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
+        bubbleParent: false,
+        height: 60,
+        width: "100%",
+        returnKeyType: Titanium.UI.RETURNKEY_DONE
+    }
+}, {
+    isClass: true,
     priority: 10101.0006,
     key: "settingsBtn",
     style: {

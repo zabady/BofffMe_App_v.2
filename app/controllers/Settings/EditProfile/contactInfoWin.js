@@ -1,7 +1,7 @@
 Ti.include("/editProfileHelper.js");	// Including editProfileHelper APIs
 
 //////////////////////////////////////////////////////////////////////////////////////// INITIALIZING VARIABLES
-// Initialize userDataInArrays here as this is the first required view
+// Initialize userDataInArrays here as this is the first required view in the Edit Profile TabGroup
 userDataInArrays = convertAddableFieldsToArrays(userData); // Convert the addable fields into arrays	// editProfileHelper.js
 
 var addNewRow = false;	// Used to flag that the add button was clicked
@@ -17,6 +17,7 @@ if(OS_ANDROID) var androidDeleteRowFlag = false;	// Used to flag that remove ico
 // TODO: Add an alert dialog to confirm deleting
 // TODO: Put Android Edit View in an xml alone and require it
 // TODO: Replace non-native android picker with the native one
+// TODO: Replace all text fields with labels
 
 //////////////////////////////////////////////////////////////////////////////////////// END OF INITIALIZING VARIABLES
 
@@ -116,15 +117,13 @@ function PrimaryPhoneTextLongclick(e) {
 // Event listener for addable fields' text fields to get their current value before edidting
 function TextFieldFocused(e) {
 //////////////////////////////////////////////////////////////////////////////// ANDROID WORK AROUND
-	if(OS_ANDROID) {
-		e.source.blur();
-		$.androidEditView.visible = true;
-		$.fieldTitle.text = "Type " + e.source.hintText;
-		$.fieldValue.hintText = e.source.hintText;
-		$.fieldValue.value = e.source.value;
-		$.fieldValue.keyboardType = e.source.keyboardType;
-	}
-	else if(OS_IOS && clickedPrivacyLabel) DismissPicker();
+	e.source.blur();	// TODO: Remove it while replacing text fields with labels
+	$.editView.visible = true;
+	$.fieldTitle.text = "Type " + e.source.hintText;
+	$.fieldValue.hintText = e.source.hintText;
+	if(e.source.value != e.source.hintText) $.fieldValue.value = e.source.value;
+	$.fieldValue.keyboardType = e.source.keyboardType;
+	$.fieldValue.focus();
 	
 	if(e.source.fieldType) addableTextOldValue = e.source.value;
 	clickedTextField = e.source;
@@ -132,19 +131,40 @@ function TextFieldFocused(e) {
 
 //////////////////////////////////////////////////////////////////////////////// ANDROID WORK AROUND
 // Event listener for android work around that 
-function AndroidEditViewTextChanged(e) {
+function editViewTextChanged(e) {
+	// TODO: Add some shit here
 	clickedTextField.value = $.fieldValue.value;
+	
+	// 1. Hint Text
+	// 2. Change events
+	
+	// Workaround for hint text to give UX of text fields 
+	if($.fieldValue.value == "") {
+		clickedTextField.value = clickedTextField.hintText;
+		clickedTextField.color = "blue";
+	} else clickedTextField.color = "black";
+	
+	// Workaround for change events of text fields
+	// First case is an addable field
+	if(clickedTextField.fieldType) {
+		changeValueOfAddableField(userDataInArrays, clickedTextField.fieldType, addableTextOldValue, clickedTextField.value);	// editProfileHelper.js
+		addableTextOldValue = clickedTextField.value;
+	}
+	// Else, non addable field
+	else {
+		changeValueOfNonAddableField(userDataInArrays, clickedTextField.id, clickedTextField.value);	// editProfileHelper.js
+	}
 }
 
 // Event listener for text change in non addable fields
 function NonAddableTextChanged(e) {
-	changeValueOfNonAddableField(userDataInArrays, e.source.id, e.source.value);	// editProfileHelper.js
+	//changeValueOfNonAddableField(userDataInArrays, e.source.id, e.source.value);	// editProfileHelper.js
 }
 
-// Event listener for text change in non addable fields
+// Event listener for text change in addable fields
 function AddableTextChanged(e) {
-	changeValueOfAddableField(userDataInArrays, e.source.fieldType, addableTextOldValue, e.source.value);	// editProfileHelper.js
-	addableTextOldValue = e.source.value;
+	//changeValueOfAddableField(userDataInArrays, e.source.fieldType, addableTextOldValue, e.source.value);	// editProfileHelper.js
+	//addableTextOldValue = e.source.value;
 }
 
 // Event listener for clicking on the privacy label, it shows the privacy picker
@@ -172,8 +192,9 @@ function SelectedPrivacyChanged(e) {
 }
 
 // Event listener that hide android edit view, fired when the low opacity views are clicked
-function AndroidEditViewBlur() {
-	$.androidEditView.visible = false;
+function editViewBlur() {
+	$.editView.visible = false;
+	$.fieldValue.blur();
 }
 
 // An event listener that listens to Done button in decimal pad toolbar to dismiss it on ios
@@ -248,9 +269,8 @@ function addNewRowAfter(data, rowNum) {
 $.pickerContainer.picker.addEventListener("change", SelectedPrivacyChanged);
 
 // Adding event listeners to dismiss the picker; on toolbar's done button for iOS, and of the transparent views for android
+$.pickerContainer.transparentView1.addEventListener("click", DismissPicker);
+
 if(OS_IOS) $.pickerContainer.btn_toolBarDone.addEventListener("click", DismissPicker);
-else if(OS_ANDROID) {
-	$.pickerContainer.transparentView1.addEventListener("click", DismissPicker);
-	$.pickerContainer.transparentView2.addEventListener("click", DismissPicker);
-}
+else if(OS_ANDROID) $.pickerContainer.transparentView2.addEventListener("click", DismissPicker);
 //////////////////////////////////////////////////////////////////////////////////////// END OF PICKER EVENT LISTENERS

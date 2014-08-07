@@ -1,9 +1,20 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Settings/EditProfile/privacyPicker";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     $.__views.pickerView = Ti.UI.createView({
@@ -26,33 +37,33 @@ function Controller() {
         useSpinner: "true"
     });
     $.__views.pickerView.add($.__views.picker);
-    var __alloyId192 = [];
-    $.__views.__alloyId193 = Ti.UI.createPickerRow({
+    var __alloyId177 = [];
+    $.__views.__alloyId178 = Ti.UI.createPickerRow({
         title: "public",
-        id: "__alloyId193"
+        id: "__alloyId178"
     });
-    __alloyId192.push($.__views.__alloyId193);
-    $.__views.__alloyId194 = Ti.UI.createPickerRow({
+    __alloyId177.push($.__views.__alloyId178);
+    $.__views.__alloyId179 = Ti.UI.createPickerRow({
         title: "friends",
-        id: "__alloyId194"
+        id: "__alloyId179"
     });
-    __alloyId192.push($.__views.__alloyId194);
-    $.__views.__alloyId195 = Ti.UI.createPickerRow({
+    __alloyId177.push($.__views.__alloyId179);
+    $.__views.__alloyId180 = Ti.UI.createPickerRow({
         title: "favorites",
-        id: "__alloyId195"
+        id: "__alloyId180"
     });
-    __alloyId192.push($.__views.__alloyId195);
-    $.__views.__alloyId196 = Ti.UI.createPickerRow({
+    __alloyId177.push($.__views.__alloyId180);
+    $.__views.__alloyId181 = Ti.UI.createPickerRow({
         title: "onlyMe",
-        id: "__alloyId196"
+        id: "__alloyId181"
     });
-    __alloyId192.push($.__views.__alloyId196);
-    $.__views.__alloyId197 = Ti.UI.createPickerRow({
+    __alloyId177.push($.__views.__alloyId181);
+    $.__views.__alloyId182 = Ti.UI.createPickerRow({
         title: "                                             ",
-        id: "__alloyId197"
+        id: "__alloyId182"
     });
-    __alloyId192.push($.__views.__alloyId197);
-    $.__views.picker.add(__alloyId192);
+    __alloyId177.push($.__views.__alloyId182);
+    $.__views.picker.add(__alloyId177);
     $.__views.transparentView2 = Ti.UI.createView({
         id: "transparentView2",
         opacity: "0.4",

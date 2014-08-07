@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function createBindingRowData(fieldValue, privacy, isPhone) {
         var data = {
@@ -29,20 +38,29 @@ function Controller() {
         alert("How will we allow the user to change primary phone ?\nMaybe with FTR.");
     }
     function TextFieldFocused(e) {
-        true && clickedPrivacyLabel && DismissPicker();
+        e.source.blur();
+        $.editView.visible = true;
+        $.fieldTitle.text = "Type " + e.source.hintText;
+        $.fieldValue.hintText = e.source.hintText;
+        e.source.value != e.source.hintText && ($.fieldValue.value = e.source.value);
+        $.fieldValue.keyboardType = e.source.keyboardType;
+        $.fieldValue.focus();
         e.source.fieldType && (addableTextOldValue = e.source.value);
         clickedTextField = e.source;
     }
-    function AndroidEditViewTextChanged() {
+    function editViewTextChanged() {
         clickedTextField.value = $.fieldValue.value;
+        if ("" == $.fieldValue.value) {
+            clickedTextField.value = clickedTextField.hintText;
+            clickedTextField.color = "blue";
+        } else clickedTextField.color = "black";
+        if (clickedTextField.fieldType) {
+            changeValueOfAddableField(userDataInArrays, clickedTextField.fieldType, addableTextOldValue, clickedTextField.value);
+            addableTextOldValue = clickedTextField.value;
+        } else changeValueOfNonAddableField(userDataInArrays, clickedTextField.id, clickedTextField.value);
     }
-    function NonAddableTextChanged(e) {
-        changeValueOfNonAddableField(userDataInArrays, e.source.id, e.source.value);
-    }
-    function AddableTextChanged(e) {
-        changeValueOfAddableField(userDataInArrays, e.source.fieldType, addableTextOldValue, e.source.value);
-        addableTextOldValue = e.source.value;
-    }
+    function NonAddableTextChanged() {}
+    function AddableTextChanged() {}
     function PrivacyLabelClicked(e) {
         DismissKeyboardClicked();
         $.pickerContainer.pickerView.visible = true;
@@ -57,8 +75,9 @@ function Controller() {
         clickedPrivacyLabel.id ? changePrivacyOfNonAddableField(userDataInArrays, clickedPrivacyLabel.id, newPrivacy) : changePrivacyOfAddableField(userDataInArrays, clickedPrivacyLabel.fieldType, clickedPrivacyLabel.text, newPrivacy);
         clickedPrivacyLabel.text = newPrivacy;
     }
-    function AndroidEditViewBlur() {
-        $.androidEditView.visible = false;
+    function editViewBlur() {
+        $.editView.visible = false;
+        $.fieldValue.blur();
     }
     function DismissKeyboardClicked() {
         clickedTextField && clickedTextField.blur();
@@ -101,45 +120,47 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Settings/EditProfile/contactInfoWin";
-    var __parentSymbol = arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        var __parentSymbol = __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
-    var __alloyId124 = [];
-    $.__views.__alloyId125 = Ti.UI.createTableViewRow({
+    var __alloyId110 = [];
+    $.__views.__alloyId111 = Ti.UI.createTableViewRow({
         editable: false,
         height: Ti.UI.SIZE,
         top: 20,
         isPhone: "1",
-        id: "__alloyId125"
+        id: "__alloyId111"
     });
-    __alloyId124.push($.__views.__alloyId125);
-    $.__views.__alloyId126 = Ti.UI.createLabel({
+    __alloyId110.push($.__views.__alloyId111);
+    $.__views.__alloyId112 = Ti.UI.createLabel({
         left: 10,
         font: {
             fontSize: "17"
         },
         color: "#2279bc",
         text: "Phone Numbers",
-        id: "__alloyId126"
+        id: "__alloyId112"
     });
-    $.__views.__alloyId125.add($.__views.__alloyId126);
-    $.__views.__alloyId127 = Ti.UI.createButton({
+    $.__views.__alloyId111.add($.__views.__alloyId112);
+    $.__views.__alloyId113 = Ti.UI.createButton({
         right: 10,
         style: Ti.UI.iPhone.SystemButton.CONTACT_ADD,
-        id: "__alloyId127"
+        id: "__alloyId113"
     });
-    $.__views.__alloyId125.add($.__views.__alloyId127);
-    AddRowButtonClicked ? $.__views.__alloyId127.addEventListener("click", AddRowButtonClicked) : __defers["$.__views.__alloyId127!click!AddRowButtonClicked"] = true;
-    $.__views.__alloyId129 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId111.add($.__views.__alloyId113);
+    AddRowButtonClicked ? $.__views.__alloyId113.addEventListener("click", AddRowButtonClicked) : __defers["$.__views.__alloyId113!click!AddRowButtonClicked"] = true;
+    $.__views.__alloyId114 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
-        id: "__alloyId129"
+        id: "__alloyId114"
     });
-    __alloyId124.push($.__views.__alloyId129);
-    $.__views.__alloyId130 = Ti.UI.createLabel({
+    __alloyId110.push($.__views.__alloyId114);
+    $.__views.__alloyId115 = Ti.UI.createLabel({
         left: "5%",
         width: "22%",
         font: {
@@ -148,23 +169,23 @@ function Controller() {
         color: "#2279bc",
         bubbleParent: false,
         text: "Priamry",
-        id: "__alloyId130"
+        id: "__alloyId115"
     });
-    $.__views.__alloyId129.add($.__views.__alloyId130);
-    var __alloyId133 = [];
-    $.__views.__alloyId134 = Ti.UI.createButton({
+    $.__views.__alloyId114.add($.__views.__alloyId115);
+    var __alloyId118 = [];
+    $.__views.__alloyId119 = Ti.UI.createButton({
         systemButton: Ti.UI.iPhone.SystemButton.FLEXIBLE_SPACE
     });
-    __alloyId133.push($.__views.__alloyId134);
-    $.__views.__alloyId135 = Ti.UI.createButton({
+    __alloyId118.push($.__views.__alloyId119);
+    $.__views.__alloyId120 = Ti.UI.createButton({
         style: Titanium.UI.iPhone.SystemButtonStyle.DONE,
         title: "Done",
-        id: "__alloyId135"
+        id: "__alloyId120"
     });
-    __alloyId133.push($.__views.__alloyId135);
-    DismissKeyboardClicked ? $.__views.__alloyId135.addEventListener("click", DismissKeyboardClicked) : __defers["$.__views.__alloyId135!click!DismissKeyboardClicked"] = true;
+    __alloyId118.push($.__views.__alloyId120);
+    DismissKeyboardClicked ? $.__views.__alloyId120.addEventListener("click", DismissKeyboardClicked) : __defers["$.__views.__alloyId120!click!DismissKeyboardClicked"] = true;
     $.__views.keyboardToolbar = Ti.UI.iOS.createToolbar({
-        items: __alloyId133,
+        items: __alloyId118,
         id: "keyboardToolbar"
     });
     $.__views.primary_mobile = Ti.UI.createTextField({
@@ -178,7 +199,7 @@ function Controller() {
         id: "primary_mobile",
         editable: "false"
     });
-    $.__views.__alloyId129.add($.__views.primary_mobile);
+    $.__views.__alloyId114.add($.__views.primary_mobile);
     PrimaryPhoneTextLongclick ? $.__views.primary_mobile.addEventListener("longclick", PrimaryPhoneTextLongclick) : __defers["$.__views.primary_mobile!longclick!PrimaryPhoneTextLongclick"] = true;
     $.__views.primary_mobile_privacy = Ti.UI.createLabel({
         left: "73%",
@@ -190,47 +211,47 @@ function Controller() {
         text: "Default",
         id: "primary_mobile_privacy"
     });
-    $.__views.__alloyId129.add($.__views.primary_mobile_privacy);
+    $.__views.__alloyId114.add($.__views.primary_mobile_privacy);
     PrivacyLabelClicked ? $.__views.primary_mobile_privacy.addEventListener("click", PrivacyLabelClicked) : __defers["$.__views.primary_mobile_privacy!click!PrivacyLabelClicked"] = true;
-    $.__views.__alloyId136 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId121 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
         backgroundColor: "#D0D0D0",
-        id: "__alloyId136"
+        id: "__alloyId121"
     });
-    __alloyId124.push($.__views.__alloyId136);
-    $.__views.__alloyId137 = Ti.UI.createTableViewRow({
+    __alloyId110.push($.__views.__alloyId121);
+    $.__views.__alloyId122 = Ti.UI.createTableViewRow({
         editable: false,
         height: Ti.UI.SIZE,
         top: 20,
         isPhone: "0",
-        id: "__alloyId137"
+        id: "__alloyId122"
     });
-    __alloyId124.push($.__views.__alloyId137);
-    $.__views.__alloyId138 = Ti.UI.createLabel({
+    __alloyId110.push($.__views.__alloyId122);
+    $.__views.__alloyId123 = Ti.UI.createLabel({
         left: 10,
         font: {
             fontSize: "17"
         },
         color: "#2279bc",
         text: "Email Addresses",
-        id: "__alloyId138"
+        id: "__alloyId123"
     });
-    $.__views.__alloyId137.add($.__views.__alloyId138);
-    $.__views.__alloyId139 = Ti.UI.createButton({
+    $.__views.__alloyId122.add($.__views.__alloyId123);
+    $.__views.__alloyId124 = Ti.UI.createButton({
         right: 10,
         style: Ti.UI.iPhone.SystemButton.CONTACT_ADD,
-        id: "__alloyId139"
+        id: "__alloyId124"
     });
-    $.__views.__alloyId137.add($.__views.__alloyId139);
-    AddRowButtonClicked ? $.__views.__alloyId139.addEventListener("click", AddRowButtonClicked) : __defers["$.__views.__alloyId139!click!AddRowButtonClicked"] = true;
-    $.__views.__alloyId141 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId122.add($.__views.__alloyId124);
+    AddRowButtonClicked ? $.__views.__alloyId124.addEventListener("click", AddRowButtonClicked) : __defers["$.__views.__alloyId124!click!AddRowButtonClicked"] = true;
+    $.__views.__alloyId125 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
-        id: "__alloyId141"
+        id: "__alloyId125"
     });
-    __alloyId124.push($.__views.__alloyId141);
-    $.__views.__alloyId142 = Ti.UI.createLabel({
+    __alloyId110.push($.__views.__alloyId125);
+    $.__views.__alloyId126 = Ti.UI.createLabel({
         left: "5%",
         width: "22%",
         font: {
@@ -239,9 +260,9 @@ function Controller() {
         color: "#2279bc",
         bubbleParent: false,
         text: "Priamry",
-        id: "__alloyId142"
+        id: "__alloyId126"
     });
-    $.__views.__alloyId141.add($.__views.__alloyId142);
+    $.__views.__alloyId125.add($.__views.__alloyId126);
     $.__views.primary_email = Ti.UI.createTextField({
         bubbleParent: false,
         left: "29%",
@@ -253,7 +274,7 @@ function Controller() {
         hintText: "Email address",
         keyboardType: Ti.UI.KEYBOARD_EMAIL
     });
-    $.__views.__alloyId141.add($.__views.primary_email);
+    $.__views.__alloyId125.add($.__views.primary_email);
     NonAddableTextChanged ? $.__views.primary_email.addEventListener("change", NonAddableTextChanged) : __defers["$.__views.primary_email!change!NonAddableTextChanged"] = true;
     TextFieldFocused ? $.__views.primary_email.addEventListener("focus", TextFieldFocused) : __defers["$.__views.primary_email!focus!TextFieldFocused"] = true;
     $.__views.primary_email_privacy = Ti.UI.createLabel({
@@ -266,22 +287,22 @@ function Controller() {
         text: "Default",
         id: "primary_email_privacy"
     });
-    $.__views.__alloyId141.add($.__views.primary_email_privacy);
+    $.__views.__alloyId125.add($.__views.primary_email_privacy);
     PrivacyLabelClicked ? $.__views.primary_email_privacy.addEventListener("click", PrivacyLabelClicked) : __defers["$.__views.primary_email_privacy!click!PrivacyLabelClicked"] = true;
-    $.__views.__alloyId143 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId127 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
         backgroundColor: "#D0D0D0",
-        id: "__alloyId143"
+        id: "__alloyId127"
     });
-    __alloyId124.push($.__views.__alloyId143);
-    $.__views.__alloyId144 = Ti.UI.createTableViewRow({
+    __alloyId110.push($.__views.__alloyId127);
+    $.__views.__alloyId128 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
-        id: "__alloyId144"
+        id: "__alloyId128"
     });
-    __alloyId124.push($.__views.__alloyId144);
-    $.__views.__alloyId145 = Ti.UI.createLabel({
+    __alloyId110.push($.__views.__alloyId128);
+    $.__views.__alloyId129 = Ti.UI.createLabel({
         left: "5%",
         width: "22%",
         font: {
@@ -290,9 +311,9 @@ function Controller() {
         color: "#2279bc",
         bubbleParent: false,
         text: "Skype Name",
-        id: "__alloyId145"
+        id: "__alloyId129"
     });
-    $.__views.__alloyId144.add($.__views.__alloyId145);
+    $.__views.__alloyId128.add($.__views.__alloyId129);
     $.__views.skype = Ti.UI.createTextField({
         bubbleParent: false,
         left: "29%",
@@ -303,7 +324,7 @@ function Controller() {
         id: "skype",
         hintText: "Skype name"
     });
-    $.__views.__alloyId144.add($.__views.skype);
+    $.__views.__alloyId128.add($.__views.skype);
     $.__views.skype_privacy = Ti.UI.createLabel({
         left: "73%",
         width: "22%",
@@ -314,21 +335,21 @@ function Controller() {
         text: "Default",
         id: "skype_privacy"
     });
-    $.__views.__alloyId144.add($.__views.skype_privacy);
-    $.__views.__alloyId146 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId128.add($.__views.skype_privacy);
+    $.__views.__alloyId130 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
         backgroundColor: "#D0D0D0",
-        id: "__alloyId146"
+        id: "__alloyId130"
     });
-    __alloyId124.push($.__views.__alloyId146);
-    $.__views.__alloyId147 = Ti.UI.createTableViewRow({
+    __alloyId110.push($.__views.__alloyId130);
+    $.__views.__alloyId131 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
-        id: "__alloyId147"
+        id: "__alloyId131"
     });
-    __alloyId124.push($.__views.__alloyId147);
-    $.__views.__alloyId148 = Ti.UI.createLabel({
+    __alloyId110.push($.__views.__alloyId131);
+    $.__views.__alloyId132 = Ti.UI.createLabel({
         left: "5%",
         width: "22%",
         font: {
@@ -337,9 +358,9 @@ function Controller() {
         color: "#2279bc",
         bubbleParent: false,
         text: "BBM Pin",
-        id: "__alloyId148"
+        id: "__alloyId132"
     });
-    $.__views.__alloyId147.add($.__views.__alloyId148);
+    $.__views.__alloyId131.add($.__views.__alloyId132);
     $.__views.bbm = Ti.UI.createTextField({
         bubbleParent: false,
         left: "29%",
@@ -350,7 +371,7 @@ function Controller() {
         id: "bbm",
         hintText: "BBM Pin Number"
     });
-    $.__views.__alloyId147.add($.__views.bbm);
+    $.__views.__alloyId131.add($.__views.bbm);
     $.__views.bbm_privacy = Ti.UI.createLabel({
         left: "73%",
         width: "22%",
@@ -361,15 +382,74 @@ function Controller() {
         text: "Default",
         id: "bbm_privacy"
     });
-    $.__views.__alloyId147.add($.__views.bbm_privacy);
+    $.__views.__alloyId131.add($.__views.bbm_privacy);
     $.__views.tableView = Ti.UI.createTableView({
         bottom: 0,
-        data: __alloyId124,
+        data: __alloyId110,
         id: "tableView"
     });
     $.__views.tableView && $.addTopLevelView($.__views.tableView);
     TableViewRowClicked ? $.__views.tableView.addEventListener("click", TableViewRowClicked) : __defers["$.__views.tableView!click!TableViewRowClicked"] = true;
     DeletePressed ? $.__views.tableView.addEventListener("delete", DeletePressed) : __defers["$.__views.tableView!delete!DeletePressed"] = true;
+    $.__views.editView = Ti.UI.createView({
+        id: "editView",
+        visible: "false",
+        height: "100%",
+        layout: "vertical"
+    });
+    $.__views.editView && $.addTopLevelView($.__views.editView);
+    $.__views.__alloyId133 = Ti.UI.createView({
+        opacity: "0.5",
+        height: "25%",
+        backgroundColor: "black",
+        id: "__alloyId133"
+    });
+    $.__views.editView.add($.__views.__alloyId133);
+    editViewBlur ? $.__views.__alloyId133.addEventListener("click", editViewBlur) : __defers["$.__views.__alloyId133!click!editViewBlur"] = true;
+    $.__views.__alloyId134 = Ti.UI.createView({
+        layout: "vertical",
+        backgroundColor: "white",
+        height: Ti.UI.SIZE,
+        id: "__alloyId134"
+    });
+    $.__views.editView.add($.__views.__alloyId134);
+    $.__views.fieldTitle = Ti.UI.createLabel({
+        font: {
+            fontSize: 20,
+            fontWeight: "bold"
+        },
+        textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
+        bubbleParent: false,
+        height: 60,
+        width: "100%",
+        returnKeyType: Titanium.UI.RETURNKEY_DONE,
+        id: "fieldTitle",
+        color: "#2279bc"
+    });
+    $.__views.__alloyId134.add($.__views.fieldTitle);
+    $.__views.fieldValue = Ti.UI.createTextField({
+        bubbleParent: false,
+        font: {
+            fontSize: 20,
+            fontWeight: "bold"
+        },
+        textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
+        height: 60,
+        width: "100%",
+        returnKeyType: Titanium.UI.RETURNKEY_DONE,
+        id: "fieldValue"
+    });
+    $.__views.__alloyId134.add($.__views.fieldValue);
+    editViewBlur ? $.__views.fieldValue.addEventListener("return", editViewBlur) : __defers["$.__views.fieldValue!return!editViewBlur"] = true;
+    editViewTextChanged ? $.__views.fieldValue.addEventListener("change", editViewTextChanged) : __defers["$.__views.fieldValue!change!editViewTextChanged"] = true;
+    $.__views.__alloyId135 = Ti.UI.createView({
+        opacity: "0.5",
+        height: "60%",
+        backgroundColor: "black",
+        id: "__alloyId135"
+    });
+    $.__views.editView.add($.__views.__alloyId135);
+    editViewBlur ? $.__views.__alloyId135.addEventListener("click", editViewBlur) : __defers["$.__views.__alloyId135!click!editViewBlur"] = true;
     $.__views.pickerContainer = Alloy.createController("Settings/EditProfile/privacyPicker", {
         id: "pickerContainer",
         __parentSymbol: __parentSymbol
@@ -412,23 +492,22 @@ function Controller() {
         addNewRowAfter(data, 1);
     }
     $.pickerContainer.picker.addEventListener("change", SelectedPrivacyChanged);
+    $.pickerContainer.transparentView1.addEventListener("click", DismissPicker);
     $.pickerContainer.btn_toolBarDone.addEventListener("click", DismissPicker);
-    __defers["$.__views.__alloyId127!click!AddRowButtonClicked"] && $.__views.__alloyId127.addEventListener("click", AddRowButtonClicked);
-    __defers["$.__views.__alloyId128!click!AddRowButtonClicked"] && $.__views.__alloyId128.addEventListener("click", AddRowButtonClicked);
-    __defers["$.__views.__alloyId135!click!DismissKeyboardClicked"] && $.__views.__alloyId135.addEventListener("click", DismissKeyboardClicked);
+    __defers["$.__views.__alloyId113!click!AddRowButtonClicked"] && $.__views.__alloyId113.addEventListener("click", AddRowButtonClicked);
+    __defers["$.__views.__alloyId120!click!DismissKeyboardClicked"] && $.__views.__alloyId120.addEventListener("click", DismissKeyboardClicked);
     __defers["$.__views.primary_mobile!longclick!PrimaryPhoneTextLongclick"] && $.__views.primary_mobile.addEventListener("longclick", PrimaryPhoneTextLongclick);
     __defers["$.__views.primary_mobile_privacy!click!PrivacyLabelClicked"] && $.__views.primary_mobile_privacy.addEventListener("click", PrivacyLabelClicked);
-    __defers["$.__views.__alloyId139!click!AddRowButtonClicked"] && $.__views.__alloyId139.addEventListener("click", AddRowButtonClicked);
-    __defers["$.__views.__alloyId140!click!AddRowButtonClicked"] && $.__views.__alloyId140.addEventListener("click", AddRowButtonClicked);
+    __defers["$.__views.__alloyId124!click!AddRowButtonClicked"] && $.__views.__alloyId124.addEventListener("click", AddRowButtonClicked);
     __defers["$.__views.primary_email!change!NonAddableTextChanged"] && $.__views.primary_email.addEventListener("change", NonAddableTextChanged);
     __defers["$.__views.primary_email!focus!TextFieldFocused"] && $.__views.primary_email.addEventListener("focus", TextFieldFocused);
     __defers["$.__views.primary_email_privacy!click!PrivacyLabelClicked"] && $.__views.primary_email_privacy.addEventListener("click", PrivacyLabelClicked);
     __defers["$.__views.tableView!click!TableViewRowClicked"] && $.__views.tableView.addEventListener("click", TableViewRowClicked);
     __defers["$.__views.tableView!delete!DeletePressed"] && $.__views.tableView.addEventListener("delete", DeletePressed);
-    __defers["$.__views.__alloyId149!click!AndroidEditViewBlur"] && $.__views.__alloyId149.addEventListener("click", AndroidEditViewBlur);
-    __defers["$.__views.fieldValue!return!AndroidEditViewBlur"] && $.__views.fieldValue.addEventListener("return", AndroidEditViewBlur);
-    __defers["$.__views.fieldValue!change!AndroidEditViewTextChanged"] && $.__views.fieldValue.addEventListener("change", AndroidEditViewTextChanged);
-    __defers["$.__views.__alloyId151!click!AndroidEditViewBlur"] && $.__views.__alloyId151.addEventListener("click", AndroidEditViewBlur);
+    __defers["$.__views.__alloyId133!click!editViewBlur"] && $.__views.__alloyId133.addEventListener("click", editViewBlur);
+    __defers["$.__views.fieldValue!return!editViewBlur"] && $.__views.fieldValue.addEventListener("return", editViewBlur);
+    __defers["$.__views.fieldValue!change!editViewTextChanged"] && $.__views.fieldValue.addEventListener("change", editViewTextChanged);
+    __defers["$.__views.__alloyId135!click!editViewBlur"] && $.__views.__alloyId135.addEventListener("click", editViewBlur);
     _.extend($, exports);
 }
 

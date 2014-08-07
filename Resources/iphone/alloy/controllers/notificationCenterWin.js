@@ -1,10 +1,19 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function LoadNotifications() {
         var allNotifications = Titanium.App.Properties.getObject("notifications");
         var mainSection = Ti.UI.createListSection({
             headerTitle: "All Notifications"
         });
-        if (allNotifications) {
+        if (allNotifications && 0 != allNotifications.length) {
             var listItems = [];
             for (var i in allNotifications) {
                 var notification = {
@@ -41,9 +50,11 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "notificationCenterWin";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -62,16 +73,16 @@ function Controller() {
         id: "btn_settings"
     });
     $.__views.notificationCenterWin.rightNavButton = $.__views.btn_settings;
-    $.__views.__alloyId9 = Ti.UI.createImageView({
+    $.__views.__alloyId8 = Ti.UI.createImageView({
         image: "/images/app_icon_60x60.png",
         width: 40,
         height: 40,
-        id: "__alloyId9"
+        id: "__alloyId8"
     });
-    $.__views.notificationCenterWin.leftNavButton = $.__views.__alloyId9;
-    var __alloyId10 = {};
-    var __alloyId13 = [];
-    var __alloyId14 = {
+    $.__views.notificationCenterWin.leftNavButton = $.__views.__alloyId8;
+    var __alloyId9 = {};
+    var __alloyId12 = [];
+    var __alloyId13 = {
         type: "Ti.UI.ImageView",
         bindId: "pic",
         properties: {
@@ -81,8 +92,8 @@ function Controller() {
             bindId: "pic"
         }
     };
-    __alloyId13.push(__alloyId14);
-    var __alloyId15 = {
+    __alloyId12.push(__alloyId13);
+    var __alloyId14 = {
         type: "Ti.UI.Label",
         bindId: "notificationTitle",
         properties: {
@@ -97,8 +108,8 @@ function Controller() {
             bindId: "notificationTitle"
         }
     };
-    __alloyId13.push(__alloyId15);
-    var __alloyId16 = {
+    __alloyId12.push(__alloyId14);
+    var __alloyId15 = {
         type: "Ti.UI.Label",
         bindId: "message",
         properties: {
@@ -113,17 +124,17 @@ function Controller() {
             bindId: "message"
         }
     };
-    __alloyId13.push(__alloyId16);
-    var __alloyId12 = {
+    __alloyId12.push(__alloyId15);
+    var __alloyId11 = {
         properties: {
             name: "template"
         },
-        childTemplates: __alloyId13
+        childTemplates: __alloyId12
     };
-    __alloyId10["template"] = __alloyId12;
+    __alloyId9["template"] = __alloyId11;
     $.__views.listView = Ti.UI.createListView({
         separatorColor: "#2279bc",
-        templates: __alloyId10,
+        templates: __alloyId9,
         id: "listView",
         defaultItemTemplate: "template"
     });

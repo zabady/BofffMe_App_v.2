@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function onChangeSMSCodeTxtField(e) {
         if (4 == e.source.value.length) {
@@ -21,9 +30,11 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "FTR/smsWin";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        __processArg(arguments[0], "__parentSymbol");
+        __processArg(arguments[0], "$model");
+        __processArg(arguments[0], "__itemTemplate");
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -34,14 +45,14 @@ function Controller() {
         title: "SMS Confirmation"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
-    $.__views.__alloyId91 = Ti.UI.createView({
+    $.__views.__alloyId78 = Ti.UI.createView({
         top: "5%",
         width: "100%",
         height: Ti.UI.SIZE,
         layout: "vertical",
-        id: "__alloyId91"
+        id: "__alloyId78"
     });
-    $.__views.win.add($.__views.__alloyId91);
+    $.__views.win.add($.__views.__alloyId78);
     $.__views.lbl_gotYourCode = Ti.UI.createLabel({
         font: {
             fontSize: "17"
@@ -54,7 +65,7 @@ function Controller() {
         id: "lbl_gotYourCode",
         text: "Got your code ?\nJust COPY it."
     });
-    $.__views.__alloyId91.add($.__views.lbl_gotYourCode);
+    $.__views.__alloyId78.add($.__views.lbl_gotYourCode);
     $.__views.txt_SMSCode = Ti.UI.createTextField({
         bubbleParent: false,
         width: "75%",
@@ -66,7 +77,7 @@ function Controller() {
         textAlign: "center",
         id: "txt_SMSCode"
     });
-    $.__views.__alloyId91.add($.__views.txt_SMSCode);
+    $.__views.__alloyId78.add($.__views.txt_SMSCode);
     onChangeSMSCodeTxtField ? $.__views.txt_SMSCode.addEventListener("change", onChangeSMSCodeTxtField) : __defers["$.__views.txt_SMSCode!change!onChangeSMSCodeTxtField"] = true;
     $.__views.btn_continue = Ti.UI.createButton({
         top: "8%",
@@ -84,9 +95,9 @@ function Controller() {
         title: "Continue",
         enabled: "false"
     });
-    $.__views.__alloyId91.add($.__views.btn_continue);
+    $.__views.__alloyId78.add($.__views.btn_continue);
     continueBtnPressed ? $.__views.btn_continue.addEventListener("click", continueBtnPressed) : __defers["$.__views.btn_continue!click!continueBtnPressed"] = true;
-    $.__views.__alloyId92 = Ti.UI.createLabel({
+    $.__views.__alloyId79 = Ti.UI.createLabel({
         font: {
             fontSize: "14"
         },
@@ -96,10 +107,10 @@ function Controller() {
         height: Ti.UI.SIZE,
         textAlign: "center",
         text: "A code was sent to you via SMS.",
-        id: "__alloyId92"
+        id: "__alloyId79"
     });
-    $.__views.__alloyId91.add($.__views.__alloyId92);
-    $.__views.__alloyId93 = Ti.UI.createLabel({
+    $.__views.__alloyId78.add($.__views.__alloyId79);
+    $.__views.__alloyId80 = Ti.UI.createLabel({
         font: {
             fontSize: "14"
         },
@@ -109,9 +120,9 @@ function Controller() {
         height: Ti.UI.SIZE,
         textAlign: "center",
         text: "It can take up to a minute, thank you for your patience.",
-        id: "__alloyId93"
+        id: "__alloyId80"
     });
-    $.__views.__alloyId91.add($.__views.__alloyId93);
+    $.__views.__alloyId78.add($.__views.__alloyId80);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var accessCode = "0000";
