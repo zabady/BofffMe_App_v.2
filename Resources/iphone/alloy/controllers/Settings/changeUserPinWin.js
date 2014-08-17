@@ -28,6 +28,7 @@ function Controller() {
     function RowClicked(e) {
         alert(e.row.pin + "\nPlease Restart the App.");
         Titanium.App.Properties.setObject("pin", e.row.pin);
+        Alloy.Globals.userPin = e.row.pin;
         getUserData();
     }
     function getUserData() {

@@ -1,0 +1,80 @@
+<Alloy>
+	
+	<TableView id="tableView">
+		
+		
+		<TableViewRow backgroundColor="#D0D0D0" />
+		
+		
+		<!-- ------ BofffMe Full Name (Independent) ------ -->
+		<TableViewRow class="fieldRow" >
+			<Label class="fieldTitleLabel" >Full Name</Label>
+			<Label id="fullName" class="fieldText" hintText="Skype Name" onClick="ValueLabelClicked" >Full Name</Label>
+			<Label class="privacyLabel" >friends</Label>	<!-- This field has no privacy -->
+		</TableViewRow>
+		
+		
+		<TableViewRow backgroundColor="#D0D0D0" />
+		
+		
+		<!-- ------ Marital Status (Independent) ------ -->
+		<TableViewRow class="fieldRow" >
+			<Label class="fieldTitleLabel" >Marital Status</Label>
+			<Label id="marital_status" class="fieldText" hintText="Marital Status" onClick="ValueLabelClicked" >Marital Status</Label>
+			<Label id="marital_status_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
+		</TableViewRow>
+		
+		
+		<TableViewRow backgroundColor="#D0D0D0" />
+		
+		
+		<!-- ------ Residence (Independent) ------ -->
+		<TableViewRow class="fieldRow" >
+			<Label class="fieldTitleLabel" >Residence</Label>
+			<Label id="residence" class="fieldText" hintText="Residence" onClick="ValueLabelClicked" >Residence</Label>
+			<Label id="residence_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
+		</TableViewRow>
+		
+		
+		<TableViewRow backgroundColor="#D0D0D0" />
+		
+		
+		<!-- ------ Birthday (Independent) ------ -->
+		<TableViewRow class="headTitleRow" >
+			<Label class="headTitleLabel" >Birthday</Label>
+			<Label id="birthday_date_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
+		</TableViewRow>
+		
+		<TableViewRow class="fieldRow" height="auto">
+			 <Picker id="birthday_date" backgroundColor="#D0D0D0" type="Titanium.UI.PICKER_TYPE_DATE" onChange="BirthDay" />
+		</TableViewRow>
+		
+		
+		<TableViewRow backgroundColor="#D0D0D0" />
+		
+		
+		<!-- ------ Gender (Independent) ------ -->
+		<TableViewRow class="headTitleRow" >
+			<Label class="headTitleLabel" >Gender</Label>
+			<Label id="gender_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
+		</TableViewRow>
+		<TableViewRow class="fieldRow" height="auto" >
+			<View id="gender" layout="horizontal" height="Ti.UI.SIZE" width="Ti.UI.SIZE">
+				<Label class="genderLabelsStyle" id="lbl_gender_male" textAlign="right">Male  </Label>
+				<ImageView id="img_gender_male" onClick="GenderSelected" />
+				<ImageView id="img_gender_female" onClick="GenderSelected" />
+				<Label class="genderLabelsStyle" id="lbl_gender_female" textAlign="left">Female</Label>
+			</View>
+		</TableViewRow>
+		
+		
+	</TableView>
+	
+	
+	<!-- Requiring edit view for both platforms -->
+	<Require id="editViewContainer" src="Settings/EditProfile/editFieldView" type="view" />
+
+	<!-- Requiring picker view for both platforms -->
+	<Require id="pickerContainer" src="Settings/EditProfile/privacyPicker" type="view" />
+	
+</Alloy>

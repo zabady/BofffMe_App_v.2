@@ -2,7 +2,6 @@
  * Initialize userDataInArrays in contactInfoWin.js as this is the first required view
  */
 
-var args = arguments[0] || {};
 Ti.include("/editProfileHelper.js");	// TODO: Try to remove it
 
 
@@ -19,6 +18,7 @@ function EditClicked(e) {
 
 // An event listener to done button that sends the new data to the server after validating it
 function SubmitDataToServer() {
+	//alert(userDataInArrays.mails);
 	alert(userDataInArrays);
 	//var validReturnString = postUserDataUpdatesOnServer(userData, userDataInArrays);	// editProfileHelper.js 
 	//if(validReturnString.search("Wrong") >= 0) alert(validReturnString);

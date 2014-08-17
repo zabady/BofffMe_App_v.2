@@ -41,6 +41,7 @@ function RowClicked(e) {
 	// TODO: save the new pin to properties
 	alert(e.row.pin + "\nPlease Restart the App.");
 	Titanium.App.Properties.setObject('pin', e.row.pin);
+	Alloy.Globals.userPin = e.row.pin;
 	getUserData();
 }
 

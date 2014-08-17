@@ -86,3 +86,19 @@
 	width: "20%",
 	color: "black",
 }
+
+/////////////////////////////////////////////////////////////////////////// HANDLING GENDER
+".genderLabelsStyle": {
+	width: "75",
+	color: "gray",
+}
+"#img_gender_male": {
+	image: "/images/gender_male[shaded].png",
+	width: "75",
+	height: "75",
+},
+"#img_gender_female": {
+	image: "/images/gender_female[shaded].png",
+	width: "75",
+	height: "75",
+}

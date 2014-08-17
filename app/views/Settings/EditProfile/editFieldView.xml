@@ -1,14 +1,15 @@
 <Alloy>
-	<View id="editView" platform="android" visible="false" height="100%" layout="vertical">
-		<View opacity="0.4" onClick="Zeby" height="25%" backgroundColor="black" />
+	<!-- Editing fields view -->
+	<View id="editView" visible="false" height="100%" layout="vertical">
+		<View id='cancelView1' opacity="0.5" height="25%" backgroundColor="black" />
 		
-		<View layout="vertical" backgroundColor="#58c8f3" height="Ti.UI.SIZE"
-			softKeyboardOnFocus="Titanium.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS">
+		<View layout="vertical" backgroundColor="white" height="Ti.UI.SIZE">
+			<!-- Old Background color: #58c8f3 -->
 			
-			<Label class="andoridEditViewField" id="fieldTitle" />
+			<Label class="andoridEditViewField" id="fieldTitle" color="#2279bc" />
 			<TextField class="andoridEditViewField" id="fieldValue" />
 		</View>
 		
-		<View opacity="0.4" onClick="Zeby" height="60%" backgroundColor="black" />
+		<View id='cancelView2' opacity="0.5" height="60%" backgroundColor="black" />
 	</View>
 </Alloy>

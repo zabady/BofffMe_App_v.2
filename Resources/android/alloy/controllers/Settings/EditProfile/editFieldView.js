@@ -17,7 +17,6 @@ function Controller() {
     }
     var $ = this;
     var exports = {};
-    var __defers = {};
     $.__views.editView = Ti.UI.createView({
         id: "editView",
         visible: "false",
@@ -25,22 +24,20 @@ function Controller() {
         layout: "vertical"
     });
     $.__views.editView && $.addTopLevelView($.__views.editView);
-    $.__views.__alloyId152 = Ti.UI.createView({
-        opacity: "0.4",
+    $.__views.cancelView1 = Ti.UI.createView({
+        id: "cancelView1",
+        opacity: "0.5",
         height: "25%",
-        backgroundColor: "black",
-        id: "__alloyId152"
+        backgroundColor: "black"
     });
-    $.__views.editView.add($.__views.__alloyId152);
-    Zeby ? $.__views.__alloyId152.addEventListener("click", Zeby) : __defers["$.__views.__alloyId152!click!Zeby"] = true;
-    $.__views.__alloyId153 = Ti.UI.createView({
+    $.__views.editView.add($.__views.cancelView1);
+    $.__views.__alloyId151 = Ti.UI.createView({
         layout: "vertical",
-        backgroundColor: "#58c8f3",
+        backgroundColor: "white",
         height: Ti.UI.SIZE,
-        softKeyboardOnFocus: Titanium.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS,
-        id: "__alloyId153"
+        id: "__alloyId151"
     });
-    $.__views.editView.add($.__views.__alloyId153);
+    $.__views.editView.add($.__views.__alloyId151);
     $.__views.fieldTitle = Ti.UI.createLabel({
         font: {
             fontSize: 20,
@@ -51,9 +48,10 @@ function Controller() {
         height: 60,
         width: "100%",
         returnKeyType: Titanium.UI.RETURNKEY_DONE,
-        id: "fieldTitle"
+        id: "fieldTitle",
+        color: "#2279bc"
     });
-    $.__views.__alloyId153.add($.__views.fieldTitle);
+    $.__views.__alloyId151.add($.__views.fieldTitle);
     $.__views.fieldValue = Ti.UI.createTextField({
         bubbleParent: false,
         color: "black",
@@ -69,19 +67,16 @@ function Controller() {
         returnKeyType: Titanium.UI.RETURNKEY_DONE,
         id: "fieldValue"
     });
-    $.__views.__alloyId153.add($.__views.fieldValue);
-    $.__views.__alloyId154 = Ti.UI.createView({
-        opacity: "0.4",
+    $.__views.__alloyId151.add($.__views.fieldValue);
+    $.__views.cancelView2 = Ti.UI.createView({
+        id: "cancelView2",
+        opacity: "0.5",
         height: "60%",
-        backgroundColor: "black",
-        id: "__alloyId154"
+        backgroundColor: "black"
     });
-    $.__views.editView.add($.__views.__alloyId154);
-    Zeby ? $.__views.__alloyId154.addEventListener("click", Zeby) : __defers["$.__views.__alloyId154!click!Zeby"] = true;
+    $.__views.editView.add($.__views.cancelView2);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    __defers["$.__views.__alloyId152!click!Zeby"] && $.__views.__alloyId152.addEventListener("click", Zeby);
-    __defers["$.__views.__alloyId154!click!Zeby"] && $.__views.__alloyId154.addEventListener("click", Zeby);
     _.extend($, exports);
 }
 

@@ -12,7 +12,7 @@
 		<!-- Tab 1 : Contact Information Window -->
         <Tab title="Contact" icon="/images/man-7aram.png" >
         	
-        	<Window id="win">
+        	<Window>
 		
 				<RightNavButton>
 					<View layout="horizontal">
@@ -32,9 +32,26 @@
         </Tab>
         
 		
-		<!-- Tab 2 : Basic Information Window -->
+		<!-- Tab 2 : General Information Window -->
 		<Tab title="General" icon="/images/man-7aram.png">
-    		<Require id="basicInfoWin" src="Settings/EditProfile/basicInfoWin" type="view" />
+			
+			<Window>
+		
+				<RightNavButton>
+					<View layout="horizontal">
+						<Button title="Edit" onClick="EditClicked" requiredViewId="contactInfoWin" />
+						<Button title=" Done" onClick="SubmitDataToServer" />
+					</View>
+				</RightNavButton>
+				
+				<LeftNavButton>
+					<Button title="Cancel" onClick="CancelClicked" />
+				</LeftNavButton>
+			
+				<!-- Requiring the general information view as we create its window here -->
+    			<Require id="generalInfoWin" src="Settings/EditProfile/generalInfoWin" type="view" />
+    			
+			</Window>
         </Tab>
         
         
@@ -51,6 +68,9 @@
 				<LeftNavButton>
 					<Button title="Cancel" onClick="CancelClicked" />
 				</LeftNavButton>
+				
+				<!-- Requiring the general information view as we create its window here -->
+    			<Require id="workAndEdWin" src="Settings/EditProfile/workAndEdWin" type="view" />
         	</Window>
         </Tab>
 		

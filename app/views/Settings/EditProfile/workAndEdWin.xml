@@ -1,0 +1,51 @@
+<Alloy>
+	
+	<TableView id="tableView">
+		
+		
+		<TableViewRow backgroundColor="#D0D0D0" />
+		
+		
+		<!-- ------ Job Title (Independent) ------ -->
+		<TableViewRow class="fieldRow" >
+			<Label class="fieldTitleLabel" >Job Title</Label>
+			<Label id="job_title" class="fieldText" hintText="Job Title" onClick="ValueLabelClicked" >Job Title</Label>
+			<Label id="job_title_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
+		</TableViewRow>
+		
+		
+		<TableViewRow backgroundColor="#D0D0D0" />
+		
+		
+		<!-- ------ Company (Independent) ------ -->
+		<TableViewRow class="fieldRow" >
+			<Label class="fieldTitleLabel" >Company</Label>
+			<Label id="company" class="fieldText" hintText="Company" onClick="ValueLabelClicked" >Company</Label>
+			<Label id="company_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
+		</TableViewRow>
+		
+		
+		<TableViewRow backgroundColor="#D0D0D0" />
+		
+		
+		<!-- ------ Education (Independent) ------ -->
+		<TableViewRow class="fieldRow" >
+			<Label class="fieldTitleLabel" >Education</Label>
+			<Label id="education" class="fieldText" hintText="Education" onClick="ValueLabelClicked" >Education</Label>
+			<Label id="education_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
+		</TableViewRow>
+		
+		
+		<TableViewRow backgroundColor="#D0D0D0" />
+		
+		
+	</TableView>
+	
+	
+	<!-- Requiring edit view for both platforms -->
+	<Require id="editViewContainer" src="Settings/EditProfile/editFieldView" type="view" />
+
+	<!-- Requiring picker view for both platforms -->
+	<Require id="pickerContainer" src="Settings/EditProfile/privacyPicker" type="view" />
+	
+</Alloy>

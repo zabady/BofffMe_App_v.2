@@ -17,6 +17,10 @@
 	
 		<TableView id="tableView" onClick="TableViewRowClicked" onDelete="DeletePressed" >
 			
+			
+			<TableViewRow backgroundColor="#D0D0D0" />
+			
+			
 			<!-- ------ Phone Numbers (Section) ------ -->
 			<TableViewRow class="headTitleRow" isPhone=1 >
 				<Label class="headTitleLabel" >Phone Numbers</Label>
@@ -27,7 +31,7 @@
 			<!-- ------ Primary Phone Number (Child) ------ -->
 			<TableViewRow class="fieldRow" >
 				<Label class="fieldTitleLabel" >Priamry</Label>
-				<Label id="primary_mobile" class="fieldText" onClick="PrimaryPhoneTextLongclick" />
+				<Label id="primary_mobile" class="fieldText" onLongclick="PrimaryPhoneTextLongclick" />
 				
 				<!-->
 				<TextField id="primary_mobile" class="fieldText" onLongclick="PrimaryPhoneTextLongclick" editable="false" >
@@ -36,7 +40,7 @@
 						<Toolbar id="keyboardToolbar">
 					        <Items >
 					            <FlexSpace />
-					            <Button style="Titanium.UI.iPhone.SystemButtonStyle.DONE" title="Done" onClick="DismissKeyboardClicked" />
+					    <Button style="Titanium.UI.iPhone.SystemButtonStyle.DONE" title="Done" onClick="DismissKeyboardClicked" />
 					        </Items>
 					    </Toolbar>
 					</KeyboardToolbar>
@@ -62,7 +66,7 @@
 			<TableViewRow class="fieldRow" >
 				<Label class="fieldTitleLabel" >Priamry</Label>
 				<Label id="primary_email" class="fieldText" hintText="Email address"
-					onFocus="TextFieldFocused" keyboardType="Ti.UI.KEYBOARD_EMAIL" />
+					onClick="ValueLabelClicked" keyboardType="Ti.UI.KEYBOARD_EMAIL" />
 				
 				<!--
 				<TextField id="primary_email" class="fieldText" hintText="Email address" 
@@ -81,8 +85,8 @@
 			<!-- ------ Skype Name (Independent) ------ -->
 			<TableViewRow class="fieldRow" >
 				<Label class="fieldTitleLabel" >Skype Name</Label>
-				<TextField id="skype" class="fieldText" hintText="Skype name" />
-				<Label id="skype_privacy" class="privacyLabel" >Default</Label>
+				<Label id="skype_name" class="fieldText" hintText="Skype Name" onClick="ValueLabelClicked" >Skype Name</Label>
+				<Label id="skype_name_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
 			</TableViewRow>
 			
 			
@@ -92,28 +96,20 @@
 			<!-- ------ BBM Pin Number (Independent) ------ -->
 			<TableViewRow class="fieldRow" >
 				<Label class="fieldTitleLabel" >BBM Pin</Label>
-				<TextField id="bbm" class="fieldText" hintText="BBM Pin Number" />
-				<Label id="bbm_privacy" class="privacyLabel" >Default</Label>
+				<Label id="bbm_pin" class="fieldText" hintText="BBM Pin" onClick="ValueLabelClicked" >BBM Pin</Label>
+				<Label id="bbm_pin_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
 			</TableViewRow>
+			
+			
+			<TableViewRow backgroundColor="#D0D0D0" />
+			
 			
 		</TableView>
 		
 		
-		<!-- Android editing fields view -->
-		<View id="editView" visible="false" height="100%" layout="vertical">
-			<View opacity="0.5" onClick="editViewBlur" height="25%" backgroundColor="black" />
-			
-			<View layout="vertical" backgroundColor="white" height="Ti.UI.SIZE">
-				<!-- Old Background color: #58c8f3 -->
-				
-				<Label class="andoridEditViewField" id="fieldTitle" color="#2279bc" />
-				<TextField class="andoridEditViewField" id="fieldValue" onReturn="editViewBlur"
-					onChange="editViewTextChanged" />
-			</View>
-			
-			<View opacity="0.5" onClick="editViewBlur" height="60%" backgroundColor="black" />
-		</View>
-		
+		<!-- Requiring edit view for both platforms -->
+		<Require id="editViewContainer" src="Settings/EditProfile/editFieldView" type="view" />
+	
 		<!-- Requiring picker view for both platforms -->
 		<Require id="pickerContainer" src="Settings/EditProfile/privacyPicker" type="view" />
 	

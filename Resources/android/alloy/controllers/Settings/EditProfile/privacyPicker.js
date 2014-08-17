@@ -27,7 +27,7 @@ function Controller() {
     $.__views.pickerView && $.addTopLevelView($.__views.pickerView);
     $.__views.transparentView1 = Ti.UI.createView({
         id: "transparentView1",
-        opacity: "0.4",
+        opacity: "0.5",
         height: "25%",
         backgroundColor: "black"
     });
@@ -37,36 +37,36 @@ function Controller() {
         useSpinner: "true"
     });
     $.__views.pickerView.add($.__views.picker);
-    var __alloyId177 = [];
-    $.__views.__alloyId178 = Ti.UI.createPickerRow({
+    var __alloyId200 = [];
+    $.__views.__alloyId201 = Ti.UI.createPickerRow({
         title: "public",
-        id: "__alloyId178"
+        id: "__alloyId201"
     });
-    __alloyId177.push($.__views.__alloyId178);
-    $.__views.__alloyId179 = Ti.UI.createPickerRow({
+    __alloyId200.push($.__views.__alloyId201);
+    $.__views.__alloyId202 = Ti.UI.createPickerRow({
         title: "friends",
-        id: "__alloyId179"
+        id: "__alloyId202"
     });
-    __alloyId177.push($.__views.__alloyId179);
-    $.__views.__alloyId180 = Ti.UI.createPickerRow({
+    __alloyId200.push($.__views.__alloyId202);
+    $.__views.__alloyId203 = Ti.UI.createPickerRow({
         title: "favorites",
-        id: "__alloyId180"
+        id: "__alloyId203"
     });
-    __alloyId177.push($.__views.__alloyId180);
-    $.__views.__alloyId181 = Ti.UI.createPickerRow({
+    __alloyId200.push($.__views.__alloyId203);
+    $.__views.__alloyId204 = Ti.UI.createPickerRow({
         title: "onlyMe",
-        id: "__alloyId181"
+        id: "__alloyId204"
     });
-    __alloyId177.push($.__views.__alloyId181);
-    $.__views.__alloyId182 = Ti.UI.createPickerRow({
+    __alloyId200.push($.__views.__alloyId204);
+    $.__views.__alloyId205 = Ti.UI.createPickerRow({
         title: "                                             ",
-        id: "__alloyId182"
+        id: "__alloyId205"
     });
-    __alloyId177.push($.__views.__alloyId182);
-    $.__views.picker.add(__alloyId177);
+    __alloyId200.push($.__views.__alloyId205);
+    $.__views.picker.add(__alloyId200);
     $.__views.transparentView2 = Ti.UI.createView({
         id: "transparentView2",
-        opacity: "0.4",
+        opacity: "0.5",
         height: "60%",
         backgroundColor: "black"
     });
