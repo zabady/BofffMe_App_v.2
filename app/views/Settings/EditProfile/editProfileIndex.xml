@@ -39,7 +39,7 @@
 		
 				<RightNavButton>
 					<View layout="horizontal">
-						<Button title="Edit" onClick="EditClicked" requiredViewId="contactInfoWin" />
+						<Button title="Edit" onClick="EditClicked" requiredViewId="generalInfoWin" />
 						<Button title=" Done" onClick="SubmitDataToServer" />
 					</View>
 				</RightNavButton>

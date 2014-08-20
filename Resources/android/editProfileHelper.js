@@ -77,7 +77,7 @@ function deleteAddableField(userDataInArrays, fieldType, value) {
 function addNewFieldToUserData(userDataInArrays, fieldType) {
     try {
         userDataInArrays[fieldType].push("");
-        userDataInArrays[fieldType + "_privacy"].push("public");
+        userDataInArrays[fieldType + "_privacy"].push("friends");
     } catch (exp) {
         alert(exp);
     }
@@ -108,10 +108,9 @@ function postUserDataUpdatesOnServer(oldUserDataInStrings, newUserDataInArrays) 
         var bofffsSpecificData = Titanium.App.Properties.getObject("bofffsSpecificData");
         var userUpdatesInStrings = convertAddableFieldsToStrings(newUserDataInArrays);
         updateUserDataOnServerAndProperties(Alloy.Globals.userPin, oldUserDataInStrings, userUpdatesInStrings, bofffsSpecificData);
-        Ti.include("/pushNotificationAPIs.js");
         NotifyAllUserFriendsWithMessage(newUserDataInArrays.fullName + " has updated his profile, click here so these updates are applied to your phonebook.", "test", newUserDataInArrays.icon_image);
     } catch (exp) {
-        alert(exp);
+        alert(exp + "postUserDataUpdatesOnServer");
     } finally {
         return "";
     }

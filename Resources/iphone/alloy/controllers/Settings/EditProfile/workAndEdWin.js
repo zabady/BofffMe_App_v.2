@@ -64,21 +64,21 @@ function Controller() {
     var $ = this;
     var exports = {};
     var __defers = {};
-    var __alloyId181 = [];
-    $.__views.__alloyId182 = Ti.UI.createTableViewRow({
+    var __alloyId200 = [];
+    $.__views.__alloyId201 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
         backgroundColor: "#D0D0D0",
-        id: "__alloyId182"
+        id: "__alloyId201"
     });
-    __alloyId181.push($.__views.__alloyId182);
-    $.__views.__alloyId183 = Ti.UI.createTableViewRow({
+    __alloyId200.push($.__views.__alloyId201);
+    $.__views.__alloyId202 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
-        id: "__alloyId183"
+        id: "__alloyId202"
     });
-    __alloyId181.push($.__views.__alloyId183);
-    $.__views.__alloyId184 = Ti.UI.createLabel({
+    __alloyId200.push($.__views.__alloyId202);
+    $.__views.__alloyId203 = Ti.UI.createLabel({
         left: "5%",
         width: "22%",
         font: {
@@ -87,9 +87,9 @@ function Controller() {
         color: "#2279bc",
         bubbleParent: false,
         text: "Job Title",
-        id: "__alloyId184"
+        id: "__alloyId203"
     });
-    $.__views.__alloyId183.add($.__views.__alloyId184);
+    $.__views.__alloyId202.add($.__views.__alloyId203);
     $.__views.job_title = Ti.UI.createLabel({
         left: "29%",
         width: "42%",
@@ -102,7 +102,7 @@ function Controller() {
         id: "job_title",
         hintText: "Job Title"
     });
-    $.__views.__alloyId183.add($.__views.job_title);
+    $.__views.__alloyId202.add($.__views.job_title);
     ValueLabelClicked ? $.__views.job_title.addEventListener("click", ValueLabelClicked) : __defers["$.__views.job_title!click!ValueLabelClicked"] = true;
     $.__views.job_title_privacy = Ti.UI.createLabel({
         left: "73%",
@@ -114,22 +114,22 @@ function Controller() {
         text: "Default",
         id: "job_title_privacy"
     });
-    $.__views.__alloyId183.add($.__views.job_title_privacy);
+    $.__views.__alloyId202.add($.__views.job_title_privacy);
     PrivacyLabelClicked ? $.__views.job_title_privacy.addEventListener("click", PrivacyLabelClicked) : __defers["$.__views.job_title_privacy!click!PrivacyLabelClicked"] = true;
-    $.__views.__alloyId185 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId204 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
         backgroundColor: "#D0D0D0",
-        id: "__alloyId185"
+        id: "__alloyId204"
     });
-    __alloyId181.push($.__views.__alloyId185);
-    $.__views.__alloyId186 = Ti.UI.createTableViewRow({
+    __alloyId200.push($.__views.__alloyId204);
+    $.__views.__alloyId205 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
-        id: "__alloyId186"
+        id: "__alloyId205"
     });
-    __alloyId181.push($.__views.__alloyId186);
-    $.__views.__alloyId187 = Ti.UI.createLabel({
+    __alloyId200.push($.__views.__alloyId205);
+    $.__views.__alloyId206 = Ti.UI.createLabel({
         left: "5%",
         width: "22%",
         font: {
@@ -138,9 +138,9 @@ function Controller() {
         color: "#2279bc",
         bubbleParent: false,
         text: "Company",
-        id: "__alloyId187"
+        id: "__alloyId206"
     });
-    $.__views.__alloyId186.add($.__views.__alloyId187);
+    $.__views.__alloyId205.add($.__views.__alloyId206);
     $.__views.company = Ti.UI.createLabel({
         left: "29%",
         width: "42%",
@@ -153,7 +153,7 @@ function Controller() {
         id: "company",
         hintText: "Company"
     });
-    $.__views.__alloyId186.add($.__views.company);
+    $.__views.__alloyId205.add($.__views.company);
     ValueLabelClicked ? $.__views.company.addEventListener("click", ValueLabelClicked) : __defers["$.__views.company!click!ValueLabelClicked"] = true;
     $.__views.company_privacy = Ti.UI.createLabel({
         left: "73%",
@@ -165,22 +165,22 @@ function Controller() {
         text: "Default",
         id: "company_privacy"
     });
-    $.__views.__alloyId186.add($.__views.company_privacy);
+    $.__views.__alloyId205.add($.__views.company_privacy);
     PrivacyLabelClicked ? $.__views.company_privacy.addEventListener("click", PrivacyLabelClicked) : __defers["$.__views.company_privacy!click!PrivacyLabelClicked"] = true;
-    $.__views.__alloyId188 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId207 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
         backgroundColor: "#D0D0D0",
-        id: "__alloyId188"
+        id: "__alloyId207"
     });
-    __alloyId181.push($.__views.__alloyId188);
-    $.__views.__alloyId189 = Ti.UI.createTableViewRow({
+    __alloyId200.push($.__views.__alloyId207);
+    $.__views.__alloyId208 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
-        id: "__alloyId189"
+        id: "__alloyId208"
     });
-    __alloyId181.push($.__views.__alloyId189);
-    $.__views.__alloyId190 = Ti.UI.createLabel({
+    __alloyId200.push($.__views.__alloyId208);
+    $.__views.__alloyId209 = Ti.UI.createLabel({
         left: "5%",
         width: "22%",
         font: {
@@ -189,9 +189,9 @@ function Controller() {
         color: "#2279bc",
         bubbleParent: false,
         text: "Education",
-        id: "__alloyId190"
+        id: "__alloyId209"
     });
-    $.__views.__alloyId189.add($.__views.__alloyId190);
+    $.__views.__alloyId208.add($.__views.__alloyId209);
     $.__views.education = Ti.UI.createLabel({
         left: "29%",
         width: "42%",
@@ -204,7 +204,7 @@ function Controller() {
         id: "education",
         hintText: "Education"
     });
-    $.__views.__alloyId189.add($.__views.education);
+    $.__views.__alloyId208.add($.__views.education);
     ValueLabelClicked ? $.__views.education.addEventListener("click", ValueLabelClicked) : __defers["$.__views.education!click!ValueLabelClicked"] = true;
     $.__views.education_privacy = Ti.UI.createLabel({
         left: "73%",
@@ -216,18 +216,18 @@ function Controller() {
         text: "Default",
         id: "education_privacy"
     });
-    $.__views.__alloyId189.add($.__views.education_privacy);
+    $.__views.__alloyId208.add($.__views.education_privacy);
     PrivacyLabelClicked ? $.__views.education_privacy.addEventListener("click", PrivacyLabelClicked) : __defers["$.__views.education_privacy!click!PrivacyLabelClicked"] = true;
-    $.__views.__alloyId191 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId210 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
         backgroundColor: "#D0D0D0",
-        id: "__alloyId191"
+        id: "__alloyId210"
     });
-    __alloyId181.push($.__views.__alloyId191);
+    __alloyId200.push($.__views.__alloyId210);
     $.__views.tableView = Ti.UI.createTableView({
         bottom: 0,
-        data: __alloyId181,
+        data: __alloyId200,
         id: "tableView"
     });
     $.__views.tableView && $.addTopLevelView($.__views.tableView);

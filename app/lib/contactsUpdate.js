@@ -616,13 +616,23 @@ function updateUserDataOnServerAndProperties(pin, oldData, newData, bofffsSpecif
 	    	//manageUserUpdates(userData,pin,bofffsSpecificData);
 	    	createUpdateString(oldData, newData, pin, bofffsSpecificData);
 	    	
+	    	// If the profile picture was updated by the user, the server sends back the new urls
+	    	// Delete the new_profile_picture flag and save the new urls
+	    	if(newData.new_profile_picture) {
+	    		delete newData.new_profile_picture;
+	    		var newPictureUrls = JSON.parse(this.responseText);
+	    		newData.profile_picture = newPictureUrls.profile_picture;
+	    		newData.icon_image = newPictureUrls.icon_image;
+	    		alert("el donia mashya tamam yatsa, el url el gdida aheh \n" + newPictureUrls.profile_picture);
+	    	}
+	    	
 	    	// Save the new user data to properties and to golbal variable userData
 	    	userData = newData;
 	    	Titanium.App.Properties.setObject("userData", newData);
 	    },
 	    onerror: function(e) 
 	    {
-	    	alert("error");
+	    	alert(this.responseText);
 	    },
 	});
 	xhr.open("POST", url+"update_with_pin/bofff/user_accounts/"+pin);

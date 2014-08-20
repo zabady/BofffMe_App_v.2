@@ -77,7 +77,7 @@ function deleteAddableField(userDataInArrays, fieldType, value) {
 function addNewFieldToUserData(userDataInArrays, fieldType) {
     try {
         userDataInArrays[fieldType].push("");
-        userDataInArrays[fieldType + "_privacy"].push("public");
+        userDataInArrays[fieldType + "_privacy"].push("friends");
     } catch (exp) {
         alert(exp);
     }

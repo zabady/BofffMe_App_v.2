@@ -117,7 +117,7 @@ function addNewFieldToUserData(userDataInArrays, fieldType) {
 	try {
 		userDataInArrays[fieldType].push("");
 		// TODO: Handle Privacy
-		userDataInArrays[fieldType + "_privacy"].push("public");
+		userDataInArrays[fieldType + "_privacy"].push("friends");
 	}
 	catch(exp) { /*TODO: remove this line*/ alert(exp); }
 }
@@ -157,11 +157,10 @@ function postUserDataUpdatesOnServer(oldUserDataInStrings, newUserDataInArrays) 
 		// Update these changes on server, on userData property and on userData global vairable --> (contactsUpdate.js)
 		updateUserDataOnServerAndProperties(Alloy.Globals.userPin, oldUserDataInStrings, userUpdatesInStrings, bofffsSpecificData);
 		
-		Ti.include('/pushNotificationAPIs.js');	// TODO: Remove this line, it's included in alloy.js
 		NotifyAllUserFriendsWithMessage(newUserDataInArrays.fullName + ' has updated his profile, click here so these updates are applied to your phonebook.',
 										'test', newUserDataInArrays.icon_image);
 	}
-	catch(exp) { /*TODO: remove this line*/ alert(exp); }
+	catch(exp) { /*TODO: remove this line*/ alert(exp + "postUserDataUpdatesOnServer"); }
 	finally{ return ""; }
 }
 

@@ -10,24 +10,23 @@
             <MenuItem icon="/images/icon_settings.png" onClick="settingsClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
         </Menu>
 		
-		
-		<!-- Tab 1 : QrCode Window -->
-		<Tab class="tab1Style" >
-    		<Require id="qrCodeWin" src="qrCodeWin" type="view" />
-        </Tab>
-        
-        
-        <!-- Tab 2 : Contacts Window -->
-        <Tab class="tab2Style" >
+        <!-- Tab 1 : Contacts Window -->
+        <Tab class="contactsTab" >
     		<Require id="contactsWin" src="Contacts/coreContactsWin" type="view" />
         </Tab>
 		
 		
-		<!-- Tab 3 -->
-		<Tab class="tab3Style" >
+		<!-- Tab 2 -->
+		<Tab class="notificationsTab" >
 			<Require id="notificationCenterWin" src="notificationCenterWin" type="view" />
 		</Tab>
 		
+		
+		<!-- Tab 3 : QrCode Window -->
+		<Tab class="qrCodeTab" >
+    		<Require id="qrCodeWin" src="qrCodeWin" type="view" />
+        </Tab>
+        
 	</TabGroup>
 	
 </Alloy>

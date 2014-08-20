@@ -1,0 +1,18 @@
+<Alloy>
+	<!-- ------ Profile Picture (Independent) ------ -->
+	<TableViewRow class="imageTableViewRow" >
+		<ImageView id="profile_picture" />
+		<Button class="editPictureBtn" title="Edit" onClick="displayDialog" />
+		<Label id="profile_picture_privacy" class="privacyLabel" >Default</Label>
+	</TableViewRow>
+	
+	
+	<!-- Capture Picture Options Dialog  -->
+	<OptionDialog id="optionDialog" cancel="2" onClick="optionDialogClicked">
+		<Options>
+			<Option>Open Camera</Option>
+			<Option>Choose from Library</Option>
+			<Option>Cancel</Option>
+		</Options>
+	</OptionDialog>
+</Alloy>

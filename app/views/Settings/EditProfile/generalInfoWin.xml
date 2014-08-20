@@ -1,16 +1,17 @@
 <Alloy>
 	
-	<TableView id="tableView">
+	<TableView id="tableView" onClick="TableViewRowClicked" onDelete="DeletePressed" >
 		
 		
-		<TableViewRow backgroundColor="#D0D0D0" />
+		<!-- ------ Edit Picture Row (Independent) ------ -->
+		<Require id="pictureView" src="Settings/EditProfile/editPictureWin" type="view" />
 		
 		
 		<!-- ------ BofffMe Full Name (Independent) ------ -->
 		<TableViewRow class="fieldRow" >
 			<Label class="fieldTitleLabel" >Full Name</Label>
-			<Label id="fullName" class="fieldText" hintText="Skype Name" onClick="ValueLabelClicked" >Full Name</Label>
-			<Label class="privacyLabel" >friends</Label>	<!-- This field has no privacy -->
+			<Label id="fullName" class="fieldText" hintText="Full Name" onClick="ValueLabelClicked" >Full Name</Label>
+			<Label class="privacyLabel" >friends</Label>	<!-- This field has no privacy (No event listener) -->
 		</TableViewRow>
 		
 		
@@ -20,7 +21,7 @@
 		<!-- ------ Marital Status (Independent) ------ -->
 		<TableViewRow class="fieldRow" >
 			<Label class="fieldTitleLabel" >Marital Status</Label>
-			<Label id="marital_status" class="fieldText" hintText="Marital Status" onClick="ValueLabelClicked" >Marital Status</Label>
+			<Label id="marital_status" class="fieldText" hintText="Marital Status" onClick="ValueLabelClicked">Marital Status</Label>
 			<Label id="marital_status_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
 		</TableViewRow>
 		
@@ -28,11 +29,18 @@
 		<TableViewRow backgroundColor="#D0D0D0" />
 		
 		
-		<!-- ------ Residence (Independent) ------ -->
-		<TableViewRow class="fieldRow" >
-			<Label class="fieldTitleLabel" >Residence</Label>
-			<Label id="residence" class="fieldText" hintText="Residence" onClick="ValueLabelClicked" >Residence</Label>
-			<Label id="residence_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
+		<!-- ------ Gender (Independent) ------ -->
+		<TableViewRow class="headTitleRow" >
+			<Label class="headTitleLabel" >Gender</Label>
+			<Label id="gender_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
+		</TableViewRow>
+		<TableViewRow class="fieldRow" height="auto" >
+			<View id="gender" layout="horizontal" height="Ti.UI.SIZE" width="Ti.UI.SIZE">
+				<Label class="genderLabelsStyle" id="lbl_gender_male" textAlign="right">Male  </Label>
+				<ImageView id="img_gender_male" onClick="GenderSelected" />
+				<ImageView id="img_gender_female" onClick="GenderSelected" />
+				<Label class="genderLabelsStyle" id="lbl_gender_female" textAlign="left">Female</Label>
+			</View>
 		</TableViewRow>
 		
 		
@@ -53,18 +61,33 @@
 		<TableViewRow backgroundColor="#D0D0D0" />
 		
 		
-		<!-- ------ Gender (Independent) ------ -->
-		<TableViewRow class="headTitleRow" >
-			<Label class="headTitleLabel" >Gender</Label>
-			<Label id="gender_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
+		<!-- ------ Interests (Section) ------ -->
+		<TableViewRow class="headTitleRow" isInterest=1 >
+			<Label class="headTitleLabel" >Interests</Label>
+			<Button platform="ios" class="addRowButton" onClick="AddRowButtonClicked" />
+			<ImageView platform="android" class="addRowImage" onClick="AddRowButtonClicked" />
 		</TableViewRow>
-		<TableViewRow class="fieldRow" height="auto" >
-			<View id="gender" layout="horizontal" height="Ti.UI.SIZE" width="Ti.UI.SIZE">
-				<Label class="genderLabelsStyle" id="lbl_gender_male" textAlign="right">Male  </Label>
-				<ImageView id="img_gender_male" onClick="GenderSelected" />
-				<ImageView id="img_gender_female" onClick="GenderSelected" />
-				<Label class="genderLabelsStyle" id="lbl_gender_female" textAlign="left">Female</Label>
-			</View>
+		
+		
+		<TableViewRow backgroundColor="#D0D0D0" />
+		
+		
+		<!-- ------ Favorite Places (Section) ------ -->
+		<TableViewRow class="headTitleRow" isInterest=0 >
+			<Label class="headTitleLabel" >Favorite Places</Label>
+			<Button platform="ios" class="addRowButton" onClick="AddRowButtonClicked" />
+			<ImageView platform="android" class="addRowImage" onClick="AddRowButtonClicked" />
+		</TableViewRow>
+		
+		
+		<TableViewRow backgroundColor="#D0D0D0" />
+		
+		
+		<!-- ------ Residence (Independent) ------ -->
+		<TableViewRow class="fieldRow" >
+			<Label class="fieldTitleLabel" >Residence</Label>
+			<Label id="residence" class="fieldText" hintText="Residence" onClick="ValueLabelClicked" >Residence</Label>
+			<Label id="residence_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
 		</TableViewRow>
 		
 		

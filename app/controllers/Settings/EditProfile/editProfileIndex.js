@@ -13,15 +13,16 @@ function CancelClicked() {
 
 // An event listener that edits the table view insiede the window required
 function EditClicked(e) {
-	$[e.source.requiredViewId].tableView.editing = !$.contactInfoWin.tableView.editing;
+	$[e.source.requiredViewId].tableView.editing = !$[e.source.requiredViewId].tableView.editing;
 }
 
 // An event listener to done button that sends the new data to the server after validating it
 function SubmitDataToServer() {
-	//alert(userDataInArrays.mails);
 	alert(userDataInArrays);
-	//var validReturnString = postUserDataUpdatesOnServer(userData, userDataInArrays);	// editProfileHelper.js 
-	//if(validReturnString.search("Wrong") >= 0) alert(validReturnString);
+	
+	var validReturnString = postUserDataUpdatesOnServer(userData, userDataInArrays);	// editProfileHelper.js 
+	if(validReturnString.search("Wrong") >= 0) alert(validReturnString);
+	
 	// TODO: Close the window when done
 	// $.win.close();
 	//CancelClicked();

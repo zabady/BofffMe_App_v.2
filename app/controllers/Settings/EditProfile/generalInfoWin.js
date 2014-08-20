@@ -1,4 +1,4 @@
-
+// TODO: Handle Marital Status Picker
 //////////////////////////////////////////////////////////////////////////////////////// INITIALIZING VARIABLES
 // userDataInArrays is initialized in contactInfoWin as it is the first required view in the Edit Profile TabGroup
 // So, it's used here with no need to initialize it again
@@ -26,6 +26,7 @@ for(var i = 0; i < rows.length; i ++) { 	// Loop over the table view rows
 			case 'residence_privacy':
 			case 'birthday_date_privacy':
 			case 'gender_privacy':
+			case 'profile_picture_privacy':
 			
 				if(userData[children[j].id] != "" && userData[children[j].id] != null) {
 					children[j].text = userData[children[j].id];
@@ -52,13 +53,86 @@ for(var i = 0; i < rows.length; i ++) { 	// Loop over the table view rows
 						}
 					});
 				}
+				break;
+				
+			case 'profile_picture':
+				if(userData['profile_picture'] != "" && userData['profile_picture'] != null) {
+					children[j].image = userData['profile_picture'];
+					// TODO: Read the image from the stored file
+					//children[j].image = 
+						//Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, 'img_profile_pic_large.jpg').read();
+				}
+				
+				// Add event listener for picture's privacy
+				$.pictureView.profile_picture_privacy.addEventListener('click', PrivacyLabelClicked);
+				break;
 		}
 	}
+}
+
+// Loop over the user favorite places
+for(var i = userDataInArrays.favorite_places.length - 1; i >= 0; i--) {
+	// Create the data that will be displayed for each mail and send it to addNewRow function with the index of the row
+	var data = createBindingRowData(userDataInArrays.favorite_places[i], userDataInArrays.favorite_places_privacy[i], false);
+	AddNewRowAfter(data, 14);
+}
+
+// Loop over the user interests
+for(var i = userDataInArrays.interests.length - 1; i >= 0; i--) {
+	// Create the data that will be displayed for each mail and send it to addNewRow function with the index of the row
+	var data = createBindingRowData(userDataInArrays.interests[i], userDataInArrays.interests_privacy[i], true);
+	AddNewRowAfter(data, 12);
+}
+
+// Defining a function that creates the data that will be binded with the table view row and its children
+function createBindingRowData(fieldValue, privacy, isInterest) {
+	var data = {
+		TextOfFieldTitle: isInterest ? "Interest" : "Place",
+		HintTextOfField: isInterest ? "eg. Playing Football" : "eg. Spectra Resturant",
+		FieldType: isInterest ? "interests" : "favorite_places",
+		
+		TextOfField: fieldValue,
+		TextOfPrivacy: privacy,
+	};
+	
+	return data;
 }
 //////////////////////////////////////////////////////////////////////////////////////// END OF DISPLAY USER DATA
 
 
 //////////////////////////////////////////////////////////////////////////////////////// EVENT LISTENRES
+// Event listener for clicking the add row button that turns the flag to true
+function AddRowButtonClicked() {
+	addNewRowFlag = true;
+}
+
+// Event listener for deleting any row of the table view
+function DeletePressed(e) {
+	deleteAddableField(userDataInArrays, e.source.fieldType, e.source.fieldValue);	// editProfileHelper.js
+}
+
+// Event listener to table view clicks which adds a new row or delete an existing row depending on flags
+function TableViewRowClicked(e) {
+	if(addNewRowFlag) {
+		// Add it to the user's data, the call is by reference, so no need to wait a returning value
+		addNewFieldToUserData(userDataInArrays, e.row.isInterest > 0 ? "interests" : "favorite_places");
+		
+		// Add it to the UI
+		var data = createBindingRowData("", "friends", e.row.isInterest > 0);
+		AddNewRowAfter(data, e.index + 1);
+		addNewRowFlag = false;
+	}
+	// If delete flag is true, delete the selected row for android
+	else if(OS_ANDROID && androidDeleteRowFlag) {
+		DeletePressed({ source: {
+			fieldType: e.row.fieldType,
+			fieldValue: e.row.fieldValue,
+		}});	// Call DeletePressed event listener and send it the required arguments get from selected row
+		$.tableView.deleteRow(e.index);	// Delete the row from the table view
+		androidDeleteRowFlag = false;
+	}
+}
+
 // Event listener for value labels' to save their current text before edidting and displaying edit view
 function ValueLabelClicked(e) {
 	DisplayEditView(e.source);	// Display the editing view and passing the required info to it
@@ -195,6 +269,57 @@ function AddableFieldTextChanged() {
 	changeValueOfAddableField(userDataInArrays, clickedTextField.fieldType, addableTextOldValue, clickedTextField.text);
 	if(clickedTextField.text != clickedTextField.hintText) addableTextOldValue = clickedTextField.text;
 	else addableTextOldValue = "";
+}
+
+// A function that adds a new row after the incoming row number
+function AddNewRowAfter(data, rowNum) {
+	// Create the field's title label
+	var fieldTitleLabel = Ti.UI.createLabel({
+		text: data.TextOfFieldTitle
+	});
+	$.addClass(fieldTitleLabel, "fieldTitleLabel");
+
+	// Create the field's value text field
+	var fieldTextField = Ti.UI.createLabel({
+		text: data.TextOfField != "" ? data.TextOfField : data.HintTextOfField,
+		hintText: data.HintTextOfField,
+		fieldType: data.FieldType,	// Used in editing the addable fields, to know the array that should be processed
+		keyboardType: data.KeyboardType,
+		keyboardToolbar: data.KeyboardToolbar,
+	});
+	// After applying the class with gray color, must check if it's hint text or value text
+	$.addClass(fieldTextField, "fieldText");
+	if(data.TextOfField != "") fieldTextField.color = 'black';
+	fieldTextField.addEventListener("click", ValueLabelClicked);
+	
+	// Create the field's privacy label
+	var privacyLabel = Ti.UI.createLabel({
+		text: data.TextOfPrivacy,
+		fieldType: data.FieldType,	// Used in editing the addable fields' privacy, to know the array that should be processed
+	});
+	privacyLabel.addEventListener("click", PrivacyLabelClicked);
+	$.addClass(privacyLabel, "privacyLabel");
+	
+	// Create the field's row
+	var newRow = Ti.UI.createTableViewRow({
+		fieldType: data.FieldType,
+		fieldValue: data.TextOfField	// Used in deleting the row, to get the value's index in the array
+	});
+	$.addClass(newRow, "fieldRow");
+	
+	newRow.add(fieldTitleLabel);
+	newRow.add(fieldTextField);
+	newRow.add(privacyLabel);
+	
+	// Add a remove row image view for android
+	if(OS_ANDROID) {
+		var removeIcon = Ti.UI.createImageView();
+		removeIcon.addEventListener("click", function() { androidDeleteRowFlag = true; });
+		$.addClass(removeIcon, "removeRowImage");
+		newRow.add(removeIcon);
+	}
+	
+	$.tableView.insertRowAfter(rowNum - 1, newRow, { animated: true });
 }
 //////////////////////////////////////////////////////////////////////////////////////// END OF UI
 

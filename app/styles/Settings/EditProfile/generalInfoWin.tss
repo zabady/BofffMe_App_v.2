@@ -53,7 +53,7 @@
 	//borderWidth: 1,
 },
 ".fieldTitleLabel[platform=android]": {
-	width: "18%",
+	width: "20%",
 }
 
 // A class for the field's VALUE text field for both android and iOS used dynamically
@@ -87,7 +87,7 @@
 	color: "black",
 }
 
-/////////////////////////////////////////////////////////////////////////// HANDLING GENDER
+/////////////////////////////////////////////////////////////////////////// GENDER STYLES
 ".genderLabelsStyle": {
 	width: "75",
 	color: "gray",

@@ -422,11 +422,18 @@ function updateUserDataOnServerAndProperties(pin, oldData, newData, bofffsSpecif
         onload: function() {
             alert(this.responseText);
             createUpdateString(oldData, newData, pin, bofffsSpecificData);
+            if (newData.new_profile_picture) {
+                delete newData.new_profile_picture;
+                var newPictureUrls = JSON.parse(this.responseText);
+                newData.profile_picture = newPictureUrls.profile_picture;
+                newData.icon_image = newPictureUrls.icon_image;
+                alert("el donia mashya tamam yatsa, el url el gdida aheh \n" + newPictureUrls.profile_picture);
+            }
             userData = newData;
             Titanium.App.Properties.setObject("userData", newData);
         },
         onerror: function() {
-            alert("error");
+            alert(this.responseText);
         }
     });
     xhr.open("POST", url + "update_with_pin/bofff/user_accounts/" + pin);

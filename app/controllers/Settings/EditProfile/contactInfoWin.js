@@ -12,9 +12,7 @@ var clickedTextField;	// Used to save the clicked text field, to be able to blur
 if(OS_ANDROID) var androidDeleteRowFlag = false;	// Used to flag that remove icon was pressed for android
 
 // TODO: Handle changing the primary phone number
-// TODO: Handle skype name and BBM pin number
 // TODO: Add an alert dialog to confirm deleting
-// TODO: Put Android Edit View in an xml alone and require it
 // TODO: Replace non-native android picker with the native one
 
 //////////////////////////////////////////////////////////////////////////////////////// END OF INITIALIZING VARIABLES
@@ -43,29 +41,34 @@ for(var i = 0; i < rows.length; i ++) { 	// Loop over the table view rows
 	}
 }
 
+// Loop over the user social links
+for(var i = userDataInArrays.social_links.length - 1; i >= 0; i--) {
+	// Create the data that will be displayed for each mail and send it to addNewRow function with the index of the row
+	var data = createBindingRowData(userDataInArrays.social_links[i], userDataInArrays.social_links_privacy[i], false, true);
+	AddNewRowAfter(data, 8);
+}
 
 // Loop over the user emails
 for(var i = userDataInArrays.mails.length - 1; i >= 0; i--) {
 	// Create the data that will be displayed for each mail and send it to addNewRow function with the index of the row
 	var data = createBindingRowData(userDataInArrays.mails[i], userDataInArrays.mails_privacy[i], false);
-	AddNewRowAfter(data, 4);
+	AddNewRowAfter(data, 5);
 }
 
 // Loop over the user phone numbers
 for(var i = userDataInArrays.phone_numbers.length - 1; i >= 0; i--) {
 	// Create the data that will be displayed for each mail and send it to addNewRow function with the index of the row
 	var data = createBindingRowData(userDataInArrays.phone_numbers[i], userDataInArrays.phone_numbers_privacy[i], true);
-	AddNewRowAfter(data, 1);
+	AddNewRowAfter(data, 2);
 }
 
 // Defining a function that creates the data that will be binded with the table view row and its children
-function createBindingRowData(fieldValue, privacy, isPhone) {
+function createBindingRowData(fieldValue, privacy, isPhone, isSocial) {
 	var data = {
-		TextOfFieldTitle: isPhone ? "Phone" : "Email",
-		HintTextOfField: isPhone ? "Phone number" : "Email address",
-		FieldType: isPhone ? "phone_numbers" : "mails",
-		KeyboardType: isPhone ? Ti.UI.KEYBOARD_DECIMAL_PAD : Ti.UI.KEYBOARD_EMAIL,
-		KeyboardToolbar: isPhone ? $.keyboardToolbar : null,
+		TextOfFieldTitle: isPhone ? "Phone" : !isSocial ? "Email" : "Url",
+		HintTextOfField: isPhone ? "Phone number" : !isSocial ? "Email address" : "Social Link, eg. facebook",
+		FieldType: isPhone ? "phone_numbers" : !isSocial ? "mails" : "social_links",
+		KeyboardType: isPhone ? Ti.UI.KEYBOARD_DECIMAL_PAD : !isSocial ? Ti.UI.KEYBOARD_EMAIL : Ti.UI.KEYBOARD_URL,
 		
 		TextOfField: fieldValue,
 		TextOfPrivacy: privacy,
@@ -86,10 +89,10 @@ function AddRowButtonClicked() {
 function TableViewRowClicked(e) {
 	if(addNewRowFlag) {
 		// Add it to the user's data, the call is by reference, so no need to wait a returning value
-		addNewFieldToUserData(userDataInArrays, e.row.isPhone > 0 ? "phone_numbers" : "mails");
+		addNewFieldToUserData(userDataInArrays, e.row.isPhone > 0 ? "phone_numbers" : !e.row.isSocial ? "mails": "social_links");
 		
 		// Add it to the UI
-		var data = createBindingRowData("", "public", e.row.isPhone > 0);
+		var data = createBindingRowData("", "friends", e.row.isPhone > 0, e.row.isSocial > 0);
 		AddNewRowAfter(data, e.index + 1);
 		addNewRowFlag = false;
 	}
@@ -263,9 +266,10 @@ function AddNewRowAfter(data, rowNum) {
 		newRow.add(removeIcon);
 	}
 	
+	// Special case for social links, no primary social links so add them just after the head title row
+	if(data.HintTextOfField.search("facebook") >= 0) rowNum--;
 	$.tableView.insertRowAfter(rowNum, newRow, { animated: true });
 }
-
 //////////////////////////////////////////////////////////////////////////////////////// END OF UI
 
 

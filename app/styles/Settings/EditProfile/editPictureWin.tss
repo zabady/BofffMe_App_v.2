@@ -1,0 +1,21 @@
+///////////////////////////////////////////////////////////////////////////// PROIFLE PICTURE STYLES
+".imageTableViewRow": {
+	height: 120,
+	backgroundColor: "#D0D0D0",
+},
+".imageTableViewRow[platform=android]": {
+	backgroundColor: "#B7B7B7",
+},
+// TODO: Replace the id with class if id is not used in the controller
+"#profile_picture": {
+	height: 100,
+	//width: 100,
+	//left: 20,
+	image: "/images/contact_photo.png",
+},
+".editPictureBtn": {
+	left: 30,
+},
+".privacyLabel": {
+	right: 20,
+}

@@ -2,30 +2,31 @@
 "TabGroup": {
 	exitOnClose: true,
 },
-// Tab 1 style for ios and android
-".tab1Style[platform=ios]": {
-	title : "QR Code",
-	icon : "/images/QR-code-7aram.png",
-},
-".tab1Style[platform=android]": {
-	icon : Ti.App.Android.R.drawable.qrcodeicon2
-	//icon : "/images/QR scope.png"
-}
 
-// Tab 2 style for ios and android
-".tab2Style[platform=ios]": {
+// Tab 1 style for ios and android
+".contactsTab[platform=ios]": {
 	title : "Contacts",
 	icon : "/images/man-7aram.png",
 },
-".tab2Style[platform=android]": {
+".contactsTab[platform=android]": {
 	icon : Ti.App.Android.R.drawable.contacticon
 }
 
-// Tab 3 style for ios and android
-".tab3Style[platform=ios]": {
+// Tab 2 style for ios and android
+".notificationsTab[platform=ios]": {
 	title : "Notifications",
 	icon : "/images/love-7aram.png",
 },
-".tab3Style[platform=android]": {
+".notificationsTab[platform=android]": {
 	icon : Ti.App.Android.R.drawable.notificationicon
+}
+
+// Tab 3 style for ios and android
+".qrCodeTab[platform=ios]": {
+	title : "QR Code",
+	icon : "/images/QR-code-7aram.png",
+},
+".qrCodeTab[platform=android]": {
+	icon : Ti.App.Android.R.drawable.qrcodeicon2
+	//icon : "/images/QR scope.png"
 }

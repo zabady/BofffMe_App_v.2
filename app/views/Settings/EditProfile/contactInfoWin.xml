@@ -30,7 +30,7 @@
 			
 			<!-- ------ Primary Phone Number (Child) ------ -->
 			<TableViewRow class="fieldRow" >
-				<Label class="fieldTitleLabel" >Priamry</Label>
+				<Label class="fieldTitleLabel" >Primary</Label>
 				<Label id="primary_mobile" class="fieldText" onLongclick="PrimaryPhoneTextLongclick" />
 				
 				<!-->
@@ -64,7 +64,7 @@
 			
 			<!-- ------ Primary email address (Child) ------ -->
 			<TableViewRow class="fieldRow" >
-				<Label class="fieldTitleLabel" >Priamry</Label>
+				<Label class="fieldTitleLabel" >Primary</Label>
 				<Label id="primary_email" class="fieldText" hintText="Email address"
 					onClick="ValueLabelClicked" keyboardType="Ti.UI.KEYBOARD_EMAIL" />
 				
@@ -76,6 +76,17 @@
 					
 				<Label id="primary_email_privacy" class="privacyLabel" onClick="PrivacyLabelClicked" >Default</Label>
 				
+			</TableViewRow>
+			
+			
+			<TableViewRow backgroundColor="#D0D0D0" />
+			
+			
+			<!-- ------ Social Links (Section) ------ -->
+			<TableViewRow class="headTitleRow" isPhone=0 isSocial=1 >
+				<Label class="headTitleLabel" >Social Links</Label>
+				<Button platform="ios" class="addRowButton" onClick="AddRowButtonClicked" />
+				<ImageView platform="android" class="addRowImage" onClick="AddRowButtonClicked" />
 			</TableViewRow>
 			
 			
