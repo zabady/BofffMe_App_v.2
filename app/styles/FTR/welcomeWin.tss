@@ -1,5 +1,6 @@
 "Window": {
 	exitOnClose: true,
+	navBarHidden: true,
 },
 "Window[platform=android]": {
 	backgroundGradient: {

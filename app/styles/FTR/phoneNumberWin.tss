@@ -31,9 +31,11 @@
 	bubbleParent: false,
 },
 "Picker": {
-	 selectionIndicator: true,
-	 width: "80%",
-	 height: "42",
+	//backgroundColor: "blue",
+	color: 'black',
+	selectionIndicator: true,
+	width: "80%",
+	height: "42",
 },
 "Picker[platform=ios]": {
 	bottom: 0,

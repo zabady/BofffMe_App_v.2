@@ -10,7 +10,8 @@ function __processArg(obj, key) {
 function Controller() {
     function openClickedSettings(e) {
         if ("FTR" == e.source.window) {
-            Titanium.App.Properties.setObject("FTR", true);
+            var isFTR = Titanium.App.Properties.getObject("FTR");
+            Titanium.App.Properties.setObject("FTR", !isFTR);
             alert("FTR will start after restarting the app.");
             return;
         }

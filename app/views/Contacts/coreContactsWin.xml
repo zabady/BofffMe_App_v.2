@@ -9,7 +9,7 @@
 		</LeftNavButton>
 		
 		<View layout="vertical">
-	 		<ScrollableView showPagingControl="true" id="scrollableview_mainContactsView" onScrollend="changeRightNavButton" />
+	 		<ScrollableView showPagingControl="true" id="scrollableview_mainContactsView" />
 		</View>
 		
 	</Window>

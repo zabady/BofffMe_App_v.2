@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="win">
+	<Window id="win" onOpen="windowOpen">
 		<View>
 
 			<Label>WELCOME TO BOFFF ME!</Label>

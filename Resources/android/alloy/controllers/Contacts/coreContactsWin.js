@@ -8,10 +8,6 @@ function __processArg(obj, key) {
 }
 
 function Controller() {
-    function changeRightNavButton() {
-        var currentView = $.scrollableview_mainContactsView.getCurrentPage();
-        $.win_boffsList.rightNavButton = 1 == currentView ? myBofffsButton : allContactsButton;
-    }
     function addressBookDisallowed() {
         alert("Failed");
     }
@@ -128,7 +124,6 @@ function Controller() {
     }
     var $ = this;
     var exports = {};
-    var __defers = {};
     $.__views.win_boffsList = Ti.UI.createWindow({
         backgroundColor: "white",
         id: "win_boffsList",
@@ -155,22 +150,8 @@ function Controller() {
         id: "scrollableview_mainContactsView"
     });
     $.__views.__alloyId62.add($.__views.scrollableview_mainContactsView);
-    changeRightNavButton ? $.__views.scrollableview_mainContactsView.addEventListener("scrollend", changeRightNavButton) : __defers["$.__views.scrollableview_mainContactsView!scrollend!changeRightNavButton"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    arguments[0] || {};
-    var allContactsButton = Titanium.UI.createButton({
-        title: "all contacts"
-    });
-    var myBofffsButton = Titanium.UI.createButton({
-        title: "my bofffs"
-    });
-    allContactsButton.addEventListener("click", function() {
-        $.scrollableview_mainContactsView.scrollToView(1);
-    });
-    myBofffsButton.addEventListener("click", function() {
-        $.scrollableview_mainContactsView.scrollToView(0);
-    });
     Ti.Contacts.contactsAuthorization == Ti.Contacts.AUTHORIZATION_AUTHORIZED ? performAddressBookFunction() : Ti.Contacts.contactsAuthorization == Ti.Contacts.AUTHORIZATION_UNKNOWN ? Ti.Contacts.requestAuthorization(function(e) {
         e.success ? performAddressBookFunction() : addressBookDisallowed();
     }) : addressBookDisallowed();
@@ -186,7 +167,6 @@ function Controller() {
     };
     var bofffsContacts = Alloy.createController("Contacts/bofffsContacts", bofffContactsPayload);
     $.scrollableview_mainContactsView.addView(bofffsContacts.getView());
-    __defers["$.__views.scrollableview_mainContactsView!scrollend!changeRightNavButton"] && $.__views.scrollableview_mainContactsView.addEventListener("scrollend", changeRightNavButton);
     _.extend($, exports);
 }
 

@@ -4,7 +4,8 @@ function openClickedSettings(e) {
 	
 	// TODO: Remove this shit in real app
 	if(e.source.window == "FTR") {
-		Titanium.App.Properties.setObject('FTR', true);
+		var isFTR = Titanium.App.Properties.getObject('FTR'); 
+		Titanium.App.Properties.setObject('FTR', !isFTR);
 		alert("FTR will start after restarting the app.");
 		return;
 	}

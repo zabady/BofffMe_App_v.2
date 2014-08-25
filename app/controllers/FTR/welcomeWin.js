@@ -4,6 +4,14 @@
  * It will not get here until there's internet connection.
  */
 
+// Defining an event listener for hiding the action bar in android
+function windowOpen(e)
+{
+    // Grab the window's action bar instance and call the hide method
+	//e.source.activity.actionBar.hide();
+	$.win.activity.actionBar.hide();
+}
+
 
 // Defining a boolean that is used if continue is clicked before receiving the country code
 var continueBtnClicked = false;

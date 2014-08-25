@@ -159,30 +159,6 @@ function Controller() {
         scrollingEnabled: "false"
     });
     $.__views.win.add($.__views.scrollView);
-    $.__views.__alloyId105 = Ti.UI.createLabel({
-        font: {
-            fontSize: "17dp"
-        },
-        color: "#2279bc",
-        width: "75%",
-        top: "8dp",
-        height: Ti.UI.SIZE,
-        textAlign: "center",
-        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        text: "Enter Your Details",
-        id: "__alloyId105"
-    });
-    $.__views.scrollView.add($.__views.__alloyId105);
-    $.__views.img_facebook = Ti.UI.createImageView({
-        top: "10",
-        bottom: "12",
-        height: "40",
-        width: "200",
-        image: "/images/facebook_btn.png",
-        id: "img_facebook"
-    });
-    $.__views.scrollView.add($.__views.img_facebook);
-    facebookImgPressed ? $.__views.img_facebook.addEventListener("click", facebookImgPressed) : __defers["$.__views.img_facebook!click!facebookImgPressed"] = true;
     $.__views.__alloyId106 = Ti.UI.createLabel({
         font: {
             fontSize: "17dp"
@@ -193,16 +169,40 @@ function Controller() {
         height: Ti.UI.SIZE,
         textAlign: "center",
         borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        text: "OR",
+        text: "Enter Your Details",
         id: "__alloyId106"
     });
     $.__views.scrollView.add($.__views.__alloyId106);
-    $.__views.__alloyId107 = Ti.UI.createView({
+    $.__views.img_facebook = Ti.UI.createImageView({
+        top: "10",
+        bottom: "12",
+        height: "40",
         width: "200",
-        height: "100",
+        image: "/images/facebook_btn.png",
+        id: "img_facebook"
+    });
+    $.__views.scrollView.add($.__views.img_facebook);
+    facebookImgPressed ? $.__views.img_facebook.addEventListener("click", facebookImgPressed) : __defers["$.__views.img_facebook!click!facebookImgPressed"] = true;
+    $.__views.__alloyId107 = Ti.UI.createLabel({
+        font: {
+            fontSize: "17dp"
+        },
+        color: "#2279bc",
+        width: "75%",
+        top: "8dp",
+        height: Ti.UI.SIZE,
+        textAlign: "center",
+        borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        text: "OR",
         id: "__alloyId107"
     });
     $.__views.scrollView.add($.__views.__alloyId107);
+    $.__views.__alloyId108 = Ti.UI.createView({
+        width: "200",
+        height: "100",
+        id: "__alloyId108"
+    });
+    $.__views.scrollView.add($.__views.__alloyId108);
     $.__views.img_user = Ti.UI.createImageView({
         top: "12",
         height: "100",
@@ -210,7 +210,7 @@ function Controller() {
         image: "/images/contact_photo.png",
         id: "img_user"
     });
-    $.__views.__alloyId107.add($.__views.img_user);
+    $.__views.__alloyId108.add($.__views.img_user);
     imgPressed ? $.__views.img_user.addEventListener("click", imgPressed) : __defers["$.__views.img_user!click!imgPressed"] = true;
     $.__views.txt_name = Ti.UI.createTextField({
         bubbleParent: false,
@@ -248,13 +248,13 @@ function Controller() {
     $.__views.scrollView.add($.__views.txt_email);
     allowScroll ? $.__views.txt_email.addEventListener("focus", allowScroll) : __defers["$.__views.txt_email!focus!allowScroll"] = true;
     disableScroll ? $.__views.txt_email.addEventListener("blur", disableScroll) : __defers["$.__views.txt_email!blur!disableScroll"] = true;
-    $.__views.__alloyId108 = Ti.UI.createView({
+    $.__views.__alloyId109 = Ti.UI.createView({
         layout: "horizontal",
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE,
-        id: "__alloyId108"
+        id: "__alloyId109"
     });
-    $.__views.scrollView.add($.__views.__alloyId108);
+    $.__views.scrollView.add($.__views.__alloyId109);
     $.__views.lbl_gender_male = Ti.UI.createLabel({
         font: {
             fontSize: "17dp"
@@ -265,14 +265,14 @@ function Controller() {
         id: "lbl_gender_male",
         textAlign: "right"
     });
-    $.__views.__alloyId108.add($.__views.lbl_gender_male);
+    $.__views.__alloyId109.add($.__views.lbl_gender_male);
     $.__views.img_gender_male = Ti.UI.createImageView({
         image: "/images/gender_male[shaded].png",
         width: "75",
         height: "75",
         id: "img_gender_male"
     });
-    $.__views.__alloyId108.add($.__views.img_gender_male);
+    $.__views.__alloyId109.add($.__views.img_gender_male);
     genderSelected ? $.__views.img_gender_male.addEventListener("click", genderSelected) : __defers["$.__views.img_gender_male!click!genderSelected"] = true;
     $.__views.img_gender_female = Ti.UI.createImageView({
         image: "/images/gender_female[shaded].png",
@@ -280,7 +280,7 @@ function Controller() {
         height: "75",
         id: "img_gender_female"
     });
-    $.__views.__alloyId108.add($.__views.img_gender_female);
+    $.__views.__alloyId109.add($.__views.img_gender_female);
     genderSelected ? $.__views.img_gender_female.addEventListener("click", genderSelected) : __defers["$.__views.img_gender_female!click!genderSelected"] = true;
     $.__views.lbl_gender_female = Ti.UI.createLabel({
         font: {
@@ -292,8 +292,8 @@ function Controller() {
         id: "lbl_gender_female",
         textAlign: "left"
     });
-    $.__views.__alloyId108.add($.__views.lbl_gender_female);
-    $.__views.__alloyId109 = Ti.UI.createButton({
+    $.__views.__alloyId109.add($.__views.lbl_gender_female);
+    $.__views.__alloyId110 = Ti.UI.createButton({
         top: "10dp",
         borderRadius: 5,
         font: {
@@ -306,16 +306,16 @@ function Controller() {
         color: "white",
         bubbleParent: false,
         title: "Continue",
-        id: "__alloyId109"
+        id: "__alloyId110"
     });
-    $.__views.scrollView.add($.__views.__alloyId109);
-    continueBtnPressed ? $.__views.__alloyId109.addEventListener("click", continueBtnPressed) : __defers["$.__views.__alloyId109!click!continueBtnPressed"] = true;
-    var __alloyId111 = [];
-    __alloyId111.push("Open Camera");
-    __alloyId111.push("Choose from Library");
-    __alloyId111.push("Cancel");
+    $.__views.scrollView.add($.__views.__alloyId110);
+    continueBtnPressed ? $.__views.__alloyId110.addEventListener("click", continueBtnPressed) : __defers["$.__views.__alloyId110!click!continueBtnPressed"] = true;
+    var __alloyId112 = [];
+    __alloyId112.push("Open Camera");
+    __alloyId112.push("Choose from Library");
+    __alloyId112.push("Cancel");
     $.__views.optionDialog = Ti.UI.createOptionDialog({
-        options: __alloyId111,
+        options: __alloyId112,
         id: "optionDialog",
         cancel: "2"
     });
@@ -347,7 +347,7 @@ function Controller() {
     __defers["$.__views.txt_email!blur!disableScroll"] && $.__views.txt_email.addEventListener("blur", disableScroll);
     __defers["$.__views.img_gender_male!click!genderSelected"] && $.__views.img_gender_male.addEventListener("click", genderSelected);
     __defers["$.__views.img_gender_female!click!genderSelected"] && $.__views.img_gender_female.addEventListener("click", genderSelected);
-    __defers["$.__views.__alloyId109!click!continueBtnPressed"] && $.__views.__alloyId109.addEventListener("click", continueBtnPressed);
+    __defers["$.__views.__alloyId110!click!continueBtnPressed"] && $.__views.__alloyId110.addEventListener("click", continueBtnPressed);
     __defers["$.__views.optionDialog!click!optionDialogClick"] && $.__views.optionDialog.addEventListener("click", optionDialogClick);
     _.extend($, exports);
 }

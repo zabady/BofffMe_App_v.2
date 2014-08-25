@@ -6,7 +6,9 @@
 			<Label>Type in your phone number</Label>
 			
 			<TextField top="20" platform="ios" id="txt_country_ios" class="entryFields" onFocus="openPicker" />
-			<Picker top="20" platform="android" id="picker" onChange="changeCountryAndCountryCode" />
+			<View backgroundColor="gray">
+				<Picker top="20" platform="android" id="picker" onChange="changeCountryAndCountryCode" />
+			</View>
 			
 			<TextField class="entryFields" id="txt_phoneNumber" hintText="Phone Number without country code" />
 		
