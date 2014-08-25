@@ -2,6 +2,15 @@
 "TabGroup": {
 	exitOnClose: true,
 },
+"TabGroup[platform=android]": {
+	windowSoftInputMode : Titanium.UI.Android.SOFT_INPUT_STATE_ALWAYS_HIDDEN,
+}
+
+// Setting android's settings menu item
+".settingsMenuItem[platform=android]": {
+	showAsAction : Ti.Android.SHOW_AS_ACTION_IF_ROOM,
+	icon : Ti.App.Android.R.drawable.settingsicon,
+},
 
 // Tab 1 style for ios and android
 ".contactsTab[platform=ios]": {

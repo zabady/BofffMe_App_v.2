@@ -132,7 +132,6 @@ function Controller() {
         var item = listItem.section.getItemAt(listItem.itemIndex);
         var newStatus = "not favorite";
         "not favorite" == item.userPrivacy_towards_friend && (newStatus = "favorite");
-        var url = "http://www.bofffme.com/api/index.php/home/";
         var xhr = Ti.Network.createHTTPClient({
             onload: function() {
                 JSON.parse(this.responseText);
@@ -142,7 +141,7 @@ function Controller() {
                 alert("error");
             }
         });
-        xhr.open("POST", url + "update_friend_status/bofff/user_friends/" + bofffsList[listItem.itemId].id);
+        xhr.open("POST", Alloy.Globals.apiUrl + "update_friend_status/bofff/user_friends/" + bofffsList[listItem.itemId].id);
         var params = {
             userPrivacy_towards_friend: newStatus
         };

@@ -230,7 +230,6 @@ function checkCompanyUpdate(userData, newUserData, companyObject)
 function manageUserUpdates(oldUserData,pin,bofffsSpecificData)
 {
 	Ti.API.info("manageUserUpdates");
-	var url =  'http://www.bofffme.com/api/index.php/home/';
 	var xhr = Ti.Network.createHTTPClient(
 	{
 	    onload: function(e) 
@@ -244,7 +243,7 @@ function manageUserUpdates(oldUserData,pin,bofffsSpecificData)
 	    },
 	});
 	
-	xhr.open("POST", url+"search_user_by/bofff/user_accounts/pin/"+pin);
+	xhr.open("POST", Alloy.Globals.apiUrl + "search_user_by/bofff/user_accounts/pin/"+pin);
 	xhr.send();  
 }
 
@@ -469,7 +468,6 @@ function checkPrivacySettings(fieldToUpdate,fieldPrivacy,valueOfField,newUserDat
 function addUpdatesToFriends(dataAdded,dataDeleted,friendsToSendAdded,friendsToSendDeleted, userPin)
 {
 	Ti.API.info("addUpdatesToFriends");
-	var url =  'http://www.bofffme.com/api/index.php/home/';
 	var xhr = Ti.Network.createHTTPClient(
 	{
 	    onload: function(e) 
@@ -483,7 +481,7 @@ function addUpdatesToFriends(dataAdded,dataDeleted,friendsToSendAdded,friendsToS
 	    },
 	});
 	
-	xhr.open("POST", url+"update_friend_updates/bofff/user_friends/"+userPin);
+	xhr.open("POST", Alloy.Globals.apiUrl + "update_friend_updates/bofff/user_friends/"+userPin);
 	var params=
 	{
 		// TODO: Send array to server via json.stringify
@@ -580,7 +578,6 @@ function parsingUpdateString(updateString, addOrDelete, userFriendAppId, bofffsS
 function deleteUpdatesOffriend(friendId)
 {
 	Ti.API.info("deleteUpdatesOffriend");
-	var url =  'http://www.bofffme.com/api/index.php/home/';
 	var xhr = Ti.Network.createHTTPClient(
 	{
 	    onload: function(e) 
@@ -593,7 +590,7 @@ function deleteUpdatesOffriend(friendId)
 	    },
 	});
 	
-	xhr.open("POST", url + "update_with_id/bofff/user_friends/" + friendId);
+	xhr.open("POST", Alloy.Globals.apiUrl + "update_with_id/bofff/user_friends/" + friendId);
 	var params = {
 		friend_added_data: "",
 		friend_deleted_data	: "",
@@ -607,7 +604,6 @@ function deleteUpdatesOffriend(friendId)
 function updateUserDataOnServerAndProperties(pin, oldData, newData, bofffsSpecificData)
 {
 	Ti.API.info("updateUserDataOnServerAndProperties");
-	var url =  'http://www.bofffme.com/api/index.php/home/';
 	var xhr = Ti.Network.createHTTPClient(
 	{
 	    onload: function(e) 
@@ -635,7 +631,7 @@ function updateUserDataOnServerAndProperties(pin, oldData, newData, bofffsSpecif
 	    	alert(this.responseText);
 	    },
 	});
-	xhr.open("POST", url+"update_with_pin/bofff/user_accounts/"+pin);
+	xhr.open("POST", Alloy.Globals.apiUrl + "update_with_pin/bofff/user_accounts/"+pin);
 	
 	xhr.send(newData);  // request is actually sent with this statement
 }

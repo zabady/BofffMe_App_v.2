@@ -152,7 +152,6 @@ function checkCompanyUpdate(userData, newUserData, companyObject) {
 
 function manageUserUpdates(oldUserData, pin, bofffsSpecificData) {
     Ti.API.info("manageUserUpdates");
-    var url = "http://www.bofffme.com/api/index.php/home/";
     var xhr = Ti.Network.createHTTPClient({
         onload: function() {
             var newData = JSON.parse(this.responseText).rows[0];
@@ -162,7 +161,7 @@ function manageUserUpdates(oldUserData, pin, bofffsSpecificData) {
             alert(this.responseText);
         }
     });
-    xhr.open("POST", url + "search_user_by/bofff/user_accounts/pin/" + pin);
+    xhr.open("POST", Alloy.Globals.apiUrl + "search_user_by/bofff/user_accounts/pin/" + pin);
     xhr.send();
 }
 
@@ -340,7 +339,6 @@ function checkPrivacySettings(fieldToUpdate, fieldPrivacy, valueOfField, newUser
 
 function addUpdatesToFriends(dataAdded, dataDeleted, friendsToSendAdded, friendsToSendDeleted, userPin) {
     Ti.API.info("addUpdatesToFriends");
-    var url = "http://www.bofffme.com/api/index.php/home/";
     var xhr = Ti.Network.createHTTPClient({
         onload: function() {
             alert(this.responseText);
@@ -349,7 +347,7 @@ function addUpdatesToFriends(dataAdded, dataDeleted, friendsToSendAdded, friends
             alert(this.responseText);
         }
     });
-    xhr.open("POST", url + "update_friend_updates/bofff/user_friends/" + userPin);
+    xhr.open("POST", Alloy.Globals.apiUrl + "update_friend_updates/bofff/user_friends/" + userPin);
     var params = {
         friend_added_data: JSON.stringify(dataAdded),
         friend_deleted_data: JSON.stringify(dataDeleted),
@@ -398,7 +396,6 @@ function parsingUpdateString(updateString, addOrDelete, userFriendAppId, bofffsS
 
 function deleteUpdatesOffriend(friendId) {
     Ti.API.info("deleteUpdatesOffriend");
-    var url = "http://www.bofffme.com/api/index.php/home/";
     var xhr = Ti.Network.createHTTPClient({
         onload: function() {
             alert(this.responseText);
@@ -407,7 +404,7 @@ function deleteUpdatesOffriend(friendId) {
             alert(this.responseText);
         }
     });
-    xhr.open("POST", url + "update_with_id/bofff/user_friends/" + friendId);
+    xhr.open("POST", Alloy.Globals.apiUrl + "update_with_id/bofff/user_friends/" + friendId);
     var params = {
         friend_added_data: "",
         friend_deleted_data: ""
@@ -417,7 +414,6 @@ function deleteUpdatesOffriend(friendId) {
 
 function updateUserDataOnServerAndProperties(pin, oldData, newData, bofffsSpecificData) {
     Ti.API.info("updateUserDataOnServerAndProperties");
-    var url = "http://www.bofffme.com/api/index.php/home/";
     var xhr = Ti.Network.createHTTPClient({
         onload: function() {
             alert(this.responseText);
@@ -436,6 +432,6 @@ function updateUserDataOnServerAndProperties(pin, oldData, newData, bofffsSpecif
             alert(this.responseText);
         }
     });
-    xhr.open("POST", url + "update_with_pin/bofff/user_accounts/" + pin);
+    xhr.open("POST", Alloy.Globals.apiUrl + "update_with_pin/bofff/user_accounts/" + pin);
     xhr.send(newData);
 }

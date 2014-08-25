@@ -7,7 +7,7 @@
 		<!-- Android Menu -->
 		<Menu platform="android">
             <!-- Cannot specify node text.  Use attributes only. -->
-            <MenuItem icon="/images/icon_settings.png" onClick="settingsClicked" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM" />
+            <MenuItem class="settingsMenuItem" onClick="settingsClicked" />
         </Menu>
 		
         <!-- Tab 1 : Contacts Window -->

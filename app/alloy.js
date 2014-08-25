@@ -31,7 +31,8 @@ Alloy.Globals.loading = Alloy.createWidget("nl.fokkezb.loading");
 
 
 // Defining the server's api url and adding it to globals
-Alloy.Globals.apiUrl = 'http://www.bofffme.com/api/index.php/home/';
+//Alloy.Globals.apiUrl = 'http://www.bofffme.com/api/index.php/home/';
+Alloy.Globals.apiUrl = 'http://www.2m4i.net/api/index.php/home/';
 
 
 // Split value to split updated ana deleted strings strings (used in contacts)

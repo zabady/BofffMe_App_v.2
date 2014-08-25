@@ -12,8 +12,8 @@ function Controller() {
         $.__views.tabGroup.removeEventListener("open", __alloyId9);
         if ($.__views.tabGroup.activity) $.__views.tabGroup.activity.onCreateOptionsMenu = function(e) {
             var __alloyId8 = {
-                icon: "/images/icon_settings.png",
                 showAsAction: Ti.Android.SHOW_AS_ACTION_IF_ROOM,
+                icon: Ti.App.Android.R.drawable.settingsicon,
                 id: "__alloyId7"
             };
             $.__views.__alloyId7 = e.menu.add(_.pick(__alloyId8, Alloy.Android.menuItemCreateArgs));
@@ -84,6 +84,7 @@ function Controller() {
     __alloyId0.push($.__views.__alloyId4);
     $.__views.tabGroup = Ti.UI.createTabGroup({
         exitOnClose: true,
+        windowSoftInputMode: Titanium.UI.Android.SOFT_INPUT_STATE_ALWAYS_HIDDEN,
         tabs: __alloyId0,
         id: "tabGroup"
     });

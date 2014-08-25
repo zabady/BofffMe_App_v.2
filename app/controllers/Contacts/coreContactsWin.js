@@ -182,7 +182,6 @@ function findBofffs(contactNumbers)
 {
 	var bofffFriends=[];
 	var contactNames=[];
-	var url =  'http://www.bofffme.com/api/index.php/home/';
 	var xhr = Ti.Network.createHTTPClient(
 	{
 	    onload: function(e) 
@@ -221,7 +220,7 @@ function findBofffs(contactNumbers)
 		pin:Alloy.Globals.userPin,
 	};
 	
-	xhr.open("POST", url + "detect_user_friends_by_mobile/bofff");
+	xhr.open("POST", Alloy.Globals.apiUrl + "detect_user_friends_by_mobile/bofff");
 	xhr.send(params);  // request is actually sent with this statement
 }
 
@@ -231,7 +230,6 @@ function findBofffs(contactNumbers)
 function addFriend(data, bofffFriends)
 {
 	var bofffsList=[];
-	var url =  'http://www.bofffme.com/api/index.php/home/';
 	var xhr = Ti.Network.createHTTPClient(
 	{
 	    onload: function(e) 
@@ -254,7 +252,7 @@ function addFriend(data, bofffFriends)
 	    },
 	});
 	
-	xhr.open("POST", url+"insert_friend/bofff/user_friends");
+	xhr.open("POST", Alloy.Globals.apiUrl + "insert_friend/bofff/user_friends");
 	var params =
 		{
 			friends: JSON.stringify(data),
