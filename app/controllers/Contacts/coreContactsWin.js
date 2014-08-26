@@ -1,47 +1,20 @@
-// 
-// //rightNavButton for the win_bofffsList in case the current viewed list is my bofffs
-// var allContactsButton = Titanium.UI.createButton({
-    // title:'all contacts' 
-// });
-// //rightNavButton for the win_bofffsList in case the current viewed list is all contacts
-// var myBofffsButton = Titanium.UI.createButton({
-    // title:'my bofffs' 
-// });
-// 
-// // //assigning the allContactsButton to the current window because the app always starts on my bofffs view as default
-// // $.win_boffsList.rightNavButton= allContactsButton;
-// 
-// //this is to go to scroll to all contacts list
-// allContactsButton.addEventListener('click',function(e)
-// {
-  // $.scrollableview_mainContactsView.scrollToView(1);
- // });
-// 
-// //this is to go to scroll to my bofffs list
-// myBofffsButton.addEventListener('click', function(e)
-// {
-	// $.scrollableview_mainContactsView.scrollToView(0);
-// });
+// TODO: Think about reload event listener for contacts
+// TODO: The new contacts' algorithm should replace findBofffs function
+// TODO: Icon and Profile Picture are not working
+// TODO: If no profile picture, display bofffContact icon from images folder
 
 
-// //this is to check the current viewed List to decide which rightNavButton to show whether it is all contacts or my bofffs
-// function changeRightNavButton(e)
-// {
-	// var currentView=$.scrollableview_mainContactsView.getCurrentPage();
-	// if(currentView==1)
-	// {
-		// $.win_boffsList.rightNavButton= myBofffsButton;
-	// }
-	// else
-	// {
-		// $.win_boffsList.rightNavButton= allContactsButton;
-	// }
-// }
+// This variable will contain all contacts read from the device
+var sortedContacts = [];
 
-//This is to check if the user allows the access to his phonebook or not
-if (Ti.Contacts.contactsAuthorization == Ti.Contacts.AUTHORIZATION_AUTHORIZED){
+
+// This is to check if the user allows the access to his phonebook or not
+if (Ti.Contacts.contactsAuthorization == Ti.Contacts.AUTHORIZATION_AUTHORIZED)
+{
     performAddressBookFunction();
-} else if (Ti.Contacts.contactsAuthorization == Ti.Contacts.AUTHORIZATION_UNKNOWN){
+}
+else if (Ti.Contacts.contactsAuthorization == Ti.Contacts.AUTHORIZATION_UNKNOWN)
+{
     Ti.Contacts.requestAuthorization(function(e){
         if (e.success) {
             performAddressBookFunction();
@@ -49,50 +22,38 @@ if (Ti.Contacts.contactsAuthorization == Ti.Contacts.AUTHORIZATION_AUTHORIZED){
             addressBookDisallowed();
         }
     });
-} else {
+}
+else
+{
     addressBookDisallowed();
 }
 
-//This is in case the user didn't allow to access his phonebook
-function addressBookDisallowed(){alert("Failed");};
 
-var sortedContacts;
-//This is to collect the contacts from the user's phonebook
+// This is in case the user didn't allow to access his phonebook
+function addressBookDisallowed() {
+	alert("No access for phonebook granted :(");
+};
+
+
+// This is to read the contacts from the user's phonebook
 function performAddressBookFunction()
 {  
 	var contacts = Ti.Contacts.getAllPeople();
- 	sortedContacts = [];
-    for (var x in contacts)
-    {
-        sortedContacts.push(contacts[x]);
-    }
+ 	
+	for (var x in contacts)
+	{
+		sortedContacts.push(contacts[x]);
+	}
     
  	// TODO: BUG FOUND --> sortedContacts.sort(sortContacts);
+ 	
  	sortedContacts.sort();
  	getContactsReady();
  	
-};
-var refreshAssurance=true;
-//This listens for any change in the user's phonebook if that happens it reloads the whole contact list
-Ti.Contacts.addEventListener('reload', function(e)
-{
-	// if(refreshAssurance==true)
-	// {
-		// refreshAssurance=false;
-		// setTimeout(function(){ alert('refreshAssurance: '+refreshAssurance);
-		// refreshAssurance = true; alert('refreshAssurance: '+refreshAssurance); }, 30000);
-	    // alert('Reloading contacts. Your contacts were changed externally!');
-	    // var contacts = Ti.Contacts.getAllPeople();
-	    // sortedContacts = [];
-	    // for (var x = 0; x < contacts.length; x++) 
-	    // {
-	        // sortedContacts.push(contacts[x]);
-	    // }
-	 	// sortedContacts.sort(sortContacts);
-	 	// getContactsReady();
- 	// }
-});
+}
 
+
+// Defining a function to sort contacts using it, it's an optional paramter sent to the function sort of arrays
 // This is to sort the contacts alphabetically
 function sortContacts(a, b) {
     if (a.fullName.toUpperCase() > b.fullName.toUpperCase())
@@ -106,6 +67,8 @@ function sortContacts(a, b) {
     return 0;
 }
 
+
+// The same idea of the previous function, but it's for bofff friends but with their names' on the user's device, not on the server
 // This is to sort the bofffs alphabetically
 function sortBofffs(a, b) {
     if (a.contactName.toUpperCase() > b.contactName.toUpperCase())
@@ -119,20 +82,22 @@ function sortBofffs(a, b) {
     return 0;
 }
 
-//gather contacts' numbers and change them to readable number string without special characters
+
+// Gather contacts' numbers and change them to readable number string without special characters
 function getContactsReady()
 {
-	var repeatedNumberCheck=[];
-	var contactNumbersAndIds=[];
+	var repeatedNumberCheck = [];
+	var contactNumbersAndIds = [];
 	var mobileNumbers;
 	var expression = /^\d+$/;
 	for(var contact in sortedContacts)
 	{
-		mobileNumbers= sortedContacts[contact].getPhone();
+		mobileNumbers = sortedContacts[contact].getPhone();
 		if (!isEmpty(mobileNumbers))
 		{
 			for (var i in mobileNumbers)
 			{
+				// Loop over each mobile number
 				for (var x in mobileNumbers[i])
 				{
 					var trimmedNumber="";
@@ -142,83 +107,98 @@ function getContactsReady()
 						{
 							if(expression.test(mobileNumbers[i][x][character]))
 							{
-								trimmedNumber+=mobileNumbers[i][x][character];
+								trimmedNumber += mobileNumbers[i][x][character];
 							}
 						}
 					}
 					else
 					{
-						trimmedNumber=mobileNumbers[i][x];
+						trimmedNumber = mobileNumbers[i][x];
 					}
-					if(repeatedNumberCheck[trimmedNumber]==null)
+					
+					if(repeatedNumberCheck[trimmedNumber] == null)
 					{
-						repeatedNumberCheck[trimmedNumber]=0;
+						repeatedNumberCheck[trimmedNumber] = 0;
 					}
 					else
 					{
 						continue;
 					}
+					
 					if(OS_IOS)
 					{
-						var numberAndId={number:trimmedNumber, id:sortedContacts[contact].recordId };
+						var numberAndId = { number:trimmedNumber, id:sortedContacts[contact].recordId };
 						contactNumbersAndIds.push(numberAndId);
 					}
 					else
 					if(OS_ANDROID)
 					{
-						var numberAndId={number:trimmedNumber, id:sortedContacts[contact].id };
+						var numberAndId = { number:trimmedNumber, id:sortedContacts[contact].id };
 						contactNumbersAndIds.push(numberAndId);
 					}
 				}
 			}
 		}
 	}
-	//then send these numbers to the bofffme DB to check whether this user has bofffs in his contacts or not
+	
+	// Then send these numbers to the bofffme DB to check whether this user has bofffs in his contacts or not
 	findBofffs(contactNumbersAndIds);
 }
-//this is to check whether or not these numbers are in our DB if yes
-//then this user is added as a friend and mapped to the contacts of the user
-//after all friends are found a list of friends are sent to initialize bofffs list to create the bofffs list
+
+// TODO: A lot of work should be done here, the new algorithm should replace this function
+// This is to check whether or not these numbers are in our DB if yes
+// Then this user is added as a friend and mapped to the contacts of the user
+// After all friends are found a list of friends are sent to initialize bofffs list to create the bofffs list
 function findBofffs(contactNumbers)
 {
-	var bofffFriends=[];
-	var contactNames=[];
+	// bofffFriends will capture the user's friends found on the DB
+	var bofffFriends = [];
+	
+	var contactNames = [];
+	
 	var xhr = Ti.Network.createHTTPClient(
 	{
 	    onload: function(e) 
 	    {
-	    	var bofffsData=[];
+	    	var bofffsData = [];
+	    	
+	    	// The next line should be receiving the user's friends on the DB
 	    	bofffFriends = JSON.parse(this.responseText);
-	    	for(var record in bofffFriends )
+	    	
+	    	// A loop over the user's friends to do some unkown stuff :D
+	    	for(var record in bofffFriends)
 	    	{
-	    		var fullName=Titanium.Contacts.getPersonByID(bofffFriends[record].contact_id).fullName;
-	    		bofffFriends[record].contactName=fullName;
+	    		// TODO: fullName should be replaced with other code because we had already imported all contacts
+	    		var fullName = Titanium.Contacts.getPersonByID(bofffFriends[record].contact_id).fullName;
+	    		
+	    		bofffFriends[record].contactName = fullName;
+	    		
 	    		contactNames.push(fullName);
-	    		var data=
+	    		
+	    		var data =
 	    		{
-	    			fullName:bofffFriends[record]['bofff'].fullName,
-	    			icon_image:bofffFriends[record]['bofff'].icon_image,
-	    			friend_pin_code:bofffFriends[record]['bofff'].pin,	
-	    			user_pin_code:Alloy.Globals.userPin,
-	    			contactName:fullName,
+	    			fullName : bofffFriends[record]['bofff'].fullName,
+	    			icon_image : bofffFriends[record]['bofff'].icon_image,
+	    			friend_pin_code : bofffFriends[record]['bofff'].pin,	
+	    			user_pin_code : Alloy.Globals.userPin,
+	    			contactName : fullName,
 	    		};
 	    		bofffsData.push(data);
-	    	}
-	    	addFriend(bofffsData,bofffFriends);
+	    	} // End of proccessing user's friends
+	    	
+	    	// Add friends to the user
+	    	addFriend(bofffsData, bofffFriends);
 	    	bofffFriends.sort(sortBofffs);
-	    	
-	    	
-	    		
 	    },
-	    onerror: function(e) 
-	    {
+	    onerror: function(e) {
 	    	alert(this.responseText);
+	    	alert("Error in findBofffs function in coreContactsWin.js");
 	    },
 	});
-	var params=
+	var params =
 	{
-		numbers:JSON.stringify(contactNumbers),
-		pin:Alloy.Globals.userPin,
+		numbers: JSON.stringify(contactNumbers),
+		pin: Alloy.Globals.userPin,
 	};
 	
 	xhr.open("POST", Alloy.Globals.apiUrl + "detect_user_friends_by_mobile/bofff");
@@ -227,10 +207,10 @@ function findBofffs(contactNumbers)
 
 
 
-//when the pin is sent back it saves it as a friend to this user
+// When the pin is sent back it saves it as a friend to this user
 function addFriend(data, bofffFriends)
 {
-	var bofffsList=[];
+	var bofffsList = [];
 	var xhr = Ti.Network.createHTTPClient(
 	{
 	    onload: function(e) 
@@ -242,6 +222,8 @@ function addFriend(data, bofffFriends)
 		    	//This is to sort the bofffs alphabetically
 		    	bofffsList.sort(sortBofffs);
 		    	// TODO: Adding the bofffLists (friends from my prespective)
+		    	
+		    	// TODO: Study bofffsSpecificData well :D
 		    	Titanium.App.Properties.setObject("bofffsSpecificData", bofffsList);
 		    	initializeBofffsList(bofffFriends,bofffsList);
 	    	}
@@ -255,14 +237,14 @@ function addFriend(data, bofffFriends)
 	
 	xhr.open("POST", Alloy.Globals.apiUrl + "insert_friend/bofff/user_friends");
 	var params =
-		{
-			friends: JSON.stringify(data),
-    	};
+	{
+		friends: JSON.stringify(data),
+	};
 	xhr.send(params);  // request is actually sent with this statement
-
 }
 
-//This is to check if an object is empty or not
+
+// This is to check if an object is empty or not
 function isEmpty(obj)
 {
     for(var key in obj) {
@@ -272,32 +254,38 @@ function isEmpty(obj)
     return true;
 }
 
-//Send the pins of the bofffs friend to create a list with it
-function initializeBofffsList(bofffFriends,bofffsList)
+// Send the pins of the bofffs friend to create a list with it
+function initializeBofffsList(bofffFriends, bofffsList)
 {
-	var bofffContactsPayload=
+	var bofffContactsPayload =
 	{
-		mainView:$.scrollableview_mainContactsView,
 		// TODO: bofffList are my friends with their data from the server
-		bofffFriends:bofffFriends,
+		bofffFriends : bofffFriends,
+		
 		// TODO: bofffFiends are my friends from my prespective, it need's to be global
-		bofffsList:bofffsList,
+		bofffsList : bofffsList,
+		
+		sortedContacts:sortedContacts,
 	};
-	bofffsContacts=Alloy.createController("Contacts/bofffsContacts",bofffContactsPayload);
-	// var views=[bofffsContacts.getView(),allContacts.getView()];
-	var views=[bofffsContacts.getView()];
- 	$.scrollableview_mainContactsView.setViews(views);
+	
+	bofffsContacts = Alloy.createController("Contacts/bofffsContacts", bofffContactsPayload);
+	$.win_boffsList.add(bofffsContacts.getView());
+	
+	//var views = [bofffsContacts.getView()];
+ 	//$.scrollableview_mainContactsView.setViews(views);
 }
 
-var allContactsPayload=
-{
-	mainView:$.scrollableview_mainContactsView,
-	sortedContacts:sortedContacts,
-};
-var bofffContactsPayload=
-{
-	mainView:$.scrollableview_mainContactsView,
-	sortedContacts:sortedContacts,
-};
-var bofffsContacts=Alloy.createController("Contacts/bofffsContacts",bofffContactsPayload);
-$.scrollableview_mainContactsView.addView(bofffsContacts.getView());
+// var allContactsPayload=
+// {
+	// mainView:$.scrollableview_mainContactsView,
+	// sortedContacts:sortedContacts,
+// };
+// var bofffContactsPayload=
+// {
+	// mainView:$.scrollableview_mainContactsView,
+	// sortedContacts:sortedContacts,
+// };
+// var bofffsContacts=Alloy.createController("Contacts/bofffsContacts",bofffContactsPayload);
+// $.scrollableview_mainContactsView.addView(bofffsContacts.getView());
+
+// TODO: Icon and Profile Picture are not working

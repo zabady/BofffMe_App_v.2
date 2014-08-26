@@ -1,5 +1,5 @@
 var args = arguments[0] || {};
-var mainView = args.mainView;
+
 // contains functions to update friends data on user contacts
 Ti.include("/contactsUpdate.js");
 try

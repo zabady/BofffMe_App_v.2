@@ -8,9 +8,11 @@
 			<ImageView class="logo"/>
 		</LeftNavButton>
 		
+		<!-- 
 		<View layout="vertical">
 	 		<ScrollableView showPagingControl="true" id="scrollableview_mainContactsView" />
 		</View>
+		-->
 		
 	</Window>
 </Alloy>

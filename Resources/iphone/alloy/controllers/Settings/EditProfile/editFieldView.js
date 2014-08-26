@@ -31,13 +31,13 @@ function Controller() {
         backgroundColor: "black"
     });
     $.__views.editView.add($.__views.cancelView1);
-    $.__views.__alloyId130 = Ti.UI.createView({
+    $.__views.__alloyId129 = Ti.UI.createView({
         layout: "vertical",
         backgroundColor: "white",
         height: Ti.UI.SIZE,
-        id: "__alloyId130"
+        id: "__alloyId129"
     });
-    $.__views.editView.add($.__views.__alloyId130);
+    $.__views.editView.add($.__views.__alloyId129);
     $.__views.fieldTitle = Ti.UI.createLabel({
         font: {
             fontSize: 20,
@@ -51,7 +51,7 @@ function Controller() {
         id: "fieldTitle",
         color: "#2279bc"
     });
-    $.__views.__alloyId130.add($.__views.fieldTitle);
+    $.__views.__alloyId129.add($.__views.fieldTitle);
     $.__views.fieldValue = Ti.UI.createTextField({
         bubbleParent: false,
         font: {
@@ -64,7 +64,7 @@ function Controller() {
         returnKeyType: Titanium.UI.RETURNKEY_DONE,
         id: "fieldValue"
     });
-    $.__views.__alloyId130.add($.__views.fieldValue);
+    $.__views.__alloyId129.add($.__views.fieldValue);
     $.__views.cancelView2 = Ti.UI.createView({
         id: "cancelView2",
         opacity: "0.5",

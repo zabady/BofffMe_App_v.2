@@ -16,6 +16,8 @@ function Controller() {
     }
     function SubmitDataToServer() {
         alert(userDataInArrays);
+        var validReturnString = postUserDataUpdatesOnServer(userData, userDataInArrays);
+        validReturnString.search("Wrong") >= 0 && alert(validReturnString);
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Settings/EditProfile/editProfileIndex";
@@ -27,141 +29,141 @@ function Controller() {
     var $ = this;
     var exports = {};
     var __defers = {};
-    var __alloyId137 = [];
-    $.__views.__alloyId139 = Ti.UI.createWindow({
+    var __alloyId136 = [];
+    $.__views.__alloyId138 = Ti.UI.createWindow({
         backgroundColor: "white",
-        id: "__alloyId139"
-    });
-    $.__views.__alloyId141 = Ti.UI.createView({
-        layout: "horizontal",
-        id: "__alloyId141"
-    });
-    $.__views.__alloyId142 = Ti.UI.createButton({
-        title: "Edit",
-        requiredViewId: "contactInfoWin",
-        id: "__alloyId142"
-    });
-    $.__views.__alloyId141.add($.__views.__alloyId142);
-    EditClicked ? $.__views.__alloyId142.addEventListener("click", EditClicked) : __defers["$.__views.__alloyId142!click!EditClicked"] = true;
-    $.__views.__alloyId143 = Ti.UI.createButton({
-        title: " Done",
-        id: "__alloyId143"
-    });
-    $.__views.__alloyId141.add($.__views.__alloyId143);
-    SubmitDataToServer ? $.__views.__alloyId143.addEventListener("click", SubmitDataToServer) : __defers["$.__views.__alloyId143!click!SubmitDataToServer"] = true;
-    $.__views.__alloyId139.rightNavButton = $.__views.__alloyId141;
-    $.__views.__alloyId145 = Ti.UI.createButton({
-        title: "Cancel",
-        id: "__alloyId145"
-    });
-    CancelClicked ? $.__views.__alloyId145.addEventListener("click", CancelClicked) : __defers["$.__views.__alloyId145!click!CancelClicked"] = true;
-    $.__views.__alloyId139.leftNavButton = $.__views.__alloyId145;
-    $.__views.contactInfoWin = Alloy.createController("Settings/EditProfile/contactInfoWin", {
-        id: "contactInfoWin",
-        __parentSymbol: $.__views.__alloyId139
-    });
-    $.__views.contactInfoWin.setParent($.__views.__alloyId139);
-    $.__views.__alloyId138 = Ti.UI.createTab({
-        window: $.__views.__alloyId139,
-        title: "Contact",
-        icon: "/images/man-7aram.png",
         id: "__alloyId138"
     });
-    __alloyId137.push($.__views.__alloyId138);
-    $.__views.__alloyId147 = Ti.UI.createWindow({
-        backgroundColor: "white",
-        id: "__alloyId147"
-    });
-    $.__views.__alloyId149 = Ti.UI.createView({
+    $.__views.__alloyId140 = Ti.UI.createView({
         layout: "horizontal",
-        id: "__alloyId149"
+        id: "__alloyId140"
     });
-    $.__views.__alloyId150 = Ti.UI.createButton({
+    $.__views.__alloyId141 = Ti.UI.createButton({
         title: "Edit",
-        requiredViewId: "generalInfoWin",
-        id: "__alloyId150"
+        requiredViewId: "contactInfoWin",
+        id: "__alloyId141"
     });
-    $.__views.__alloyId149.add($.__views.__alloyId150);
-    EditClicked ? $.__views.__alloyId150.addEventListener("click", EditClicked) : __defers["$.__views.__alloyId150!click!EditClicked"] = true;
-    $.__views.__alloyId151 = Ti.UI.createButton({
+    $.__views.__alloyId140.add($.__views.__alloyId141);
+    EditClicked ? $.__views.__alloyId141.addEventListener("click", EditClicked) : __defers["$.__views.__alloyId141!click!EditClicked"] = true;
+    $.__views.__alloyId142 = Ti.UI.createButton({
         title: " Done",
-        id: "__alloyId151"
+        id: "__alloyId142"
     });
-    $.__views.__alloyId149.add($.__views.__alloyId151);
-    SubmitDataToServer ? $.__views.__alloyId151.addEventListener("click", SubmitDataToServer) : __defers["$.__views.__alloyId151!click!SubmitDataToServer"] = true;
-    $.__views.__alloyId147.rightNavButton = $.__views.__alloyId149;
-    $.__views.__alloyId153 = Ti.UI.createButton({
+    $.__views.__alloyId140.add($.__views.__alloyId142);
+    SubmitDataToServer ? $.__views.__alloyId142.addEventListener("click", SubmitDataToServer) : __defers["$.__views.__alloyId142!click!SubmitDataToServer"] = true;
+    $.__views.__alloyId138.rightNavButton = $.__views.__alloyId140;
+    $.__views.__alloyId144 = Ti.UI.createButton({
         title: "Cancel",
-        id: "__alloyId153"
+        id: "__alloyId144"
     });
-    CancelClicked ? $.__views.__alloyId153.addEventListener("click", CancelClicked) : __defers["$.__views.__alloyId153!click!CancelClicked"] = true;
-    $.__views.__alloyId147.leftNavButton = $.__views.__alloyId153;
-    $.__views.generalInfoWin = Alloy.createController("Settings/EditProfile/generalInfoWin", {
-        id: "generalInfoWin",
-        __parentSymbol: $.__views.__alloyId147
+    CancelClicked ? $.__views.__alloyId144.addEventListener("click", CancelClicked) : __defers["$.__views.__alloyId144!click!CancelClicked"] = true;
+    $.__views.__alloyId138.leftNavButton = $.__views.__alloyId144;
+    $.__views.contactInfoWin = Alloy.createController("Settings/EditProfile/contactInfoWin", {
+        id: "contactInfoWin",
+        __parentSymbol: $.__views.__alloyId138
     });
-    $.__views.generalInfoWin.setParent($.__views.__alloyId147);
-    $.__views.__alloyId146 = Ti.UI.createTab({
-        window: $.__views.__alloyId147,
-        title: "General",
+    $.__views.contactInfoWin.setParent($.__views.__alloyId138);
+    $.__views.__alloyId137 = Ti.UI.createTab({
+        window: $.__views.__alloyId138,
+        title: "Contact",
         icon: "/images/man-7aram.png",
+        id: "__alloyId137"
+    });
+    __alloyId136.push($.__views.__alloyId137);
+    $.__views.__alloyId146 = Ti.UI.createWindow({
+        backgroundColor: "white",
         id: "__alloyId146"
     });
-    __alloyId137.push($.__views.__alloyId146);
-    $.__views.__alloyId155 = Ti.UI.createWindow({
-        backgroundColor: "white",
-        id: "__alloyId155"
-    });
-    $.__views.__alloyId157 = Ti.UI.createView({
+    $.__views.__alloyId148 = Ti.UI.createView({
         layout: "horizontal",
-        id: "__alloyId157"
+        id: "__alloyId148"
     });
-    $.__views.__alloyId158 = Ti.UI.createButton({
+    $.__views.__alloyId149 = Ti.UI.createButton({
         title: "Edit",
-        id: "__alloyId158"
+        requiredViewId: "generalInfoWin",
+        id: "__alloyId149"
     });
-    $.__views.__alloyId157.add($.__views.__alloyId158);
-    $.__views.__alloyId159 = Ti.UI.createButton({
+    $.__views.__alloyId148.add($.__views.__alloyId149);
+    EditClicked ? $.__views.__alloyId149.addEventListener("click", EditClicked) : __defers["$.__views.__alloyId149!click!EditClicked"] = true;
+    $.__views.__alloyId150 = Ti.UI.createButton({
         title: " Done",
-        id: "__alloyId159"
+        id: "__alloyId150"
     });
-    $.__views.__alloyId157.add($.__views.__alloyId159);
-    SubmitDataToServer ? $.__views.__alloyId159.addEventListener("click", SubmitDataToServer) : __defers["$.__views.__alloyId159!click!SubmitDataToServer"] = true;
-    $.__views.__alloyId155.rightNavButton = $.__views.__alloyId157;
-    $.__views.__alloyId161 = Ti.UI.createButton({
+    $.__views.__alloyId148.add($.__views.__alloyId150);
+    SubmitDataToServer ? $.__views.__alloyId150.addEventListener("click", SubmitDataToServer) : __defers["$.__views.__alloyId150!click!SubmitDataToServer"] = true;
+    $.__views.__alloyId146.rightNavButton = $.__views.__alloyId148;
+    $.__views.__alloyId152 = Ti.UI.createButton({
         title: "Cancel",
-        id: "__alloyId161"
+        id: "__alloyId152"
     });
-    CancelClicked ? $.__views.__alloyId161.addEventListener("click", CancelClicked) : __defers["$.__views.__alloyId161!click!CancelClicked"] = true;
-    $.__views.__alloyId155.leftNavButton = $.__views.__alloyId161;
-    $.__views.workAndEdWin = Alloy.createController("Settings/EditProfile/workAndEdWin", {
-        id: "workAndEdWin",
-        __parentSymbol: $.__views.__alloyId155
+    CancelClicked ? $.__views.__alloyId152.addEventListener("click", CancelClicked) : __defers["$.__views.__alloyId152!click!CancelClicked"] = true;
+    $.__views.__alloyId146.leftNavButton = $.__views.__alloyId152;
+    $.__views.generalInfoWin = Alloy.createController("Settings/EditProfile/generalInfoWin", {
+        id: "generalInfoWin",
+        __parentSymbol: $.__views.__alloyId146
     });
-    $.__views.workAndEdWin.setParent($.__views.__alloyId155);
-    $.__views.__alloyId154 = Ti.UI.createTab({
-        window: $.__views.__alloyId155,
-        title: "Work & Ed.",
+    $.__views.generalInfoWin.setParent($.__views.__alloyId146);
+    $.__views.__alloyId145 = Ti.UI.createTab({
+        window: $.__views.__alloyId146,
+        title: "General",
         icon: "/images/man-7aram.png",
+        id: "__alloyId145"
+    });
+    __alloyId136.push($.__views.__alloyId145);
+    $.__views.__alloyId154 = Ti.UI.createWindow({
+        backgroundColor: "white",
         id: "__alloyId154"
     });
-    __alloyId137.push($.__views.__alloyId154);
+    $.__views.__alloyId156 = Ti.UI.createView({
+        layout: "horizontal",
+        id: "__alloyId156"
+    });
+    $.__views.__alloyId157 = Ti.UI.createButton({
+        title: "Edit",
+        id: "__alloyId157"
+    });
+    $.__views.__alloyId156.add($.__views.__alloyId157);
+    $.__views.__alloyId158 = Ti.UI.createButton({
+        title: " Done",
+        id: "__alloyId158"
+    });
+    $.__views.__alloyId156.add($.__views.__alloyId158);
+    SubmitDataToServer ? $.__views.__alloyId158.addEventListener("click", SubmitDataToServer) : __defers["$.__views.__alloyId158!click!SubmitDataToServer"] = true;
+    $.__views.__alloyId154.rightNavButton = $.__views.__alloyId156;
+    $.__views.__alloyId160 = Ti.UI.createButton({
+        title: "Cancel",
+        id: "__alloyId160"
+    });
+    CancelClicked ? $.__views.__alloyId160.addEventListener("click", CancelClicked) : __defers["$.__views.__alloyId160!click!CancelClicked"] = true;
+    $.__views.__alloyId154.leftNavButton = $.__views.__alloyId160;
+    $.__views.workAndEdWin = Alloy.createController("Settings/EditProfile/workAndEdWin", {
+        id: "workAndEdWin",
+        __parentSymbol: $.__views.__alloyId154
+    });
+    $.__views.workAndEdWin.setParent($.__views.__alloyId154);
+    $.__views.__alloyId153 = Ti.UI.createTab({
+        window: $.__views.__alloyId154,
+        title: "Work & Ed.",
+        icon: "/images/man-7aram.png",
+        id: "__alloyId153"
+    });
+    __alloyId136.push($.__views.__alloyId153);
     $.__views.tabGroup = Ti.UI.createTabGroup({
-        tabs: __alloyId137,
+        tabs: __alloyId136,
         id: "tabGroup"
     });
     $.__views.tabGroup && $.addTopLevelView($.__views.tabGroup);
     exports.destroy = function() {};
     _.extend($, $.__views);
     Ti.include("/editProfileHelper.js");
-    __defers["$.__views.__alloyId142!click!EditClicked"] && $.__views.__alloyId142.addEventListener("click", EditClicked);
-    __defers["$.__views.__alloyId143!click!SubmitDataToServer"] && $.__views.__alloyId143.addEventListener("click", SubmitDataToServer);
-    __defers["$.__views.__alloyId145!click!CancelClicked"] && $.__views.__alloyId145.addEventListener("click", CancelClicked);
-    __defers["$.__views.__alloyId150!click!EditClicked"] && $.__views.__alloyId150.addEventListener("click", EditClicked);
-    __defers["$.__views.__alloyId151!click!SubmitDataToServer"] && $.__views.__alloyId151.addEventListener("click", SubmitDataToServer);
-    __defers["$.__views.__alloyId153!click!CancelClicked"] && $.__views.__alloyId153.addEventListener("click", CancelClicked);
-    __defers["$.__views.__alloyId159!click!SubmitDataToServer"] && $.__views.__alloyId159.addEventListener("click", SubmitDataToServer);
-    __defers["$.__views.__alloyId161!click!CancelClicked"] && $.__views.__alloyId161.addEventListener("click", CancelClicked);
+    __defers["$.__views.__alloyId141!click!EditClicked"] && $.__views.__alloyId141.addEventListener("click", EditClicked);
+    __defers["$.__views.__alloyId142!click!SubmitDataToServer"] && $.__views.__alloyId142.addEventListener("click", SubmitDataToServer);
+    __defers["$.__views.__alloyId144!click!CancelClicked"] && $.__views.__alloyId144.addEventListener("click", CancelClicked);
+    __defers["$.__views.__alloyId149!click!EditClicked"] && $.__views.__alloyId149.addEventListener("click", EditClicked);
+    __defers["$.__views.__alloyId150!click!SubmitDataToServer"] && $.__views.__alloyId150.addEventListener("click", SubmitDataToServer);
+    __defers["$.__views.__alloyId152!click!CancelClicked"] && $.__views.__alloyId152.addEventListener("click", CancelClicked);
+    __defers["$.__views.__alloyId158!click!SubmitDataToServer"] && $.__views.__alloyId158.addEventListener("click", SubmitDataToServer);
+    __defers["$.__views.__alloyId160!click!CancelClicked"] && $.__views.__alloyId160.addEventListener("click", CancelClicked);
     _.extend($, exports);
 }
 

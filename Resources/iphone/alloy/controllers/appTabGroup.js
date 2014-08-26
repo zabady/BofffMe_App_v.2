@@ -26,40 +26,40 @@ function Controller() {
     });
     $.__views.settingsWin && $.addTopLevelView($.__views.settingsWin);
     var __alloyId0 = [];
-    $.__views.qrCodeWin = Alloy.createController("qrCodeWin", {
-        id: "qrCodeWin",
-        __parentSymbol: __parentSymbol
-    });
-    $.__views.__alloyId1 = Ti.UI.createTab({
-        title: "QR Code",
-        icon: "/images/QR-code-7aram.png",
-        window: $.__views.qrCodeWin.getViewEx({
-            recurse: true
-        }),
-        id: "__alloyId1"
-    });
-    __alloyId0.push($.__views.__alloyId1);
     $.__views.contactsWin = Alloy.createController("Contacts/coreContactsWin", {
         id: "contactsWin",
         __parentSymbol: __parentSymbol
     });
-    $.__views.__alloyId3 = Ti.UI.createTab({
+    $.__views.__alloyId1 = Ti.UI.createTab({
         title: "Contacts",
         icon: "/images/man-7aram.png",
         window: $.__views.contactsWin.getViewEx({
             recurse: true
         }),
-        id: "__alloyId3"
+        id: "__alloyId1"
     });
-    __alloyId0.push($.__views.__alloyId3);
+    __alloyId0.push($.__views.__alloyId1);
     $.__views.notificationCenterWin = Alloy.createController("notificationCenterWin", {
         id: "notificationCenterWin",
         __parentSymbol: __parentSymbol
     });
-    $.__views.__alloyId4 = Ti.UI.createTab({
+    $.__views.__alloyId2 = Ti.UI.createTab({
         title: "Notifications",
         icon: "/images/love-7aram.png",
         window: $.__views.notificationCenterWin.getViewEx({
+            recurse: true
+        }),
+        id: "__alloyId2"
+    });
+    __alloyId0.push($.__views.__alloyId2);
+    $.__views.qrCodeWin = Alloy.createController("qrCodeWin", {
+        id: "qrCodeWin",
+        __parentSymbol: __parentSymbol
+    });
+    $.__views.__alloyId4 = Ti.UI.createTab({
+        title: "QR Code",
+        icon: "/images/QR-code-7aram.png",
+        window: $.__views.qrCodeWin.getViewEx({
             recurse: true
         }),
         id: "__alloyId4"

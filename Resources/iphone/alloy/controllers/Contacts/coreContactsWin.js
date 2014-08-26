@@ -8,16 +8,11 @@ function __processArg(obj, key) {
 }
 
 function Controller() {
-    function changeRightNavButton() {
-        var currentView = $.scrollableview_mainContactsView.getCurrentPage();
-        $.win_boffsList.rightNavButton = 1 == currentView ? myBofffsButton : allContactsButton;
-    }
     function addressBookDisallowed() {
-        alert("Failed");
+        alert("No access for phonebook granted :(");
     }
     function performAddressBookFunction() {
         var contacts = Ti.Contacts.getAllPeople();
-        sortedContacts = [];
         for (var x in contacts) sortedContacts.push(contacts[x]);
         sortedContacts.sort();
         getContactsReady();
@@ -52,7 +47,6 @@ function Controller() {
     function findBofffs(contactNumbers) {
         var bofffFriends = [];
         var contactNames = [];
-        var url = "http://www.bofffme.com/api/index.php/home/";
         var xhr = Ti.Network.createHTTPClient({
             onload: function() {
                 var bofffsData = [];
@@ -75,18 +69,18 @@ function Controller() {
             },
             onerror: function() {
                 alert(this.responseText);
+                alert("Error in findBofffs function in coreContactsWin.js");
             }
         });
         var params = {
             numbers: JSON.stringify(contactNumbers),
             pin: Alloy.Globals.userPin
         };
-        xhr.open("POST", url + "detect_user_friends_by_mobile/bofff");
+        xhr.open("POST", Alloy.Globals.apiUrl + "detect_user_friends_by_mobile/bofff");
         xhr.send(params);
     }
     function addFriend(data, bofffFriends) {
         var bofffsList = [];
-        var url = "http://www.bofffme.com/api/index.php/home/";
         var xhr = Ti.Network.createHTTPClient({
             onload: function() {
                 var response = JSON.parse(this.responseText);
@@ -101,7 +95,7 @@ function Controller() {
                 alert(this.responseText);
             }
         });
-        xhr.open("POST", url + "insert_friend/bofff/user_friends");
+        xhr.open("POST", Alloy.Globals.apiUrl + "insert_friend/bofff/user_friends");
         var params = {
             friends: JSON.stringify(data)
         };
@@ -115,11 +109,11 @@ function Controller() {
         var bofffContactsPayload = {
             mainView: $.scrollableview_mainContactsView,
             bofffFriends: bofffFriends,
-            bofffsList: bofffsList
+            bofffsList: bofffsList,
+            sortedContacts: sortedContacts
         };
         bofffsContacts = Alloy.createController("Contacts/bofffsContacts", bofffContactsPayload);
-        var views = [ bofffsContacts.getView() ];
-        $.scrollableview_mainContactsView.setViews(views);
+        $.win_boffsList.add(bofffsContacts.getView());
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Contacts/coreContactsWin";
@@ -130,7 +124,6 @@ function Controller() {
     }
     var $ = this;
     var exports = {};
-    var __defers = {};
     $.__views.win_boffsList = Ti.UI.createWindow({
         backgroundColor: "white",
         id: "win_boffsList",
@@ -152,50 +145,12 @@ function Controller() {
         id: "__alloyId51"
     });
     $.__views.win_boffsList.leftNavButton = $.__views.__alloyId51;
-    $.__views.__alloyId52 = Ti.UI.createView({
-        layout: "vertical",
-        id: "__alloyId52"
-    });
-    $.__views.win_boffsList.add($.__views.__alloyId52);
-    var __alloyId53 = [];
-    $.__views.scrollableview_mainContactsView = Ti.UI.createScrollableView({
-        views: __alloyId53,
-        showPagingControl: "true",
-        id: "scrollableview_mainContactsView"
-    });
-    $.__views.__alloyId52.add($.__views.scrollableview_mainContactsView);
-    changeRightNavButton ? $.__views.scrollableview_mainContactsView.addEventListener("scrollend", changeRightNavButton) : __defers["$.__views.scrollableview_mainContactsView!scrollend!changeRightNavButton"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    arguments[0] || {};
-    var allContactsButton = Titanium.UI.createButton({
-        title: "all contacts"
-    });
-    var myBofffsButton = Titanium.UI.createButton({
-        title: "my bofffs"
-    });
-    allContactsButton.addEventListener("click", function() {
-        $.scrollableview_mainContactsView.scrollToView(1);
-    });
-    myBofffsButton.addEventListener("click", function() {
-        $.scrollableview_mainContactsView.scrollToView(0);
-    });
+    var sortedContacts = [];
     Ti.Contacts.contactsAuthorization == Ti.Contacts.AUTHORIZATION_AUTHORIZED ? performAddressBookFunction() : Ti.Contacts.contactsAuthorization == Ti.Contacts.AUTHORIZATION_UNKNOWN ? Ti.Contacts.requestAuthorization(function(e) {
         e.success ? performAddressBookFunction() : addressBookDisallowed();
     }) : addressBookDisallowed();
-    var sortedContacts;
-    Ti.Contacts.addEventListener("reload", function() {});
-    ({
-        mainView: $.scrollableview_mainContactsView,
-        sortedContacts: sortedContacts
-    });
-    var bofffContactsPayload = {
-        mainView: $.scrollableview_mainContactsView,
-        sortedContacts: sortedContacts
-    };
-    var bofffsContacts = Alloy.createController("Contacts/bofffsContacts", bofffContactsPayload);
-    $.scrollableview_mainContactsView.addView(bofffsContacts.getView());
-    __defers["$.__views.scrollableview_mainContactsView!scrollend!changeRightNavButton"] && $.__views.scrollableview_mainContactsView.addEventListener("scrollend", changeRightNavButton);
     _.extend($, exports);
 }
 

@@ -11,7 +11,7 @@ function Controller() {
     function optionDialogClicked(e) {
         0 == e.index ? Ti.Media.showCamera({
             success: function(event) {
-                $.profile_picture.image = event.media;
+                resizeAndSaveProfilePictures(event.media);
             },
             cancel: function() {
                 alert("You have cancelled !");
@@ -24,7 +24,7 @@ function Controller() {
             mediaTypes: [ Ti.Media.MEDIA_TYPE_PHOTO ]
         }) : 1 == e.index && Ti.Media.openPhotoGallery({
             success: function(event) {
-                $.profile_picture.image = event.media;
+                resizeAndSaveProfilePictures(event.media);
             },
             cancel: function() {
                 alert("You've Cancelled !");
@@ -35,6 +35,14 @@ function Controller() {
             allowEditing: true,
             mediaTypes: [ Ti.Media.MEDIA_TYPE_PHOTO ]
         });
+    }
+    function resizeAndSaveProfilePictures(image) {
+        var resizedImage = image.imageAsResized(500, 500 * image.height / image.width);
+        var imageFile = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory, "img_profile_pic_large.jpg");
+        imageFile.write(resizedImage);
+        $.profile_picture.image = imageFile.read();
+        userDataInArrays.profile_picture = imageFile.read();
+        userDataInArrays.new_profile_picture = true;
     }
     function displayDialog() {
         $.optionDialog.show();
@@ -57,31 +65,29 @@ function Controller() {
     $.__views.editPictureWin && $.addTopLevelView($.__views.editPictureWin);
     $.__views.profile_picture = Ti.UI.createImageView({
         height: 100,
-        width: 100,
-        left: 20,
         image: "/images/contact_photo.png",
         id: "profile_picture"
     });
     $.__views.editPictureWin.add($.__views.profile_picture);
-    $.__views.__alloyId131 = Ti.UI.createButton({
-        left: 180,
+    $.__views.__alloyId130 = Ti.UI.createButton({
+        left: 30,
         title: "Edit",
-        id: "__alloyId131"
+        id: "__alloyId130"
     });
-    $.__views.editPictureWin.add($.__views.__alloyId131);
-    displayDialog ? $.__views.__alloyId131.addEventListener("click", displayDialog) : __defers["$.__views.__alloyId131!click!displayDialog"] = true;
+    $.__views.editPictureWin.add($.__views.__alloyId130);
+    displayDialog ? $.__views.__alloyId130.addEventListener("click", displayDialog) : __defers["$.__views.__alloyId130!click!displayDialog"] = true;
     $.__views.profile_picture_privacy = Ti.UI.createLabel({
+        right: 20,
         text: "Default",
-        id: "profile_picture_privacy",
-        right: "10"
+        id: "profile_picture_privacy"
     });
     $.__views.editPictureWin.add($.__views.profile_picture_privacy);
-    var __alloyId133 = [];
-    __alloyId133.push("Open Camera");
-    __alloyId133.push("Choose from Library");
-    __alloyId133.push("Cancel");
+    var __alloyId132 = [];
+    __alloyId132.push("Open Camera");
+    __alloyId132.push("Choose from Library");
+    __alloyId132.push("Cancel");
     $.__views.optionDialog = Ti.UI.createOptionDialog({
-        options: __alloyId133,
+        options: __alloyId132,
         id: "optionDialog",
         cancel: "2"
     });
@@ -89,7 +95,7 @@ function Controller() {
     optionDialogClicked ? $.__views.optionDialog.addEventListener("click", optionDialogClicked) : __defers["$.__views.optionDialog!click!optionDialogClicked"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    __defers["$.__views.__alloyId131!click!displayDialog"] && $.__views.__alloyId131.addEventListener("click", displayDialog);
+    __defers["$.__views.__alloyId130!click!displayDialog"] && $.__views.__alloyId130.addEventListener("click", displayDialog);
     __defers["$.__views.optionDialog!click!optionDialogClicked"] && $.__views.optionDialog.addEventListener("click", optionDialogClicked);
     _.extend($, exports);
 }
