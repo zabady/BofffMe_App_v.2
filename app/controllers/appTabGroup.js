@@ -37,6 +37,7 @@ if(OS_IOS){
 	// Adding the settingsClicked function for settings button in the three tabs' windows
 	$.qrCodeWin.btn_settings.addEventListener('click', settingsClicked);
 	$.contactsWin.btn_settings.addEventListener('click', settingsClicked);
+	$.notificationCenterWin.btn_settings.addEventListener('click', settingsClicked);
 	
 	// Overriding closing the settings window with toggling it to the right
 	$.settingsWin.win.addEventListener('close', function() {

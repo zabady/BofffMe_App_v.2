@@ -28,7 +28,7 @@ alertDialog.addEventListener('click', function(e){
 
 for(var i in bofffsList) {
 	if( (bofffsList[i].friend_added_data != "" && bofffsList[i].friend_added_data != null) ||	//friend_added_data contains updates
-		(bofffsList[i].friend_deleted_data != "" && bofffsList[i].friend_deleted_data != null)) //friend_deleted_data contains updates
+		(bofffsList[i].friend_deleted_data != "" && bofffsList[i].friend_deleted_data != null))//friend_deleted_data contains updates
 	{
 		// Coming here means that this friend has updated his profile
 		friendPin = bofffsList[i].friend_pin_code;
@@ -36,12 +36,12 @@ for(var i in bofffsList) {
 		alertDialog.show();  
 	}
 }
-
 /////////////////////////////////////////////////////////////////////////////////////////////////// END ZABADY'S CODE
 
 
 var searchbarIsOnFocus= false;
 var firstFocus=true;
+
 //on searchbar focus
 function initializeSearch(e)
 {
@@ -52,20 +52,22 @@ function initializeSearch(e)
 	}
 	else
 	{
-		$.view_search.width=Ti.UI.SIZE;
-		$.view_search.height=Ti.UI.SIZE;
-		searchbarIsOnFocus=true;
-		$.search.showCancel="true";
+		$.view_search.width = Ti.UI.SIZE;
+		$.view_search.height = Ti.UI.SIZE;
+		//$.search.top = 100;
+		searchbarIsOnFocus = true;
+		$.search.showCancel = true;
 	}
 }
+
 //on searchbar cancel
 function cancelSearch(e)
 {
 	$.search.blur();
-	$.search.value="";
-	$.list_bofffContacts.searchText="";
-    searchbarIsOnFocus=false;
-    $.search.showCancel="false";
+	$.search.value = "";
+	$.list_bofffContacts.searchText = "";
+    searchbarIsOnFocus = false;
+    $.search.showCancel = "false";
 }
 //on searchbar change
 function updateSearch(e)
@@ -109,7 +111,7 @@ function stopSearch(e)
 $.list_bofffContacts.caseInsensitiveSearch=true;
 $.list_bofffContacts.keepSectionsInSearch=true;
 
-var pickerVisible=false;
+var pickerVisible = false;
 var animation = require('alloy/animation');
 //OS_IOS ONLY function
 //on click on the search field label to open picker or close picker
@@ -121,19 +123,25 @@ function openSearchPicker(e)
 			$.picker_searchBy.view_picker.width=0;
 			$.picker_searchBy.view_picker.height=0;
 			pickerVisible=false;
-			$.search.focus();	
+			$.search.focus();
+			$.picker_searchBy.view_picker.visible = false;	// TODO
 		});
 		changeSearchableText(searchableText,searchableTextPrivacy);
 	}
 	else
 	{
+		$.picker_searchBy.view_picker.visible = true;	// TODO
+		
 		$.picker_searchBy.view_picker.width=Ti.UI.SIZE;
-		$.picker_searchBy.view_picker.height=Ti.UI.FILL;
+		$.picker_searchBy.view_picker.height=Ti.UI.SIZE;
+		//if($.picker_searchBy.view_picker.visible == false) $.picker_searchBy.view_picker.visible = true;
+		
 		animation.popIn($.picker_searchBy.view_picker);
 		pickerVisible=true;
 		$.search.blur();
 	}
 }
+
 var searchableText ="fullName";
 var searchableTextPrivacy="public";
 //on selection of picker change update the search process
@@ -242,13 +250,13 @@ function createBofffListView(_data, textToSearchFor)
    		//var fullName=Titanium.Contacts.getPersonByID(bofffs[i].contact_id).fullName;
    		items.push({
             template : "template1",            // set the template
-            textLabel : {
+            textLabel_bind : {
                 text : _data[i].contactName           // assign the values from the data
             },
-            pic : {
+            pic_bind : {
                 image : _data[i].icon_image   // assign the values from the data
             },
-            bofff_pic:{
+            bofff_pic_bind : {
             	image:imageFavorite,
             	},
             userPrivacy_towards_friend:_data[i].userPrivacy_towards_friend,

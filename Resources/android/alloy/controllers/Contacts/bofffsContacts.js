@@ -16,7 +16,7 @@ function Controller() {
             $.view_search.width = Ti.UI.SIZE;
             $.view_search.height = Ti.UI.SIZE;
             searchbarIsOnFocus = true;
-            $.search.showCancel = "true";
+            $.search.showCancel = true;
         }
     }
     function cancelSearch() {
@@ -69,6 +69,7 @@ function Controller() {
         }
     }
     function createBofffListView(_data) {
+        alert(_data);
         var listSections = [];
         var lastCharacter = _data[0].contactName.substring(0, 1).toUpperCase();
         var section = Ti.UI.createListSection({
@@ -150,12 +151,16 @@ function Controller() {
     function showContact(e) {
         if (privacyClicked) updatePrivacy(e); else if (ifImageClicked) {
             ifImageClicked = false;
-            bofffs[e.itemId].contact_id;
+            {
+                bofffs[e.itemId].contact_id;
+            }
         } else {
             $.search.blur();
             var bofff = bofffs[e.itemId]["bofff"];
             var privacyOfBofff = bofffsList[e.itemId].friendPrivacy_towards_user;
-            e.section.getItemAt(e.itemIndex).pic.image;
+            {
+                e.section.getItemAt(e.itemIndex).pic.image;
+            }
             createVisibleData(privacyOfBofff, bofff);
         }
     }
@@ -354,9 +359,15 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Contacts/bofffsContacts";
     if (arguments[0]) {
-        __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
     }
     var $ = this;
     var exports = {};
@@ -397,23 +408,34 @@ function Controller() {
         __parentSymbol: $.__views.view_search
     });
     $.__views.picker_searchBy.setParent($.__views.view_search);
+    $.__views.__alloyId53 = Ti.UI.createView({
+        layout: "horizontal",
+        id: "__alloyId53"
+    });
+    $.__views.view_bofffsContacts.add($.__views.__alloyId53);
+    $.__views.__alloyId54 = Ti.UI.createButton({
+        title: "Interests",
+        width: "25%",
+        id: "__alloyId54"
+    });
+    $.__views.__alloyId53.add($.__views.__alloyId54);
     $.__views.search = Ti.UI.createSearchBar({
+        width: "75%",
         backgroundColor: "transparent",
         id: "search",
         left: "0",
         height: "43",
-        width: Ti.UI.FILL,
         hintText: "find a bofff"
     });
-    $.__views.view_bofffsContacts.add($.__views.search);
+    $.__views.__alloyId53.add($.__views.search);
     initializeSearch ? $.__views.search.addEventListener("focus", initializeSearch) : __defers["$.__views.search!focus!initializeSearch"] = true;
     cancelSearch ? $.__views.search.addEventListener("cancel", cancelSearch) : __defers["$.__views.search!cancel!cancelSearch"] = true;
     updateSearch ? $.__views.search.addEventListener("change", updateSearch) : __defers["$.__views.search!change!updateSearch"] = true;
     stopSearch ? $.__views.search.addEventListener("blur", stopSearch) : __defers["$.__views.search!blur!stopSearch"] = true;
     searchBofff ? $.__views.search.addEventListener("return", searchBofff) : __defers["$.__views.search!return!searchBofff"] = true;
-    var __alloyId53 = {};
-    var __alloyId55 = [];
-    var __alloyId56 = {
+    var __alloyId55 = {};
+    var __alloyId57 = [];
+    var __alloyId58 = {
         type: "Ti.UI.ImageView",
         bindId: "pic",
         properties: {
@@ -426,8 +448,8 @@ function Controller() {
             click: imageClicked
         }
     };
-    __alloyId55.push(__alloyId56);
-    var __alloyId57 = {
+    __alloyId57.push(__alloyId58);
+    var __alloyId59 = {
         type: "Ti.UI.ImageView",
         bindId: "bofff_pic",
         properties: {
@@ -440,12 +462,12 @@ function Controller() {
             click: starClicked
         }
     };
-    __alloyId55.push(__alloyId57);
-    var __alloyId58 = {
+    __alloyId57.push(__alloyId59);
+    var __alloyId60 = {
         type: "Ti.UI.Label",
         bindId: "textLabel",
         properties: {
-            color: "#000",
+            color: "black",
             font: {
                 fontSize: "20dp",
                 fontFamily: "Helvetica Neue"
@@ -456,20 +478,20 @@ function Controller() {
             bindId: "textLabel"
         }
     };
-    __alloyId55.push(__alloyId58);
-    var __alloyId54 = {
+    __alloyId57.push(__alloyId60);
+    var __alloyId56 = {
         properties: {
             height: Ti.UI.SIZE,
             name: "template1"
         },
-        childTemplates: __alloyId55
+        childTemplates: __alloyId57
     };
-    __alloyId53["template1"] = __alloyId54;
+    __alloyId55["template1"] = __alloyId56;
     $.__views.list_bofffContacts = Ti.UI.createListView({
-        width: "100%",
-        templates: __alloyId53,
-        id: "list_bofffContacts",
+        width: Ti.Platform.displayCaps.platformWidth,
         left: "0",
+        templates: __alloyId55,
+        id: "list_bofffContacts",
         defaultItemTemplate: "template1"
     });
     $.__views.view_bofffsContacts.add($.__views.list_bofffContacts);
@@ -482,7 +504,6 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
-    args.mainView;
     Ti.include("/contactsUpdate.js");
     try {
         var bofffs = args.bofffFriends;

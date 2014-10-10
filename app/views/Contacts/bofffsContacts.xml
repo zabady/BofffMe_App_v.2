@@ -1,24 +1,39 @@
 <Alloy>
 	<View id="view_container" class="container">
+		
 		<View id="view_bofffsContacts" class="view_bofffsContacts">
+			
 			<View id="view_search" layout="horizontal" width="0" height="0">
 				<Label left="10" id="lbl_findBy"  width="Ti.UI.SIZE" height="Ti.UI.SIZE">Find By</Label>
 				<Label platform="ios" left="10" id="lbl_searchField" width="Ti.UI.SIZE" height="Ti.UI.SIZE" onClick="openSearchPicker">Name</Label>
 				<Require platform="android" id="picker_searchBy"  src="Contacts/searchByFieldPicker" type="view"/>
 			</View>
-			<Require platform="ios"  id="picker_searchBy"  src="Contacts/searchByFieldPicker" type="view" />
-			<SearchBar  backgroundColor="transparent" id="search" left="0" height="43" width="Ti.UI.FILL" hintText="find a bofff" onFocus="initializeSearch"
-			onCancel="cancelSearch" onChange="updateSearch" onBlur="stopSearch" onReturn="searchBofff" />
-			<ListView  id="list_bofffContacts"  left="0" class="list_bofffContacts" width="100%" defaultItemTemplate="template1" onItemclick="showContact"  >
+			
+			<View layout="horizontal" height="Ti.UI.SIZE">
+				<Button title="Interests" width="25%"></Button>
+				<SearchBar width="75%" backgroundColor="transparent" id="search" left="0" height="43" hintText="find a bofff"
+					onFocus="initializeSearch"
+					onCancel="cancelSearch"
+					onChange="updateSearch"
+					onBlur="stopSearch"
+					onReturn="searchBofff" />
+			</View>
+			
+			<ListView  id="list_bofffContacts" class="list_bofffContacts" defaultItemTemplate="template1" onItemclick="showContact">
 				<Templates>
 					<ItemTemplate id="template1" name="template1"  class="template1">
-						<ImageView id="pic"  bindId="pic" class="bofffThumb" onClick="imageClicked"/>
-						<ImageView id="bofff_pic"  bindId="bofff_pic" class="favoriteThumb" onClick="starClicked"/>
-						<Label id="textLabel" bindId="textLabel" class="title"/>
+						<ImageView id="pic"  bindId="pic_bind" class="bofffThumb" onClick="imageClicked"/>
+						<ImageView id="bofff_pic"  bindId="bofff_pic_bind" class="favoriteThumb" onClick="starClicked"/>
+						<Label id="textLabel" bindId="textLabel_bind" class="title"/>
 					</ItemTemplate>
 				</Templates>
 			</ListView>
+			
 		</View>
+		
+		<Require platform="ios"  id="picker_searchBy"  src="Contacts/searchByFieldPicker" type="view" />
+		
 		<Require id="view_customField" src="Contacts/view_customField" type="view"/>
+	
 	</View>
 </Alloy>

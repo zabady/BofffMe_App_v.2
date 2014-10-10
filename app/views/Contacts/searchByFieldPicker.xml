@@ -1,5 +1,5 @@
 <Alloy>
-	<View id="view_picker" width="0" height="0" backgroundColor="white">
+	<View id="view_picker" width="0" height="0" backgroundColor="white" platform="ios" visible="false">
 		<Picker  width="Ti.UI.SIZE" height="Ti.UI.SIZE" id="picker" selectionIndicator="true" >
 			<Row dbName="fullName" dbPrivacy="" title="Name" />
 			<Row dbName="phone_numbers" dbPrivacy="phone_numbers_privacy" title="Phone Number"/>

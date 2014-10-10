@@ -1,0 +1,6 @@
+<Alloy>
+	<View layout="vertical">
+		<Label>No friends found on server</Label>
+		<Label>Invite friends should be implemented here !</Label>
+	</View>
+</Alloy>

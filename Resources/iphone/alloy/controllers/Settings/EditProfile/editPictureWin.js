@@ -50,9 +50,15 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Settings/EditProfile/editPictureWin";
     if (arguments[0]) {
-        __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
     }
     var $ = this;
     var exports = {};
@@ -69,25 +75,25 @@ function Controller() {
         id: "profile_picture"
     });
     $.__views.editPictureWin.add($.__views.profile_picture);
-    $.__views.__alloyId130 = Ti.UI.createButton({
+    $.__views.__alloyId136 = Ti.UI.createButton({
         left: 30,
         title: "Edit",
-        id: "__alloyId130"
+        id: "__alloyId136"
     });
-    $.__views.editPictureWin.add($.__views.__alloyId130);
-    displayDialog ? $.__views.__alloyId130.addEventListener("click", displayDialog) : __defers["$.__views.__alloyId130!click!displayDialog"] = true;
+    $.__views.editPictureWin.add($.__views.__alloyId136);
+    displayDialog ? $.__views.__alloyId136.addEventListener("click", displayDialog) : __defers["$.__views.__alloyId136!click!displayDialog"] = true;
     $.__views.profile_picture_privacy = Ti.UI.createLabel({
         right: 20,
         text: "Default",
         id: "profile_picture_privacy"
     });
     $.__views.editPictureWin.add($.__views.profile_picture_privacy);
-    var __alloyId132 = [];
-    __alloyId132.push("Open Camera");
-    __alloyId132.push("Choose from Library");
-    __alloyId132.push("Cancel");
+    var __alloyId138 = [];
+    __alloyId138.push("Open Camera");
+    __alloyId138.push("Choose from Library");
+    __alloyId138.push("Cancel");
     $.__views.optionDialog = Ti.UI.createOptionDialog({
-        options: __alloyId132,
+        options: __alloyId138,
         id: "optionDialog",
         cancel: "2"
     });
@@ -95,7 +101,7 @@ function Controller() {
     optionDialogClicked ? $.__views.optionDialog.addEventListener("click", optionDialogClicked) : __defers["$.__views.optionDialog!click!optionDialogClicked"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    __defers["$.__views.__alloyId130!click!displayDialog"] && $.__views.__alloyId130.addEventListener("click", displayDialog);
+    __defers["$.__views.__alloyId136!click!displayDialog"] && $.__views.__alloyId136.addEventListener("click", displayDialog);
     __defers["$.__views.optionDialog!click!optionDialogClicked"] && $.__views.optionDialog.addEventListener("click", optionDialogClicked);
     _.extend($, exports);
 }

@@ -15,8 +15,12 @@ function Controller() {
     this.__controllerPath = "appTabGroup";
     if (arguments[0]) {
         var __parentSymbol = __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
     }
     var $ = this;
     var exports = {};
@@ -89,6 +93,7 @@ function Controller() {
     nappDrawerWin.open();
     $.qrCodeWin.btn_settings.addEventListener("click", settingsClicked);
     $.contactsWin.btn_settings.addEventListener("click", settingsClicked);
+    $.notificationCenterWin.btn_settings.addEventListener("click", settingsClicked);
     $.settingsWin.win.addEventListener("close", function() {
         nappDrawerWin.toggleRightWindow();
     });

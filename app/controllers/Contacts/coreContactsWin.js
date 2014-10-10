@@ -7,6 +7,7 @@
 // This variable will contain all contacts read from the device
 var sortedContacts = [];
 
+var repeatedNumberCheck = [];
 
 // This is to check if the user allows the access to his phonebook or not
 if (Ti.Contacts.contactsAuthorization == Ti.Contacts.AUTHORIZATION_AUTHORIZED)
@@ -19,19 +20,20 @@ else if (Ti.Contacts.contactsAuthorization == Ti.Contacts.AUTHORIZATION_UNKNOWN)
         if (e.success) {
             performAddressBookFunction();
         } else {
-            addressBookDisallowed();
+            contactsAccessDenied();
         }
     });
 }
 else
 {
-    addressBookDisallowed();
+    contactsAccessDenied();
 }
 
 
 // This is in case the user didn't allow to access his phonebook
-function addressBookDisallowed() {
-	alert("No access for phonebook granted :(");
+function contactsAccessDenied() {
+	var noContactAccessView = Alloy.createController("Contacts/noContactAccessWin");
+	$.win_boffsList.add(noContactAccessView.getView());
 };
 
 
@@ -47,9 +49,11 @@ function performAddressBookFunction()
     
  	// TODO: BUG FOUND --> sortedContacts.sort(sortContacts);
  	
- 	sortedContacts.sort();
- 	getContactsReady();
+ 	//sortedContacts = Ti.Contacts.getAllPeople();
+ 	//sortedContacts.sort(sortContacts);
  	
+ 	sortedContacts.sort();
+ 	editContactsToCorrectForm();
 }
 
 
@@ -83,66 +87,125 @@ function sortBofffs(a, b) {
 }
 
 
+// TODO: Bug found, when country code exists without the begining of neither '+' nor '00'
+// TODO: Try to found a better way to put country code, check this library "https://code.google.com/p/libphonenumber/"
+// Defifing a function that process the number and removes any character
+// function removeCharactersFromPhoneNumber(phoneNumber) {
+// 	
+	// // The expression used to make sure that the phone number is in the correct form
+	// var phoneNumberExpression = /^\d+$/;
+// 	
+	// var correctPhoneNumber = "";
+// 	
+	// // Defining a flag for noCountryCode and turn it on if the phone number doesn't contain one
+	// var noCountryCodeFlag = false; 
+	// if(phoneNumber[0] != '+' && !(phoneNumber[0] == '0' && phoneNumber[1] == '0')) noCountryCodeFlag = true;
+// 	
+	// if(!phoneNumberExpression.test(phoneNumber)) {
+		// for(var character in phoneNumber) {
+			// if(phoneNumberExpression.test(phoneNumber[character])) {
+				// correctPhoneNumber += phoneNumber[character];
+			// }
+		// }
+	// } else correctPhoneNumber = phoneNumber;
+// 	
+	// correctPhoneNumber = parseInt(correctPhoneNumber, 10);	// Turn it to number to remove '00..' if it contains them
+	// if(noCountryCodeFlag) {
+		// correctPhoneNumber = '20' + correctPhoneNumber;	// TODO: Add the true country code
+	// }
+// 	
+	// return correctPhoneNumber;
+// }
+
+
+// Defifing a function that process the number and removes any character
+function removeCharactersFromPhoneNumber(phoneNumber) {
+	
+	// The expression used to make sure that the phone number is in the correct form
+	var phoneNumberExpression = /^\d+$/;
+	
+	var correctPhoneNumber = "";
+
+	if(!phoneNumberExpression.test(phoneNumber)) {
+		for(var character in phoneNumber) {
+			if(phoneNumberExpression.test(phoneNumber[character])) {
+				correctPhoneNumber += phoneNumber[character];
+			}
+		}
+	} else correctPhoneNumber = phoneNumber;
+	
+	return correctPhoneNumber;
+}
+
+// Defining a function that is used to eliminate processing saved-more-than-once phone numbers in device's contacts
+function isRepeatedPhoneNumber(phoneNumber) {
+	if(repeatedNumberCheck[phoneNumber] == null) {
+		repeatedNumberCheck[phoneNumber] = 0;
+		return false;
+	} else {
+		alert("Repeated number: " + phoneNumber);
+		return true;
+	}
+}
+
+
 // Gather contacts' numbers and change them to readable number string without special characters
-function getContactsReady()
+function editContactsToCorrectForm()
 {
-	var repeatedNumberCheck = [];
-	var contactNumbersAndIds = [];
-	var mobileNumbers;
-	var expression = /^\d+$/;
-	for(var contact in sortedContacts)
-	{
-		mobileNumbers = sortedContacts[contact].getPhone();
-		if (!isEmpty(mobileNumbers))
-		{
-			for (var i in mobileNumbers)
-			{
-				// Loop over each mobile number
-				for (var x in mobileNumbers[i])
-				{
-					var trimmedNumber="";
-					if(!expression.test(mobileNumbers[i][x]))
-					{
-						for(var character in mobileNumbers[i][x])
-						{
-							if(expression.test(mobileNumbers[i][x][character]))
-							{
-								trimmedNumber += mobileNumbers[i][x][character];
-							}
-						}
-					}
-					else
-					{
-						trimmedNumber = mobileNumbers[i][x];
-					}
+	/* Defining an array that will contain all contacts phone numbers with the contact's id on the device
+	 * Each item in the array will contain: {
+	 *		number : "The phone number in the correct form with the country code",
+	 * 		id : "The id of the contact's phone number on the device so we can retrieve its fullName after returning from server"
+	 * }
+	 */
+	var allContactsPhoneNumbersAndIds = [];
+	
+	/* A variable used in getting and processing all phone numbers of each contact
+	 * Phone numbers object returned from device's contacts is associative array of arrays, ex.:
+	 * contactPhoneNumbers = {
+	 * 		mobile: {
+	 * 			(+2)555-666-777,
+	 * 			(+995)111-222-333
+	 * 		},
+	 * 		work : {
+	 * 			(+1)123-123-123,
+	 * 			(+44)456-456-456
+	 * 		},
+	 * 		...
+	 * }
+	 */
+	var contactPhoneNumbers;
+	
+	// Loop over each contact
+	for(var contact in sortedContacts) {
+		
+		contactPhoneNumbers = sortedContacts[contact].getPhone();
+		
+		if (!isEmpty(contactPhoneNumbers)) {
+			// Loop over each array inside phoneNumers, ex. mobile, work, home, etc.
+			for (var i in contactPhoneNumbers) {
+				// Loop over each phone number inside this array
+				for (var num in contactPhoneNumbers[i]) {
 					
-					if(repeatedNumberCheck[trimmedNumber] == null)
-					{
-						repeatedNumberCheck[trimmedNumber] = 0;
-					}
-					else
-					{
-						continue;
-					}
+					// First, check if the number is repeated, happens when the user is saving the same phone number more than once
+					if(isRepeatedPhoneNumber(contactPhoneNumbers[i][num])) {continue; alert("continue");}
 					
-					if(OS_IOS)
-					{
-						var numberAndId = { number:trimmedNumber, id:sortedContacts[contact].recordId };
-						contactNumbersAndIds.push(numberAndId);
-					}
-					else
-					if(OS_ANDROID)
-					{
-						var numberAndId = { number:trimmedNumber, id:sortedContacts[contact].id };
-						contactNumbersAndIds.push(numberAndId);
-					}
+					// A variable that will contain the correct number after processing the one read from device's contacts
+					var correctPhoneNumber = removeCharactersFromPhoneNumber(contactPhoneNumbers[i][num]);
+					
+					// Push the correct phone numbers with the id of the contact to "allContactsPhoneNumbersAndIds" array
+					var numberAndId = {
+						number: correctPhoneNumber,
+						id: OS_IOS ? sortedContacts[contact].recordId : sortedContacts[contact].id
+					};
+					allContactsPhoneNumbersAndIds.push(numberAndId);
 				}
 			}
 		}
 	}
 	
 	// Then send these numbers to the bofffme DB to check whether this user has bofffs in his contacts or not
-	findBofffs(contactNumbersAndIds);
+	findBofffs(allContactsPhoneNumbersAndIds);
 }
 
 // TODO: A lot of work should be done here, the new algorithm should replace this function
@@ -164,6 +227,13 @@ function findBofffs(contactNumbers)
 	    	
 	    	// The next line should be receiving the user's friends on the DB
 	    	bofffFriends = JSON.parse(this.responseText);
+	    	
+	    	// Display no friends window if non were found on the server, and then break
+	    	if(isEmpty(bofffFriends)) {
+	    		var noFriendsView = Alloy.createController("Contacts/noFriendsWin");
+				$.win_boffsList.add(noFriendsView.getView());
+				return;
+	    	}
 	    	
 	    	// A loop over the user's friends to do some unkown stuff :D
 	    	for(var record in bofffFriends)
@@ -190,6 +260,7 @@ function findBofffs(contactNumbers)
 	    	addFriend(bofffsData, bofffFriends);
 	    	bofffFriends.sort(sortBofffs);
 	    },
+	    
 	    onerror: function(e) {
 	    	alert(this.responseText);
 	    	alert("Error in findBofffs function in coreContactsWin.js");
@@ -270,22 +341,4 @@ function initializeBofffsList(bofffFriends, bofffsList)
 	
 	bofffsContacts = Alloy.createController("Contacts/bofffsContacts", bofffContactsPayload);
 	$.win_boffsList.add(bofffsContacts.getView());
-	
-	//var views = [bofffsContacts.getView()];
- 	//$.scrollableview_mainContactsView.setViews(views);
 }
-
-// var allContactsPayload=
-// {
-	// mainView:$.scrollableview_mainContactsView,
-	// sortedContacts:sortedContacts,
-// };
-// var bofffContactsPayload=
-// {
-	// mainView:$.scrollableview_mainContactsView,
-	// sortedContacts:sortedContacts,
-// };
-// var bofffsContacts=Alloy.createController("Contacts/bofffsContacts",bofffContactsPayload);
-// $.scrollableview_mainContactsView.addView(bofffsContacts.getView());
-
-// TODO: Icon and Profile Picture are not working

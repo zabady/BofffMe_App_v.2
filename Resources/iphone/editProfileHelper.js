@@ -117,12 +117,12 @@ function postUserDataUpdatesOnServer(oldUserDataInStrings, newUserDataInArrays) 
 }
 
 function validateAddableFields(userDataInArrays) {
-    for (var i = 0; userDataInArrays.phone_numbers.length > i; i++) if (null == userDataInArrays.phone_numbers[i] || "" == userDataInArrays.phone_numbers[i]) {
+    for (var i = 0; i < userDataInArrays.phone_numbers.length; i++) if (null == userDataInArrays.phone_numbers[i] || "" == userDataInArrays.phone_numbers[i]) {
         Ti.API.info("I will delete an empty phone");
         deleteAddableField(userDataInArrays, "phone_numbers", "");
         i--;
     } else if (!validatePhoneNumber(userDataInArrays.phone_numbers[i])) return "Wrong phone number.";
-    for (var i = 0; userDataInArrays.mails.length > i; i++) if (null == userDataInArrays.mails[i] || "" == userDataInArrays.mails[i]) {
+    for (var i = 0; i < userDataInArrays.mails.length; i++) if (null == userDataInArrays.mails[i] || "" == userDataInArrays.mails[i]) {
         Ti.API.info("I will delete an empty email");
         deleteAddableField(userDataInArrays, "mails", "");
         i--;

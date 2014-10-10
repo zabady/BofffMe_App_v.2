@@ -9,11 +9,11 @@ function __processArg(obj, key) {
 
 function Controller() {
     function addressBookDisallowed() {
-        alert("Failed");
+        var noContactAccessView = Alloy.createController("Contacts/noContactAccessWin");
+        $.win_boffsList.add(noContactAccessView.getView());
     }
     function performAddressBookFunction() {
         var contacts = Ti.Contacts.getAllPeople();
-        sortedContacts = [];
         for (var x in contacts) sortedContacts.push(contacts[x]);
         sortedContacts.sort();
         getContactsReady();
@@ -52,6 +52,11 @@ function Controller() {
             onload: function() {
                 var bofffsData = [];
                 bofffFriends = JSON.parse(this.responseText);
+                if (isEmpty(bofffFriends)) {
+                    var noFriendsView = Alloy.createController("Contacts/noFriendsWin");
+                    $.win_boffsList.add(noFriendsView.getView());
+                    return;
+                }
                 for (var record in bofffFriends) {
                     var fullName = Titanium.Contacts.getPersonByID(bofffFriends[record].contact_id).fullName;
                     bofffFriends[record].contactName = fullName;
@@ -70,6 +75,7 @@ function Controller() {
             },
             onerror: function() {
                 alert(this.responseText);
+                alert("Error in findBofffs function in coreContactsWin.js");
             }
         });
         var params = {
@@ -107,20 +113,25 @@ function Controller() {
     }
     function initializeBofffsList(bofffFriends, bofffsList) {
         var bofffContactsPayload = {
-            mainView: $.scrollableview_mainContactsView,
             bofffFriends: bofffFriends,
-            bofffsList: bofffsList
+            bofffsList: bofffsList,
+            sortedContacts: sortedContacts
         };
         bofffsContacts = Alloy.createController("Contacts/bofffsContacts", bofffContactsPayload);
-        var views = [ bofffsContacts.getView() ];
-        $.scrollableview_mainContactsView.setViews(views);
+        $.win_boffsList.add(bofffsContacts.getView());
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Contacts/coreContactsWin";
     if (arguments[0]) {
-        __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
     }
     var $ = this;
     var exports = {};
@@ -134,39 +145,16 @@ function Controller() {
         id: "btn_settings"
     });
     $.__views.win_boffsList.rightNavButton = $.__views.btn_settings;
-    $.__views.__alloyId61 = Ti.UI.createImageView({
-        id: "__alloyId61"
+    $.__views.__alloyId63 = Ti.UI.createImageView({
+        id: "__alloyId63"
     });
-    $.__views.win_boffsList.leftNavButton = $.__views.__alloyId61;
-    $.__views.__alloyId62 = Ti.UI.createView({
-        layout: "vertical",
-        id: "__alloyId62"
-    });
-    $.__views.win_boffsList.add($.__views.__alloyId62);
-    var __alloyId63 = [];
-    $.__views.scrollableview_mainContactsView = Ti.UI.createScrollableView({
-        views: __alloyId63,
-        showPagingControl: "true",
-        id: "scrollableview_mainContactsView"
-    });
-    $.__views.__alloyId62.add($.__views.scrollableview_mainContactsView);
+    $.__views.win_boffsList.leftNavButton = $.__views.__alloyId63;
     exports.destroy = function() {};
     _.extend($, $.__views);
+    var sortedContacts = [];
     Ti.Contacts.contactsAuthorization == Ti.Contacts.AUTHORIZATION_AUTHORIZED ? performAddressBookFunction() : Ti.Contacts.contactsAuthorization == Ti.Contacts.AUTHORIZATION_UNKNOWN ? Ti.Contacts.requestAuthorization(function(e) {
         e.success ? performAddressBookFunction() : addressBookDisallowed();
     }) : addressBookDisallowed();
-    var sortedContacts;
-    Ti.Contacts.addEventListener("reload", function() {});
-    ({
-        mainView: $.scrollableview_mainContactsView,
-        sortedContacts: sortedContacts
-    });
-    var bofffContactsPayload = {
-        mainView: $.scrollableview_mainContactsView,
-        sortedContacts: sortedContacts
-    };
-    var bofffsContacts = Alloy.createController("Contacts/bofffsContacts", bofffContactsPayload);
-    $.scrollableview_mainContactsView.addView(bofffsContacts.getView());
     _.extend($, exports);
 }
 

@@ -174,27 +174,31 @@ function Controller() {
     this.__controllerPath = "Settings/EditProfile/generalInfoWin";
     if (arguments[0]) {
         var __parentSymbol = __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
     }
     var $ = this;
     var exports = {};
     var __defers = {};
-    var __alloyId194 = [];
+    var __alloyId184 = [];
     $.__views.pictureView = Alloy.createController("Settings/EditProfile/editPictureWin", {
         id: "pictureView",
         __parentSymbol: __parentSymbol
     });
-    __alloyId194.push($.__views.pictureView.getViewEx({
+    __alloyId184.push($.__views.pictureView.getViewEx({
         recurse: true
     }));
-    $.__views.__alloyId195 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId185 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
-        id: "__alloyId195"
+        id: "__alloyId185"
     });
-    __alloyId194.push($.__views.__alloyId195);
-    $.__views.__alloyId196 = Ti.UI.createLabel({
+    __alloyId184.push($.__views.__alloyId185);
+    $.__views.__alloyId186 = Ti.UI.createLabel({
         left: "5%",
         width: "20%",
         font: {
@@ -203,9 +207,9 @@ function Controller() {
         color: "#2279bc",
         bubbleParent: false,
         text: "Full Name",
-        id: "__alloyId196"
+        id: "__alloyId186"
     });
-    $.__views.__alloyId195.add($.__views.__alloyId196);
+    $.__views.__alloyId185.add($.__views.__alloyId186);
     $.__views.fullName = Ti.UI.createLabel({
         left: "25%",
         width: "42%",
@@ -218,9 +222,9 @@ function Controller() {
         id: "fullName",
         hintText: "Full Name"
     });
-    $.__views.__alloyId195.add($.__views.fullName);
+    $.__views.__alloyId185.add($.__views.fullName);
     ValueLabelClicked ? $.__views.fullName.addEventListener("click", ValueLabelClicked) : __defers["$.__views.fullName!click!ValueLabelClicked"] = true;
-    $.__views.__alloyId197 = Ti.UI.createLabel({
+    $.__views.__alloyId187 = Ti.UI.createLabel({
         left: "71%",
         width: "20%",
         font: {
@@ -229,23 +233,23 @@ function Controller() {
         bubbleParent: false,
         color: "black",
         text: "friends",
-        id: "__alloyId197"
+        id: "__alloyId187"
     });
-    $.__views.__alloyId195.add($.__views.__alloyId197);
-    $.__views.__alloyId198 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId185.add($.__views.__alloyId187);
+    $.__views.__alloyId188 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
         backgroundColor: "#D0D0D0",
-        id: "__alloyId198"
+        id: "__alloyId188"
     });
-    __alloyId194.push($.__views.__alloyId198);
-    $.__views.__alloyId199 = Ti.UI.createTableViewRow({
+    __alloyId184.push($.__views.__alloyId188);
+    $.__views.__alloyId189 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
-        id: "__alloyId199"
+        id: "__alloyId189"
     });
-    __alloyId194.push($.__views.__alloyId199);
-    $.__views.__alloyId200 = Ti.UI.createLabel({
+    __alloyId184.push($.__views.__alloyId189);
+    $.__views.__alloyId190 = Ti.UI.createLabel({
         left: "5%",
         width: "20%",
         font: {
@@ -254,9 +258,9 @@ function Controller() {
         color: "#2279bc",
         bubbleParent: false,
         text: "Marital Status",
-        id: "__alloyId200"
+        id: "__alloyId190"
     });
-    $.__views.__alloyId199.add($.__views.__alloyId200);
+    $.__views.__alloyId189.add($.__views.__alloyId190);
     $.__views.marital_status = Ti.UI.createLabel({
         left: "25%",
         width: "42%",
@@ -269,7 +273,7 @@ function Controller() {
         id: "marital_status",
         hintText: "Marital Status"
     });
-    $.__views.__alloyId199.add($.__views.marital_status);
+    $.__views.__alloyId189.add($.__views.marital_status);
     ValueLabelClicked ? $.__views.marital_status.addEventListener("click", ValueLabelClicked) : __defers["$.__views.marital_status!click!ValueLabelClicked"] = true;
     $.__views.marital_status_privacy = Ti.UI.createLabel({
         left: "71%",
@@ -282,32 +286,32 @@ function Controller() {
         text: "Default",
         id: "marital_status_privacy"
     });
-    $.__views.__alloyId199.add($.__views.marital_status_privacy);
+    $.__views.__alloyId189.add($.__views.marital_status_privacy);
     PrivacyLabelClicked ? $.__views.marital_status_privacy.addEventListener("click", PrivacyLabelClicked) : __defers["$.__views.marital_status_privacy!click!PrivacyLabelClicked"] = true;
-    $.__views.__alloyId201 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId191 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
         backgroundColor: "#D0D0D0",
-        id: "__alloyId201"
+        id: "__alloyId191"
     });
-    __alloyId194.push($.__views.__alloyId201);
-    $.__views.__alloyId202 = Ti.UI.createTableViewRow({
+    __alloyId184.push($.__views.__alloyId191);
+    $.__views.__alloyId192 = Ti.UI.createTableViewRow({
         editable: false,
         height: Ti.UI.SIZE,
         top: 20,
-        id: "__alloyId202"
+        id: "__alloyId192"
     });
-    __alloyId194.push($.__views.__alloyId202);
-    $.__views.__alloyId203 = Ti.UI.createLabel({
+    __alloyId184.push($.__views.__alloyId192);
+    $.__views.__alloyId193 = Ti.UI.createLabel({
         left: 10,
         font: {
             fontSize: "17"
         },
         color: "#2279bc",
         text: "Gender",
-        id: "__alloyId203"
+        id: "__alloyId193"
     });
-    $.__views.__alloyId202.add($.__views.__alloyId203);
+    $.__views.__alloyId192.add($.__views.__alloyId193);
     $.__views.gender_privacy = Ti.UI.createLabel({
         left: "71%",
         width: "20%",
@@ -319,21 +323,21 @@ function Controller() {
         text: "Default",
         id: "gender_privacy"
     });
-    $.__views.__alloyId202.add($.__views.gender_privacy);
+    $.__views.__alloyId192.add($.__views.gender_privacy);
     PrivacyLabelClicked ? $.__views.gender_privacy.addEventListener("click", PrivacyLabelClicked) : __defers["$.__views.gender_privacy!click!PrivacyLabelClicked"] = true;
-    $.__views.__alloyId204 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId194 = Ti.UI.createTableViewRow({
         editable: false,
         height: "auto",
-        id: "__alloyId204"
+        id: "__alloyId194"
     });
-    __alloyId194.push($.__views.__alloyId204);
+    __alloyId184.push($.__views.__alloyId194);
     $.__views.gender = Ti.UI.createView({
         id: "gender",
         layout: "horizontal",
         height: Ti.UI.SIZE,
         width: Ti.UI.SIZE
     });
-    $.__views.__alloyId204.add($.__views.gender);
+    $.__views.__alloyId194.add($.__views.gender);
     $.__views.lbl_gender_male = Ti.UI.createLabel({
         width: "75",
         color: "gray",
@@ -366,30 +370,30 @@ function Controller() {
         textAlign: "left"
     });
     $.__views.gender.add($.__views.lbl_gender_female);
-    $.__views.__alloyId205 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId195 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
         backgroundColor: "#D0D0D0",
-        id: "__alloyId205"
+        id: "__alloyId195"
     });
-    __alloyId194.push($.__views.__alloyId205);
-    $.__views.__alloyId206 = Ti.UI.createTableViewRow({
+    __alloyId184.push($.__views.__alloyId195);
+    $.__views.__alloyId196 = Ti.UI.createTableViewRow({
         editable: false,
         height: Ti.UI.SIZE,
         top: 20,
-        id: "__alloyId206"
+        id: "__alloyId196"
     });
-    __alloyId194.push($.__views.__alloyId206);
-    $.__views.__alloyId207 = Ti.UI.createLabel({
+    __alloyId184.push($.__views.__alloyId196);
+    $.__views.__alloyId197 = Ti.UI.createLabel({
         left: 10,
         font: {
             fontSize: "17"
         },
         color: "#2279bc",
         text: "Birthday",
-        id: "__alloyId207"
+        id: "__alloyId197"
     });
-    $.__views.__alloyId206.add($.__views.__alloyId207);
+    $.__views.__alloyId196.add($.__views.__alloyId197);
     $.__views.birthday_date_privacy = Ti.UI.createLabel({
         left: "71%",
         width: "20%",
@@ -401,14 +405,14 @@ function Controller() {
         text: "Default",
         id: "birthday_date_privacy"
     });
-    $.__views.__alloyId206.add($.__views.birthday_date_privacy);
+    $.__views.__alloyId196.add($.__views.birthday_date_privacy);
     PrivacyLabelClicked ? $.__views.birthday_date_privacy.addEventListener("click", PrivacyLabelClicked) : __defers["$.__views.birthday_date_privacy!click!PrivacyLabelClicked"] = true;
-    $.__views.__alloyId208 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId198 = Ti.UI.createTableViewRow({
         editable: false,
         height: "auto",
-        id: "__alloyId208"
+        id: "__alloyId198"
     });
-    __alloyId194.push($.__views.__alloyId208);
+    __alloyId184.push($.__views.__alloyId198);
     $.__views.birthday_date = Ti.UI.createPicker({
         format24: false,
         calendarViewShown: false,
@@ -416,90 +420,90 @@ function Controller() {
         backgroundColor: "#D0D0D0",
         type: Titanium.UI.PICKER_TYPE_DATE
     });
-    $.__views.__alloyId208.add($.__views.birthday_date);
+    $.__views.__alloyId198.add($.__views.birthday_date);
     BirthDay ? $.__views.birthday_date.addEventListener("change", BirthDay) : __defers["$.__views.birthday_date!change!BirthDay"] = true;
-    $.__views.__alloyId209 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId199 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
         backgroundColor: "#D0D0D0",
-        id: "__alloyId209"
+        id: "__alloyId199"
     });
-    __alloyId194.push($.__views.__alloyId209);
-    $.__views.__alloyId210 = Ti.UI.createTableViewRow({
+    __alloyId184.push($.__views.__alloyId199);
+    $.__views.__alloyId200 = Ti.UI.createTableViewRow({
         editable: false,
         height: Ti.UI.SIZE,
         top: 20,
         isInterest: "1",
-        id: "__alloyId210"
+        id: "__alloyId200"
     });
-    __alloyId194.push($.__views.__alloyId210);
-    $.__views.__alloyId211 = Ti.UI.createLabel({
+    __alloyId184.push($.__views.__alloyId200);
+    $.__views.__alloyId201 = Ti.UI.createLabel({
         left: 10,
         font: {
             fontSize: "17"
         },
         color: "#2279bc",
         text: "Interests",
-        id: "__alloyId211"
+        id: "__alloyId201"
     });
-    $.__views.__alloyId210.add($.__views.__alloyId211);
-    $.__views.__alloyId212 = Ti.UI.createImageView({
+    $.__views.__alloyId200.add($.__views.__alloyId201);
+    $.__views.__alloyId202 = Ti.UI.createImageView({
         right: 10,
         width: 22,
         height: 22,
         image: "/images/addIcon-44x44.png",
-        id: "__alloyId212"
+        id: "__alloyId202"
     });
-    $.__views.__alloyId210.add($.__views.__alloyId212);
-    AddRowButtonClicked ? $.__views.__alloyId212.addEventListener("click", AddRowButtonClicked) : __defers["$.__views.__alloyId212!click!AddRowButtonClicked"] = true;
-    $.__views.__alloyId213 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId200.add($.__views.__alloyId202);
+    AddRowButtonClicked ? $.__views.__alloyId202.addEventListener("click", AddRowButtonClicked) : __defers["$.__views.__alloyId202!click!AddRowButtonClicked"] = true;
+    $.__views.__alloyId203 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
         backgroundColor: "#D0D0D0",
-        id: "__alloyId213"
+        id: "__alloyId203"
     });
-    __alloyId194.push($.__views.__alloyId213);
-    $.__views.__alloyId214 = Ti.UI.createTableViewRow({
+    __alloyId184.push($.__views.__alloyId203);
+    $.__views.__alloyId204 = Ti.UI.createTableViewRow({
         editable: false,
         height: Ti.UI.SIZE,
         top: 20,
         isInterest: "0",
-        id: "__alloyId214"
+        id: "__alloyId204"
     });
-    __alloyId194.push($.__views.__alloyId214);
-    $.__views.__alloyId215 = Ti.UI.createLabel({
+    __alloyId184.push($.__views.__alloyId204);
+    $.__views.__alloyId205 = Ti.UI.createLabel({
         left: 10,
         font: {
             fontSize: "17"
         },
         color: "#2279bc",
         text: "Favorite Places",
-        id: "__alloyId215"
+        id: "__alloyId205"
     });
-    $.__views.__alloyId214.add($.__views.__alloyId215);
-    $.__views.__alloyId216 = Ti.UI.createImageView({
+    $.__views.__alloyId204.add($.__views.__alloyId205);
+    $.__views.__alloyId206 = Ti.UI.createImageView({
         right: 10,
         width: 22,
         height: 22,
         image: "/images/addIcon-44x44.png",
-        id: "__alloyId216"
+        id: "__alloyId206"
     });
-    $.__views.__alloyId214.add($.__views.__alloyId216);
-    AddRowButtonClicked ? $.__views.__alloyId216.addEventListener("click", AddRowButtonClicked) : __defers["$.__views.__alloyId216!click!AddRowButtonClicked"] = true;
-    $.__views.__alloyId217 = Ti.UI.createTableViewRow({
+    $.__views.__alloyId204.add($.__views.__alloyId206);
+    AddRowButtonClicked ? $.__views.__alloyId206.addEventListener("click", AddRowButtonClicked) : __defers["$.__views.__alloyId206!click!AddRowButtonClicked"] = true;
+    $.__views.__alloyId207 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
         backgroundColor: "#D0D0D0",
-        id: "__alloyId217"
+        id: "__alloyId207"
     });
-    __alloyId194.push($.__views.__alloyId217);
-    $.__views.__alloyId218 = Ti.UI.createTableViewRow({
+    __alloyId184.push($.__views.__alloyId207);
+    $.__views.__alloyId208 = Ti.UI.createTableViewRow({
         editable: false,
         height: 50,
-        id: "__alloyId218"
+        id: "__alloyId208"
     });
-    __alloyId194.push($.__views.__alloyId218);
-    $.__views.__alloyId219 = Ti.UI.createLabel({
+    __alloyId184.push($.__views.__alloyId208);
+    $.__views.__alloyId209 = Ti.UI.createLabel({
         left: "5%",
         width: "20%",
         font: {
@@ -508,9 +512,9 @@ function Controller() {
         color: "#2279bc",
         bubbleParent: false,
         text: "Residence",
-        id: "__alloyId219"
+        id: "__alloyId209"
     });
-    $.__views.__alloyId218.add($.__views.__alloyId219);
+    $.__views.__alloyId208.add($.__views.__alloyId209);
     $.__views.residence = Ti.UI.createLabel({
         left: "25%",
         width: "42%",
@@ -523,7 +527,7 @@ function Controller() {
         id: "residence",
         hintText: "Residence"
     });
-    $.__views.__alloyId218.add($.__views.residence);
+    $.__views.__alloyId208.add($.__views.residence);
     ValueLabelClicked ? $.__views.residence.addEventListener("click", ValueLabelClicked) : __defers["$.__views.residence!click!ValueLabelClicked"] = true;
     $.__views.residence_privacy = Ti.UI.createLabel({
         left: "71%",
@@ -536,11 +540,11 @@ function Controller() {
         text: "Default",
         id: "residence_privacy"
     });
-    $.__views.__alloyId218.add($.__views.residence_privacy);
+    $.__views.__alloyId208.add($.__views.residence_privacy);
     PrivacyLabelClicked ? $.__views.residence_privacy.addEventListener("click", PrivacyLabelClicked) : __defers["$.__views.residence_privacy!click!PrivacyLabelClicked"] = true;
     $.__views.tableView = Ti.UI.createTableView({
         bottom: 0,
-        data: __alloyId194,
+        data: __alloyId184,
         id: "tableView"
     });
     $.__views.tableView && $.addTopLevelView($.__views.tableView);
@@ -570,9 +574,9 @@ function Controller() {
     var clickedTextField;
     var androidDeleteRowFlag = false;
     var rows = $.tableView.sections[0].rows;
-    for (var i = 0; rows.length > i; i++) {
+    for (var i = 0; i < rows.length; i++) {
         var children = rows[i].children;
-        for (var j = 0; children.length > j; j++) switch (children[j].id) {
+        for (var j = 0; j < children.length; j++) switch (children[j].id) {
           case "fullName":
           case "marital_status":
           case "marital_status_privacy":
@@ -632,8 +636,8 @@ function Controller() {
     __defers["$.__views.img_gender_female!click!GenderSelected"] && $.__views.img_gender_female.addEventListener("click", GenderSelected);
     __defers["$.__views.birthday_date_privacy!click!PrivacyLabelClicked"] && $.__views.birthday_date_privacy.addEventListener("click", PrivacyLabelClicked);
     __defers["$.__views.birthday_date!change!BirthDay"] && $.__views.birthday_date.addEventListener("change", BirthDay);
-    __defers["$.__views.__alloyId212!click!AddRowButtonClicked"] && $.__views.__alloyId212.addEventListener("click", AddRowButtonClicked);
-    __defers["$.__views.__alloyId216!click!AddRowButtonClicked"] && $.__views.__alloyId216.addEventListener("click", AddRowButtonClicked);
+    __defers["$.__views.__alloyId202!click!AddRowButtonClicked"] && $.__views.__alloyId202.addEventListener("click", AddRowButtonClicked);
+    __defers["$.__views.__alloyId206!click!AddRowButtonClicked"] && $.__views.__alloyId206.addEventListener("click", AddRowButtonClicked);
     __defers["$.__views.residence!click!ValueLabelClicked"] && $.__views.residence.addEventListener("click", ValueLabelClicked);
     __defers["$.__views.residence_privacy!click!PrivacyLabelClicked"] && $.__views.residence_privacy.addEventListener("click", PrivacyLabelClicked);
     __defers["$.__views.tableView!click!TableViewRowClicked"] && $.__views.tableView.addEventListener("click", TableViewRowClicked);

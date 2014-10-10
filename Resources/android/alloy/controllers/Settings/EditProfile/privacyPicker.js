@@ -11,9 +11,15 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Settings/EditProfile/privacyPicker";
     if (arguments[0]) {
-        __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
     }
     var $ = this;
     var exports = {};
@@ -37,33 +43,33 @@ function Controller() {
         useSpinner: "true"
     });
     $.__views.pickerView.add($.__views.picker);
-    var __alloyId220 = [];
-    $.__views.__alloyId221 = Ti.UI.createPickerRow({
+    var __alloyId210 = [];
+    $.__views.__alloyId211 = Ti.UI.createPickerRow({
         title: "public",
-        id: "__alloyId221"
+        id: "__alloyId211"
     });
-    __alloyId220.push($.__views.__alloyId221);
-    $.__views.__alloyId222 = Ti.UI.createPickerRow({
+    __alloyId210.push($.__views.__alloyId211);
+    $.__views.__alloyId212 = Ti.UI.createPickerRow({
         title: "friends",
-        id: "__alloyId222"
+        id: "__alloyId212"
     });
-    __alloyId220.push($.__views.__alloyId222);
-    $.__views.__alloyId223 = Ti.UI.createPickerRow({
+    __alloyId210.push($.__views.__alloyId212);
+    $.__views.__alloyId213 = Ti.UI.createPickerRow({
         title: "favorites",
-        id: "__alloyId223"
+        id: "__alloyId213"
     });
-    __alloyId220.push($.__views.__alloyId223);
-    $.__views.__alloyId224 = Ti.UI.createPickerRow({
+    __alloyId210.push($.__views.__alloyId213);
+    $.__views.__alloyId214 = Ti.UI.createPickerRow({
         title: "onlyMe",
-        id: "__alloyId224"
+        id: "__alloyId214"
     });
-    __alloyId220.push($.__views.__alloyId224);
-    $.__views.__alloyId225 = Ti.UI.createPickerRow({
+    __alloyId210.push($.__views.__alloyId214);
+    $.__views.__alloyId215 = Ti.UI.createPickerRow({
         title: "                                             ",
-        id: "__alloyId225"
+        id: "__alloyId215"
     });
-    __alloyId220.push($.__views.__alloyId225);
-    $.__views.picker.add(__alloyId220);
+    __alloyId210.push($.__views.__alloyId215);
+    $.__views.picker.add(__alloyId210);
     $.__views.transparentView2 = Ti.UI.createView({
         id: "transparentView2",
         opacity: "0.5",

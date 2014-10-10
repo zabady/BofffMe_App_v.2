@@ -1,0 +1,6 @@
+<Alloy>
+	<View layout="vertical">
+		<Label>No access granted to contacts, this application requires access to your contacts in order to work !</Label>
+		<Label>To allow it, go to settings, open Bofff Me app and turn on contacts access.</Label>
+	</View>
+</Alloy>

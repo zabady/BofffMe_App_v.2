@@ -11,9 +11,15 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "Contacts/view_customField";
     if (arguments[0]) {
-        __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
     }
     var $ = this;
     var exports = {};
@@ -27,15 +33,15 @@ function Controller() {
         id: "view_customField"
     });
     $.__views.view_customField && $.addTopLevelView($.__views.view_customField);
-    $.__views.__alloyId66 = Ti.UI.createView({
+    $.__views.__alloyId72 = Ti.UI.createView({
         backgroundColor: "#2279bc",
         top: 0,
         width: "100%",
         height: Ti.UI.SIZE,
-        id: "__alloyId66"
+        id: "__alloyId72"
     });
-    $.__views.view_customField.add($.__views.__alloyId66);
-    $.__views.__alloyId67 = Ti.UI.createLabel({
+    $.__views.view_customField.add($.__views.__alloyId72);
+    $.__views.__alloyId73 = Ti.UI.createLabel({
         color: "black",
         left: "10",
         width: Ti.UI.SIZE,
@@ -44,9 +50,9 @@ function Controller() {
             fontSize: "20dp"
         },
         text: "Custom Field",
-        id: "__alloyId67"
+        id: "__alloyId73"
     });
-    $.__views.__alloyId66.add($.__views.__alloyId67);
+    $.__views.__alloyId72.add($.__views.__alloyId73);
     $.__views.img_closeCustomView = Ti.UI.createImageView({
         id: "img_closeCustomView",
         image: "/images/close-icon.png",
@@ -54,7 +60,7 @@ function Controller() {
         height: "40",
         width: "40"
     });
-    $.__views.__alloyId66.add($.__views.img_closeCustomView);
+    $.__views.__alloyId72.add($.__views.img_closeCustomView);
     $.__views.txt_customField = Ti.UI.createTextField({
         bubbleParent: "false",
         id: "txt_customField",

@@ -21,7 +21,7 @@ function SubscribeToChannel(channelName) {
         channel: channelName ? channelName : "all",
         type: "ios"
     }, function(e) {
-        e.success ? alert("Subscribed") : alert("Error:\n" + (e.error && e.message || JSON.stringify(e)));
+        alert(e.success ? "Subscribed" : "Error:\n" + (e.error && e.message || JSON.stringify(e)));
     });
 }
 
@@ -34,7 +34,7 @@ function UnsubscribeFromChannel(channelName) {
         device_token: deviceToken,
         channel: channelName
     }, function(e) {
-        e.success ? alert("Unsubscribed") : alert("Error:\n" + (e.error && e.message || JSON.stringify(e)));
+        alert(e.success ? "Unsubscribed" : "Error:\n" + (e.error && e.message || JSON.stringify(e)));
     });
 }
 
@@ -118,7 +118,7 @@ function sendNotificationTo(deviceTokens, message, channelName, title, iconImage
             alert: message
         }
     }, function(e) {
-        e.success ? alert("Push notification sent") : alert("Error:\n" + (e.error && e.message || JSON.stringify(e)));
+        alert(e.success ? "Push notification sent" : "Error:\n" + (e.error && e.message || JSON.stringify(e)));
     });
 }
 

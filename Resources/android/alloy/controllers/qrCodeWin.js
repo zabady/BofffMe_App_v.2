@@ -31,9 +31,15 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "qrCodeWin";
     if (arguments[0]) {
-        __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
     }
     var $ = this;
     var exports = {};
@@ -140,7 +146,7 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.img.image = Ti.Filesystem.getFile(Ti.Filesystem.applicationDataDirectory + "qrcode.jpg").read();
-    if (500 > Ti.Platform.displayCaps.platformHeight) {
+    if (Ti.Platform.displayCaps.platformHeight < 500) {
         $.img.width = "90%";
         $.img.height = Ti.UI.SIZE;
     }

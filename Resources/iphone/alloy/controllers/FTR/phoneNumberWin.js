@@ -35,9 +35,15 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "FTR/phoneNumberWin";
     if (arguments[0]) {
-        __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
     }
     var $ = this;
     var exports = {};
@@ -49,12 +55,12 @@ function Controller() {
         title: "Bofff Me Setup"
     });
     $.__views.win && $.addTopLevelView($.__views.win);
-    $.__views.__alloyId68 = Ti.UI.createView({
+    $.__views.__alloyId74 = Ti.UI.createView({
         layout: "vertical",
-        id: "__alloyId68"
+        id: "__alloyId74"
     });
-    $.__views.win.add($.__views.__alloyId68);
-    $.__views.__alloyId69 = Ti.UI.createLabel({
+    $.__views.win.add($.__views.__alloyId74);
+    $.__views.__alloyId75 = Ti.UI.createLabel({
         top: "8%",
         color: "#2279bc",
         textAlign: "center",
@@ -63,9 +69,9 @@ function Controller() {
             fontSize: "15"
         },
         text: "Type in your phone number",
-        id: "__alloyId69"
+        id: "__alloyId75"
     });
-    $.__views.__alloyId68.add($.__views.__alloyId69);
+    $.__views.__alloyId74.add($.__views.__alloyId75);
     $.__views.txt_country_ios = Ti.UI.createTextField({
         bubbleParent: false,
         top: "20",
@@ -77,13 +83,13 @@ function Controller() {
         keyboardType: Ti.UI.KEYBOARD_PHONE_PAD,
         id: "txt_country_ios"
     });
-    $.__views.__alloyId68.add($.__views.txt_country_ios);
+    $.__views.__alloyId74.add($.__views.txt_country_ios);
     openPicker ? $.__views.txt_country_ios.addEventListener("focus", openPicker) : __defers["$.__views.txt_country_ios!focus!openPicker"] = true;
-    $.__views.__alloyId70 = Ti.UI.createView({
+    $.__views.__alloyId76 = Ti.UI.createView({
         backgroundColor: "gray",
-        id: "__alloyId70"
+        id: "__alloyId76"
     });
-    $.__views.__alloyId68.add($.__views.__alloyId70);
+    $.__views.__alloyId74.add($.__views.__alloyId76);
     $.__views.txt_phoneNumber = Ti.UI.createTextField({
         bubbleParent: false,
         top: "5",
@@ -96,8 +102,8 @@ function Controller() {
         id: "txt_phoneNumber",
         hintText: "Phone Number without country code"
     });
-    $.__views.__alloyId68.add($.__views.txt_phoneNumber);
-    $.__views.__alloyId71 = Ti.UI.createButton({
+    $.__views.__alloyId74.add($.__views.txt_phoneNumber);
+    $.__views.__alloyId77 = Ti.UI.createButton({
         top: 20,
         color: "white",
         backgroundColor: "#2279bc",
@@ -110,11 +116,11 @@ function Controller() {
         width: "50%",
         bubbleParent: false,
         title: "Continue",
-        id: "__alloyId71"
+        id: "__alloyId77"
     });
-    $.__views.__alloyId68.add($.__views.__alloyId71);
-    continueBtnPressed ? $.__views.__alloyId71.addEventListener("click", continueBtnPressed) : __defers["$.__views.__alloyId71!click!continueBtnPressed"] = true;
-    $.__views.__alloyId72 = Ti.UI.createLabel({
+    $.__views.__alloyId74.add($.__views.__alloyId77);
+    continueBtnPressed ? $.__views.__alloyId77.addEventListener("click", continueBtnPressed) : __defers["$.__views.__alloyId77!click!continueBtnPressed"] = true;
+    $.__views.__alloyId78 = Ti.UI.createLabel({
         top: "8%",
         color: "gray",
         textAlign: "center",
@@ -123,9 +129,9 @@ function Controller() {
             fontSize: "15"
         },
         text: "Keep your bofff friends in sync with your contact list by registering your phone number.",
-        id: "__alloyId72"
+        id: "__alloyId78"
     });
-    $.__views.__alloyId68.add($.__views.__alloyId72);
+    $.__views.__alloyId74.add($.__views.__alloyId78);
     $.__views.picker = Ti.UI.createPicker({
         color: "black",
         selectionIndicator: true,
@@ -138,11 +144,11 @@ function Controller() {
     });
     $.__views.win.add($.__views.picker);
     changeCountryAndCountryCode ? $.__views.picker.addEventListener("change", changeCountryAndCountryCode) : __defers["$.__views.picker!change!changeCountryAndCountryCode"] = true;
-    var __alloyId74 = [];
-    __alloyId74.push("Edit");
-    __alloyId74.push("Confirm");
+    var __alloyId80 = [];
+    __alloyId80.push("Edit");
+    __alloyId80.push("Confirm");
     $.__views.dialog_confirm = Ti.UI.createAlertDialog({
-        buttonNames: __alloyId74,
+        buttonNames: __alloyId80,
         id: "dialog_confirm",
         title: "Confirm your number"
     });
@@ -172,7 +178,7 @@ function Controller() {
     });
     $.win.leftNavButton = Ti.UI.createButton();
     __defers["$.__views.txt_country_ios!focus!openPicker"] && $.__views.txt_country_ios.addEventListener("focus", openPicker);
-    __defers["$.__views.__alloyId71!click!continueBtnPressed"] && $.__views.__alloyId71.addEventListener("click", continueBtnPressed);
+    __defers["$.__views.__alloyId77!click!continueBtnPressed"] && $.__views.__alloyId77.addEventListener("click", continueBtnPressed);
     __defers["$.__views.picker!change!changeCountryAndCountryCode"] && $.__views.picker.addEventListener("change", changeCountryAndCountryCode);
     __defers["$.__views.dialog_confirm!click!dialogConfirmPressed"] && $.__views.dialog_confirm.addEventListener("click", dialogConfirmPressed);
     _.extend($, exports);
