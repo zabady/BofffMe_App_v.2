@@ -55,5 +55,5 @@ Alloy.Globals.OpenNotificationCenter = function SetActiveTabToNotifications() {
 	//if($.tabGroup.activeTab.window.title == "Notifications") Alloy.Globals.LoadNotifications();
 	//else $.tabGroup.setActiveTab(2);
 	Alloy.Globals.LoadNotifications();
-	$.tabGroup.setActiveTab(2);
+	$.tabGroup.setActiveTab(1);
 };

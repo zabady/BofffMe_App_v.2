@@ -174,7 +174,7 @@ function Controller() {
             var bofff = bofffs[e.itemId]["bofff"];
             var privacyOfBofff = bofffsList[e.itemId].friendPrivacy_towards_user;
             {
-                e.section.getItemAt(e.itemIndex).pic.image;
+                e.section.getItemAt(e.itemIndex).pic_bind.image;
             }
             createVisibleData(privacyOfBofff, bofff);
         }

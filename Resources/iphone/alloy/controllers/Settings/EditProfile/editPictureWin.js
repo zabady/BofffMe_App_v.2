@@ -75,25 +75,25 @@ function Controller() {
         id: "profile_picture"
     });
     $.__views.editPictureWin.add($.__views.profile_picture);
-    $.__views.__alloyId136 = Ti.UI.createButton({
+    $.__views.__alloyId137 = Ti.UI.createButton({
         left: 30,
         title: "Edit",
-        id: "__alloyId136"
+        id: "__alloyId137"
     });
-    $.__views.editPictureWin.add($.__views.__alloyId136);
-    displayDialog ? $.__views.__alloyId136.addEventListener("click", displayDialog) : __defers["$.__views.__alloyId136!click!displayDialog"] = true;
+    $.__views.editPictureWin.add($.__views.__alloyId137);
+    displayDialog ? $.__views.__alloyId137.addEventListener("click", displayDialog) : __defers["$.__views.__alloyId137!click!displayDialog"] = true;
     $.__views.profile_picture_privacy = Ti.UI.createLabel({
         right: 20,
         text: "Default",
         id: "profile_picture_privacy"
     });
     $.__views.editPictureWin.add($.__views.profile_picture_privacy);
-    var __alloyId138 = [];
-    __alloyId138.push("Open Camera");
-    __alloyId138.push("Choose from Library");
-    __alloyId138.push("Cancel");
+    var __alloyId139 = [];
+    __alloyId139.push("Open Camera");
+    __alloyId139.push("Choose from Library");
+    __alloyId139.push("Cancel");
     $.__views.optionDialog = Ti.UI.createOptionDialog({
-        options: __alloyId138,
+        options: __alloyId139,
         id: "optionDialog",
         cancel: "2"
     });
@@ -101,7 +101,7 @@ function Controller() {
     optionDialogClicked ? $.__views.optionDialog.addEventListener("click", optionDialogClicked) : __defers["$.__views.optionDialog!click!optionDialogClicked"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    __defers["$.__views.__alloyId136!click!displayDialog"] && $.__views.__alloyId136.addEventListener("click", displayDialog);
+    __defers["$.__views.__alloyId137!click!displayDialog"] && $.__views.__alloyId137.addEventListener("click", displayDialog);
     __defers["$.__views.optionDialog!click!optionDialogClicked"] && $.__views.optionDialog.addEventListener("click", optionDialogClicked);
     _.extend($, exports);
 }

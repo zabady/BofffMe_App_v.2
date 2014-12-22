@@ -217,7 +217,7 @@ function findBofffs(contactNumbers)
 	// bofffFriends will capture the user's friends found on the DB
 	var bofffFriends = [];
 	
-	var contactNames = [];
+	//var contactNames = [];
 	
 	var xhr = Ti.Network.createHTTPClient(
 	{
@@ -243,7 +243,7 @@ function findBofffs(contactNumbers)
 	    		
 	    		bofffFriends[record].contactName = fullName;
 	    		
-	    		contactNames.push(fullName);
+	    		//contactNames.push(fullName);
 	    		
 	    		var data =
 	    		{
@@ -253,6 +253,7 @@ function findBofffs(contactNumbers)
 	    			user_pin_code : Alloy.Globals.userPin,
 	    			contactName : fullName,
 	    		};
+	    		
 	    		bofffsData.push(data);
 	    	} // End of proccessing user's friends
 	    	
@@ -266,8 +267,8 @@ function findBofffs(contactNumbers)
 	    	alert("Error in findBofffs function in coreContactsWin.js");
 	    },
 	});
-	var params =
-	{
+	
+	var params = {
 		numbers: JSON.stringify(contactNumbers),
 		pin: Alloy.Globals.userPin,
 	};
@@ -288,6 +289,9 @@ function addFriend(data, bofffFriends)
 	    {
 	    	var response = JSON.parse(this.responseText);
 	    	bofffsList=response.rows;
+	    	
+	    	//alert(bofffsList);
+	    	
 	    	if(bofffsList.length>0)
 	    	{
 		    	//This is to sort the bofffs alphabetically
@@ -336,7 +340,7 @@ function initializeBofffsList(bofffFriends, bofffsList)
 		// TODO: bofffFiends are my friends from my prespective, it need's to be global
 		bofffsList : bofffsList,
 		
-		sortedContacts:sortedContacts,
+		//sortedContacts:sortedContacts,
 	};
 	
 	bofffsContacts = Alloy.createController("Contacts/bofffsContacts", bofffContactsPayload);

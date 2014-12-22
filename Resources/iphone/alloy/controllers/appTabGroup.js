@@ -99,7 +99,7 @@ function Controller() {
     });
     Alloy.Globals.OpenNotificationCenter = function() {
         Alloy.Globals.LoadNotifications();
-        $.tabGroup.setActiveTab(2);
+        $.tabGroup.setActiveTab(1);
     };
     _.extend($, exports);
 }

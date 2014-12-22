@@ -2,6 +2,9 @@
 	<Window id="win" onOpen="windowOpen">
 		<View>
 
+			<!-- DEBUG -->
+			<Button title="Skip FTR" onClick="skipFTR" bottom="80"></Button>
+
 			<Label>WELCOME TO BOFFF ME!</Label>
 			<ImageView />
 			<Button onClick="continueClicked">Continue</Button>

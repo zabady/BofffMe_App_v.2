@@ -69,7 +69,6 @@ function Controller() {
         }
     }
     function createBofffListView(_data) {
-        alert(_data);
         var listSections = [];
         var lastCharacter = _data[0].contactName.substring(0, 1).toUpperCase();
         var section = Ti.UI.createListSection({
@@ -90,13 +89,13 @@ function Controller() {
             imageFavorite = "favorite" == _data[i].userPrivacy_towards_friend ? "/images/favoritecontact.png" : "/images/notfavoritecontact.png";
             items.push({
                 template: "template1",
-                textLabel: {
+                textLabel_bind: {
                     text: _data[i].contactName
                 },
-                pic: {
+                pic_bind: {
                     image: _data[i].icon_image
                 },
-                bofff_pic: {
+                bofff_pic_bind: {
                     image: imageFavorite
                 },
                 userPrivacy_towards_friend: _data[i].userPrivacy_towards_friend,
@@ -159,7 +158,7 @@ function Controller() {
             var bofff = bofffs[e.itemId]["bofff"];
             var privacyOfBofff = bofffsList[e.itemId].friendPrivacy_towards_user;
             {
-                e.section.getItemAt(e.itemIndex).pic.image;
+                e.section.getItemAt(e.itemIndex).pic_bind.image;
             }
             createVisibleData(privacyOfBofff, bofff);
         }
@@ -410,6 +409,7 @@ function Controller() {
     $.__views.picker_searchBy.setParent($.__views.view_search);
     $.__views.__alloyId53 = Ti.UI.createView({
         layout: "horizontal",
+        height: Ti.UI.SIZE,
         id: "__alloyId53"
     });
     $.__views.view_bofffsContacts.add($.__views.__alloyId53);
@@ -437,12 +437,12 @@ function Controller() {
     var __alloyId57 = [];
     var __alloyId58 = {
         type: "Ti.UI.ImageView",
-        bindId: "pic",
+        bindId: "pic_bind",
         properties: {
             width: "50dp",
             height: "50dp",
             left: 0,
-            bindId: "pic"
+            bindId: "pic_bind"
         },
         events: {
             click: imageClicked
@@ -451,12 +451,12 @@ function Controller() {
     __alloyId57.push(__alloyId58);
     var __alloyId59 = {
         type: "Ti.UI.ImageView",
-        bindId: "bofff_pic",
+        bindId: "bofff_pic_bind",
         properties: {
             width: "37dp",
             height: "34dp",
             right: 0,
-            bindId: "bofff_pic"
+            bindId: "bofff_pic_bind"
         },
         events: {
             click: starClicked
@@ -465,9 +465,9 @@ function Controller() {
     __alloyId57.push(__alloyId59);
     var __alloyId60 = {
         type: "Ti.UI.Label",
-        bindId: "textLabel",
+        bindId: "textLabel_bind",
         properties: {
-            color: "black",
+            color: "#000",
             font: {
                 fontSize: "20dp",
                 fontFamily: "Helvetica Neue"
@@ -475,7 +475,7 @@ function Controller() {
             left: "60dp",
             top: 0,
             textAlign: "left",
-            bindId: "textLabel"
+            bindId: "textLabel_bind"
         }
     };
     __alloyId57.push(__alloyId60);

@@ -18,7 +18,7 @@ function EditClicked(e) {
 
 // An event listener to done button that sends the new data to the server after validating it
 function SubmitDataToServer() {
-	alert(userDataInArrays);
+//	alert(userDataInArrays);
 	
 	var validReturnString = postUserDataUpdatesOnServer(userData, userDataInArrays);	// editProfileHelper.js 
 	if(validReturnString.search("Wrong") >= 0) alert(validReturnString);

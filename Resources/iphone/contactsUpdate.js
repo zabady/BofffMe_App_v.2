@@ -364,7 +364,7 @@ function applyUpdatesOfFriend(friend_pin, bofffsList, bofffsData) {
         var updateFoundFlag = false;
         var stringToUpdate = bofffsList[record].friend_added_data;
         if ("" != stringToUpdate) {
-            InitializeContact(bofffsData[userFriendAppId].contact_id);
+            InitializeContact(bofffsData[record].contact_id);
             updateFoundFlag = true;
             parsingUpdateString(stringToUpdate, "add", record, bofffsList, bofffsData);
             bofffsList[record].friend_added_data = "";
@@ -372,7 +372,7 @@ function applyUpdatesOfFriend(friend_pin, bofffsList, bofffsData) {
         stringToUpdate = bofffsList[record].friend_deleted_data;
         if ("" != stringToUpdate) {
             if (!updateFoundFlag) {
-                InitializeContact(bofffsData[userFriendAppId].contact_id);
+                InitializeContact(bofffsData[record].contact_id);
                 updateFoundFlag = true;
             }
             parsingUpdateString(stringToUpdate, "delete", record, bofffsList, bofffsData);
@@ -413,6 +413,7 @@ function deleteUpdatesOffriend(friendId) {
 }
 
 function updateUserDataOnServerAndProperties(pin, oldData, newData, bofffsSpecificData) {
+    alert(newData);
     Ti.API.info("updateUserDataOnServerAndProperties");
     var xhr = Ti.Network.createHTTPClient({
         onload: function() {

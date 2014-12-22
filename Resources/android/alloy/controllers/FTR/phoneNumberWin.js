@@ -70,6 +70,8 @@ function Controller() {
     $.__views.__alloyId84.add($.__views.__alloyId85);
     $.__views.__alloyId86 = Ti.UI.createView({
         backgroundColor: "gray",
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE,
         id: "__alloyId86"
     });
     $.__views.__alloyId84.add($.__views.__alloyId86);

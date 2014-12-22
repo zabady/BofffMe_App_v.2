@@ -27,7 +27,7 @@ function editContactsToCorrectForm() {
             var correctPhoneNumber = removeCharactersFromPhoneNumber(contactPhoneNumbers[i][num]);
             var numberAndId = {
                 number: correctPhoneNumber,
-                id: sortedContacts[contact].recordId
+                id: sortedContacts[contact].id
             };
             allContactsPhoneNumbersAndIds.push(numberAndId);
         }

@@ -87,6 +87,8 @@ function Controller() {
     openPicker ? $.__views.txt_country_ios.addEventListener("focus", openPicker) : __defers["$.__views.txt_country_ios!focus!openPicker"] = true;
     $.__views.__alloyId76 = Ti.UI.createView({
         backgroundColor: "gray",
+        width: Ti.UI.SIZE,
+        height: Ti.UI.SIZE,
         id: "__alloyId76"
     });
     $.__views.__alloyId74.add($.__views.__alloyId76);

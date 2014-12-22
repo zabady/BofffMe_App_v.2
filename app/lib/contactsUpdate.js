@@ -521,7 +521,7 @@ function applyUpdatesOfFriend(friend_pin, bofffsList, bofffsData)
 			if(stringToUpdate != "")
 			{
 				// Since update is found, initialize contact and set flag to true
-				InitializeContact(bofffsData[userFriendAppId].contact_id);
+				InitializeContact(bofffsData[record].contact_id);
 				updateFoundFlag = true;
 				
 				parsingUpdateString(stringToUpdate, "add", record, bofffsList, bofffsData);
@@ -534,7 +534,7 @@ function applyUpdatesOfFriend(friend_pin, bofffsList, bofffsData)
 			{
 				// Update is found here but no added data, so the contact has not been initialized yet
 				if(!updateFoundFlag) {
-					InitializeContact(bofffsData[userFriendAppId].contact_id);
+					InitializeContact(bofffsData[record].contact_id);
 					updateFoundFlag = true;
 				}
 				parsingUpdateString(stringToUpdate, "delete", record, bofffsList, bofffsData);
@@ -603,6 +603,7 @@ function deleteUpdatesOffriend(friendId)
  // TODO: De msh bel tarteeb 3shan zeez myz3alsh
 function updateUserDataOnServerAndProperties(pin, oldData, newData, bofffsSpecificData)
 {
+	alert(newData);
 	Ti.API.info("updateUserDataOnServerAndProperties");
 	var xhr = Ti.Network.createHTTPClient(
 	{

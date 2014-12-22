@@ -8,6 +8,11 @@ function __processArg(obj, key) {
 }
 
 function Controller() {
+    function skipFTR() {
+        var isFTR = Titanium.App.Properties.getObject("FTR");
+        Titanium.App.Properties.setObject("FTR", !isFTR);
+        alert("FTR will start after restarting the app.");
+    }
     function windowOpen() {
         $.win.activity.actionBar.hide();
     }
@@ -72,7 +77,22 @@ function Controller() {
         id: "__alloyId106"
     });
     $.__views.win.add($.__views.__alloyId106);
-    $.__views.__alloyId107 = Ti.UI.createLabel({
+    $.__views.__alloyId107 = Ti.UI.createButton({
+        bottom: "120",
+        font: {
+            fontSize: "22",
+            fontWeight: "bold"
+        },
+        height: "10%",
+        width: "100%",
+        backgroundColor: "transparent",
+        color: "white",
+        title: "Skip FTR",
+        id: "__alloyId107"
+    });
+    $.__views.__alloyId106.add($.__views.__alloyId107);
+    skipFTR ? $.__views.__alloyId107.addEventListener("click", skipFTR) : __defers["$.__views.__alloyId107!click!skipFTR"] = true;
+    $.__views.__alloyId108 = Ti.UI.createLabel({
         left: 10,
         top: "5%",
         width: Ti.UI.SIZE,
@@ -82,18 +102,18 @@ function Controller() {
             fontSize: "18"
         },
         text: "WELCOME TO BOFFF ME!",
-        id: "__alloyId107"
+        id: "__alloyId108"
     });
-    $.__views.__alloyId106.add($.__views.__alloyId107);
-    $.__views.__alloyId108 = Ti.UI.createImageView({
+    $.__views.__alloyId106.add($.__views.__alloyId108);
+    $.__views.__alloyId109 = Ti.UI.createImageView({
         image: "/images/bofffme_logo_512x512.png",
         width: "200",
         height: "200",
         top: "25%",
-        id: "__alloyId108"
+        id: "__alloyId109"
     });
-    $.__views.__alloyId106.add($.__views.__alloyId108);
-    $.__views.__alloyId109 = Ti.UI.createButton({
+    $.__views.__alloyId106.add($.__views.__alloyId109);
+    $.__views.__alloyId110 = Ti.UI.createButton({
         bottom: 0,
         font: {
             fontSize: "22",
@@ -104,10 +124,10 @@ function Controller() {
         backgroundColor: "transparent",
         color: "white",
         title: "Continue",
-        id: "__alloyId109"
+        id: "__alloyId110"
     });
-    $.__views.__alloyId106.add($.__views.__alloyId109);
-    continueClicked ? $.__views.__alloyId109.addEventListener("click", continueClicked) : __defers["$.__views.__alloyId109!click!continueClicked"] = true;
+    $.__views.__alloyId106.add($.__views.__alloyId110);
+    continueClicked ? $.__views.__alloyId110.addEventListener("click", continueClicked) : __defers["$.__views.__alloyId110!click!continueClicked"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     var continueBtnClicked = false;
@@ -129,7 +149,8 @@ function Controller() {
     $.win.navBarHidden = true;
     $.win.open();
     __defers["$.__views.win!open!windowOpen"] && $.__views.win.addEventListener("open", windowOpen);
-    __defers["$.__views.__alloyId109!click!continueClicked"] && $.__views.__alloyId109.addEventListener("click", continueClicked);
+    __defers["$.__views.__alloyId107!click!skipFTR"] && $.__views.__alloyId107.addEventListener("click", skipFTR);
+    __defers["$.__views.__alloyId110!click!continueClicked"] && $.__views.__alloyId110.addEventListener("click", continueClicked);
     _.extend($, exports);
 }
 

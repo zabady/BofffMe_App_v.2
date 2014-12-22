@@ -4,6 +4,13 @@
  * It will not get here until there's internet connection.
  */
 
+// DEBUGGING ONLY
+function skipFTR(){
+	var isFTR = Titanium.App.Properties.getObject('FTR'); 
+	Titanium.App.Properties.setObject('FTR', !isFTR);
+	alert("FTR will start after restarting the app.");
+}
+
 // Defining an event listener for hiding the action bar in android
 function windowOpen(e)
 {

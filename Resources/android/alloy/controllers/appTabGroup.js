@@ -99,7 +99,7 @@ function Controller() {
     $.tabGroup.open();
     Alloy.Globals.OpenNotificationCenter = function() {
         Alloy.Globals.LoadNotifications();
-        $.tabGroup.setActiveTab(2);
+        $.tabGroup.setActiveTab(1);
     };
     __defers["$.__views.__alloyId7!click!settingsClicked"] && $.__views.__alloyId7.addEventListener("click", settingsClicked);
     _.extend($, exports);

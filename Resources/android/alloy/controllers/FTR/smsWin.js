@@ -152,10 +152,9 @@ function Controller() {
         }
     });
     xhr.open("POST", Alloy.Globals.apiUrl + "send_code_msg");
-    var msgParams = {
+    ({
         mobile: Alloy.Globals.userSignUpData.phone
-    };
-    xhr.send(msgParams);
+    });
     $.win.addEventListener("click", function() {
         $.txt_SMSCode.blur();
     });

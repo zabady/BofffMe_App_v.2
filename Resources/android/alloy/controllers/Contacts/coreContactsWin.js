@@ -8,7 +8,7 @@ function __processArg(obj, key) {
 }
 
 function Controller() {
-    function addressBookDisallowed() {
+    function contactsAccessDenied() {
         var noContactAccessView = Alloy.createController("Contacts/noContactAccessWin");
         $.win_boffsList.add(noContactAccessView.getView());
     }
@@ -16,38 +16,46 @@ function Controller() {
         var contacts = Ti.Contacts.getAllPeople();
         for (var x in contacts) sortedContacts.push(contacts[x]);
         sortedContacts.sort();
-        getContactsReady();
+        editContactsToCorrectForm();
     }
     function sortBofffs(a, b) {
         if (a.contactName.toUpperCase() > b.contactName.toUpperCase()) return 1;
         if (a.contactName.toUpperCase() < b.contactName.toUpperCase()) return -1;
         return 0;
     }
-    function getContactsReady() {
-        var repeatedNumberCheck = [];
-        var contactNumbersAndIds = [];
-        var mobileNumbers;
-        var expression = /^\d+$/;
+    function removeCharactersFromPhoneNumber(phoneNumber) {
+        var phoneNumberExpression = /^\d+$/;
+        var correctPhoneNumber = "";
+        if (phoneNumberExpression.test(phoneNumber)) correctPhoneNumber = phoneNumber; else for (var character in phoneNumber) phoneNumberExpression.test(phoneNumber[character]) && (correctPhoneNumber += phoneNumber[character]);
+        return correctPhoneNumber;
+    }
+    function isRepeatedPhoneNumber(phoneNumber) {
+        if (null == repeatedNumberCheck[phoneNumber]) {
+            repeatedNumberCheck[phoneNumber] = 0;
+            return false;
+        }
+        alert("Repeated number: " + phoneNumber);
+        return true;
+    }
+    function editContactsToCorrectForm() {
+        var allContactsPhoneNumbersAndIds = [];
+        var contactPhoneNumbers;
         for (var contact in sortedContacts) {
-            mobileNumbers = sortedContacts[contact].getPhone();
-            if (!isEmpty(mobileNumbers)) for (var i in mobileNumbers) for (var x in mobileNumbers[i]) {
-                var trimmedNumber = "";
-                if (expression.test(mobileNumbers[i][x])) trimmedNumber = mobileNumbers[i][x]; else for (var character in mobileNumbers[i][x]) expression.test(mobileNumbers[i][x][character]) && (trimmedNumber += mobileNumbers[i][x][character]);
-                if (null != repeatedNumberCheck[trimmedNumber]) continue;
-                repeatedNumberCheck[trimmedNumber] = 0;
-                var numberAndId;
+            contactPhoneNumbers = sortedContacts[contact].getPhone();
+            if (!isEmpty(contactPhoneNumbers)) for (var i in contactPhoneNumbers) for (var num in contactPhoneNumbers[i]) {
+                if (isRepeatedPhoneNumber(contactPhoneNumbers[i][num])) continue;
+                var correctPhoneNumber = removeCharactersFromPhoneNumber(contactPhoneNumbers[i][num]);
                 var numberAndId = {
-                    number: trimmedNumber,
+                    number: correctPhoneNumber,
                     id: sortedContacts[contact].id
                 };
-                contactNumbersAndIds.push(numberAndId);
+                allContactsPhoneNumbersAndIds.push(numberAndId);
             }
         }
-        findBofffs(contactNumbersAndIds);
+        findBofffs(allContactsPhoneNumbersAndIds);
     }
     function findBofffs(contactNumbers) {
         var bofffFriends = [];
-        var contactNames = [];
         var xhr = Ti.Network.createHTTPClient({
             onload: function() {
                 var bofffsData = [];
@@ -60,7 +68,6 @@ function Controller() {
                 for (var record in bofffFriends) {
                     var fullName = Titanium.Contacts.getPersonByID(bofffFriends[record].contact_id).fullName;
                     bofffFriends[record].contactName = fullName;
-                    contactNames.push(fullName);
                     var data = {
                         fullName: bofffFriends[record]["bofff"].fullName,
                         icon_image: bofffFriends[record]["bofff"].icon_image,
@@ -114,8 +121,7 @@ function Controller() {
     function initializeBofffsList(bofffFriends, bofffsList) {
         var bofffContactsPayload = {
             bofffFriends: bofffFriends,
-            bofffsList: bofffsList,
-            sortedContacts: sortedContacts
+            bofffsList: bofffsList
         };
         bofffsContacts = Alloy.createController("Contacts/bofffsContacts", bofffContactsPayload);
         $.win_boffsList.add(bofffsContacts.getView());
@@ -152,9 +158,10 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var sortedContacts = [];
+    var repeatedNumberCheck = [];
     Ti.Contacts.contactsAuthorization == Ti.Contacts.AUTHORIZATION_AUTHORIZED ? performAddressBookFunction() : Ti.Contacts.contactsAuthorization == Ti.Contacts.AUTHORIZATION_UNKNOWN ? Ti.Contacts.requestAuthorization(function(e) {
-        e.success ? performAddressBookFunction() : addressBookDisallowed();
-    }) : addressBookDisallowed();
+        e.success ? performAddressBookFunction() : contactsAccessDenied();
+    }) : contactsAccessDenied();
     _.extend($, exports);
 }
 

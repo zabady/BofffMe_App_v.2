@@ -23,7 +23,6 @@ var msgParams = {
 };
 // Send the request to the server
 // TODO: Uncomment: xhr.send(msgParams);
-xhr.send(msgParams);
 
 /////////////////////////////////////////////////////////////////////////// HANDLING UI AND EVENT LISTENERS FUNCTIONS
 // Defining a function for the SMS text field that enables the Button Continue

@@ -14,6 +14,7 @@ if(OS_ANDROID) var androidDeleteRowFlag = false;	// Used to flag that remove ico
 // TODO: Handle changing the primary phone number
 // TODO: Add an alert dialog to confirm deleting
 // TODO: Replace non-native android picker with the native one
+// TODO: Handle bugs
 
 //////////////////////////////////////////////////////////////////////////////////////// END OF INITIALIZING VARIABLES
 
@@ -129,6 +130,7 @@ function ValueLabelClicked(e) {
 
 // Event listener for android work around that 
 function EditViewTextChanged(e) {
+// TODO: BUG Found --> When any symbol or . are typed, this function is fired more than once and misbihavior happens
 	if($.editViewContainer.editView.visible == false) return;	// Do nothing if the view is not visible
 	
 	clickedTextField.text = $.editViewContainer.fieldValue.value;	// Copy the new text to the label on change 

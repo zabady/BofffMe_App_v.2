@@ -6,7 +6,7 @@
 			<Label>Type in your phone number</Label>
 			
 			<TextField top="20" platform="ios" id="txt_country_ios" class="entryFields" onFocus="openPicker" />
-			<View backgroundColor="gray">
+			<View backgroundColor="gray" width="Ti.UI.SIZE" height="Ti.UI.SIZE">
 				<Picker top="20" platform="android" id="picker" onChange="changeCountryAndCountryCode" />
 			</View>
 			

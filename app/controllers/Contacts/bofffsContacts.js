@@ -186,8 +186,8 @@ function changeSearchableText(searchableText,searchableTextPrivacy)
 			{
 				item.properties.searchableText='';
 				var privacyOfBofff = bofffsList[itemId].friendPrivacy_towards_user;
-				var searchableTextValues=bofffs[itemId].bofff[searchableText].split(",");
-				var searchableTextPrivacyValues=bofffs[itemId].bofff[searchableTextPrivacy].split(",");
+				var searchableTextValues = bofffs[itemId].bofff[searchableText].split(",");
+				var searchableTextPrivacyValues = bofffs[itemId].bofff[searchableTextPrivacy].split(",");
 				for(var record in searchableTextValues)
 				{
 					var privacyOfField=searchableTextPrivacyValues[record];
@@ -373,7 +373,7 @@ function showContact(e)
 		//is saved the actual contact id of this user
 		var bofff=bofffs[e.itemId]['bofff'];
 		var privacyOfBofff= bofffsList[e.itemId].friendPrivacy_towards_user;
-		var image = e.section.getItemAt(e.itemIndex).pic.image;
+		var image = e.section.getItemAt(e.itemIndex).pic_bind.image;
 		//Here is to initialize a view that will contain the data of the user
 		var params=
 		{
